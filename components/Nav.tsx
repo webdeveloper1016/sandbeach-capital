@@ -8,7 +8,7 @@ const Nav = () => (
       <li>
         <Link href="/">
           <a className="text-blue-500 no-underline text-accent-1 dark:text-blue-300">
-            Home With Typescript
+            Home
           </a>
         </Link>
       </li>

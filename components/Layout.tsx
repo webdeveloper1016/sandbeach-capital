@@ -4,7 +4,7 @@ const Layout = ({children}) => {
   return (
     <div>
       <Nav />
-      {children}
+      <div className="container px-10 py-5">{children}</div>
     </div>
   );
 };
