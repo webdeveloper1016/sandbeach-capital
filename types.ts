@@ -1,24 +1,34 @@
-export type SectorType =
-  | 'US Stock'
-  | 'Intl Stock'
-  | 'US Bond'
-  | 'Intl Bond'
-  | 'Alternative'
-  | 'ETF'
-  | 'Mutual Fund'
-  | 'Robo'
-  | 'M1'
-  | 'Cash';
+export type CategoryType = 'short-term' | 'long-term' | 'retirement';
+
+export type SectorType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
 
 export type SubSectorType =
-  | 'US stock'
-  | 'Tech stock'
-  | 'International stock'
-  | 'EMG market stock'
-  | 'Us Govt bond'
+  | 'Domestic stocks'
+  | 'Tech stocks'
+  | 'Foreign stocks'
+  | 'EMG market stocks'
+  | 'Domestic/Foreign mix stocks'
+  | 'US Govt bond'
   | 'Foreign Bond'
   | 'EMG bond'
   | 'Corporate bond'
+  | 'Muni Bond'
+  | 'MBS Bond'
+  | 'Junk Bond'
+  | 'Domestic/Foreign mix bonds'
+  | 'REIT'
+  | 'Art'
+  | 'Currency'
+  | 'Crypto'
+  | 'Commodity'
+  | 'Cash'
+  | 'Other';
+
+export type StrategyType =
+  | 'Individual Stocks'
+  | 'Growth'
+  | 'Value'
+  | 'Income'
   | 'Hedge fund'
   | 'Hedge fund follow'
   | 'Private equity'
@@ -26,25 +36,32 @@ export type SubSectorType =
   | 'Pre IPO'
   | 'Income share'
   | 'Real estate'
-  | 'Reit'
-  | 'Art'
-  | 'Currency'
-  | 'Crypto'
-  | 'Commodity'
-  | 'Cash';
+  | 'Other';
 
-export interface PortfolioModel {
-  category: 'short-term' | 'long-term' | 'retirement';
-  sector: SectorType;
-  subSector?: SubSectorType;
-  pie?: { slice: SubSectorType; percentage: number }[];
-  amount: number
+export type ApproachType =
+  | 'Individual Stocks'
+  | 'ETF'
+  | 'Mutual Fund'
+  | 'Robo'
+  | 'Self Directed'
+  | 'Advisor'
+  | 'Other';
+
+export interface AccountModel {
+  account: string;
+  category: CategoryType;
+  approach: ApproachType;
+  amount: number;
+  pie: {
+    nickname: string;
+    targetPercent: number;
+    sector: SectorType;
+    subSector: SubSectorType | StrategyType;
+  }[];
 }
 
-// style: 'ETF',
-// strategy: cash, income, value, growth, hedge, alt
-// ticker: 'QQQ',
-// fees: 0.2,
-// shares: 133,
-// amount: 38000,
-// yield: 0.55
+export interface PortfolioModel {
+  shortTerm: AccountModel[];
+  longTerm: AccountModel[];
+  retirement: AccountModel[];
+}
