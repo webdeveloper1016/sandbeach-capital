@@ -65,3 +65,19 @@ export interface PortfolioModel {
   longTerm: AccountModel[];
   retirement: AccountModel[];
 }
+
+export interface PortfolioModelExtended {
+  netWorth: number
+  shortTerm: {
+    sum: number
+    data: AccountModel[]
+  },
+  longTerm: {
+    sum: number
+    data: AccountModel[]
+  }
+  retirement: {
+    sum: number
+    data: AccountModel[]
+  }
+}
