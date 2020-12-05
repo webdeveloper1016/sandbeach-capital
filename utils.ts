@@ -1,4 +1,10 @@
-import { AccountModel, PortfolioModel, PortfolioModelExtended } from './types';
+import {
+  NumberDisplayModel,
+  AccountModel,
+  AccountModelExtended,
+  PortfolioModel,
+  PortfolioModelExtended,
+} from './types';
 
 export const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -9,6 +15,34 @@ export const currencyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 });
+
+export const percentFormatter = (a, b): string =>
+  `${Math.round((a / b) * 100 * 100) / 100}%`;
+
+export const percentDisplay = (a, b): NumberDisplayModel => ({
+  val: a / b,
+  display: percentFormatter(a, b),
+});
+
+export const currencyDisplay = (a): NumberDisplayModel => ({
+  val: a,
+  display: currencyFormatter.format(a),
+});
+
+export const dataEnricher = (
+  data: AccountModel[],
+  sumCat: number,
+  netWorth: number,
+): AccountModelExtended[] => {
+  return data.map((i) => {
+    return {
+      ...i,
+      value: currencyDisplay(i.amount),
+      categoryWeight: percentDisplay(i.amount, sumCat),
+      portfolioWeight: percentDisplay(i.amount, netWorth),
+    };
+  });
+};
 
 export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
   const sumST = sumAccounts(data.shortTerm);
@@ -21,27 +55,21 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
       display: currencyFormatter.format(netWorth),
     },
     categoryPercents: {
-      shortTerm: `${Math.round((sumST / netWorth) * 100 * 100) / 100}%`,
-      longTerm: `${Math.round((sumLT / netWorth) * 100 * 100) / 100}%`,
-      retirement: `${Math.round((sumR / netWorth) * 100 * 100) / 100}%`,
+      shortTerm: percentDisplay(sumST, netWorth),
+      longTerm: percentDisplay(sumLT, netWorth),
+      retirement: percentDisplay(sumR, netWorth),
     },
     shortTerm: {
-      sum: sumST,
-      data: data.shortTerm.map(i => {
-        return {
-          ...i,
-          categoryWeight: '',
-          portfolioWeight: '',
-        }
-      })
+      sum: currencyDisplay(sumST),
+      data: dataEnricher(data.shortTerm, sumST, netWorth),
     },
     longTerm: {
-      sum: sumLT,
-      data: data.longTerm,
+      sum: currencyDisplay(sumLT),
+      data: dataEnricher(data.longTerm, sumLT, netWorth),
     },
     retirement: {
-      sum: sumR,
-      data: data.retirement,
+      sum: currencyDisplay(sumR),
+      data: dataEnricher(data.retirement, sumR, netWorth),
     },
   };
 };
