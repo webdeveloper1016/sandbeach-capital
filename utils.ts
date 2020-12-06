@@ -40,17 +40,23 @@ export const flattenData = (data: PortfolioModel): AccountModel[] => {
     .flat();
 };
 
-export const filterByAttribute = (
+/** filter by attribute and su */
+export const sumBySector = (
   data: AccountModel[],
-  key: string,
-  value: unknown,
-) => {
-  console.log(data, key, value);
-  const vals = data.filter(i => i[key] === value)
+  value: SectorType,
+): number => {
+  // for each dataset, filter by the sector
+  // then calc the value based on target percentage
+  const vals = data.map((i) => {
+    const inSector = i.pie.filter((i) => i.sector === value);
+    const sums = inSector.reduce(
+      (accum, current) => accum + current.targetPercent * i.amount,
+      0,
+    );
+    return sums;
+  });
 
-  console.log(vals)
-
-  return '';
+  return vals.reduce((accum, current) => accum + current, 0);
 };
 
 export const dataEnricher = (
@@ -84,26 +90,48 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
       longTerm: percentDisplay(sumLT, netWorth),
       retirement: percentDisplay(sumR, netWorth),
     },
-    sectorWeights: sectors.map((sector) => ({
-      sector,
-      weight: ((): NumberDisplayModel => {
-        const t = filterByAttribute(flatData, 'sector', sector);
-        return {
-          val: 0,
-          display: '',
-        };
-      })(),
-    })),
+    portfolioSectorWeights: sectors.map((sector) => {
+      const sectorSum = sumBySector(flatData, sector);
+      return {
+        sector,
+        value: currencyDisplay(sectorSum),
+        weight: percentDisplay(sectorSum, netWorth),
+      };
+    }),
     shortTerm: {
-      sum: currencyDisplay(sumST),
+      value: currencyDisplay(sumST),
+      categorySectorWeights: sectors.map((sector) => {
+        const sectorSum = sumBySector(data.shortTerm, sector);
+        return {
+          sector,
+          value: currencyDisplay(sectorSum),
+          weight: percentDisplay(sectorSum, sumST),
+        };
+      }),
       data: dataEnricher(data.shortTerm, sumST, netWorth),
     },
     longTerm: {
-      sum: currencyDisplay(sumLT),
+      value: currencyDisplay(sumLT),
+      categorySectorWeights: sectors.map((sector) => {
+        const sectorSum = sumBySector(data.longTerm, sector);
+        return {
+          sector,
+          value: currencyDisplay(sectorSum),
+          weight: percentDisplay(sectorSum, sumLT),
+        };
+      }),
       data: dataEnricher(data.longTerm, sumLT, netWorth),
     },
     retirement: {
-      sum: currencyDisplay(sumR),
+      value: currencyDisplay(sumR),
+      categorySectorWeights: sectors.map((sector) => {
+        const sectorSum = sumBySector(data.retirement, sector);
+        return {
+          sector,
+          value: currencyDisplay(sectorSum),
+          weight: percentDisplay(sectorSum, sumR),
+        };
+      }),
       data: dataEnricher(data.retirement, sumR, netWorth),
     },
   };

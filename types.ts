@@ -52,6 +52,12 @@ export interface NumberDisplayModel {
   display: string;
 }
 
+export interface SectorWeightModel {
+  sector: SectorType;
+  value: NumberDisplayModel;
+  weight: NumberDisplayModel;
+}
+
 export interface AccountModel {
   account: string;
   category: CategoryType;
@@ -84,20 +90,20 @@ export interface PortfolioModelExtended {
     longTerm: NumberDisplayModel;
     retirement: NumberDisplayModel;
   };
-  sectorWeights: {
-    sector: SectorType;
-    weight: NumberDisplayModel;
-  }[];
+  portfolioSectorWeights: SectorWeightModel[];
   shortTerm: {
-    sum: NumberDisplayModel;
+    value: NumberDisplayModel;
+    categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };
   longTerm: {
-    sum: NumberDisplayModel;
+    value: NumberDisplayModel;
+    categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };
   retirement: {
-    sum: NumberDisplayModel;
+    value: NumberDisplayModel;
+    categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };
 }
