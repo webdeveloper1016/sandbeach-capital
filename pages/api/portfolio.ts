@@ -84,7 +84,7 @@ const data: PortfolioModel = {
       approach: 'Robo',
       pie: [
         {
-          sector: 'Stocks',
+          sector: "Alts",
           subSector: 'Hedge fund',
           nickname: 'Titan Flagship',
           targetPercent: 1.0,

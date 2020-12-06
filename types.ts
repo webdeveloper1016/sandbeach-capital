@@ -91,6 +91,7 @@ export interface PortfolioModelExtended {
     retirement: NumberDisplayModel;
   };
   portfolioSectorWeights: SectorWeightModel[];
+  longTermRetireSectorWeights: SectorWeightModel[];
   shortTerm: {
     value: NumberDisplayModel;
     categorySectorWeights: SectorWeightModel[];
