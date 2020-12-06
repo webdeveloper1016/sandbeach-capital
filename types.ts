@@ -47,10 +47,9 @@ export type ApproachType =
   | 'Advisor'
   | 'Other';
 
-
 export interface NumberDisplayModel {
-  val: number
-  display: string
+  val: number;
+  display: string;
 }
 
 export interface AccountModel {
@@ -67,9 +66,9 @@ export interface AccountModel {
 }
 
 export interface AccountModelExtended extends AccountModel {
-  categoryWeight?: NumberDisplayModel
-  portfolioWeight?: NumberDisplayModel
-  value: NumberDisplayModel
+  categoryWeight?: NumberDisplayModel;
+  portfolioWeight?: NumberDisplayModel;
+  value: NumberDisplayModel;
 }
 
 export interface PortfolioModel {
@@ -79,22 +78,26 @@ export interface PortfolioModel {
 }
 
 export interface PortfolioModelExtended {
-  netWorth: NumberDisplayModel
+  netWorth: NumberDisplayModel;
   categoryPercents: {
-    shortTerm: NumberDisplayModel
-    longTerm: NumberDisplayModel
-    retirement: NumberDisplayModel
-  }
+    shortTerm: NumberDisplayModel;
+    longTerm: NumberDisplayModel;
+    retirement: NumberDisplayModel;
+  };
+  sectorWeights: {
+    sector: SectorType;
+    weight: NumberDisplayModel;
+  }[];
   shortTerm: {
-    sum: NumberDisplayModel
-    data: AccountModelExtended[]
-  },
+    sum: NumberDisplayModel;
+    data: AccountModelExtended[];
+  };
   longTerm: {
-    sum: NumberDisplayModel
-    data: AccountModelExtended[]
-  }
+    sum: NumberDisplayModel;
+    data: AccountModelExtended[];
+  };
   retirement: {
-    sum: NumberDisplayModel
-    data: AccountModelExtended[]
-  }
+    sum: NumberDisplayModel;
+    data: AccountModelExtended[];
+  };
 }

@@ -1,4 +1,5 @@
 import {
+  SectorType,
   NumberDisplayModel,
   AccountModel,
   AccountModelExtended,
@@ -7,6 +8,8 @@ import {
 } from './types';
 
 export const fetcher = (url) => fetch(url).then((res) => res.json());
+
+const sectors: SectorType[] = ['Stocks', 'Bonds', 'Alts', 'Crypto', 'Cash'];
 
 export const sumAccounts = (data: AccountModel[]): number =>
   data.reduce((accum, current) => accum + current.amount, 0);
@@ -29,6 +32,27 @@ export const currencyDisplay = (a): NumberDisplayModel => ({
   display: currencyFormatter.format(a),
 });
 
+export const flattenData = (data: PortfolioModel): AccountModel[] => {
+  return Object.keys(data)
+    .map((k) => {
+      return data[k];
+    })
+    .flat();
+};
+
+export const filterByAttribute = (
+  data: AccountModel[],
+  key: string,
+  value: unknown,
+) => {
+  console.log(data, key, value);
+  const vals = data.filter(i => i[key] === value)
+
+  console.log(vals)
+
+  return '';
+};
+
 export const dataEnricher = (
   data: AccountModel[],
   sumCat: number,
@@ -45,6 +69,7 @@ export const dataEnricher = (
 };
 
 export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
+  const flatData = flattenData(data);
   const sumST = sumAccounts(data.shortTerm);
   const sumLT = sumAccounts(data.longTerm);
   const sumR = sumAccounts(data.retirement);
@@ -59,6 +84,16 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
       longTerm: percentDisplay(sumLT, netWorth),
       retirement: percentDisplay(sumR, netWorth),
     },
+    sectorWeights: sectors.map((sector) => ({
+      sector,
+      weight: ((): NumberDisplayModel => {
+        const t = filterByAttribute(flatData, 'sector', sector);
+        return {
+          val: 0,
+          display: '',
+        };
+      })(),
+    })),
     shortTerm: {
       sum: currencyDisplay(sumST),
       data: dataEnricher(data.shortTerm, sumST, netWorth),
