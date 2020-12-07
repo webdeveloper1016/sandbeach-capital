@@ -95,10 +95,22 @@ export interface PortfolioModel {
 
 export interface PortfolioModelExtended {
   totalBalance: NumberDisplayModel;
-  categoryPercents: {
-    shortTerm: NumberDisplayModel;
-    longTerm: NumberDisplayModel;
-    retirement: NumberDisplayModel;
+  categorySummary: {
+    shortTerm: {
+      value: NumberDisplayModel;
+      balance: NumberDisplayModel;
+      label: string;
+    };
+    longTerm: {
+      value: NumberDisplayModel;
+      balance: NumberDisplayModel;
+      label: string;
+    };
+    retirement: {
+      value: NumberDisplayModel;
+      balance: NumberDisplayModel;
+      label: string;
+    };
   };
   portfolioSectorWeights: SectorWeightModel[];
   longTermRetireSectorWeights: SectorWeightModel[];

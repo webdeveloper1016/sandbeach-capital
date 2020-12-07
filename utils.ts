@@ -84,10 +84,10 @@ export const dataEnricher = (
       value: currencyDisplay(i.balance),
       categoryWeight: percentDisplay(i.balance, sumCat),
       portfolioWeight: percentDisplay(i.balance, totalBalance),
-      pie: i.pie.map(p => ({
+      pie: i.pie.map((p) => ({
         ...p,
-        approxVal: currencyDisplay(i.balance * p.targetPercent)
-      }))
+        approxVal: currencyDisplay(i.balance * p.targetPercent),
+      })),
     };
   });
 };
@@ -103,10 +103,22 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
       val: totalBalance,
       display: currencyFormatter.format(totalBalance),
     },
-    categoryPercents: {
-      shortTerm: percentDisplay(sumST, totalBalance),
-      longTerm: percentDisplay(sumLT, totalBalance),
-      retirement: percentDisplay(sumR, totalBalance),
+    categorySummary: {
+      shortTerm: {
+        value: percentDisplay(sumST, totalBalance),
+        balance: currencyDisplay(sumST),
+        label: 'Short Term',
+      },
+      longTerm: {
+        value: percentDisplay(sumLT, totalBalance),
+        balance: currencyDisplay(sumLT),
+        label: 'Long Term',
+      },
+      retirement: {
+        value: percentDisplay(sumR, totalBalance),
+        balance: currencyDisplay(sumR),
+        label: 'Retirement',
+      },
     },
     portfolioSectorWeights: calcSectorWeights(flatData, totalBalance),
     longTermRetireSectorWeights: calcSectorWeights(
