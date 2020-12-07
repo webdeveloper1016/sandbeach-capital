@@ -58,23 +58,30 @@ export interface SectorWeightModel {
   weight: NumberDisplayModel;
 }
 
+export interface PieModel {
+  nickname: string;
+  targetPercent: number;
+  sector: SectorType;
+  subSector: SubSectorType | StrategyType;
+}
+
 export interface AccountModel {
   account: string;
   category: CategoryType;
   approach: ApproachType;
   balance: number;
-  pie: {
-    nickname: string;
-    targetPercent: number;
-    sector: SectorType;
-    subSector: SubSectorType | StrategyType;
-  }[];
+  pie: PieModel[];
+}
+
+export interface PieModelExtended extends PieModel {
+  approxVal: NumberDisplayModel;
 }
 
 export interface AccountModelExtended extends AccountModel {
   categoryWeight?: NumberDisplayModel;
   portfolioWeight?: NumberDisplayModel;
   value: NumberDisplayModel;
+  pie: PieModelExtended[];
 }
 
 export interface PortfolioModel {

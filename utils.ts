@@ -84,6 +84,10 @@ export const dataEnricher = (
       value: currencyDisplay(i.balance),
       categoryWeight: percentDisplay(i.balance, sumCat),
       portfolioWeight: percentDisplay(i.balance, totalBalance),
+      pie: i.pie.map(p => ({
+        ...p,
+        approxVal: currencyDisplay(i.balance * p.targetPercent)
+      }))
     };
   });
 };
