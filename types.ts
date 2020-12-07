@@ -67,6 +67,9 @@ export interface PieModel {
 
 export interface AccountModel {
   account: string;
+  institution: string;
+  goal: string;
+  timeHorizon: string;
   category: CategoryType;
   approach: ApproachType;
   balance: number;

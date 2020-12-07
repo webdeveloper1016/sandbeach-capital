@@ -3,7 +3,10 @@ import { PortfolioModel } from '../../types';
 const data: PortfolioModel = {
   shortTerm: [
     {
-      account: 'Betterment',
+      account: 'Emergency Fund',
+      institution: 'Betterment',
+      goal: 'Liquid emergency fund',
+      timeHorizon: 'sub 3 years',
       category: 'short-term',
       approach: 'Robo',
       balance: 13000,
@@ -17,7 +20,10 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Betterment',
+      account: 'Short Term - Stock/Bond',
+      institution: 'M1',
+      goal: 'Liquid emergency fund backup',
+      timeHorizon: 'next 5 years',
       category: 'short-term',
       approach: 'Robo',
       balance: 2000,
@@ -37,10 +43,12 @@ const data: PortfolioModel = {
       ],
     },
   ],
-
   longTerm: [
     {
-      account: 'M1',
+      account: 'Long Term - Diversified Portfolio',
+      institution: 'M1',
+      goal: 'Liquid capital appriciation',
+      timeHorizon: '5+ years',
       category: 'long-term',
       approach: 'Self Directed',
       balance: 200,
@@ -79,6 +87,9 @@ const data: PortfolioModel = {
     },
     {
       account: 'Titan',
+      institution: 'Titan',
+      goal: 'Capital appriciation that outpreforms the S&P 500',
+      timeHorizon: '5+ years',
       category: 'long-term',
       balance: 350,
       approach: 'Robo',
@@ -93,8 +104,11 @@ const data: PortfolioModel = {
     },
     {
       account: 'Coinbase',
+      institution: 'Coinbase',
+      goal: 'Exposure to cryptocurrencies',
+      timeHorizon: '5+ years',
       category: 'long-term',
-      balance: 2500,
+      balance: 500,
       approach: 'Self Directed',
       pie: [
         {
@@ -107,8 +121,11 @@ const data: PortfolioModel = {
     },
     {
       account: 'BlockFi',
+      institution: 'BlockFi',
+      goal: 'Exposure to cryptocurrencies while earning interest',
+      timeHorizon: '5+ years',
       category: 'long-term',
-      balance: 100,
+      balance: 2200,
       approach: 'Self Directed',
       pie: [
         {
@@ -124,6 +141,9 @@ const data: PortfolioModel = {
   retirement: [
     {
       account: 'Jamie - Rollover',
+      institution: 'Vanguard',
+      goal: 'Long term capital appritiation',
+      timeHorizon: '25+ years',
       category: 'retirement',
       balance: 39000,
       approach: 'Self Directed',
@@ -138,6 +158,9 @@ const data: PortfolioModel = {
     },
     {
       account: 'Jamie IRA',
+      institution: 'Vanguard',
+      goal: 'Long term capital appritiation',
+      timeHorizon: '25+ years',
       category: 'retirement',
       balance: 42000,
       approach: 'Robo',
@@ -158,6 +181,9 @@ const data: PortfolioModel = {
     },
     {
       account: 'Bryan Rollover',
+      institution: 'M1 - TODO',
+      goal: 'Long term capital appritiation',
+      timeHorizon: '25+ years',
       category: 'retirement',
       approach: 'Self Directed',
       balance: 30000,
@@ -172,6 +198,9 @@ const data: PortfolioModel = {
     },
     {
       account: 'Bryan 401(k)',
+      institution: 'Merril Lynch',
+      goal: 'Long term capital appritiation',
+      timeHorizon: '25+ years',
       category: 'retirement',
       approach: 'Self Directed',
       balance: 2500,
@@ -191,7 +220,10 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'bryan IRA',
+      account: 'Bryan IRA',
+      institution: 'M1',
+      goal: 'Long term capital appritiation',
+      timeHorizon: '25+ years',
       category: 'retirement',
       approach: 'Self Directed',
       balance: 1600,
