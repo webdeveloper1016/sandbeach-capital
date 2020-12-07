@@ -1,22 +1,25 @@
 import Link from 'next/link';
 
-const links = [{ href: '/portfolio', label: 'Portfolio' }];
+const links = [
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/savings', label: 'Savings' },
+];
 
 const Nav = () => (
   <nav>
     <ul className="flex items-center justify-between p-8">
       <li>
         <Link href="/">
-          <a className="text-blue-500 no-underline text-accent-1 dark:text-blue-300">
-            Home
-          </a>
+          <a className="text-green-500 no-underline">Home</a>
         </Link>
       </li>
       <ul className="flex items-center justify-between space-x-4">
         {links.map(({ href, label }) => (
           <li key={`${href}${label}`}>
             <Link href={href}>
-              <a className="no-underline btn-blue">{label}</a>
+              <a className="no-underline px-4 py-2 font-bold text-white bg-green-500 rounded">
+                {label}
+              </a>
             </Link>
           </li>
         ))}
