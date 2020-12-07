@@ -62,7 +62,7 @@ export interface AccountModel {
   account: string;
   category: CategoryType;
   approach: ApproachType;
-  amount: number;
+  balance: number;
   pie: {
     nickname: string;
     targetPercent: number;
@@ -84,7 +84,7 @@ export interface PortfolioModel {
 }
 
 export interface PortfolioModelExtended {
-  netWorth: NumberDisplayModel;
+  totalBalance: NumberDisplayModel;
   categoryPercents: {
     shortTerm: NumberDisplayModel;
     longTerm: NumberDisplayModel;
@@ -93,17 +93,17 @@ export interface PortfolioModelExtended {
   portfolioSectorWeights: SectorWeightModel[];
   longTermRetireSectorWeights: SectorWeightModel[];
   shortTerm: {
-    value: NumberDisplayModel;
+    balance: NumberDisplayModel;
     categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };
   longTerm: {
-    value: NumberDisplayModel;
+    balance: NumberDisplayModel;
     categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };
   retirement: {
-    value: NumberDisplayModel;
+    balance: NumberDisplayModel;
     categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };

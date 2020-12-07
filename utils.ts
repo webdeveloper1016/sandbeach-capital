@@ -13,7 +13,7 @@ export const fetcher = (url) => fetch(url).then((res) => res.json());
 const sectors: SectorType[] = ['Stocks', 'Bonds', 'Alts', 'Crypto', 'Cash'];
 
 export const sumAccounts = (data: AccountModel[]): number =>
-  data.reduce((accum, current) => accum + current.amount, 0);
+  data.reduce((accum, current) => accum + current.balance, 0);
 
 export const currencyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -50,7 +50,7 @@ export const sumBySector = (
   const vals = data.map((i) => {
     const inSector = i.pie.filter((i) => i.sector === value);
     const sums = inSector.reduce(
-      (accum, current) => accum + current.targetPercent * i.amount,
+      (accum, current) => accum + current.targetPercent * i.balance,
       0,
     );
     return sums;
@@ -76,14 +76,14 @@ export const calcSectorWeights = (
 export const dataEnricher = (
   data: AccountModel[],
   sumCat: number,
-  netWorth: number,
+  totalBalance: number,
 ): AccountModelExtended[] => {
   return data.map((i) => {
     return {
       ...i,
-      value: currencyDisplay(i.amount),
-      categoryWeight: percentDisplay(i.amount, sumCat),
-      portfolioWeight: percentDisplay(i.amount, netWorth),
+      value: currencyDisplay(i.balance),
+      categoryWeight: percentDisplay(i.balance, sumCat),
+      portfolioWeight: percentDisplay(i.balance, totalBalance),
     };
   });
 };
@@ -93,36 +93,36 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
   const sumST = sumAccounts(data.shortTerm);
   const sumLT = sumAccounts(data.longTerm);
   const sumR = sumAccounts(data.retirement);
-  const netWorth = sumST + sumLT + sumR;
+  const totalBalance = sumST + sumLT + sumR;
   return {
-    netWorth: {
-      val: netWorth,
-      display: currencyFormatter.format(netWorth),
+    totalBalance: {
+      val: totalBalance,
+      display: currencyFormatter.format(totalBalance),
     },
     categoryPercents: {
-      shortTerm: percentDisplay(sumST, netWorth),
-      longTerm: percentDisplay(sumLT, netWorth),
-      retirement: percentDisplay(sumR, netWorth),
+      shortTerm: percentDisplay(sumST, totalBalance),
+      longTerm: percentDisplay(sumLT, totalBalance),
+      retirement: percentDisplay(sumR, totalBalance),
     },
-    portfolioSectorWeights: calcSectorWeights(flatData, netWorth),
+    portfolioSectorWeights: calcSectorWeights(flatData, totalBalance),
     longTermRetireSectorWeights: calcSectorWeights(
       flatData.filter((i) => i.category !== 'short-term'),
       sumLT + sumR,
     ),
     shortTerm: {
-      value: currencyDisplay(sumST),
+      balance: currencyDisplay(sumST),
       categorySectorWeights: calcSectorWeights(data.shortTerm, sumST),
-      data: dataEnricher(data.shortTerm, sumST, netWorth),
+      data: dataEnricher(data.shortTerm, sumST, totalBalance),
     },
     longTerm: {
-      value: currencyDisplay(sumLT),
+      balance: currencyDisplay(sumLT),
       categorySectorWeights: calcSectorWeights(data.longTerm, sumLT),
-      data: dataEnricher(data.longTerm, sumLT, netWorth),
+      data: dataEnricher(data.longTerm, sumLT, totalBalance),
     },
     retirement: {
-      value: currencyDisplay(sumR),
+      balance: currencyDisplay(sumR),
       categorySectorWeights: calcSectorWeights(data.retirement, sumR),
-      data: dataEnricher(data.retirement, sumR, netWorth),
+      data: dataEnricher(data.retirement, sumR, totalBalance),
     },
   };
 };

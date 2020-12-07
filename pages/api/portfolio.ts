@@ -6,7 +6,7 @@ const data: PortfolioModel = {
       account: 'Betterment',
       category: 'short-term',
       approach: 'Robo',
-      amount: 13000,
+      balance: 13000,
       pie: [
         {
           sector: 'Cash',
@@ -20,7 +20,7 @@ const data: PortfolioModel = {
       account: 'Betterment',
       category: 'short-term',
       approach: 'Robo',
-      amount: 2000,
+      balance: 2000,
       pie: [
         {
           sector: 'Stocks',
@@ -43,7 +43,7 @@ const data: PortfolioModel = {
       account: 'M1',
       category: 'long-term',
       approach: 'Self Directed',
-      amount: 200,
+      balance: 200,
       pie: [
         {
           sector: 'Stocks',
@@ -80,7 +80,7 @@ const data: PortfolioModel = {
     {
       account: 'Titan',
       category: 'long-term',
-      amount: 350,
+      balance: 350,
       approach: 'Robo',
       pie: [
         {
@@ -94,7 +94,7 @@ const data: PortfolioModel = {
     {
       account: 'Coinbase',
       category: 'long-term',
-      amount: 2500,
+      balance: 2500,
       approach: 'Self Directed',
       pie: [
         {
@@ -108,7 +108,7 @@ const data: PortfolioModel = {
     {
       account: 'BlockFi',
       category: 'long-term',
-      amount: 100,
+      balance: 100,
       approach: 'Self Directed',
       pie: [
         {
@@ -125,7 +125,7 @@ const data: PortfolioModel = {
     {
       account: 'Jamie - Rollover',
       category: 'retirement',
-      amount: 39000,
+      balance: 39000,
       approach: 'Self Directed',
       pie: [
         {
@@ -139,7 +139,7 @@ const data: PortfolioModel = {
     {
       account: 'Jamie IRA',
       category: 'retirement',
-      amount: 42000,
+      balance: 42000,
       approach: 'Robo',
       pie: [
         {
@@ -160,7 +160,7 @@ const data: PortfolioModel = {
       account: 'Bryan Rollover',
       category: 'retirement',
       approach: 'Self Directed',
-      amount: 30000,
+      balance: 30000,
       pie: [
         {
           sector: 'Stocks',
@@ -174,7 +174,7 @@ const data: PortfolioModel = {
       account: 'Bryan 401(k)',
       category: 'retirement',
       approach: 'Self Directed',
-      amount: 2500,
+      balance: 2500,
       pie: [
         {
           sector: 'Stocks',
@@ -194,7 +194,7 @@ const data: PortfolioModel = {
       account: 'bryan IRA',
       category: 'retirement',
       approach: 'Self Directed',
-      amount: 1600,
+      balance: 1600,
       pie: [
         {
           sector: 'Stocks',
