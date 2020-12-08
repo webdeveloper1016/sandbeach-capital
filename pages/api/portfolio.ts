@@ -9,6 +9,7 @@ const data: PortfolioModel = {
       timeHorizon: 'sub 3 years',
       category: 'short-term',
       approach: 'Robo',
+      risk: 1,
       balance: 13000,
       pie: [
         {
@@ -26,6 +27,7 @@ const data: PortfolioModel = {
       timeHorizon: 'next 5 years',
       category: 'short-term',
       approach: 'Robo',
+      risk: 2,
       balance: 2000,
       pie: [
         {
@@ -51,7 +53,8 @@ const data: PortfolioModel = {
       timeHorizon: '5+ years',
       category: 'long-term',
       approach: 'Self Directed',
-      balance: 200,
+      risk: 3,
+      balance: 295,
       pie: [
         {
           sector: 'Stocks',
@@ -86,16 +89,41 @@ const data: PortfolioModel = {
       ],
     },
     {
+      account: 'Long Term - Stocks',
+      institution: 'M1',
+      goal: 'Capital appriciation that outpreforms the S&P 500',
+      timeHorizon: '5+ years',
+      category: 'long-term',
+      balance: 0,
+      risk: 5,
+      approach: 'Self Directed',
+      pie: [
+        {
+          sector: "Stocks",
+          subSector: 'Hedge fund follow',
+          nickname: 'Hedge Fund Follow',
+          targetPercent: 0.9,
+        },
+        {
+          sector: "Stocks",
+          subSector: 'Domestic stocks',
+          nickname: 'My stock picks',
+          targetPercent: 0.1,
+        },
+      ],
+    },
+    {
       account: 'Titan',
       institution: 'Titan',
       goal: 'Capital appriciation that outpreforms the S&P 500',
       timeHorizon: '5+ years',
       category: 'long-term',
-      balance: 350,
+      balance: 500,
+      risk: 5,
       approach: 'Robo',
       pie: [
         {
-          sector: "Alts",
+          sector: "Stocks",
           subSector: 'Hedge fund',
           nickname: 'Titan Flagship',
           targetPercent: 1.0,
@@ -108,6 +136,7 @@ const data: PortfolioModel = {
       goal: 'Exposure to cryptocurrencies',
       timeHorizon: '5+ years',
       category: 'long-term',
+      risk: 5,
       balance: 500,
       approach: 'Self Directed',
       pie: [
@@ -125,6 +154,7 @@ const data: PortfolioModel = {
       goal: 'Exposure to cryptocurrencies while earning interest',
       timeHorizon: '5+ years',
       category: 'long-term',
+      risk: 5,
       balance: 2200,
       approach: 'Self Directed',
       pie: [
@@ -145,6 +175,7 @@ const data: PortfolioModel = {
       goal: 'Long term capital appritiation',
       timeHorizon: '25+ years',
       category: 'retirement',
+      risk: 4,
       balance: 39000,
       approach: 'Self Directed',
       pie: [
@@ -162,19 +193,20 @@ const data: PortfolioModel = {
       goal: 'Long term capital appritiation',
       timeHorizon: '25+ years',
       category: 'retirement',
+      risk: 4,
       balance: 42000,
-      approach: 'Robo',
+      approach: 'Self Directed',
       pie: [
         {
           sector: 'Stocks',
-          subSector: 'Domestic/Foreign mix stocks',
-          nickname: 'VTI',
+          subSector: 'Domestic stocks',
+          nickname: 'domestic',
           targetPercent: 0.6,
         },
         {
           sector: 'Stocks',
           subSector: 'Foreign stocks',
-          nickname: 'VXUS',
+          nickname: 'foreign',
           targetPercent: 0.4,
         },
       ],
@@ -187,6 +219,7 @@ const data: PortfolioModel = {
       category: 'retirement',
       approach: 'Self Directed',
       balance: 30000,
+      risk: 4,
       pie: [
         {
           sector: 'Stocks',
@@ -204,6 +237,7 @@ const data: PortfolioModel = {
       category: 'retirement',
       approach: 'Self Directed',
       balance: 2500,
+      risk: 4,
       pie: [
         {
           sector: 'Stocks',
@@ -227,6 +261,7 @@ const data: PortfolioModel = {
       category: 'retirement',
       approach: 'Self Directed',
       balance: 1600,
+      risk: 4,
       pie: [
         {
           sector: 'Stocks',

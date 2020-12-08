@@ -72,6 +72,7 @@ export interface AccountModel {
   timeHorizon: string;
   category: CategoryType;
   approach: ApproachType;
+  risk: 1 | 2 | 3| 4| 5;
   balance: number;
   pie: PieModel[];
 }
