@@ -1,13 +1,7 @@
-import { useQuery } from 'react-query';
-import { fetcher, runAnalysis } from '../utils';
-import { PortfolioModel } from '../types';
+import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
-const getPortfolio = (): Promise<PortfolioModel> => {
-  return fetcher('/api/portfolio');
-};
-
-const HomePage = () => {
-  const { data: apiData, status } = useQuery('portfolio', getPortfolio);
+const AccountsPage = () => {
+  const { data, status } = useFetchPortfolio();
 
   if (status === 'loading') {
     return <div className="text-green-500">loading...</div>;
@@ -17,7 +11,6 @@ const HomePage = () => {
     return <div className="text-red-500">error...</div>;
   }
 
-  const data = runAnalysis(apiData);
   console.log(data);
 
   return (
@@ -30,5 +23,5 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AccountsPage;
 

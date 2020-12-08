@@ -93,6 +93,7 @@ export const dataEnricher = (
 };
 
 export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
+  console.log('FIRE!!!')
   const flatData = flattenData(data);
   const sumST = sumAccounts(data.shortTerm);
   const sumLT = sumAccounts(data.longTerm);
