@@ -4,6 +4,7 @@ const links = [
   { href: '/accounts', label: 'Accounts' },
   { href: '/insights', label: 'Insights' },
   { href: '/savings', label: 'Savings' },
+  { href: '/watchlist', label: 'Watchlist' },
 ];
 
 const Nav = () => (
