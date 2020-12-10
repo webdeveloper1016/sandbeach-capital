@@ -7,7 +7,7 @@ import {
   AccountModelExtended,
   PortfolioModel,
   PortfolioModelExtended,
-} from './types';
+} from '../ts/types';
 
 export const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -96,12 +96,14 @@ export const dataEnricher = (
 };
 
 export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
-  console.log('FIRE!!!');
+  // group and sum data
   const flatData = flattenData(data);
   const sumST = sumAccounts(data.shortTerm);
   const sumLT = sumAccounts(data.longTerm);
   const sumR = sumAccounts(data.retirement);
   const totalBalance = sumST + sumLT + sumR;
+
+  // build out analysis object
   return {
     totalBalance: {
       val: totalBalance,
@@ -133,24 +135,6 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
         label,
       };
     }),
-
-    // {
-    //   shortTerm: {
-    //     value: percentDisplay(sumST, totalBalance),
-    //     balance: currencyDisplay(sumST),
-    //     label: 'Short Term',
-    //   },
-    //   longTerm: {
-    //     value: percentDisplay(sumLT, totalBalance),
-    //     balance: currencyDisplay(sumLT),
-    //     label: 'Long Term',
-    //   },
-    //   retirement: {
-    //     value: percentDisplay(sumR, totalBalance),
-    //     balance: currencyDisplay(sumR),
-    //     label: 'Retirement',
-    //   },
-    // },
     portfolioSectorWeights: calcSectorWeights(flatData, totalBalance),
     longTermRetireSectorWeights: calcSectorWeights(
       flatData.filter((i) => i.category !== 'short-term'),

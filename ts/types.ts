@@ -16,6 +16,7 @@ export type SubSectorType =
   | 'MBS Bond'
   | 'Junk Bond'
   | 'Domestic/Foreign mix bonds'
+  | 'Alts mix'
   | 'REIT'
   | 'Art'
   | 'Currency'

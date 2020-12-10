@@ -14,8 +14,6 @@ const HomePage = () => {
     return <div className="text-red-500">error...</div>;
   }
 
-  console.log(data);
-
   return (
     <div>
       <div className="mb-5">

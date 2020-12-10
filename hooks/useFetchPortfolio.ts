@@ -1,6 +1,6 @@
 import { useQuery, QueryResult } from 'react-query';
 import { fetcher, runAnalysis } from '../utils';
-import { PortfolioModelExtended } from '../types';
+import { PortfolioModelExtended } from '../ts/types';
 
 const getPortfolio = async (): Promise<PortfolioModelExtended> => {
   const data = await fetcher('/api/portfolio');
