@@ -1,5 +1,6 @@
 import {
   SectorType,
+  CategoryType,
   NumberDisplayModel,
   SectorWeightModel,
   AccountModel,
@@ -11,6 +12,8 @@ import {
 export const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const sectors: SectorType[] = ['Stocks', 'Bonds', 'Alts', 'Crypto', 'Cash'];
+
+const categories: CategoryType[] = ['short-term', 'long-term', 'retirement'];
 
 export const sumAccounts = (data: AccountModel[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
@@ -93,7 +96,7 @@ export const dataEnricher = (
 };
 
 export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
-  console.log('FIRE!!!')
+  console.log('FIRE!!!');
   const flatData = flattenData(data);
   const sumST = sumAccounts(data.shortTerm);
   const sumLT = sumAccounts(data.longTerm);
@@ -104,23 +107,50 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
       val: totalBalance,
       display: currencyFormatter.format(totalBalance),
     },
-    categorySummary: {
-      shortTerm: {
-        value: percentDisplay(sumST, totalBalance),
-        balance: currencyDisplay(sumST),
-        label: 'Short Term',
-      },
-      longTerm: {
-        value: percentDisplay(sumLT, totalBalance),
-        balance: currencyDisplay(sumLT),
-        label: 'Long Term',
-      },
-      retirement: {
-        value: percentDisplay(sumR, totalBalance),
-        balance: currencyDisplay(sumR),
-        label: 'Retirement',
-      },
-    },
+    categorySummary: categories.map((c) => {
+      let sum = 0;
+      let label = '';
+      switch (c) {
+        case 'short-term':
+          sum = sumST;
+          label = 'Short Term';
+          break;
+        case 'long-term':
+          sum = sumLT;
+          label = 'Long Term';
+          break;
+        case 'retirement':
+          sum = sumR;
+          label = 'Retirement';
+          break;
+        default:
+          break;
+      }
+
+      return {
+        value: currencyDisplay(sum),
+        weight: percentDisplay(sum, totalBalance),
+        label,
+      };
+    }),
+
+    // {
+    //   shortTerm: {
+    //     value: percentDisplay(sumST, totalBalance),
+    //     balance: currencyDisplay(sumST),
+    //     label: 'Short Term',
+    //   },
+    //   longTerm: {
+    //     value: percentDisplay(sumLT, totalBalance),
+    //     balance: currencyDisplay(sumLT),
+    //     label: 'Long Term',
+    //   },
+    //   retirement: {
+    //     value: percentDisplay(sumR, totalBalance),
+    //     balance: currencyDisplay(sumR),
+    //     label: 'Retirement',
+    //   },
+    // },
     portfolioSectorWeights: calcSectorWeights(flatData, totalBalance),
     longTermRetireSectorWeights: calcSectorWeights(
       flatData.filter((i) => i.category !== 'short-term'),

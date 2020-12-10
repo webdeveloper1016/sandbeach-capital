@@ -72,7 +72,7 @@ export interface AccountModel {
   timeHorizon: string;
   category: CategoryType;
   approach: ApproachType;
-  risk: 1 | 2 | 3| 4| 5;
+  risk: 1 | 2 | 3 | 4 | 5;
   balance: number;
   pie: PieModel[];
 }
@@ -97,22 +97,10 @@ export interface PortfolioModel {
 export interface PortfolioModelExtended {
   totalBalance: NumberDisplayModel;
   categorySummary: {
-    shortTerm: {
-      value: NumberDisplayModel;
-      balance: NumberDisplayModel;
-      label: string;
-    };
-    longTerm: {
-      value: NumberDisplayModel;
-      balance: NumberDisplayModel;
-      label: string;
-    };
-    retirement: {
-      value: NumberDisplayModel;
-      balance: NumberDisplayModel;
-      label: string;
-    };
-  };
+    value: NumberDisplayModel;
+    weight: NumberDisplayModel;
+    label: string;
+  }[];
   portfolioSectorWeights: SectorWeightModel[];
   longTermRetireSectorWeights: SectorWeightModel[];
   shortTerm: {

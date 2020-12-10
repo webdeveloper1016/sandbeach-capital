@@ -2,13 +2,18 @@
 
 /* Write your own custom base styles here */
 
+.container-extended {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Start purging... */
 @tailwind components;
 /* Stop purging. */
 
 html,
 body {
-  @apply bg-gray-50 dark:bg-black;
+  @apply bg-black text-gray-500;
 }
 
 /* Write your own custom component styles here */

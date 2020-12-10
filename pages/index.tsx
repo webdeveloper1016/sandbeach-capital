@@ -1,3 +1,4 @@
+import Header from '../components/Header';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const HomePage = () => {
@@ -16,20 +17,60 @@ const HomePage = () => {
   return (
     <div>
       <div className="mb-5">
-        <div className="text-gray-500 text-lg">Total Portfolio Value:</div>
-        <h1 className="text-gray-500 text-5xl">
-          {data.totalBalance.display}
-        </h1>
+        <Header size="2xl" content="Total Portfolio Value:" />
+        <Header size="5xl" content={data.totalBalance.display} noGutter />
       </div>
       <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">Summary by Category:</h3>
+        <Header size="2xl" content="By Time Horizon:" />
+        <div className="grid grid-cols-3 gap-4">
+          <div>Category</div>
+          <div>Balance</div>
+          <div>Weight</div>
+          <>
+            {data.categorySummary.map((c) => (
+              <>
+                <div>{c.label}</div>
+                <div>{c.value.display}</div>
+                <div>{c.weight.display}</div>
+              </>
+            ))}
+          </>
+        </div>
       </div>
       <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">Summary by Sector:</h3>
+        <Header size="2xl" content="By Sector:" />
+        <div className="grid grid-cols-3 gap-4">
+          <div>Sector</div>
+          <div>Balance</div>
+          <div>Weight</div>
+          <>
+            {data.portfolioSectorWeights.map((c) => (
+              <>
+                <div>{c.sector}</div>
+                <div>{c.value.display}</div>
+                <div>{c.weight.display}</div>
+              </>
+            ))}
+          </>
+        </div>
       </div>
-      <pre className="text-gray-500 my-8">
-        {JSON.stringify(data, null, 4)}
-      </pre>
+      <div className="mb-5">
+        <Header size="2xl" content="By Sector (ex-ST):" />
+        <div className="grid grid-cols-3 gap-4">
+          <div>Sector</div>
+          <div>Balance</div>
+          <div>Weight</div>
+          <>
+            {data.longTermRetireSectorWeights.map((c) => (
+              <>
+                <div>{c.sector}</div>
+                <div>{c.value.display}</div>
+                <div>{c.weight.display}</div>
+              </>
+            ))}
+          </>
+        </div>
+      </div>
     </div>
   );
 };
