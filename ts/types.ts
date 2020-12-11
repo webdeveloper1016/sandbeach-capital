@@ -1,6 +1,6 @@
 export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
-export type SectorType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
+export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Stablecoin' | 'Cash';
 
 export type SubSectorType =
   | 'Domestic stocks'
@@ -48,13 +48,15 @@ export type ApproachType =
   | 'Advisor'
   | 'Other';
 
+export type CoinType = 'BTC' | 'ETH' | 'GUSD' | 'USDC';
+
 export interface NumberDisplayModel {
   val: number;
   display: string;
 }
 
 export interface SectorWeightModel {
-  sector: SectorType;
+  assetClass: AssetClassType;
   value: NumberDisplayModel;
   weight: NumberDisplayModel;
 }
@@ -62,8 +64,8 @@ export interface SectorWeightModel {
 export interface PieModel {
   nickname: string;
   targetPercent: number;
-  sector: SectorType;
-  subSector: SubSectorType | StrategyType;
+  assetClass: AssetClassType;
+  subSector: SubSectorType | StrategyType | CoinType;
 }
 
 export interface AccountModel {

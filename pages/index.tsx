@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '../components/Header';
 import Section from '../components/Section';
+import GridList from '../components/GridList';
+import Table from '../components/Table';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const HomePage = () => {
@@ -22,10 +24,8 @@ const HomePage = () => {
       </div>
       <Section>
         <Header size="2xl" content="By Time Horizon:" />
-        <div className="grid grid-cols-3 gap-4">
-          <div>Category</div>
-          <div>Balance</div>
-          <div>Weight</div>
+        <Table />
+        <GridList headers={['Category', 'Balance', 'Weight']}>
           <>
             {data.categorySummary.map((c) => (
               <React.Fragment key={c.label}>
@@ -35,41 +35,21 @@ const HomePage = () => {
               </React.Fragment>
             ))}
           </>
-        </div>
+        </GridList>
       </Section>
       <Section>
-        <Header size="2xl" content="By Sector:" />
-        <div className="grid grid-cols-3 gap-4">
-          <div>Sector</div>
-          <div>Balance</div>
-          <div>Weight</div>
+        <Header size="2xl" content="By Asset Class:" />
+        <GridList headers={['Asset Class', 'Balance', 'Weight']}>
           <>
             {data.portfolioSectorWeights.map((c) => (
-              <React.Fragment key={c.sector}>
-                <div>{c.sector}</div>
+              <React.Fragment key={c.assetClass}>
+                <div className="place-self-auto">{c.assetClass}</div>
                 <div>{c.value.display}</div>
                 <div>{c.weight.display}</div>
               </React.Fragment>
             ))}
           </>
-        </div>
-      </Section>
-      <Section>
-        <Header size="2xl" content="By Sector (ex-ST):" />
-        <div className="grid grid-cols-3 gap-4 justify-center">
-          <div>Sector</div>
-          <div>Balance</div>
-          <div>Weight</div>
-          <>
-            {data.longTermRetireSectorWeights.map((c) => (
-              <React.Fragment key={c.sector}>
-                <div>{c.sector}</div>
-                <div>{c.value.display}</div>
-                <div>{c.weight.display}</div>
-              </React.Fragment>
-            ))}
-          </>
-        </div>
+        </GridList>
       </Section>
     </div>
   );

@@ -14,7 +14,7 @@ const data: PortfolioModel = {
       balance: currentBalances.stEmergency,
       pie: [
         {
-          sector: 'Cash',
+          assetClass: 'Cash',
           subSector: 'Cash',
           nickname: 'Betterment cash',
           targetPercent: 1.0,
@@ -32,13 +32,13 @@ const data: PortfolioModel = {
       balance: currentBalances.stStockBond,
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Domestic/Foreign mix stocks',
           nickname: 'Betterment general investing',
           targetPercent: 0.5,
         },
         {
-          sector: 'Bonds',
+          assetClass: 'Bonds',
           subSector: 'Domestic/Foreign mix bonds',
           nickname: 'Betterment general investing',
           targetPercent: 0.5,
@@ -58,25 +58,25 @@ const data: PortfolioModel = {
       balance: currentBalances.ltDiversified,
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Growth',
           nickname: 'Growth',
           targetPercent: 0.52,
         },
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Income',
           nickname: 'Income',
           targetPercent: 0.27,
         },
         {
-          sector: 'Bonds',
+          assetClass: 'Bonds',
           subSector: 'Domestic/Foreign mix bonds',
           nickname: 'Bonds',
           targetPercent: 0.11,
         },
         {
-          sector: 'Alts',
+          assetClass: 'Alts',
           subSector: 'Alts mix',
           nickname: 'Alts',
           targetPercent: 0.10,
@@ -94,13 +94,13 @@ const data: PortfolioModel = {
       approach: 'Self Directed',
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Domestic stocks',
           nickname: 'My stock picks',
           targetPercent: 0.9,
         },
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Foreign stocks',
           nickname: 'My stock picks',
           targetPercent: 0.1,
@@ -118,7 +118,7 @@ const data: PortfolioModel = {
       approach: 'Robo',
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Hedge fund',
           nickname: 'Titan Flagship',
           targetPercent: 1.0,
@@ -136,7 +136,7 @@ const data: PortfolioModel = {
       approach: 'Self Directed',
       pie: [
         {
-          sector: 'Crypto',
+          assetClass: 'Crypto',
           subSector: 'Crypto',
           nickname: 'Coinbase',
           targetPercent: 1.0,
@@ -154,10 +154,16 @@ const data: PortfolioModel = {
       approach: 'Self Directed',
       pie: [
         {
-          sector: 'Crypto',
-          subSector: 'Crypto',
+          assetClass: 'Crypto',
+          subSector: 'BTC',
           nickname: 'BlockFi',
-          targetPercent: 1.0,
+          targetPercent: 0.94,
+        },
+        {
+          assetClass: 'Stablecoin',
+          subSector: 'GUSD',
+          nickname: 'BlockFi',
+          targetPercent: 0.06,
         },
       ],
     },
@@ -175,7 +181,7 @@ const data: PortfolioModel = {
       approach: 'Self Directed',
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Tech stocks',
           nickname: 'QQQ',
           targetPercent: 1.0,
@@ -193,13 +199,13 @@ const data: PortfolioModel = {
       approach: 'Self Directed',
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Domestic stocks',
           nickname: 'domestic',
           targetPercent: 0.6,
         },
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Foreign stocks',
           nickname: 'foreign',
           targetPercent: 0.4,
@@ -217,7 +223,7 @@ const data: PortfolioModel = {
       risk: 4,
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Domestic stocks',
           nickname: 'SP 500',
           targetPercent: 1.0,
@@ -235,13 +241,13 @@ const data: PortfolioModel = {
       risk: 4,
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Domestic stocks',
           nickname: 'domestic',
           targetPercent: 0.6,
         },
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Foreign stocks',
           nickname: 'foreign',
           targetPercent: 0.4,
@@ -259,25 +265,25 @@ const data: PortfolioModel = {
       risk: 4,
       pie: [
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Domestic stocks',
           nickname: 'domestic',
           targetPercent: 0.53,
         },
         {
-          sector: 'Stocks',
+          assetClass: 'Stocks',
           subSector: 'Foreign stocks',
           nickname: 'foreign',
           targetPercent: 0.38,
         },
         {
-          sector: 'Bonds',
+          assetClass: 'Bonds',
           subSector: 'Domestic/Foreign mix bonds',
           nickname: 'Bonds',
           targetPercent: 0.06,
         },
         {
-          sector: 'Alts',
+          assetClass: 'Alts',
           subSector: 'REIT',
           nickname: 'Alts',
           targetPercent: 0.03,

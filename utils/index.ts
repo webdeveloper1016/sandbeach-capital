@@ -1,5 +1,5 @@
 import {
-  SectorType,
+  AssetClassType,
   CategoryType,
   NumberDisplayModel,
   SectorWeightModel,
@@ -11,9 +11,20 @@ import {
 
 export const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const sectors: SectorType[] = ['Stocks', 'Bonds', 'Alts', 'Crypto', 'Cash'];
+export const assetClasses: AssetClassType[] = [
+  'Stocks',
+  'Bonds',
+  'Alts',
+  'Crypto',
+  'Stablecoin',
+  'Cash',
+];
 
-const categories: CategoryType[] = ['short-term', 'long-term', 'retirement'];
+export const categories: CategoryType[] = [
+  'short-term',
+  'long-term',
+  'retirement',
+];
 
 export const sumAccounts = (data: AccountModel[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
@@ -44,15 +55,15 @@ export const flattenData = (data: PortfolioModel): AccountModel[] => {
     .flat();
 };
 
-export const sumBySector = (
+export const sumByAsset = (
   data: AccountModel[],
-  value: SectorType,
+  value: AssetClassType,
 ): number => {
   // for each dataset, filter by the sector
   // then calc the value based on target percentage
   const vals = data.map((i) => {
-    const inSector = i.pie.filter((i) => i.sector === value);
-    const sums = inSector.reduce(
+    const inAsset = i.pie.filter((i) => i.assetClass === value);
+    const sums = inAsset.reduce(
       (accum, current) => accum + current.targetPercent * i.balance,
       0,
     );
@@ -66,12 +77,12 @@ export const calcSectorWeights = (
   data: AccountModel[],
   totalVal: number,
 ): SectorWeightModel[] => {
-  return sectors.map((sector) => {
-    const sectorSum = sumBySector(data, sector);
+  return assetClasses.map((sector) => {
+    const sum = sumByAsset(data, sector);
     return {
-      sector,
-      value: currencyDisplay(sectorSum),
-      weight: percentDisplay(sectorSum, totalVal),
+      assetClass: sector,
+      value: currencyDisplay(sum),
+      weight: percentDisplay(sum, totalVal),
     };
   });
 };
