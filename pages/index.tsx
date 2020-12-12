@@ -1,8 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import Section from '../components/Section';
-import GridList from '../components/GridList';
-import Table from '../components/Table';
+import { Table } from '../components/Table';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const HomePage = () => {
@@ -24,32 +23,25 @@ const HomePage = () => {
       </div>
       <Section>
         <Header size="2xl" content="By Time Horizon:" />
-        <Table />
-        <GridList headers={['Category', 'Balance', 'Weight']}>
-          <>
-            {data.categorySummary.map((c) => (
-              <React.Fragment key={c.label}>
-                <div>{c.label}</div>
-                <div>{c.value.display}</div>
-                <div>{c.weight.display}</div>
-              </React.Fragment>
-            ))}
-          </>
-        </GridList>
+        <Table
+          columns={[
+            { Header: 'Category', accessor: 'label' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.categorySummary}
+        />
       </Section>
       <Section>
         <Header size="2xl" content="By Asset Class:" />
-        <GridList headers={['Asset Class', 'Balance', 'Weight']}>
-          <>
-            {data.portfolioSectorWeights.map((c) => (
-              <React.Fragment key={c.assetClass}>
-                <div className="place-self-auto">{c.assetClass}</div>
-                <div>{c.value.display}</div>
-                <div>{c.weight.display}</div>
-              </React.Fragment>
-            ))}
-          </>
-        </GridList>
+        <Table
+          columns={[
+            { Header: 'Asset Class', accessor: 'assetClass' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.portfolioSectorWeights}
+        />
       </Section>
     </div>
   );

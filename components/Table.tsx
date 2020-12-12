@@ -6,27 +6,42 @@ interface TableChildrenProp {
 }
 
 interface TableHeaderProps {
-  columns: {
-    accessor: 'string';
-    Header: 'string';
-  }[];
+  headerGroups: any;
 }
 
-interface TableProps extends TableHeaderProps {
+interface TableProps {
   columns: {
-    accessor: 'string';
-    label: 'string';
+    accessor: string;
+    Header: string;
   }[];
-  data: Record<string, unknown>[];
+  data: Record<any, any>[];
 }
 
-export const TableHead = ({ headers }: TableHeaderProps) => (
+export const TableHead = ({ headerGroups }: TableHeaderProps) => (
   <thead>
-    <tr className="z-20 sticky top-0 text-sm font-semibold text-green-500 p-0">
-      {headers.map((h) => (
-        <th>{h.label}</th>
-      ))}
-    </tr>
+    {
+      // Loop over the header rows
+      headerGroups.map((headerGroup) => (
+        // Apply the header row props
+        <tr
+          className="z-20 sticky top-0 text-sm font-semibold text-green-500 p-0"
+          {...headerGroup.getHeaderGroupProps()}
+        >
+          {
+            // Loop over the headers in each row
+            headerGroup.headers.map((column) => (
+              // Apply the header cell props
+              <th {...column.getHeaderProps()}>
+                {
+                  // Render the header
+                  column.render('Header')
+                }
+              </th>
+            ))
+          }
+        </tr>
+      ))
+    }
   </thead>
 );
 
@@ -41,30 +56,48 @@ export const TableCell = ({ children }: TableChildrenProp) => (
 );
 
 export const Table = ({ columns, data }: TableProps) => {
+  const colMemo = React.useMemo(() => columns, [columns])
+  const dataMemo = React.useMemo(() => data, [data])
+  const tableInstance = useTable({ columns: colMemo, data: dataMemo });
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = tableInstance;
+
   return (
-    <table className="w-full text-left">
-      <TableHead columns={columns} />
-      <tbody className="align-baseline">
-        {data.map((h) => {
-          <TableRow>{}</TableRow>;
-        })}
-        <tr>
-          <td className="py-2 pr-2 whitespace-nowrap border-t border-green-500">
-            Intro to CSS
-          </td>
-          <td>Adam</td>
-          <td>858</td>
-        </tr>
-        <tr>
-          <td>A Long and Winding Tour</td>
-          <td>Adam</td>
-          <td>112</td>
-        </tr>
-        <tr>
-          <td>Intro to JavaScript</td>
-          <td>Chris</td>
-          <td>1,280</td>
-        </tr>
+    <table className="w-full text-left" {...getTableProps()}>
+      <TableHead headerGroups={headerGroups} />
+      <tbody className="align-baseline" {...getTableBodyProps()}>
+        {
+          // Loop over the table rows
+          rows.map((row) => {
+            // Prepare the row for display
+            prepareRow(row);
+            return (
+              // Apply the row props
+              <tr {...row.getRowProps()}>
+                {
+                  // Loop over the rows cells
+                  row.cells.map((cell) => {
+                    // Apply the cell props
+                    return (
+                      <td {...cell.getCellProps()}>
+                        {
+                          // Render the cell contents
+                          cell.render('Cell')
+                        }
+                      </td>
+                    );
+                  })
+                }
+              </tr>
+            );
+          })
+        }
       </tbody>
     </table>
   );
