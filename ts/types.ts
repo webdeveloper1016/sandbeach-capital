@@ -1,6 +1,6 @@
 export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
-export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Stablecoin' | 'Cash';
+export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
 
 export type SubSectorType =
   | 'Domestic stocks'
@@ -21,6 +21,7 @@ export type SubSectorType =
   | 'Art'
   | 'Currency'
   | 'Crypto'
+  | 'Stablecoin'
   | 'Commodity'
   | 'Cash'
   | 'Other';

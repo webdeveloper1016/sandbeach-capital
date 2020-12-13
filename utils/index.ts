@@ -16,7 +16,6 @@ export const assetClasses: AssetClassType[] = [
   'Bonds',
   'Alts',
   'Crypto',
-  'Stablecoin',
   'Cash',
 ];
 

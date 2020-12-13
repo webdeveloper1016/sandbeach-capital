@@ -4,7 +4,7 @@ export const currentBalances = {
   ltDiversified: 932,
   ltStocks: 658,
   ltTitan: 500,
-  cryptoCoinbase: 234,
+  cryptoCoinbase: 630,
   cryptoBlockFi: 2892,
   rJamieIRA: 42808,
   rJamieRoll: 40146,

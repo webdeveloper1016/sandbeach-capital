@@ -108,24 +108,6 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Titan',
-      institution: 'Titan',
-      goal: 'Capital appriciation that outpreforms the S&P 500',
-      timeHorizon: '5+ years',
-      category: 'long-term',
-      balance: currentBalances.ltTitan,
-      risk: 5,
-      approach: 'Robo',
-      pie: [
-        {
-          assetClass: 'Stocks',
-          subSector: 'Hedge fund',
-          nickname: 'Titan Flagship',
-          targetPercent: 1.0,
-        },
-      ],
-    },
-    {
       account: 'Coinbase',
       institution: 'Coinbase',
       goal: 'Exposure to cryptocurrencies',
@@ -160,8 +142,8 @@ const data: PortfolioModel = {
           targetPercent: 0.94,
         },
         {
-          assetClass: 'Stablecoin',
-          subSector: 'GUSD',
+          assetClass: 'Crypto',
+          subSector: 'Stablecoin',
           nickname: 'BlockFi',
           targetPercent: 0.06,
         },

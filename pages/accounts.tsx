@@ -36,6 +36,7 @@ const AccountsPage = () => {
             {data.allAccounts.map((a, k) => (
               <div className="px-2 pb-6">
                 <Header size="lg" content={`Pie: ${a.account}`} />
+                <div className="text-gray-400 font-light">{a.goal}</div>
                 <Table
                   columns={[
                     { Header: 'Slice', accessor: 'nickname' },
