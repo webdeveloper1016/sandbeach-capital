@@ -7,6 +7,7 @@ import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const AccountsPage = () => {
   const { data, status } = useFetchPortfolio();
+  console.log(data);
 
   return (
     <Status status={status}>
@@ -17,6 +18,7 @@ const AccountsPage = () => {
             subtitle={data.totalBalance.display}
           />
           <Section>
+            <Header size="2xl" content="Overview:" />
             <Table
               columns={[
                 { Header: 'Account', accessor: 'account' },
@@ -28,6 +30,27 @@ const AccountsPage = () => {
               ]}
               data={data.allAccounts}
             />
+          </Section>
+          <Section>
+            <Header size="2xl" content="Details:" />
+            {data.allAccounts.map((a, k) => (
+              <div className="px-2 pb-6">
+                <Header size="lg" content={`Pie: ${a.account}`} />
+                <Table
+                  columns={[
+                    { Header: 'Slice', accessor: 'nickname' },
+                    { Header: 'Class', accessor: 'assetClass' },
+                    { Header: 'Sector', accessor: 'subSector' },
+                    { Header: 'Approx Balance', accessor: 'approxVal.display' },
+                    { Header: 'Target Weight', accessor: 'targetPercent' },
+                  ]}
+                  data={a.pie}
+                />
+                {k + 1 !== data.allAccounts.length && (
+                  <div className="border-b mx-8 mt-6 border-green-500" />
+                )}
+              </div>
+            ))}
           </Section>
         </div>
       )}
