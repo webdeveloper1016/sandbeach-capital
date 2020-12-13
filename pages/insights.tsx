@@ -16,7 +16,13 @@ const InsightsPage = () => {
   return (
     <div>
       <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">Domestic/Foreign Breakdown:</h3>
+        <h3 className="text-gray-500 text-lg">Domestic/Foreign:</h3>
+      </div>
+      <div className="mb-5">
+        <h3 className="text-gray-500 text-lg">Active/Passive:</h3>
+      </div>
+      <div className="mb-5">
+        <h3 className="text-gray-500 text-lg">1-5 Risk breakdown:</h3>
       </div>
       <pre className="text-gray-500 my-8">{JSON.stringify(data, null, 4)}</pre>
     </div>
