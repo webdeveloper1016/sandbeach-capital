@@ -26,6 +26,12 @@ export const categories: CategoryType[] = [
   'retirement',
 ];
 
+export const categoryLabels: Record<CategoryType, string> = {
+  'short-term': 'Short Term',
+  'long-term': 'Long Term',
+  'retirement': 'Retirement',
+}
+
 export const sumAccounts = (data: AccountModel[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
 
@@ -98,6 +104,7 @@ export const dataEnricher = (
       value: currencyDisplay(i.balance),
       categoryWeight: percentDisplay(i.balance, sumCat),
       portfolioWeight: percentDisplay(i.balance, totalBalance),
+      categoryLabel: categoryLabels[i.category],
       pie: i.pie.map((p) => ({
         ...p,
         approxVal: currencyDisplay(i.balance * p.targetPercent),
@@ -106,7 +113,9 @@ export const dataEnricher = (
   });
 };
 
-export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
+export const runInitialAnalysis = (
+  data: PortfolioModel,
+): PortfolioModelExtended => {
   // group and sum data
   const flatData = flattenData(data);
   const sumST = sumAccounts(data.shortTerm);
@@ -166,5 +175,20 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
       categorySectorWeights: calcSectorWeights(data.retirement, sumR),
       data: dataEnricher(data.retirement, sumR, totalBalance),
     },
+    allAccounts: [],
+  };
+};
+
+export const runAnalysis = (
+  data: PortfolioModel,
+): PortfolioModelExtended => {
+  const initialAnalysis = runInitialAnalysis(data)
+  return {
+    ...initialAnalysis,
+    allAccounts: [
+      ...initialAnalysis.shortTerm.data,
+      ...initialAnalysis.longTerm.data,
+      ...initialAnalysis.retirement.data,
+    ],
   };
 };

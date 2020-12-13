@@ -87,6 +87,7 @@ export interface PieModelExtended extends PieModel {
 export interface AccountModelExtended extends AccountModel {
   categoryWeight?: NumberDisplayModel;
   portfolioWeight?: NumberDisplayModel;
+  categoryLabel: string;
   value: NumberDisplayModel;
   pie: PieModelExtended[];
 }
@@ -121,4 +122,5 @@ export interface PortfolioModelExtended {
     categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };
+  allAccounts: AccountModelExtended[];
 }

@@ -1,27 +1,38 @@
+import Status from '../components/Status';
+import Header from '../components/Header';
+import Section from '../components/Section';
+import PageTitle from '../components/PageTitle';
+import { Table } from '../components/Table';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const AccountsPage = () => {
   const { data, status } = useFetchPortfolio();
 
-  if (status === 'loading') {
-    return <div className="text-green-500">loading...</div>;
-  }
-
-  if (status === 'error') {
-    return <div className="text-red-500">error...</div>;
-  }
-
-  console.log(data);
-
   return (
-    <div>
-      <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">Accounts:</h3>
-      </div>
-      <pre className="text-gray-500 my-8">{JSON.stringify(data, null, 4)}</pre>
-    </div>
+    <Status status={status}>
+      {data && (
+        <div>
+          <PageTitle
+            title="Total Portfolio Value:"
+            subtitle={data.totalBalance.display}
+          />
+          <Section>
+            <Table
+              columns={[
+                { Header: 'Account', accessor: 'account' },
+                { Header: 'Category', accessor: 'categoryLabel' },
+                { Header: 'Balance', accessor: 'value.display' },
+                { Header: 'Weight', accessor: 'portfolioWeight.display' },
+                { Header: 'Institution', accessor: 'institution' },
+                { Header: 'Risk', accessor: 'risk' },
+              ]}
+              data={data.allAccounts}
+            />
+          </Section>
+        </div>
+      )}
+    </Status>
   );
 };
 
 export default AccountsPage;
-

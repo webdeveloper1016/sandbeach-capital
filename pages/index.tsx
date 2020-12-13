@@ -1,6 +1,7 @@
 import Status from '../components/Status';
 import Header from '../components/Header';
 import Section from '../components/Section';
+import PageTitle from '../components/PageTitle';
 import { Table } from '../components/Table';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
@@ -10,11 +11,11 @@ const HomePage = () => {
   return (
     <Status status={status}>
       {data && (
-        <>
-          <div className="mb-5">
-            <Header size="2xl" content="Total Portfolio Value:" />
-            <Header size="5xl" content={data.totalBalance.display} noGutter />
-          </div>
+        <div>
+          <PageTitle
+            title="Total Portfolio Value:"
+            subtitle={data.totalBalance.display}
+          />
           <Section>
             <Header size="2xl" content="By Time Horizon:" />
             <Table
@@ -37,7 +38,7 @@ const HomePage = () => {
               data={data.portfolioSectorWeights}
             />
           </Section>
-        </>
+        </div>
       )}
     </Status>
   );

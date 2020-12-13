@@ -22,7 +22,7 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Short Term - Stock/Bond',
+      account: 'ST - Stock/Bond',
       institution: 'M1',
       goal: 'Liquid emergency fund backup',
       timeHorizon: 'next 5 years',
@@ -48,7 +48,7 @@ const data: PortfolioModel = {
   ],
   longTerm: [
     {
-      account: 'Long Term - Diversified Portfolio',
+      account: 'LT- Diversified Portfolio',
       institution: 'M1',
       goal: 'Liquid capital appriciation',
       timeHorizon: '5+ years',
@@ -84,7 +84,7 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Long Term - Stocks',
+      account: 'LT - Stocks',
       institution: 'M1',
       goal: 'Capital appriciation that outpreforms the S&P 500',
       timeHorizon: '5+ years',
@@ -189,7 +189,7 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Jamie IRA',
+      account: 'Jamie - IRA',
       institution: 'Vanguard',
       goal: 'Long term capital appritiation',
       timeHorizon: '25+ years',
@@ -213,7 +213,7 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Bryan Rollover',
+      account: 'Bryan - Rollover',
       institution: 'M1 - TODO',
       goal: 'Long term capital appritiation',
       timeHorizon: '25+ years',
@@ -231,7 +231,7 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Bryan 401(k)',
+      account: 'Bryan - 401(k)',
       institution: 'Merril Lynch',
       goal: 'Long term capital appritiation',
       timeHorizon: '25+ years',
@@ -255,7 +255,7 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'Bryan IRA',
+      account: 'Bryan - IRA',
       institution: 'M1',
       goal: 'Long term capital appritiation',
       timeHorizon: '25+ years',
