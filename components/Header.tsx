@@ -9,7 +9,7 @@ const Header = ({ size, content, subheader, noGutter }: HeaderProps) => (
     <div className={`text-${size} ${noGutter || subheader ? 'mb-0' : 'mb-2'}`}>
       {content}
     </div>
-    {subheader && <div className="text-gray-600 text-sm font-extralight">{subheader}</div>}
+    {subheader && <div className="text-gray-500 text-sm -mt-1 font-extralight">{subheader}</div>}
   </div>
 );
 

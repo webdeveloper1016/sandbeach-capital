@@ -107,6 +107,7 @@ export const dataEnricher = (
       pie: i.pie.map((p) => ({
         ...p,
         approxVal: currencyDisplay(i.balance * p.targetPercent),
+        targetPercentDisplay: percentDisplay(p.targetPercent, 1)
       })),
     };
   });

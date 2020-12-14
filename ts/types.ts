@@ -2,24 +2,15 @@ export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
 export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
 
-export type SubSectorType =
-  | 'Domestic stocks'
-  | 'Tech stocks'
-  | 'Foreign stocks'
-  | 'EMG market stocks'
-  | 'Domestic/Foreign mix stocks'
-  | 'US Govt bond'
-  | 'Foreign Bond'
-  | 'EMG bond'
-  | 'Corporate bond'
-  | 'Muni Bond'
-  | 'MBS Bond'
-  | 'Junk Bond'
-  | 'Domestic/Foreign mix bonds'
-  | 'Alts mix'
+export type SectorType =
+  | 'US Stocks'
+  | 'Tech Stocks'
+  | 'Foreign Stocks'
+  | 'EMG Market Stocks'
+  | 'Global Stock Mix'
+  | 'Global Bond Mix'
+  | 'Alts Mix'
   | 'REIT'
-  | 'Art'
-  | 'Currency'
   | 'Crypto'
   | 'Stablecoin'
   | 'Commodity'
@@ -31,13 +22,8 @@ export type StrategyType =
   | 'Growth'
   | 'Value'
   | 'Income'
-  | 'Hedge fund'
-  | 'Hedge fund follow'
-  | 'Private equity'
-  | 'VC'
-  | 'Pre IPO'
-  | 'Income share'
-  | 'Real estate'
+  | 'Hedge Fund Follow'
+  | 'Real Estate'
   | 'Other';
 
 export type ApproachType =
@@ -66,7 +52,7 @@ export interface PieModel {
   nickname: string;
   targetPercent: number;
   assetClass: AssetClassType;
-  subSector: SubSectorType | StrategyType | CoinType;
+  sector: SectorType | StrategyType;
 }
 
 export interface AccountModel {
@@ -83,6 +69,7 @@ export interface AccountModel {
 
 export interface PieModelExtended extends PieModel {
   approxVal: NumberDisplayModel;
+  targetPercentDisplay: NumberDisplayModel;
 }
 
 export interface AccountModelExtended extends AccountModel {

@@ -35,14 +35,21 @@ const AccountsPage = () => {
             <Header size="2xl" content="Details:" />
             {data.allAccounts.map((a, k) => (
               <div className="px-2 pb-6" key={k}>
-                <Header size="lg" content={`Pie: ${a.account}`} subheader={`Goal: ${a.goal}`} />
+                <Header
+                  size="lg"
+                  content={`Pie: ${a.account}`}
+                  subheader={`Goal: ${a.goal} | Risk Level: ${a.risk}`}
+                />
                 <Table
                   columns={[
                     { Header: 'Slice', accessor: 'nickname' },
                     { Header: 'Class', accessor: 'assetClass' },
-                    { Header: 'Sector', accessor: 'subSector' },
+                    { Header: 'Sector', accessor: 'sector' },
                     { Header: 'Approx Balance', accessor: 'approxVal.display' },
-                    { Header: 'Target Weight', accessor: 'targetPercent' },
+                    {
+                      Header: 'Target Weight',
+                      accessor: 'targetPercentDisplay.display',
+                    },
                   ]}
                   data={a.pie}
                 />

@@ -15,8 +15,8 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Cash',
-          subSector: 'Cash',
-          nickname: 'Betterment cash',
+          sector: 'Cash',
+          nickname: 'Betterment Cash',
           targetPercent: 1.0,
         },
       ],
@@ -24,7 +24,7 @@ const data: PortfolioModel = {
     {
       account: 'ST - Stock/Bond',
       institution: 'M1',
-      goal: 'Liquid emergency fund backup',
+      goal: 'Liquid, conservative emergency fund backup',
       timeHorizon: 'next 5 years',
       category: 'short-term',
       approach: 'Self Directed',
@@ -33,14 +33,14 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Domestic/Foreign mix stocks',
-          nickname: 'Betterment general investing',
+          sector: 'Global Stock Mix',
+          nickname: 'Global Stocks',
           targetPercent: 0.5,
         },
         {
           assetClass: 'Bonds',
-          subSector: 'Domestic/Foreign mix bonds',
-          nickname: 'Betterment general investing',
+          sector: 'Global Bond Mix',
+          nickname: 'Global Bonds',
           targetPercent: 0.5,
         },
       ],
@@ -59,25 +59,25 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Growth',
+          sector: 'Growth',
           nickname: 'Growth',
           targetPercent: 0.52,
         },
         {
           assetClass: 'Stocks',
-          subSector: 'Income',
+          sector: 'Income',
           nickname: 'Income',
           targetPercent: 0.27,
         },
         {
           assetClass: 'Bonds',
-          subSector: 'Domestic/Foreign mix bonds',
+          sector: 'Global Bond Mix',
           nickname: 'Bonds',
           targetPercent: 0.11,
         },
         {
           assetClass: 'Alts',
-          subSector: 'Alts mix',
+          sector: 'Alts Mix',
           nickname: 'Alts',
           targetPercent: 0.10,
         },
@@ -86,7 +86,7 @@ const data: PortfolioModel = {
     {
       account: 'LT - Stocks',
       institution: 'M1',
-      goal: 'Capital appriciation that outpreforms the S&P 500',
+      goal: 'High risk/high reward individual stock picks',
       timeHorizon: '5+ years',
       category: 'long-term',
       balance: currentBalances.ltStocks,
@@ -95,15 +95,9 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Domestic stocks',
-          nickname: 'My stock picks',
-          targetPercent: 0.9,
-        },
-        {
-          assetClass: 'Stocks',
-          subSector: 'Foreign stocks',
-          nickname: 'My stock picks',
-          targetPercent: 0.1,
+          sector: 'Individual Stocks',
+          nickname: 'Stock Picks',
+          targetPercent: 1.0,
         },
       ],
     },
@@ -119,16 +113,22 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Crypto',
-          subSector: 'Crypto',
-          nickname: 'Coinbase',
-          targetPercent: 1.0,
+          sector: 'Crypto',
+          nickname: 'Bitcoin',
+          targetPercent: 0.88,
+        },
+        {
+          assetClass: 'Crypto',
+          sector: 'Crypto',
+          nickname: 'Misc Coins',
+          targetPercent: 0.12,
         },
       ],
     },
     {
       account: 'BlockFi',
       institution: 'BlockFi',
-      goal: 'Exposure to cryptocurrencies while earning interest',
+      goal: 'Crypto account with interest',
       timeHorizon: '5+ years',
       category: 'long-term',
       risk: 5,
@@ -137,14 +137,14 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Crypto',
-          subSector: 'BTC',
-          nickname: 'BlockFi',
+          sector: 'Crypto',
+          nickname: 'Bitcoin',
           targetPercent: 0.94,
         },
         {
           assetClass: 'Crypto',
-          subSector: 'Stablecoin',
-          nickname: 'BlockFi',
+          sector: 'Stablecoin',
+          nickname: 'Stablecoins',
           targetPercent: 0.06,
         },
       ],
@@ -155,7 +155,7 @@ const data: PortfolioModel = {
     {
       account: 'Jamie - Rollover',
       institution: 'Vanguard',
-      goal: 'Long term capital appritiation',
+      goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
       category: 'retirement',
       risk: 4,
@@ -164,8 +164,8 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Tech stocks',
-          nickname: 'QQQ',
+          sector: 'Tech Stocks',
+          nickname: 'Tech Stocks',
           targetPercent: 1.0,
         },
       ],
@@ -173,7 +173,7 @@ const data: PortfolioModel = {
     {
       account: 'Jamie - IRA',
       institution: 'Vanguard',
-      goal: 'Long term capital appritiation',
+      goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
       category: 'retirement',
       risk: 4,
@@ -182,14 +182,14 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Domestic stocks',
-          nickname: 'domestic',
+          sector: 'US Stocks',
+          nickname: 'US Stocks',
           targetPercent: 0.6,
         },
         {
           assetClass: 'Stocks',
-          subSector: 'Foreign stocks',
-          nickname: 'foreign',
+          sector: 'Foreign Stocks',
+          nickname: 'Foreign Stocks',
           targetPercent: 0.4,
         },
       ],
@@ -197,7 +197,7 @@ const data: PortfolioModel = {
     {
       account: 'Bryan - Rollover',
       institution: 'M1 - TODO',
-      goal: 'Long term capital appritiation',
+      goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
       category: 'retirement',
       approach: 'Self Directed',
@@ -206,8 +206,8 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Domestic stocks',
-          nickname: 'SP 500',
+          sector: 'US Stocks',
+          nickname: 'US Stocks',
           targetPercent: 1.0,
         },
       ],
@@ -215,7 +215,7 @@ const data: PortfolioModel = {
     {
       account: 'Bryan - 401(k)',
       institution: 'Merril Lynch',
-      goal: 'Long term capital appritiation',
+      goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
       category: 'retirement',
       approach: 'Self Directed',
@@ -224,14 +224,14 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Domestic stocks',
-          nickname: 'domestic',
+          sector: 'US Stocks',
+          nickname: 'US Stocks',
           targetPercent: 0.6,
         },
         {
           assetClass: 'Stocks',
-          subSector: 'Foreign stocks',
-          nickname: 'foreign',
+          sector: 'Foreign Stocks',
+          nickname: 'Foreign Stocks',
           targetPercent: 0.4,
         },
       ],
@@ -239,7 +239,7 @@ const data: PortfolioModel = {
     {
       account: 'Bryan - IRA',
       institution: 'M1',
-      goal: 'Long term capital appritiation',
+      goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
       category: 'retirement',
       approach: 'Self Directed',
@@ -248,25 +248,25 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          subSector: 'Domestic stocks',
-          nickname: 'domestic',
+          sector: 'US Stocks',
+          nickname: 'US Stocks',
           targetPercent: 0.53,
         },
         {
           assetClass: 'Stocks',
-          subSector: 'Foreign stocks',
-          nickname: 'foreign',
+          sector: 'Foreign Stocks',
+          nickname: 'Foreign Stocks',
           targetPercent: 0.38,
         },
         {
           assetClass: 'Bonds',
-          subSector: 'Domestic/Foreign mix bonds',
+          sector: 'Global Bond Mix',
           nickname: 'Bonds',
           targetPercent: 0.06,
         },
         {
           assetClass: 'Alts',
-          subSector: 'REIT',
+          sector: 'REIT',
           nickname: 'Alts',
           targetPercent: 0.03,
         },
