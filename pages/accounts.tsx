@@ -34,9 +34,8 @@ const AccountsPage = () => {
           <Section>
             <Header size="2xl" content="Details:" />
             {data.allAccounts.map((a, k) => (
-              <div className="px-2 pb-6">
-                <Header size="lg" content={`Pie: ${a.account}`} />
-                <div className="text-gray-400 font-light">{a.goal}</div>
+              <div className="px-2 pb-6" key={k}>
+                <Header size="lg" content={`Pie: ${a.account}`} subheader={`Goal: ${a.goal}`} />
                 <Table
                   columns={[
                     { Header: 'Slice', accessor: 'nickname' },
