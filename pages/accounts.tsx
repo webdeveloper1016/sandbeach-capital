@@ -41,6 +41,7 @@ const AccountsPage = () => {
                   subheader={`Goal: ${a.goal} | Risk Level: ${a.risk}`}
                 />
                 <Table
+                  layout="fixed"
                   columns={[
                     { Header: 'Slice', accessor: 'nickname' },
                     { Header: 'Class', accessor: 'assetClass' },

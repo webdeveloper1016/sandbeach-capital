@@ -11,6 +11,7 @@ interface TableProps {
     Header: string;
   }[];
   data: Record<any, any>[];
+  layout?: 'fixed' | 'auto'
 }
 
 export const TableHead = ({ headerGroups }: TableHeaderProps) => (
@@ -28,7 +29,7 @@ export const TableHead = ({ headerGroups }: TableHeaderProps) => (
   </thead>
 );
 
-export const Table = ({ columns, data }: TableProps) => {
+export const Table = ({ columns, data, layout="auto" }: TableProps) => {
   const colMemo = React.useMemo(() => columns, [columns]);
   const dataMemo = React.useMemo(() => data, [data]);
   const tableInstance = useTable({ columns: colMemo, data: dataMemo });
@@ -42,7 +43,7 @@ export const Table = ({ columns, data }: TableProps) => {
   } = tableInstance;
 
   return (
-    <table className="w-full text-left" {...getTableProps()}>
+    <table className={`w-full text-left table-${layout}`} {...getTableProps()}>
       <TableHead headerGroups={headerGroups} />
       <tbody className="align-baseline" {...getTableBodyProps()}>
         {rows.map((row) => {
