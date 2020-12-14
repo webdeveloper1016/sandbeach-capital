@@ -48,6 +48,12 @@ export interface SectorWeightModel {
   weight: NumberDisplayModel;
 }
 
+export interface ValueWeightModel {
+  label: string;
+  value: NumberDisplayModel;
+  weight: NumberDisplayModel;
+}
+
 export interface PieModel {
   nickname: string;
   targetPercent: number;
@@ -89,11 +95,7 @@ export interface PortfolioModel {
 
 export interface PortfolioModelExtended {
   totalBalance: NumberDisplayModel;
-  categorySummary: {
-    value: NumberDisplayModel;
-    weight: NumberDisplayModel;
-    label: string;
-  }[];
+  categorySummary: ValueWeightModel[];
   portfolioSectorWeights: SectorWeightModel[];
   longTermRetireSectorWeights: SectorWeightModel[];
   shortTerm: {
@@ -111,18 +113,28 @@ export interface PortfolioModelExtended {
     categorySectorWeights: SectorWeightModel[];
     data: AccountModelExtended[];
   };
+}
+
+export interface InsightsModel {
+  globalSplit: {
+    us: ValueWeightModel;
+    foreign: ValueWeightModel;
+  };
+}
+export interface PortfolioModelEnriched extends PortfolioModelExtended {
   allAccounts: AccountModelExtended[];
+  insights: InsightsModel;
 }
 
 export interface QuotesModel {
-  quote: string
+  quote: string;
 }
 
 export interface SavingsGoalModel {
   annualIncome: number;
   preTaxSavingsPercent: number;
   goalStatements?: {
-    goal: string
-  }[]
+    goal: string;
+  }[];
   biWeeklySavingsTotal: number;
 }

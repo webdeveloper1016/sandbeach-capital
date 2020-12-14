@@ -7,7 +7,15 @@ import {
   AccountModelExtended,
   PortfolioModel,
   PortfolioModelExtended,
+  PortfolioModelEnriched,
 } from '../ts/types';
+import {
+  sumAccounts,
+  currencyFormatter,
+  percentDisplay,
+  currencyDisplay,
+} from './calc';
+import { calcGlobalSplit } from './insights';
 
 export const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -28,29 +36,8 @@ export const categories: CategoryType[] = [
 export const categoryLabels: Record<CategoryType, string> = {
   'short-term': 'Short Term',
   'long-term': 'Long Term',
-  'retirement': 'Retirement',
-}
-
-export const sumAccounts = (data: AccountModel[]): number =>
-  data.reduce((accum, current) => accum + current.balance, 0);
-
-export const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
-
-export const percentFormatter = (a, b): string =>
-  `${Math.round((a / b) * 100 * 100) / 100}%`;
-
-export const percentDisplay = (a, b): NumberDisplayModel => ({
-  val: a / b,
-  display: percentFormatter(a, b),
-});
-
-export const currencyDisplay = (a): NumberDisplayModel => ({
-  val: a,
-  display: currencyFormatter.format(a),
-});
+  retirement: 'Retirement',
+};
 
 export const flattenData = (data: PortfolioModel): AccountModel[] => {
   return Object.keys(data)
@@ -107,7 +94,7 @@ export const dataEnricher = (
       pie: i.pie.map((p) => ({
         ...p,
         approxVal: currencyDisplay(i.balance * p.targetPercent),
-        targetPercentDisplay: percentDisplay(p.targetPercent, 1)
+        targetPercentDisplay: percentDisplay(p.targetPercent, 1),
       })),
     };
   });
@@ -175,20 +162,26 @@ export const runInitialAnalysis = (
       categorySectorWeights: calcSectorWeights(data.retirement, sumR),
       data: dataEnricher(data.retirement, sumR, totalBalance),
     },
-    allAccounts: [],
   };
 };
 
-export const runAnalysis = (
-  data: PortfolioModel,
-): PortfolioModelExtended => {
-  const initialAnalysis = runInitialAnalysis(data)
+export const runAnalysis = (data: PortfolioModel): PortfolioModelEnriched => {
+  const initialAnalysis = runInitialAnalysis(data);
+  const allAccounts = [
+    ...initialAnalysis.shortTerm.data,
+    ...initialAnalysis.longTerm.data,
+    ...initialAnalysis.retirement.data,
+  ];
   return {
     ...initialAnalysis,
-    allAccounts: [
-      ...initialAnalysis.shortTerm.data,
-      ...initialAnalysis.longTerm.data,
-      ...initialAnalysis.retirement.data,
-    ],
+    allAccounts,
+    insights: {
+      globalSplit: calcGlobalSplit(
+        initialAnalysis.portfolioSectorWeights.find(
+          (s) => s.assetClass === 'Stocks',
+        ),
+        allAccounts
+      ),
+    },
   };
 };
