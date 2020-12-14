@@ -64,6 +64,7 @@ export interface AccountModel {
   approach: ApproachType;
   risk: 1 | 2 | 3 | 4 | 5;
   balance: number;
+  biWeeklySavings?: number;
   pie: PieModel[];
 }
 
@@ -111,4 +112,17 @@ export interface PortfolioModelExtended {
     data: AccountModelExtended[];
   };
   allAccounts: AccountModelExtended[];
+}
+
+export interface QuotesModel {
+  quote: string
+}
+
+export interface SavingsGoalModel {
+  annualIncome: number;
+  preTaxSavingsPercent: number;
+  goalStatements?: {
+    goal: string
+  }[]
+  biWeeklySavingsTotal: number;
 }
