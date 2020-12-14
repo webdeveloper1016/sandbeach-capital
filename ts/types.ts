@@ -77,6 +77,7 @@ export interface AccountModel {
 export interface PieModelExtended extends PieModel {
   approxVal: NumberDisplayModel;
   targetPercentDisplay: NumberDisplayModel;
+  metadata: AccountModel;
 }
 
 export interface AccountModelExtended extends AccountModel {
@@ -123,6 +124,7 @@ export interface InsightsModel {
 }
 export interface PortfolioModelEnriched extends PortfolioModelExtended {
   allAccounts: AccountModelExtended[];
+  allPies: PieModelExtended[];
   insights: InsightsModel;
 }
 

@@ -1,7 +1,7 @@
 import {
   SectorWeightModel,
   ValueWeightModel,
-  AccountModelExtended,
+  PieModelExtended,
 } from '../ts/types';
 import {
   percentDisplay,
@@ -15,7 +15,7 @@ interface GlobalSplitModel {
 
 export const calcGlobalSplit = (
   sumStocks: SectorWeightModel,
-  data: AccountModelExtended[],
+  data: PieModelExtended[],
 ): GlobalSplitModel => {
   console.log(sumStocks, data);
 

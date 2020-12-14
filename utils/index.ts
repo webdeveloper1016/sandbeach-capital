@@ -95,6 +95,7 @@ export const dataEnricher = (
         ...p,
         approxVal: currencyDisplay(i.balance * p.targetPercent),
         targetPercentDisplay: percentDisplay(p.targetPercent, 1),
+        metadata: i,
       })),
     };
   });
@@ -172,15 +173,17 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelEnriched => {
     ...initialAnalysis.longTerm.data,
     ...initialAnalysis.retirement.data,
   ];
+  const allPies = allAccounts.map(a => a.pie).flat()
   return {
     ...initialAnalysis,
     allAccounts,
+    allPies,
     insights: {
       globalSplit: calcGlobalSplit(
         initialAnalysis.portfolioSectorWeights.find(
           (s) => s.assetClass === 'Stocks',
         ),
-        allAccounts
+        allPies
       ),
     },
   };
