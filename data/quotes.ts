@@ -1,6 +1,7 @@
 import { QuotesModel } from '../ts/types';
 
 export const quotes: QuotesModel[] = [
+  { quote: 'Time in the market beats timing the market' },
   {
     quote:
       'Accumulate assets. If the price goes up, good they are worth more. If the price goes down, good you can buy more',

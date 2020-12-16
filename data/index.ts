@@ -12,6 +12,20 @@ export const currentBalances = {
   rBryan401k: 2896,
 };
 
+export const currentContributions = {
+  stEmergency: [36.57].reduce((a, b) => a + b, 0),
+  stStockBond: 50,
+  ltDiversified: 100,
+  ltStocks: 100,
+  cryptoCoinbase: [15, 10].reduce((a, b) => a + b, 0),
+  cryptoBlockFi: 100,
+  rJamieIRA: 50,
+  rJamieRoll: 0,
+  rBryanIRA: 100,
+  rBryanRoll: 0,
+  rBryan401k: 365,
+};
+
 export const balancesYearStart = {
   2021: {
     stEmergency: 13004,
