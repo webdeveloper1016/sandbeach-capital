@@ -1,37 +1,44 @@
+import Status from '../components/Status';
+import Header from '../components/Header';
+import Section from '../components/Section';
+import PageTitle from '../components/PageTitle';
+import { Table } from '../components/Table';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const InsightsPage = () => {
   const { data, status } = useFetchPortfolio();
 
-  if (status === 'loading') {
-    return <div className="text-green-500">loading...</div>;
-  }
-
-  if (status === 'error') {
-    return <div className="text-red-500">error...</div>;
-  }
-
-  console.log(data);
-
   return (
-    <div>
-      <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">Domestic/Foreign:</h3>
-      </div>
-      <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">Active/Passive:</h3>
-      </div>
-      <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">1-5 Risk breakdown:</h3>
-      </div>
-      <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">sector/subsector breakdowns:</h3>
-      </div>
-      <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">goals:</h3>
-      </div>
-      <pre className="text-gray-500 my-8">{JSON.stringify(data, null, 4)}</pre>
-    </div>
+    <Status status={status}>
+      {data && (
+        <div>
+          <PageTitle
+            title="Total Portfolio Value:"
+            subtitle={data.totalBalance.display}
+          />
+          <Section>
+            <Header size="2xl" content="Region Breakdown:" />
+            <Table
+              columns={[
+                { Header: 'Region', accessor: 'label' },
+                { Header: 'Balance', accessor: 'value.display' },
+                { Header: 'Weight', accessor: 'weight.display' },
+              ]}
+              data={data.insights.globalSplit}
+            />
+          </Section>
+          <Section>
+            <Header size="2xl" content="Risk Breakdown:" />
+          </Section>
+          <Section>
+            <Header size="2xl" content="Sector Breakdown:" />
+          </Section>
+          <Section>
+            <Header size="2xl" content="Active/Passive:" />
+          </Section>
+        </div>
+      )}
+    </Status>
   );
 };
 

@@ -7,7 +7,6 @@ import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const AccountsPage = () => {
   const { data, status } = useFetchPortfolio();
-  console.log(data);
 
   return (
     <Status status={status}>

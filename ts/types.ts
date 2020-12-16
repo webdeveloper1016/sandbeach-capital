@@ -37,6 +37,8 @@ export type ApproachType =
 
 export type CoinType = 'BTC' | 'ETH' | 'GUSD' | 'USDC';
 
+export type SectorStrategyType = SectorType | StrategyType
+
 export interface NumberDisplayModel {
   val: number;
   display: string;
@@ -58,7 +60,7 @@ export interface PieModel {
   nickname: string;
   targetPercent: number;
   assetClass: AssetClassType;
-  sector: SectorType | StrategyType;
+  sector: SectorStrategyType;
 }
 
 export interface AccountModel {
@@ -117,10 +119,7 @@ export interface PortfolioModelExtended {
 }
 
 export interface InsightsModel {
-  globalSplit: {
-    us: ValueWeightModel;
-    foreign: ValueWeightModel;
-  };
+  globalSplit: ValueWeightModel[];
 }
 export interface PortfolioModelEnriched extends PortfolioModelExtended {
   allAccounts: AccountModelExtended[];

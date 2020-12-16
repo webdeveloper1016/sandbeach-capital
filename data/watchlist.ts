@@ -1,6 +1,6 @@
 export const watchlist = {
   growth: ['CRSP', 'TDOC'],
-  value: ['WFC'],
+  value: ['WFC', 'BAC', 'LMT', 'PSA'],
   monthly: {
     buy: [
       {

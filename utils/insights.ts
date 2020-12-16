@@ -1,34 +1,44 @@
 import {
+  SectorStrategyType,
   SectorWeightModel,
   ValueWeightModel,
   PieModelExtended,
 } from '../ts/types';
-import {
-  percentDisplay,
-  currencyDisplay,
-} from './calc';
-
-interface GlobalSplitModel {
-  us: ValueWeightModel;
-  foreign: ValueWeightModel;
-}
+import { percentDisplay, currencyDisplay, sumPies } from './calc';
 
 export const calcGlobalSplit = (
-  sumStocks: SectorWeightModel,
-  data: PieModelExtended[],
-): GlobalSplitModel => {
-  console.log(sumStocks, data);
+  stocksSum: SectorWeightModel,
+  stockData: PieModelExtended[],
+): ValueWeightModel[] => {
+  const foreignSectors: SectorStrategyType[] = [
+    'Foreign Stocks',
+    'EMG Market Stocks',
+    'Global Stock Mix',
+  ];
+  const foreignSum = sumPies(
+    stockData.filter((d) => foreignSectors.includes(d.sector)),
+  );
+  const usSum = sumPies(
+    stockData.filter((d) => !foreignSectors.includes(d.sector)),
+  );
 
-  return {
-    us: {
-      value: currencyDisplay(5),
-      weight: percentDisplay(5, 10),
+  console.log(stocksSum);
+
+  return [
+    {
+      value: currencyDisplay(usSum),
+      weight: percentDisplay(usSum, stocksSum.value.val),
       label: 'U.S.',
     },
-    foreign: {
-      value: currencyDisplay(5),
-      weight: percentDisplay(5, 10),
+    {
+      value: currencyDisplay(foreignSum),
+      weight: percentDisplay(foreignSum, stocksSum.value.val),
       label: 'Foreign',
     },
-  };
+    {
+      value: stocksSum.value,
+      weight: percentDisplay(stocksSum.value.val, stocksSum.value.val), // this is 100% of all stocks
+      label: 'All',
+    },
+  ];
 };

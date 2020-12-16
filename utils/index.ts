@@ -183,7 +183,7 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelEnriched => {
         initialAnalysis.portfolioSectorWeights.find(
           (s) => s.assetClass === 'Stocks',
         ),
-        allPies
+        allPies.filter(p => p.assetClass === 'Stocks')
       ),
     },
   };
