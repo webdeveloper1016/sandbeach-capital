@@ -67,6 +67,7 @@ const data: PortfolioModel = {
       category: 'long-term',
       approach: 'Self Directed',
       risk: 3,
+      active: true,
       balance: currentBalances.ltDiversified,
       pie: [
         {
@@ -91,6 +92,7 @@ const data: PortfolioModel = {
       category: 'long-term',
       balance: currentBalances.ltStocks,
       risk: 5,
+      active: true,
       approach: 'Self Directed',
       pie: [
         {

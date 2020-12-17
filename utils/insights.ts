@@ -1,10 +1,12 @@
 import {
+  NumberDisplayModel,
   SectorStrategyType,
   SectorWeightModel,
   ValueWeightModel,
+  AccountModelExtended,
   PieModelExtended,
 } from '../ts/types';
-import { percentDisplay, currencyDisplay, sumPies } from './calc';
+import { percentDisplay, currencyDisplay, sumAccounts, sumPies } from './calc';
 
 export const calcGlobalSplit = (
   stocksSum: SectorWeightModel,
@@ -37,6 +39,42 @@ export const calcGlobalSplit = (
       value: stocksSum.value,
       weight: percentDisplay(stocksSum.value.val, stocksSum.value.val), // this is 100% of all stocks
       label: 'All',
+    },
+  ];
+};
+
+export const calcActiveSplit = (
+  totalBalance: NumberDisplayModel,
+  allAccounts: AccountModelExtended[],
+): ValueWeightModel[] => {
+  const activeSum = sumAccounts(allAccounts.filter((a) => a.active));
+  const passiveSum = totalBalance.val - activeSum;
+
+  return [
+    {
+      value: currencyDisplay(activeSum),
+      weight: percentDisplay(activeSum, totalBalance.val),
+      label: 'Active',
+    },
+    {
+      value: currencyDisplay(passiveSum),
+      weight: percentDisplay(passiveSum, totalBalance.val),
+      label: 'Passive',
+    },
+  ];
+};
+
+export const calcRiskSplit = (
+  totalBalance: NumberDisplayModel,
+  allAccounts: AccountModelExtended[],
+): ValueWeightModel[] => {
+  console.log(totalBalance);
+  console.log(allAccounts);
+  return [
+    {
+      value: currencyDisplay(5),
+      weight: percentDisplay(5, 10),
+      label: '1',
     },
   ];
 };

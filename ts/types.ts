@@ -75,6 +75,7 @@ export interface AccountModel {
   risk: 1 | 2 | 3 | 4 | 5;
   balance: number;
   biWeeklySavings?: number;
+  active?: boolean;
   pie: PieModel[];
 }
 
@@ -122,6 +123,8 @@ export interface PortfolioModelExtended {
 
 export interface InsightsModel {
   globalSplit: ValueWeightModel[];
+  riskSplit: ValueWeightModel[];
+  activeSplit: ValueWeightModel[];
 }
 export interface PortfolioModelEnriched extends PortfolioModelExtended {
   allAccounts: AccountModelExtended[];

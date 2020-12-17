@@ -15,7 +15,7 @@ import {
   percentDisplay,
   currencyDisplay,
 } from './calc';
-import { calcGlobalSplit } from './insights';
+import { calcGlobalSplit, calcActiveSplit, calcRiskSplit } from './insights';
 
 export const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -185,6 +185,8 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelEnriched => {
         ),
         allPies.filter(p => p.assetClass === 'Stocks')
       ),
+      activeSplit: calcActiveSplit(initialAnalysis.totalBalance, allAccounts),
+      riskSplit: calcRiskSplit(),
     },
   };
 };
