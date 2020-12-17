@@ -8,7 +8,9 @@ export type SectorType =
   | 'Foreign Stocks'
   | 'EMG Market Stocks'
   | 'Global Stock Mix'
+  | 'US Bonds'
   | 'Global Bond Mix'
+  | 'Foreign Bonds'
   | 'Alts Mix'
   | 'REIT'
   | 'Crypto'
@@ -137,5 +139,5 @@ export interface SavingsGoalModel {
   goalStatements?: {
     goal: string;
   }[];
-  biWeeklySavingsTotal: number;
+  biWeeklySavingsGoal: number;
 }

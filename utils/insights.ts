@@ -22,8 +22,6 @@ export const calcGlobalSplit = (
     stockData.filter((d) => !foreignSectors.includes(d.sector)),
   );
 
-  console.log(stocksSum);
-
   return [
     {
       value: currencyDisplay(usSum),

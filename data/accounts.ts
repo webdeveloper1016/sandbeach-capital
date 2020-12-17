@@ -4,7 +4,7 @@ import { PortfolioModel } from '../ts/types';
 const data: PortfolioModel = {
   shortTerm: [
     {
-      account: 'Emergency Fund',
+      account: 'Cash',
       institution: 'Betterment',
       goal: 'Liquid emergency fund',
       timeHorizon: 'sub 3 years',
@@ -22,7 +22,7 @@ const data: PortfolioModel = {
       ],
     },
     {
-      account: 'ST - Stock/Bond',
+      account: 'M1 - Emergency',
       institution: 'M1',
       goal: 'Liquid, conservative emergency fund backup',
       timeHorizon: 'next 5 years',
@@ -33,22 +33,34 @@ const data: PortfolioModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          sector: 'Global Stock Mix',
-          nickname: 'Global Stocks',
-          targetPercent: 0.5,
+          sector: 'US Stocks',
+          nickname: 'VYM',
+          targetPercent: 0.25,
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Foreign Stocks',
+          nickname: 'IDV',
+          targetPercent: 0.25,
         },
         {
           assetClass: 'Bonds',
-          sector: 'Global Bond Mix',
-          nickname: 'Global Bonds',
-          targetPercent: 0.5,
+          sector: 'US Bonds',
+          nickname: 'BND',
+          targetPercent: 0.25,
+        },
+        {
+          assetClass: 'Bonds',
+          sector: 'Foreign Bonds',
+          nickname: 'BNDX',
+          targetPercent: 0.25,
         },
       ],
     },
   ],
   longTerm: [
     {
-      account: 'LT- Diversified Portfolio',
+      account: 'M1 - Balanced',
       institution: 'M1',
       goal: 'Liquid capital appriciation',
       timeHorizon: '5+ years',
@@ -61,30 +73,18 @@ const data: PortfolioModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Growth',
-          targetPercent: 0.52,
+          targetPercent: 0.58,
         },
         {
           assetClass: 'Stocks',
-          sector: 'Income',
-          nickname: 'Income',
-          targetPercent: 0.27,
-        },
-        {
-          assetClass: 'Bonds',
-          sector: 'Global Bond Mix',
-          nickname: 'Bonds',
-          targetPercent: 0.11,
-        },
-        {
-          assetClass: 'Alts',
-          sector: 'Alts Mix',
-          nickname: 'Alts',
-          targetPercent: 0.10,
+          sector: 'Value',
+          nickname: 'Value',
+          targetPercent: 0.42,
         },
       ],
     },
     {
-      account: 'LT - Stocks',
+      account: 'M1 - Stocks',
       institution: 'M1',
       goal: 'High risk/high reward individual stock picks',
       timeHorizon: '5+ years',
@@ -250,19 +250,19 @@ const data: PortfolioModel = {
           assetClass: 'Stocks',
           sector: 'US Stocks',
           nickname: 'US Stocks',
-          targetPercent: 0.53,
+          targetPercent: 0.46,
         },
         {
           assetClass: 'Stocks',
           sector: 'Foreign Stocks',
           nickname: 'Foreign Stocks',
-          targetPercent: 0.38,
+          targetPercent: 0.46,
         },
         {
           assetClass: 'Bonds',
           sector: 'Global Bond Mix',
           nickname: 'Bonds',
-          targetPercent: 0.06,
+          targetPercent: 0.05,
         },
         {
           assetClass: 'Alts',
