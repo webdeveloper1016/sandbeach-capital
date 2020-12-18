@@ -1,3 +1,4 @@
+import groupBy from 'lodash.groupby';
 import {
   NumberDisplayModel,
   SectorStrategyType,
@@ -68,13 +69,21 @@ export const calcRiskSplit = (
   totalBalance: NumberDisplayModel,
   allAccounts: AccountModelExtended[],
 ): ValueWeightModel[] => {
-  console.log(totalBalance);
-  console.log(allAccounts);
-  return [
-    {
-      value: currencyDisplay(5),
-      weight: percentDisplay(5, 10),
-      label: '1',
-    },
-  ];
+  // group by risk
+  const grouped = groupBy(allAccounts, 'risk') as Record<
+    string,
+    AccountModelExtended[]
+  >;
+
+  // sum each risk level
+  const formatted = Object.keys(grouped).map((r) => {
+    const accountSum = sumAccounts(grouped[r]);
+    return {
+      value: currencyDisplay(accountSum),
+      weight: percentDisplay(accountSum, totalBalance.val),
+      label: r,
+    };
+  });
+
+  return formatted;
 };

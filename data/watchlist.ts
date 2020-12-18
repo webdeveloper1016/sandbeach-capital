@@ -1,5 +1,5 @@
 export const watchlist = {
-  growth: ['CRSP', 'TDOC'],
+  growth: ['BYND', 'DOCU'],
   value: ['WFC', 'BAC', 'LMT', 'PSA'],
   monthly: {
     buy: [

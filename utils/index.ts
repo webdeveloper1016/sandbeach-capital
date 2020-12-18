@@ -186,7 +186,7 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelEnriched => {
         allPies.filter(p => p.assetClass === 'Stocks')
       ),
       activeSplit: calcActiveSplit(initialAnalysis.totalBalance, allAccounts),
-      riskSplit: calcRiskSplit(),
+      riskSplit: calcRiskSplit(initialAnalysis.totalBalance, allAccounts),
     },
   };
 };

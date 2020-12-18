@@ -8,7 +8,6 @@ import useFetchPortfolio from '../hooks/useFetchPortfolio';
 const InsightsPage = () => {
   const { data, status } = useFetchPortfolio();
 
-  console.log(data.insights);
   return (
     <Status status={status}>
       {data && (
@@ -26,10 +25,20 @@ const InsightsPage = () => {
                 { Header: 'Weight', accessor: 'weight.display' },
               ]}
               data={data.insights.globalSplit}
+              layout="fixed"
             />
           </Section>
           <Section>
             <Header size="2xl" content="Risk Breakdown:" />
+            <Table
+              columns={[
+                { Header: 'Level', accessor: 'label' },
+                { Header: 'Balance', accessor: 'value.display' },
+                { Header: 'Weight', accessor: 'weight.display' },
+              ]}
+              data={data.insights.riskSplit}
+              layout="fixed"
+            />
           </Section>
           <Section>
             <Header size="2xl" content="Active/Passive:" />
@@ -40,6 +49,7 @@ const InsightsPage = () => {
                 { Header: 'Weight', accessor: 'weight.display' },
               ]}
               data={data.insights.activeSplit}
+              layout="fixed"
             />
           </Section>
           <Section>
