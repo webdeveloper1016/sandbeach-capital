@@ -1,12 +1,13 @@
 import PortfolioData from '../components/PortfolioData';
 import Header from '../components/Header';
 import Section from '../components/Section';
+import TableSection from '../components/TableSection';
 
 const GoalsPage = () => {
   return (
     <PortfolioData>
       {(data) => {
-        console.log(data.goals.savings);
+        console.log(data.goals);
         return (
           <div>
             <Section>
@@ -29,6 +30,15 @@ const GoalsPage = () => {
                 ))}
               </ul>
             </Section>
+            <TableSection
+              header="Savings Analysis:"
+              columns={[
+                { Header: 'Label', accessor: 'label' },
+                { Header: 'Amount', accessor: 'savings.display' },
+              ]}
+              data={data.goals.savingsAnalysis}
+              layout="fixed"
+            />
           </div>
         );
       }}

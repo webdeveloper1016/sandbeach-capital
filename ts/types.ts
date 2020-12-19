@@ -121,7 +121,8 @@ export interface InsightsModel {
   activeSplit: ValueWeightModel[];
 }
 
-export interface PortfolioAccountModelEnriched extends PortfolioAccountModelExtended {
+export interface PortfolioAccountModelEnriched
+  extends PortfolioAccountModelExtended {
   allAccounts: AccountModelExtended[];
   allPies: PieModelExtended[];
   insights: InsightsModel;
@@ -150,6 +151,14 @@ export interface PortfolioGoalsModel {
   quotes: QuotesModel[];
   savings: SavingsGoalModel;
 }
+
+export interface PortfolioGoalsModelEnriched extends PortfolioGoalsModel {
+  savingsAnalysis: {
+    label: string;
+    savings: NumberDisplayModel;
+  }[];
+}
+
 // this is returned by the API
 export interface PortfolioModel {
   accounts: PortfolioAccountModel;
@@ -159,5 +168,5 @@ export interface PortfolioModel {
 // this is return by react-query
 export interface PortfolioModelExtended {
   accounts: PortfolioAccountModelEnriched;
-  goals: PortfolioGoalsModel;
+  goals: PortfolioGoalsModelEnriched;
 }

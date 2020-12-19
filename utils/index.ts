@@ -179,6 +179,26 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
   return {
     // existing data
     ...data,
+    // enriched goal data
+    goals: {
+      ...data.goals,
+      savingsAnalysis: [
+        {
+          label: 'Bi Weekly',
+          savings: {
+            val: 0,
+            display: '$0',
+          },
+        },
+        {
+          label: 'Annual',
+          savings: {
+            val: 0,
+            display: '$0',
+          },
+        },
+      ],
+    },
     // enriched account data
     accounts: {
       ...initialAnalysis,
