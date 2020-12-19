@@ -7,7 +7,8 @@ import {
   AccountModelExtended,
   PortfolioModel,
   PortfolioModelExtended,
-  PortfolioModelEnriched,
+  PortfolioAccountModelExtended,
+  PortfolioAccountModel,
 } from '../ts/types';
 import {
   sumAccounts,
@@ -16,8 +17,6 @@ import {
   currencyDisplay,
 } from './calc';
 import { calcGlobalSplit, calcActiveSplit, calcRiskSplit } from './insights';
-
-export const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export const assetClasses: AssetClassType[] = [
   'Stocks',
@@ -39,7 +38,7 @@ export const categoryLabels: Record<CategoryType, string> = {
   retirement: 'Retirement',
 };
 
-export const flattenData = (data: PortfolioModel): AccountModel[] => {
+export const flattenData = (data: PortfolioAccountModel): AccountModel[] => {
   return Object.keys(data)
     .map((k) => {
       return data[k];
@@ -102,8 +101,8 @@ export const dataEnricher = (
 };
 
 export const runInitialAnalysis = (
-  data: PortfolioModel,
-): PortfolioModelExtended => {
+  data: PortfolioAccountModel,
+): PortfolioAccountModelExtended => {
   // group and sum data
   const flatData = flattenData(data);
   const sumST = sumAccounts(data.shortTerm);
@@ -166,27 +165,35 @@ export const runInitialAnalysis = (
   };
 };
 
-export const runAnalysis = (data: PortfolioModel): PortfolioModelEnriched => {
-  const initialAnalysis = runInitialAnalysis(data);
+export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
+  // analyze account data
+  const initialAnalysis = runInitialAnalysis(data.accounts);
   const allAccounts = [
     ...initialAnalysis.shortTerm.data,
     ...initialAnalysis.longTerm.data,
     ...initialAnalysis.retirement.data,
   ];
-  const allPies = allAccounts.map(a => a.pie).flat()
+  const allPies = allAccounts.map((a) => a.pie).flat();
+
+  // return data
   return {
-    ...initialAnalysis,
-    allAccounts,
-    allPies,
-    insights: {
-      globalSplit: calcGlobalSplit(
-        initialAnalysis.portfolioSectorWeights.find(
-          (s) => s.assetClass === 'Stocks',
+    // existing data
+    ...data,
+    // enriched account data
+    accounts: {
+      ...initialAnalysis,
+      allAccounts,
+      allPies,
+      insights: {
+        globalSplit: calcGlobalSplit(
+          initialAnalysis.portfolioSectorWeights.find(
+            (s) => s.assetClass === 'Stocks',
+          ),
+          allPies.filter((p) => p.assetClass === 'Stocks'),
         ),
-        allPies.filter(p => p.assetClass === 'Stocks')
-      ),
-      activeSplit: calcActiveSplit(initialAnalysis.totalBalance, allAccounts),
-      riskSplit: calcRiskSplit(initialAnalysis.totalBalance, allAccounts),
+        activeSplit: calcActiveSplit(initialAnalysis.totalBalance, allAccounts),
+        riskSplit: calcRiskSplit(initialAnalysis.totalBalance, allAccounts),
+      },
     },
   };
 };

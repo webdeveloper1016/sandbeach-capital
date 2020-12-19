@@ -14,7 +14,7 @@ const AccountsPage = () => {
         <div>
           <PageTitle
             title="Total Portfolio Value:"
-            subtitle={data.totalBalance.display}
+            subtitle={data.accounts.totalBalance.display}
           />
           <Section>
             <Header size="2xl" content="Overview:" />
@@ -27,12 +27,12 @@ const AccountsPage = () => {
                 { Header: 'Institution', accessor: 'institution' },
                 { Header: 'Risk', accessor: 'risk' },
               ]}
-              data={data.allAccounts}
+              data={data.accounts.allAccounts}
             />
           </Section>
           <Section>
             <Header size="2xl" content="Details:" />
-            {data.allAccounts.map((a, k) => (
+            {data.accounts.allAccounts.map((a, k) => (
               <div className="px-2 pb-6" key={k}>
                 <Header
                   size="lg"
@@ -53,7 +53,7 @@ const AccountsPage = () => {
                   ]}
                   data={a.pie}
                 />
-                {k + 1 !== data.allAccounts.length && (
+                {k + 1 !== data.accounts.allAccounts.length && (
                   <div className="border-b mx-8 mt-6 border-green-500" />
                 )}
               </div>

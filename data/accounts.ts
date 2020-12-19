@@ -1,7 +1,7 @@
-import { currentBalances } from './index';
-import { PortfolioModel } from '../ts/types';
+import { currentBalances } from './balances';
+import { PortfolioAccountModel } from '../ts/types';
 
-const data: PortfolioModel = {
+const accounts: PortfolioAccountModel = {
   shortTerm: [
     {
       account: 'Cash',
@@ -152,7 +152,6 @@ const data: PortfolioModel = {
       ],
     },
   ],
-
   retirement: [
     {
       account: 'Jamie - Rollover',
@@ -277,4 +276,4 @@ const data: PortfolioModel = {
   ],
 };
 
-export default data;
+export default accounts;

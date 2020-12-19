@@ -14,7 +14,7 @@ const InsightsPage = () => {
         <div>
           <PageTitle
             title="Total Portfolio Value:"
-            subtitle={data.totalBalance.display}
+            subtitle={data.accounts.totalBalance.display}
           />
           <Section>
             <Header size="2xl" content="Region Breakdown:" />
@@ -24,7 +24,7 @@ const InsightsPage = () => {
                 { Header: 'Balance', accessor: 'value.display' },
                 { Header: 'Weight', accessor: 'weight.display' },
               ]}
-              data={data.insights.globalSplit}
+              data={data.accounts.insights.globalSplit}
               layout="fixed"
             />
           </Section>
@@ -36,7 +36,7 @@ const InsightsPage = () => {
                 { Header: 'Balance', accessor: 'value.display' },
                 { Header: 'Weight', accessor: 'weight.display' },
               ]}
-              data={data.insights.riskSplit}
+              data={data.accounts.insights.riskSplit}
               layout="fixed"
             />
           </Section>
@@ -48,7 +48,7 @@ const InsightsPage = () => {
                 { Header: 'Balance', accessor: 'value.display' },
                 { Header: 'Weight', accessor: 'weight.display' },
               ]}
-              data={data.insights.activeSplit}
+              data={data.accounts.insights.activeSplit}
               layout="fixed"
             />
           </Section>

@@ -39,7 +39,7 @@ export type ApproachType =
 
 export type CoinType = 'BTC' | 'ETH' | 'GUSD' | 'USDC';
 
-export type SectorStrategyType = SectorType | StrategyType
+export type SectorStrategyType = SectorType | StrategyType;
 
 export interface NumberDisplayModel {
   val: number;
@@ -93,13 +93,7 @@ export interface AccountModelExtended extends AccountModel {
   pie: PieModelExtended[];
 }
 
-export interface PortfolioModel {
-  shortTerm: AccountModel[];
-  longTerm: AccountModel[];
-  retirement: AccountModel[];
-}
-
-export interface PortfolioModelExtended {
+export interface PortfolioAccountModelExtended {
   totalBalance: NumberDisplayModel;
   categorySummary: ValueWeightModel[];
   portfolioSectorWeights: SectorWeightModel[];
@@ -126,7 +120,8 @@ export interface InsightsModel {
   riskSplit: ValueWeightModel[];
   activeSplit: ValueWeightModel[];
 }
-export interface PortfolioModelEnriched extends PortfolioModelExtended {
+
+export interface PortfolioAccountModelEnriched extends PortfolioAccountModelExtended {
   allAccounts: AccountModelExtended[];
   allPies: PieModelExtended[];
   insights: InsightsModel;
@@ -143,4 +138,26 @@ export interface SavingsGoalModel {
     goal: string;
   }[];
   biWeeklySavingsGoal: number;
+}
+
+export interface PortfolioAccountModel {
+  shortTerm: AccountModel[];
+  longTerm: AccountModel[];
+  retirement: AccountModel[];
+}
+
+export interface PortfolioGoalsModel {
+  quotes: QuotesModel[];
+  savings: SavingsGoalModel;
+}
+// this is returned by the API
+export interface PortfolioModel {
+  accounts: PortfolioAccountModel;
+  goals: PortfolioGoalsModel;
+}
+
+// this is return by react-query
+export interface PortfolioModelExtended {
+  accounts: PortfolioAccountModelEnriched;
+  goals: PortfolioGoalsModel;
 }

@@ -14,7 +14,7 @@ const HomePage = () => {
         <div>
           <PageTitle
             title="Total Portfolio Value:"
-            subtitle={data.totalBalance.display}
+            subtitle={data.accounts.totalBalance.display}
           />
           <Section>
             <Header size="2xl" content="By Time Horizon:" />
@@ -24,7 +24,7 @@ const HomePage = () => {
                 { Header: 'Balance', accessor: 'value.display' },
                 { Header: 'Weight', accessor: 'weight.display' },
               ]}
-              data={data.categorySummary}
+              data={data.accounts.categorySummary}
             />
           </Section>
           <Section>
@@ -35,7 +35,7 @@ const HomePage = () => {
                 { Header: 'Balance', accessor: 'value.display' },
                 { Header: 'Weight', accessor: 'weight.display' },
               ]}
-              data={data.portfolioSectorWeights}
+              data={data.accounts.portfolioSectorWeights}
             />
           </Section>
         </div>

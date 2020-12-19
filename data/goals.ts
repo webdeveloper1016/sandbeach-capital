@@ -1,4 +1,8 @@
-import { SavingsGoalModel, QuotesModel } from '../ts/types';
+import {
+  SavingsGoalModel,
+  QuotesModel,
+  PortfolioGoalsModel,
+} from '../ts/types';
 
 export const quotes: QuotesModel[] = [
   { quote: 'Time in the market beats timing the market' },
@@ -12,9 +16,16 @@ export const quotes: QuotesModel[] = [
   },
 ];
 
-export const goals: SavingsGoalModel = {
+export const savings: SavingsGoalModel = {
   annualIncome: 95000,
   preTaxSavingsPercent: 0.08,
   goalStatements: [{ goal: 'Save 25% of annual salary' }],
   biWeeklySavingsGoal: 400,
 };
+
+const goals: PortfolioGoalsModel = {
+  quotes,
+  savings,
+};
+
+export default goals;

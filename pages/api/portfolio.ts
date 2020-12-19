@@ -1,4 +1,4 @@
-import data from '../../data/accounts';
+import data from '../../data';
 
 const handler = (req, res) => {
   res.statusCode = 200;
