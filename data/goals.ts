@@ -15,7 +15,10 @@ export const quotes: QuotesModel[] = [
 export const savings: SavingsGoalModel = {
   annualIncome: 95000,
   preTaxSavingsPercent: 0.08,
-  goalStatements: [{ goal: 'Save 25% of annual salary' }],
+  goalStatements: [
+    { goal: 'Save 25% of annual salary' },
+    { goal: 'Accumulate half a BTC' },
+  ],
   biWeeklySavingsGoal: 400,
 };
 

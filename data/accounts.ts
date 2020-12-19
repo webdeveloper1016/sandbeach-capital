@@ -1,4 +1,4 @@
-import { currentBalances } from './balances';
+import { currentBalances, currentContributions } from './balances';
 import { PortfolioAccountModel } from '../ts/types';
 
 const accounts: PortfolioAccountModel = {
@@ -12,6 +12,7 @@ const accounts: PortfolioAccountModel = {
       approach: 'Robo',
       risk: 1,
       balance: currentBalances.stEmergency,
+      biWeeklySavings: currentContributions.stEmergency,
       pie: [
         {
           assetClass: 'Cash',
@@ -30,6 +31,7 @@ const accounts: PortfolioAccountModel = {
       approach: 'Self Directed',
       risk: 2,
       balance: currentBalances.stStockBond,
+      biWeeklySavings: currentContributions.stStockBond,
       pie: [
         {
           assetClass: 'Stocks',
@@ -69,6 +71,7 @@ const accounts: PortfolioAccountModel = {
       risk: 3,
       active: true,
       balance: currentBalances.ltDiversified,
+      biWeeklySavings: currentContributions.ltDiversified,
       pie: [
         {
           assetClass: 'Stocks',
@@ -90,10 +93,11 @@ const accounts: PortfolioAccountModel = {
       goal: 'High risk/high reward individual stock picks',
       timeHorizon: '5+ years',
       category: 'long-term',
-      balance: currentBalances.ltStocks,
       risk: 5,
       active: true,
       approach: 'Self Directed',
+      balance: currentBalances.ltStocks,
+      biWeeklySavings: currentContributions.ltStocks,
       pie: [
         {
           assetClass: 'Stocks',
@@ -111,6 +115,7 @@ const accounts: PortfolioAccountModel = {
       category: 'long-term',
       risk: 5,
       balance: currentBalances.cryptoCoinbase,
+      biWeeklySavings: currentContributions.cryptoCoinbase,
       approach: 'Self Directed',
       pie: [
         {
@@ -135,6 +140,7 @@ const accounts: PortfolioAccountModel = {
       category: 'long-term',
       risk: 5,
       balance: currentBalances.cryptoBlockFi,
+      biWeeklySavings: currentContributions.cryptoBlockFi,
       approach: 'Self Directed',
       pie: [
         {
@@ -161,6 +167,7 @@ const accounts: PortfolioAccountModel = {
       category: 'retirement',
       risk: 4,
       balance: currentBalances.rJamieRoll,
+      biWeeklySavings: currentContributions.rJamieRoll,
       approach: 'Self Directed',
       pie: [
         {
@@ -179,6 +186,7 @@ const accounts: PortfolioAccountModel = {
       category: 'retirement',
       risk: 4,
       balance: currentBalances.rJamieIRA,
+      biWeeklySavings: currentContributions.rJamieIRA,
       approach: 'Self Directed',
       pie: [
         {
@@ -203,6 +211,7 @@ const accounts: PortfolioAccountModel = {
       category: 'retirement',
       approach: 'Self Directed',
       balance: currentBalances.rBryanRoll,
+      biWeeklySavings: currentContributions.rBryanRoll,
       risk: 4,
       pie: [
         {
@@ -221,6 +230,7 @@ const accounts: PortfolioAccountModel = {
       category: 'retirement',
       approach: 'Self Directed',
       balance: currentBalances.rBryan401k,
+      biWeeklySavings: currentContributions.rBryan401k,
       risk: 4,
       pie: [
         {
@@ -245,6 +255,7 @@ const accounts: PortfolioAccountModel = {
       category: 'retirement',
       approach: 'Self Directed',
       balance: currentBalances.rBryanIRA,
+      biWeeklySavings: currentContributions.rBryanIRA,
       risk: 4,
       pie: [
         {
