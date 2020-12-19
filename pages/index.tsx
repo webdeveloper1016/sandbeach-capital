@@ -1,39 +1,28 @@
 import PortfolioData from '../components/PortfolioData';
-import Header from '../components/Header';
-import Section from '../components/Section';
-import PageTitle from '../components/PageTitle';
-import { Table } from '../components/Table';
+import TableSection from '../components/TableSection';
 
 const HomePage = () => (
   <PortfolioData>
     {(data) => (
       <div>
-        <PageTitle
-          title="Total Portfolio Value:"
-          subtitle={data.accounts.totalBalance.display}
+        <TableSection
+          header="By Time Horizon:"
+          columns={[
+            { Header: 'Category', accessor: 'label' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.accounts.categorySummary}
         />
-        <Section>
-          <Header size="2xl" content="By Time Horizon:" />
-          <Table
-            columns={[
-              { Header: 'Category', accessor: 'label' },
-              { Header: 'Balance', accessor: 'value.display' },
-              { Header: 'Weight', accessor: 'weight.display' },
-            ]}
-            data={data.accounts.categorySummary}
-          />
-        </Section>
-        <Section>
-          <Header size="2xl" content="By Asset Class:" />
-          <Table
-            columns={[
-              { Header: 'Asset Class', accessor: 'assetClass' },
-              { Header: 'Balance', accessor: 'value.display' },
-              { Header: 'Weight', accessor: 'weight.display' },
-            ]}
-            data={data.accounts.portfolioSectorWeights}
-          />
-        </Section>
+        <TableSection
+          header="By Asset Class:"
+          columns={[
+            { Header: 'Asset Class', accessor: 'assetClass' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.accounts.portfolioSectorWeights}
+        />
       </div>
     )}
   </PortfolioData>

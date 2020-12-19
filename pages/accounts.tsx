@@ -1,31 +1,25 @@
 import PortfolioData from '../components/PortfolioData';
+import TableSection from '../components/TableSection';
 import Header from '../components/Header';
 import Section from '../components/Section';
-import PageTitle from '../components/PageTitle';
 import { Table } from '../components/Table';
 
 const AccountsPage = () => (
   <PortfolioData>
     {(data) => (
       <div>
-        <PageTitle
-          title="Total Portfolio Value:"
-          subtitle={data.accounts.totalBalance.display}
+        <TableSection
+          header="Overview:"
+          columns={[
+            { Header: 'Account', accessor: 'account' },
+            { Header: 'Category', accessor: 'categoryLabel' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'portfolioWeight.display' },
+            { Header: 'Institution', accessor: 'institution' },
+            { Header: 'Risk', accessor: 'risk' },
+          ]}
+          data={data.accounts.allAccounts}
         />
-        <Section>
-          <Header size="2xl" content="Overview:" />
-          <Table
-            columns={[
-              { Header: 'Account', accessor: 'account' },
-              { Header: 'Category', accessor: 'categoryLabel' },
-              { Header: 'Balance', accessor: 'value.display' },
-              { Header: 'Weight', accessor: 'portfolioWeight.display' },
-              { Header: 'Institution', accessor: 'institution' },
-              { Header: 'Risk', accessor: 'risk' },
-            ]}
-            data={data.accounts.allAccounts}
-          />
-        </Section>
         <Section>
           <Header size="2xl" content="Details:" />
           {data.accounts.allAccounts.map((a, k) => (

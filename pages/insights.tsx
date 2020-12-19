@@ -1,53 +1,42 @@
 import PortfolioData from '../components/PortfolioData';
+import TableSection from '../components/TableSection';
 import Header from '../components/Header';
 import Section from '../components/Section';
-import PageTitle from '../components/PageTitle';
-import { Table } from '../components/Table';
 
 const InsightsPage = () => (
   <PortfolioData>
     {(data) => (
       <div>
-        <PageTitle
-          title="Total Portfolio Value:"
-          subtitle={data.accounts.totalBalance.display}
+        <TableSection
+          header="Region Breakdown:"
+          columns={[
+            { Header: 'Region', accessor: 'label' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.accounts.insights.globalSplit}
+          layout="fixed"
         />
-        <Section>
-          <Header size="2xl" content="Region Breakdown:" />
-          <Table
-            columns={[
-              { Header: 'Region', accessor: 'label' },
-              { Header: 'Balance', accessor: 'value.display' },
-              { Header: 'Weight', accessor: 'weight.display' },
-            ]}
-            data={data.accounts.insights.globalSplit}
-            layout="fixed"
-          />
-        </Section>
-        <Section>
-          <Header size="2xl" content="Risk Breakdown:" />
-          <Table
-            columns={[
-              { Header: 'Level', accessor: 'label' },
-              { Header: 'Balance', accessor: 'value.display' },
-              { Header: 'Weight', accessor: 'weight.display' },
-            ]}
-            data={data.accounts.insights.riskSplit}
-            layout="fixed"
-          />
-        </Section>
-        <Section>
-          <Header size="2xl" content="Active/Passive:" />
-          <Table
-            columns={[
-              { Header: 'Type', accessor: 'label' },
-              { Header: 'Balance', accessor: 'value.display' },
-              { Header: 'Weight', accessor: 'weight.display' },
-            ]}
-            data={data.accounts.insights.activeSplit}
-            layout="fixed"
-          />
-        </Section>
+        <TableSection
+          header="Risk Breakdown:"
+          columns={[
+            { Header: 'Level', accessor: 'label' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.accounts.insights.riskSplit}
+          layout="fixed"
+        />
+        <TableSection
+          header="Active/Passive:"
+          columns={[
+            { Header: 'Type', accessor: 'label' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.accounts.insights.activeSplit}
+          layout="fixed"
+        />
         <Section>
           <Header size="2xl" content="Growth/Value:" />
         </Section>

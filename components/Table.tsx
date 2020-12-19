@@ -5,7 +5,7 @@ interface TableHeaderProps {
   headerGroups: any;
 }
 
-interface TableProps {
+export interface TableProps {
   columns: {
     accessor: string;
     Header: string;
