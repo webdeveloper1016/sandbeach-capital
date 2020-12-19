@@ -1,27 +1,26 @@
-import useFetchPortfolio from '../hooks/useFetchPortfolio';
+import PortfolioData from '../components/PortfolioData';
+import Header from '../components/Header';
+import Section from '../components/Section';
 
-const SavingsPage = () => {
-  const { data, status } = useFetchPortfolio();
-
-  if (status === 'loading') {
-    return <div className="text-green-500">loading...</div>;
-  }
-
-  if (status === 'error') {
-    return <div className="text-red-500">error...</div>;
-  }
-
-  console.log(data);
-
+const GoalsPage = () => {
   return (
-    <div>
-      <div className="mb-5">
-        <h3 className="text-gray-500 text-lg">Savings:</h3>
-      </div>
-      <pre className="text-gray-500 my-8">{JSON.stringify(data, null, 4)}</pre>
-    </div>
+    <PortfolioData>
+      {(data) => {
+        return (
+          <Section>
+            <Header size="2xl" content="Quotes to Remember:" />
+            <ul>
+              {data.goals.quotes.map((q, k) => (
+                <li key={k}>
+                  <p className="text-gray-500 text-lg mb-5">{q.quote}</p>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        );
+      }}
+    </PortfolioData>
   );
 };
 
-export default SavingsPage;
-
+export default GoalsPage;
