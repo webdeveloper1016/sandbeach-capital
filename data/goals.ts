@@ -3,8 +3,10 @@ import {
   QuotesModel,
   PortfolioGoalsModel,
 } from '../ts/types';
+import { currentAnnualIncome } from './balances';
 
 export const quotes: QuotesModel[] = [
+  { quote: `Scared money don't make no money.` },
   { quote: 'Time in the market beats timing the market.' },
   {
     quote:
@@ -13,7 +15,7 @@ export const quotes: QuotesModel[] = [
 ];
 
 export const savings: SavingsGoalModel = {
-  annualIncome: 95000,
+  annualIncome: currentAnnualIncome,
   preTaxSavingsPercent: 0.08,
   goalStatements: [
     { goal: 'Save 25% of annual salary' },

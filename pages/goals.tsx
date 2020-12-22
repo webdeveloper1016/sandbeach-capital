@@ -34,7 +34,8 @@ const GoalsPage = () => {
               header="Savings Analysis:"
               columns={[
                 { Header: 'Label', accessor: 'label' },
-                { Header: 'Amount', accessor: 'savings.display' },
+                { Header: 'Amount', accessor: 'value.display' },
+                { Header: 'Percent', accessor: 'weight.display' },
               ]}
               data={data.goals.savingsAnalysis}
               layout="fixed"

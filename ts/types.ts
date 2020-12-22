@@ -153,10 +153,7 @@ export interface PortfolioGoalsModel {
 }
 
 export interface PortfolioGoalsModelEnriched extends PortfolioGoalsModel {
-  savingsAnalysis: {
-    label: string;
-    savings: NumberDisplayModel;
-  }[];
+  savingsAnalysis: ValueWeightModel[];
 }
 
 // this is returned by the API

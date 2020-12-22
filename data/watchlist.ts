@@ -1,6 +1,7 @@
 export const watchlist = {
   growth: ['BYND', 'DOCU'],
   value: ['WFC', 'BAC', 'LMT', 'PSA'],
+  like: ['AAPL', 'TGT', 'CMCSA', 'WMT', 'HD', 'BLK'],
   monthly: {
     buy: [
       {

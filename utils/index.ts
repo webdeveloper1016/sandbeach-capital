@@ -174,6 +174,10 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
     ...initialAnalysis.retirement.data,
   ];
   const allPies = allAccounts.map((a) => a.pie).flat();
+  const allSavings = allAccounts.reduce(
+    (accum, current) => accum + current.biWeeklySavings,
+    0,
+  );
 
   // return data
   return {
@@ -185,17 +189,17 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
       savingsAnalysis: [
         {
           label: 'Bi Weekly',
-          savings: {
+          value: currencyDisplay(allSavings),
+          weight: {
             val: 0,
-            display: '$0',
+            display: 'N/A'
           },
         },
+        // TODO: bi-weekly by ST, LT, Retire
         {
           label: 'Annual',
-          savings: {
-            val: 0,
-            display: '$0',
-          },
+          value: currencyDisplay(allSavings * 26),
+          weight: percentDisplay(allSavings * 26, data.goals.savings.annualIncome),
         },
       ],
     },
