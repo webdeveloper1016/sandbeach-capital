@@ -2,16 +2,16 @@ export const currentAnnualIncome = [95000, 4000, 5000].reduce((a, b) => a + b, 0
 
 export const currentBalances = {
   stEmergency: 15493,
-  stStockBond: 820,
-  ltDiversified: 1005,
-  ltStocks: 735,
-  cryptoCoinbase: 741,
+  stStockBond: 862,
+  ltDiversified: 1077,
+  ltStocks: 853,
+  cryptoCoinbase: 865,
   cryptoBlockFi: 3483,
-  rJamieIRA: 42808,
-  rJamieRoll: 40146,
-  rBryanIRA: 1812,
+  rJamieIRA: 43095,
+  rJamieRoll: 41137,
+  rBryanIRA: 1852,
   rBryanRoll: 31512,
-  rBryan401k: 2896,
+  rBryan401k: 3214,
 };
 
 export const unscheduledContributions = [100, 100, 2400].reduce((a, b) => a + b, 0);

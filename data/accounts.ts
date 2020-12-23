@@ -36,7 +36,7 @@ const accounts: PortfolioAccountModel = {
         {
           assetClass: 'Stocks',
           sector: 'US Stocks',
-          nickname: 'VYM',
+          nickname: 'SCHD',
           targetPercent: 0.25,
         },
         {
@@ -77,13 +77,13 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Growth',
-          targetPercent: 0.58,
+          targetPercent: 0.70,
         },
         {
           assetClass: 'Stocks',
-          sector: 'Value',
-          nickname: 'Value',
-          targetPercent: 0.42,
+          sector: 'Income',
+          nickname: 'Income',
+          targetPercent: 0.30,
         },
       ],
     },
@@ -101,9 +101,15 @@ const accounts: PortfolioAccountModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          sector: 'Individual Stocks',
-          nickname: 'Stock Picks',
-          targetPercent: 1.0,
+          sector: 'Growth',
+          nickname: 'Growth',
+          targetPercent: 0.90,
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Income',
+          nickname: 'Income',
+          targetPercent: 0.10,
         },
       ],
     },
@@ -173,7 +179,7 @@ const accounts: PortfolioAccountModel = {
         {
           assetClass: 'Stocks',
           sector: 'Tech Stocks',
-          nickname: 'Tech Stocks',
+          nickname: 'QQQ',
           targetPercent: 1.0,
         },
       ],
