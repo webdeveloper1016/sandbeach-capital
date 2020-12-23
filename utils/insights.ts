@@ -14,6 +14,7 @@ export const calcGlobalSplit = (
   stockData: PieModelExtended[],
 ): ValueWeightModel[] => {
   const foreignSectors: SectorStrategyType[] = [
+    'Intl',
     'Foreign Stocks',
     'EMG Market Stocks',
     'Global Stock Mix',
@@ -34,7 +35,7 @@ export const calcGlobalSplit = (
     {
       value: currencyDisplay(foreignSum),
       weight: percentDisplay(foreignSum, stocksSum.value.val),
-      label: 'Foreign',
+      label: 'Intl',
     },
     {
       value: stocksSum.value,

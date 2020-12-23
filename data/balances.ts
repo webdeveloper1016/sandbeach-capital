@@ -14,6 +14,18 @@ export const currentBalances = {
   rBryan401k: 3214,
 };
 
+export const currentMarketData = {
+  cryptoCoinbase: {
+    btc: 0.02931281
+  },
+  cryptoBlockFi: {
+    btc: 0.14778107
+  },
+  rJamieRoll: {
+    qqq: 133
+  }
+}
+
 export const unscheduledContributions = [100, 100, 2400].reduce((a, b) => a + b, 0);
 
 export const currentContributions = {

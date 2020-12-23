@@ -1,4 +1,8 @@
-import { currentBalances, currentContributions } from './balances';
+import {
+  currentBalances,
+  currentContributions,
+  currentMarketData,
+} from './balances';
 import { PortfolioAccountModel } from '../ts/types';
 
 const accounts: PortfolioAccountModel = {
@@ -35,13 +39,13 @@ const accounts: PortfolioAccountModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          sector: 'US Stocks',
+          sector: 'Income',
           nickname: 'SCHD',
           targetPercent: 0.25,
         },
         {
           assetClass: 'Stocks',
-          sector: 'Foreign Stocks',
+          sector: 'Intl',
           nickname: 'IDV',
           targetPercent: 0.25,
         },
@@ -77,13 +81,13 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Growth',
-          targetPercent: 0.70,
+          targetPercent: 0.7,
         },
         {
           assetClass: 'Stocks',
           sector: 'Income',
           nickname: 'Income',
-          targetPercent: 0.30,
+          targetPercent: 0.3,
         },
       ],
     },
@@ -103,13 +107,13 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Growth',
-          targetPercent: 0.90,
+          targetPercent: 0.9,
         },
         {
           assetClass: 'Stocks',
           sector: 'Income',
           nickname: 'Income',
-          targetPercent: 0.10,
+          targetPercent: 0.1,
         },
       ],
     },
@@ -129,6 +133,11 @@ const accounts: PortfolioAccountModel = {
           sector: 'Crypto',
           nickname: 'Bitcoin',
           targetPercent: 0.88,
+          marketData: {
+            ticker: 'BTC',
+            shares: currentMarketData.cryptoCoinbase.btc,
+            market: 'crypto',
+          },
         },
         {
           assetClass: 'Crypto',
@@ -154,6 +163,11 @@ const accounts: PortfolioAccountModel = {
           sector: 'Crypto',
           nickname: 'Bitcoin',
           targetPercent: 0.94,
+          marketData: {
+            ticker: 'BTC',
+            shares: currentMarketData.cryptoBlockFi.btc,
+            market: 'crypto',
+          },
         },
         {
           assetClass: 'Crypto',
@@ -178,9 +192,14 @@ const accounts: PortfolioAccountModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          sector: 'Tech Stocks',
+          sector: 'Tech',
           nickname: 'QQQ',
           targetPercent: 1.0,
+          marketData: {
+            ticker: 'QQQ',
+            shares: currentMarketData.rJamieRoll.qqq,
+            market: 'stock',
+          },
         },
       ],
     },
@@ -203,7 +222,7 @@ const accounts: PortfolioAccountModel = {
         },
         {
           assetClass: 'Stocks',
-          sector: 'Foreign Stocks',
+          sector: 'Intl',
           nickname: 'Foreign Stocks',
           targetPercent: 0.4,
         },
@@ -248,7 +267,7 @@ const accounts: PortfolioAccountModel = {
         },
         {
           assetClass: 'Stocks',
-          sector: 'Foreign Stocks',
+          sector: 'Intl',
           nickname: 'Foreign Stocks',
           targetPercent: 0.4,
         },
@@ -267,13 +286,13 @@ const accounts: PortfolioAccountModel = {
       pie: [
         {
           assetClass: 'Stocks',
-          sector: 'US Stocks',
+          sector: 'Growth',
           nickname: 'US Stocks',
-          targetPercent: 0.50,
+          targetPercent: 0.5,
         },
         {
           assetClass: 'Stocks',
-          sector: 'Foreign Stocks',
+          sector: 'Intl',
           nickname: 'Foreign Stocks',
           targetPercent: 0.46,
         },

@@ -4,7 +4,6 @@ export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
 
 export type SectorType =
   | 'US Stocks'
-  | 'Tech Stocks'
   | 'Foreign Stocks'
   | 'EMG Market Stocks'
   | 'Global Stock Mix'
@@ -20,11 +19,11 @@ export type SectorType =
   | 'Other';
 
 export type StrategyType =
-  | 'Individual Stocks'
   | 'Growth'
-  | 'Value'
   | 'Income'
-  | 'Hedge Fund Follow'
+  | 'Value'
+  | 'Tech'
+  | 'Intl'
   | 'Real Estate'
   | 'Other';
 
@@ -58,11 +57,18 @@ export interface ValueWeightModel {
   weight: NumberDisplayModel;
 }
 
+export interface MarketDataModel {
+  ticker: string;
+  shares: number;
+  market: 'stock' | 'crypto';
+}
+
 export interface PieModel {
   nickname: string;
   targetPercent: number;
   assetClass: AssetClassType;
   sector: SectorStrategyType;
+  marketData?: MarketDataModel;
 }
 
 export interface AccountModel {
@@ -77,6 +83,7 @@ export interface AccountModel {
   biWeeklySavings: number;
   active?: boolean;
   preTax?: boolean;
+  marketData?: MarketDataModel;
   pie: PieModel[];
 }
 
