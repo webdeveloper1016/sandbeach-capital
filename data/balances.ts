@@ -14,6 +14,8 @@ export const currentBalances = {
   rBryan401k: 2896,
 };
 
+export const unscheduledContributions = [100, 100, 2400].reduce((a, b) => a + b, 0);
+
 export const currentContributions = {
   stEmergency: [36.57].reduce((a, b) => a + b, 0),
   stStockBond: 50,

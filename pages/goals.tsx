@@ -7,11 +7,10 @@ const GoalsPage = () => {
   return (
     <PortfolioData>
       {(data) => {
-        console.log(data.goals);
         return (
           <div>
             <Section>
-              <Header size="2xl" content="Quotes to Remember:" />
+              <Header size="2xl" content="Remember:" />
               <ul>
                 {data.goals.quotes.map((q, k) => (
                   <li key={k}>
@@ -20,18 +19,8 @@ const GoalsPage = () => {
                 ))}
               </ul>
             </Section>
-            <Section>
-              <Header size="2xl" content="Savings Goals:" />
-              <ul>
-                {data.goals.savings.goalStatements.map((q, k) => (
-                  <li key={k}>
-                    <p className="text-gray-500 text-lg mb-5">{q.goal}</p>
-                  </li>
-                ))}
-              </ul>
-            </Section>
             <TableSection
-              header="Savings Analysis:"
+              header="Savings Details:"
               columns={[
                 { Header: 'Label', accessor: 'label' },
                 { Header: 'Amount', accessor: 'value.display' },

@@ -76,6 +76,7 @@ export interface AccountModel {
   balance: number;
   biWeeklySavings: number;
   active?: boolean;
+  preTax?: boolean;
   pie: PieModel[];
 }
 
@@ -139,6 +140,7 @@ export interface SavingsGoalModel {
     goal: string;
   }[];
   biWeeklySavingsGoal: number;
+  unscheduledContributions: number;
 }
 
 export interface PortfolioAccountModel {

@@ -3,7 +3,7 @@ import {
   QuotesModel,
   PortfolioGoalsModel,
 } from '../ts/types';
-import { currentAnnualIncome } from './balances';
+import { currentAnnualIncome, unscheduledContributions } from './balances';
 
 export const quotes: QuotesModel[] = [
   { quote: `Scared money don't make no money.` },
@@ -22,6 +22,7 @@ export const savings: SavingsGoalModel = {
     { goal: 'Accumulate half a BTC' },
   ],
   biWeeklySavingsGoal: 400,
+  unscheduledContributions,
 };
 
 const goals: PortfolioGoalsModel = {

@@ -1,7 +1,6 @@
 import {
   AssetClassType,
   CategoryType,
-  NumberDisplayModel,
   SectorWeightModel,
   AccountModel,
   AccountModelExtended,
@@ -17,6 +16,7 @@ import {
   currencyDisplay,
 } from './calc';
 import { calcGlobalSplit, calcActiveSplit, calcRiskSplit } from './insights';
+import { runSavingsAnalysis } from './savings';
 
 export const assetClasses: AssetClassType[] = [
   'Stocks',
@@ -186,22 +186,7 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
     // enriched goal data
     goals: {
       ...data.goals,
-      savingsAnalysis: [
-        {
-          label: 'Bi Weekly',
-          value: currencyDisplay(allSavings),
-          weight: {
-            val: 0,
-            display: 'N/A'
-          },
-        },
-        // TODO: bi-weekly by ST, LT, Retire
-        {
-          label: 'Annual',
-          value: currencyDisplay(allSavings * 26),
-          weight: percentDisplay(allSavings * 26, data.goals.savings.annualIncome),
-        },
-      ],
+      savingsAnalysis: runSavingsAnalysis(allAccounts, data.goals.savings),
     },
     // enriched account data
     accounts: {
