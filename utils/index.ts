@@ -174,10 +174,6 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
     ...initialAnalysis.retirement.data,
   ];
   const allPies = allAccounts.map((a) => a.pie).flat();
-  const allSavings = allAccounts.reduce(
-    (accum, current) => accum + current.biWeeklySavings,
-    0,
-  );
 
   // return data
   return {

@@ -63,6 +63,11 @@ export interface MarketDataModel {
   market: 'stock' | 'crypto';
 }
 
+export interface TickerModel {
+  stock: string[]
+  crypto: string[]
+}
+
 export interface PieModel {
   nickname: string;
   targetPercent: number;
@@ -83,7 +88,6 @@ export interface AccountModel {
   biWeeklySavings: number;
   active?: boolean;
   preTax?: boolean;
-  marketData?: MarketDataModel;
   pie: PieModel[];
 }
 
