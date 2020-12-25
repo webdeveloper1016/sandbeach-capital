@@ -88,3 +88,42 @@ export const calcRiskSplit = (
 
   return formatted;
 };
+
+export const factorBreakdown = (
+  stocksSum: SectorWeightModel,
+  stockData: PieModelExtended[],
+): ValueWeightModel[] => {
+  console.log(stocksSum, stockData);
+  return [
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Index',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Active',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Growth',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Income',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Tech',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Intl',
+    },
+  ];
+};

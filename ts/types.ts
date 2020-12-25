@@ -131,6 +131,7 @@ export interface InsightsModel {
   globalSplit: ValueWeightModel[];
   riskSplit: ValueWeightModel[];
   activeSplit: ValueWeightModel[];
+  factors: ValueWeightModel[];
 }
 
 export interface PortfolioAccountModelEnriched

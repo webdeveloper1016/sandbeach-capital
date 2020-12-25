@@ -8,7 +8,17 @@ const InsightsPage = () => (
     {(data) => (
       <div>
         <TableSection
-          header="Region Breakdown:"
+          header="Factors:"
+          columns={[
+            { Header: 'Region', accessor: 'label' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.accounts.insights.factors}
+          layout="fixed"
+        />
+        <TableSection
+          header="Regions:"
           columns={[
             { Header: 'Region', accessor: 'label' },
             { Header: 'Balance', accessor: 'value.display' },
@@ -18,7 +28,7 @@ const InsightsPage = () => (
           layout="fixed"
         />
         <TableSection
-          header="Risk Breakdown:"
+          header="Risk Levels:"
           columns={[
             { Header: 'Level', accessor: 'label' },
             { Header: 'Balance', accessor: 'value.display' },
@@ -37,12 +47,6 @@ const InsightsPage = () => (
           data={data.accounts.insights.activeSplit}
           layout="fixed"
         />
-        <Section>
-          <Header size="2xl" content="Growth/Value:" />
-        </Section>
-        <Section>
-          <Header size="2xl" content="Sector Breakdown:" />
-        </Section>
       </div>
     )}
   </PortfolioData>
