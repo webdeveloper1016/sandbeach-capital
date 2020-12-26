@@ -24,8 +24,8 @@ const HomePage = () => (
           data={data.accounts.portfolioSectorWeights}
         />
         <TableSection
-          header="Slices:"
-          subheader="*Holdings can be in more than one slice."
+          header="Factors:"
+          subheader="*Holdings can be in more than one factor."
           columns={[
             { Header: 'Type', accessor: 'label' },
             { Header: 'Asset Class', accessor: 'assetClass' },

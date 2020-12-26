@@ -100,21 +100,15 @@ export const sliceDetailsAnalysis = (
   const totalBalance = initialAnalysis.totalBalance.val;
   const stockSectorBalance = initialAnalysis.portfolioSectorWeights.find(
     (p) => p.assetClass === 'Stocks',
-  ).value.val
-  console.log(withDetails, initialAnalysis);
+  ).value.val;
 
   const speculative = withDetails.reduce(
     (accum, current) =>
-      accum + current.approxVal.val * current.sliceDetails.speculative || 0,
+      accum + current.approxVal.val * (current.sliceDetails.speculative || 0),
     0,
   );
-  console.log(speculative);
+
   return [
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Index',
-    },
     {
       value: currencyDisplay(0),
       weight: percentDisplay(1, 2),
@@ -147,6 +141,26 @@ export const sliceDetailsAnalysis = (
       value: currencyDisplay(0),
       weight: percentDisplay(1, 2),
       label: 'Tech',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Momentum',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Quality',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'ESG',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Small Cap',
     },
     {
       value: currencyDisplay(0),

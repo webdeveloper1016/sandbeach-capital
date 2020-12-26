@@ -86,7 +86,7 @@ const accounts: PortfolioAccountModel = {
             active: 0.25,
             tech: 0.25,
             speculative: 0.25,
-          }
+          },
         },
         {
           assetClass: 'Stocks',
@@ -95,7 +95,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.4,
           sliceDetails: {
             intl: 0.25,
-          }
+          },
         },
       ],
     },
@@ -119,7 +119,7 @@ const accounts: PortfolioAccountModel = {
           sliceDetails: {
             active: 1,
             speculative: 1,
-          }
+          },
         },
         {
           assetClass: 'Stocks',
@@ -128,7 +128,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.4,
           sliceDetails: {
             active: 1,
-          }
+          },
         },
       ],
     },
@@ -215,6 +215,9 @@ const accounts: PortfolioAccountModel = {
             shares: currentMarketData.rJamieRoll.qqq,
             market: 'stock',
           },
+          sliceDetails: {
+            tech: 1,
+          },
         },
       ],
     },
@@ -284,17 +287,27 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'US Stocks',
-          targetPercent: 0.5,
+          targetPercent: 0.6,
           sliceDetails: {
+            esg: 0.05,
+            smallCap: 0.15,
+            momentum: 0.15,
+            quality: 0.15,
+            income: 0.1,
             active: 0.4,
-            speculative: 0.3,
-          }
+            speculative: 0.3, // all of thematic ETFs, half of All Stocks
+          },
         },
         {
           assetClass: 'Stocks',
           sector: 'Intl',
           nickname: 'Foreign Stocks',
-          targetPercent: 0.46,
+          targetPercent: 0.36,
+          sliceDetails: {
+            intl: 1,
+            momentum: 0.1,
+            income: 0.3,
+          },
         },
         {
           assetClass: 'Bonds',
