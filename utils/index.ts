@@ -15,7 +15,12 @@ import {
   percentDisplay,
   currencyDisplay,
 } from './calc';
-import { calcGlobalSplit, calcActiveSplit, calcRiskSplit, factorBreakdown } from './insights';
+import {
+  calcGlobalSplit,
+  calcActiveSplit,
+  calcRiskSplit,
+  sliceDetailsAnalysis,
+} from './insights';
 import { runSavingsAnalysis } from './savings';
 
 export const assetClasses: AssetClassType[] = [
@@ -198,12 +203,11 @@ export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
         ),
         activeSplit: calcActiveSplit(initialAnalysis.totalBalance, allAccounts),
         riskSplit: calcRiskSplit(initialAnalysis.totalBalance, allAccounts),
-        factors: factorBreakdown(
-          initialAnalysis.portfolioSectorWeights.find(
-            (s) => s.assetClass === 'Stocks',
-          ),
-          allPies.filter((p) => p.assetClass === 'Stocks')
-        )
+        sliceDetails: sliceDetailsAnalysis(
+          initialAnalysis,
+          allPies,
+          allAccounts,
+        ),
       },
     },
   };

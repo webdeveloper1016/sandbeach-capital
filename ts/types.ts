@@ -73,6 +73,7 @@ export interface PieModel {
   targetPercent: number;
   assetClass: AssetClassType;
   sector: SectorStrategyType;
+  sliceDetails?: any;
   marketData?: MarketDataModel;
 }
 
@@ -131,7 +132,7 @@ export interface InsightsModel {
   globalSplit: ValueWeightModel[];
   riskSplit: ValueWeightModel[];
   activeSplit: ValueWeightModel[];
-  factors: ValueWeightModel[];
+  sliceDetails: ValueWeightModel[];
 }
 
 export interface PortfolioAccountModelEnriched

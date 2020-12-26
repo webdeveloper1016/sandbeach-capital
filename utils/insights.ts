@@ -6,6 +6,7 @@ import {
   ValueWeightModel,
   AccountModelExtended,
   PieModelExtended,
+  PortfolioAccountModelExtended,
 } from '../ts/types';
 import { percentDisplay, currencyDisplay, sumAccounts, sumPies } from './calc';
 
@@ -89,11 +90,12 @@ export const calcRiskSplit = (
   return formatted;
 };
 
-export const factorBreakdown = (
-  stocksSum: SectorWeightModel,
-  stockData: PieModelExtended[],
+export const sliceDetailsAnalysis = (
+  initialAnalysis: PortfolioAccountModelExtended,
+  pieData: PieModelExtended[],
+  allAccounts: AccountModelExtended[],
 ): ValueWeightModel[] => {
-  console.log(stocksSum, stockData);
+  console.log(initialAnalysis, pieData);
   return [
     {
       value: currencyDisplay(0),
@@ -111,8 +113,9 @@ export const factorBreakdown = (
       label: 'Speculative',
     },
     {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
+      ...initialAnalysis.portfolioSectorWeights.find(
+        (p) => p.assetClass === 'Crypto',
+      ),
       label: 'Crypto',
     },
     {
@@ -136,18 +139,21 @@ export const factorBreakdown = (
       label: 'Intl',
     },
     {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
+      ...initialAnalysis.portfolioSectorWeights.find(
+        (p) => p.assetClass === 'Alts',
+      ),
       label: 'Alts',
     },
     {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
+      ...initialAnalysis.portfolioSectorWeights.find(
+        (p) => p.assetClass === 'Bonds',
+      ),
       label: 'Bonds',
     },
     {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
+      ...initialAnalysis.portfolioSectorWeights.find(
+        (p) => p.assetClass === 'Cash',
+      ),
       label: 'Cash',
     },
   ];

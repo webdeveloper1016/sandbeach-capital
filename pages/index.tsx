@@ -31,7 +31,7 @@ const HomePage = () => (
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
-          data={data.accounts.insights.factors}
+          data={data.accounts.insights.sliceDetails}
           layout="fixed"
         />
         <TableSection

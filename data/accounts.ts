@@ -81,13 +81,21 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Growth',
-          targetPercent: 0.7,
+          targetPercent: 0.6,
+          sliceDetails: {
+            active: 0.25,
+            tech: 0.25,
+            speculative: 0.25,
+          }
         },
         {
           assetClass: 'Stocks',
           sector: 'Income',
           nickname: 'Income',
-          targetPercent: 0.3,
+          targetPercent: 0.4,
+          sliceDetails: {
+            intl: 0.25,
+          }
         },
       ],
     },
@@ -107,13 +115,20 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Growth',
-          targetPercent: 0.9,
+          targetPercent: 0.6,
+          sliceDetails: {
+            active: 1,
+            speculative: 1,
+          }
         },
         {
           assetClass: 'Stocks',
           sector: 'Income',
           nickname: 'Income',
-          targetPercent: 0.1,
+          targetPercent: 0.4,
+          sliceDetails: {
+            active: 1,
+          }
         },
       ],
     },
@@ -270,6 +285,10 @@ const accounts: PortfolioAccountModel = {
           sector: 'Growth',
           nickname: 'US Stocks',
           targetPercent: 0.5,
+          sliceDetails: {
+            active: 0.4,
+            speculative: 0.3,
+          }
         },
         {
           assetClass: 'Stocks',
