@@ -9,8 +9,7 @@ export const currentBalances = {
   cryptoBlockFi: 3483,
   rJamieIRA: 43095,
   rJamieRoll: 41137,
-  rBryanIRA: 1852,
-  rBryanRoll: 31512,
+  rBryanIRA: 32000,
   rBryan401k: 3214,
 };
 
@@ -38,7 +37,6 @@ export const currentContributions = {
   rJamieIRA: 51.26,
   rJamieRoll: 0,
   rBryanIRA: 100,
-  rBryanRoll: 0,
   rBryan401k: 292,
 };
 
@@ -53,7 +51,6 @@ export const balancesYearStart = {
     rJamieIRA: 42000,
     rJamieRoll: 39000,
     rBryanIRA: 31590,
-    rBryanRoll: 30000,
     rBryan401k: 2895,
   },
   2022: {},

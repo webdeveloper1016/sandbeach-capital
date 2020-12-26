@@ -108,6 +108,16 @@ export const factorBreakdown = (
     {
       value: currencyDisplay(0),
       weight: percentDisplay(1, 2),
+      label: 'Speculative',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Crypto',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
       label: 'Growth',
     },
     {
@@ -124,6 +134,21 @@ export const factorBreakdown = (
       value: currencyDisplay(0),
       weight: percentDisplay(1, 2),
       label: 'Intl',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Alts',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Bonds',
+    },
+    {
+      value: currencyDisplay(0),
+      weight: percentDisplay(1, 2),
+      label: 'Cash',
     },
   ];
 };

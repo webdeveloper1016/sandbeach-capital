@@ -1,11 +1,5 @@
 import Link from 'next/link';
-
-const links = [
-  { href: '/accounts', label: 'Accounts' },
-  { href: '/insights', label: 'Insights' },
-  { href: '/goals', label: 'Goals' },
-  { href: '/watchlist', label: 'Watchlist' },
-];
+import { links } from '../routes';
 
 const Nav = () => (
   <nav>

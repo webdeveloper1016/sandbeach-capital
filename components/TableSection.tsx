@@ -4,11 +4,18 @@ import { Table, TableProps } from '../components/Table';
 
 interface TableSectionProps extends TableProps {
   header: string;
+  subheader?: string;
 }
 
-const TableSection = ({ data, columns, header, layout }: TableSectionProps) => (
+const TableSection = ({
+  data,
+  columns,
+  header,
+  layout,
+  subheader,
+}: TableSectionProps) => (
   <Section>
-    <Header size="2xl" content={header} />
+    <Header size="2xl" content={header} subheader={subheader} />
     <Table columns={columns} data={data} layout={layout} />
   </Section>
 );

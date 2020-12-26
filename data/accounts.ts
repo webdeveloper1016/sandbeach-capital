@@ -66,7 +66,7 @@ const accounts: PortfolioAccountModel = {
   ],
   longTerm: [
     {
-      account: 'M1 - Balanced',
+      account: 'M1 - ETFs',
       institution: 'M1',
       goal: 'Liquid capital appriciation',
       timeHorizon: '5+ years',
@@ -180,7 +180,7 @@ const accounts: PortfolioAccountModel = {
   ],
   retirement: [
     {
-      account: 'Jamie - Rollover',
+      account: 'Jamie - Traditional IRA',
       institution: 'Vanguard',
       goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
@@ -204,7 +204,7 @@ const accounts: PortfolioAccountModel = {
       ],
     },
     {
-      account: 'Jamie - IRA',
+      account: 'Jamie - Roth IRA',
       institution: 'Vanguard',
       goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
@@ -225,25 +225,6 @@ const accounts: PortfolioAccountModel = {
           sector: 'Intl',
           nickname: 'Foreign Stocks',
           targetPercent: 0.4,
-        },
-      ],
-    },
-    {
-      account: 'Bryan - Rollover',
-      institution: 'M1 - TODO',
-      goal: 'Long term capital appreciation',
-      timeHorizon: '25+ years',
-      category: 'retirement',
-      approach: 'Self Directed',
-      balance: currentBalances.rBryanRoll,
-      biWeeklySavings: currentContributions.rBryanRoll,
-      risk: 4,
-      pie: [
-        {
-          assetClass: 'Stocks',
-          sector: 'US Stocks',
-          nickname: 'US Stocks',
-          targetPercent: 1.0,
         },
       ],
     },
@@ -274,7 +255,7 @@ const accounts: PortfolioAccountModel = {
       ],
     },
     {
-      account: 'Bryan - IRA',
+      account: 'Bryan - Roth IRA',
       institution: 'M1',
       goal: 'Long term capital appreciation',
       timeHorizon: '25+ years',
