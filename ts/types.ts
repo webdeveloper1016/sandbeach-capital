@@ -57,6 +57,11 @@ export interface ValueWeightModel {
   weight: NumberDisplayModel;
 }
 
+export interface SliceDetailsAnalysisModel extends ValueWeightModel {
+  assetClassWeight?: NumberDisplayModel;
+  assetClass?: AssetClassType
+}
+
 export interface MarketDataModel {
   ticker: string;
   shares: number;
@@ -64,8 +69,8 @@ export interface MarketDataModel {
 }
 
 export interface TickerModel {
-  stock: string[]
-  crypto: string[]
+  stock: string[];
+  crypto: string[];
 }
 
 export interface PieModel {

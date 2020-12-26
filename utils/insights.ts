@@ -7,6 +7,7 @@ import {
   AccountModelExtended,
   PieModelExtended,
   PortfolioAccountModelExtended,
+  SliceDetailsAnalysisModel,
 } from '../ts/types';
 import { percentDisplay, currencyDisplay, sumAccounts, sumPies } from './calc';
 
@@ -94,8 +95,20 @@ export const sliceDetailsAnalysis = (
   initialAnalysis: PortfolioAccountModelExtended,
   pieData: PieModelExtended[],
   allAccounts: AccountModelExtended[],
-): ValueWeightModel[] => {
-  console.log(initialAnalysis, pieData);
+): SliceDetailsAnalysisModel[] => {
+  const withDetails = pieData.filter((p) => p.sliceDetails);
+  const totalBalance = initialAnalysis.totalBalance.val;
+  const stockSectorBalance = initialAnalysis.portfolioSectorWeights.find(
+    (p) => p.assetClass === 'Stocks',
+  ).value.val
+  console.log(withDetails, initialAnalysis);
+
+  const speculative = withDetails.reduce(
+    (accum, current) =>
+      accum + current.approxVal.val * current.sliceDetails.speculative || 0,
+    0,
+  );
+  console.log(speculative);
   return [
     {
       value: currencyDisplay(0),
@@ -108,8 +121,10 @@ export const sliceDetailsAnalysis = (
       label: 'Active',
     },
     {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
+      value: currencyDisplay(speculative),
+      weight: percentDisplay(speculative, totalBalance),
+      assetClassWeight: percentDisplay(speculative, stockSectorBalance),
+      assetClass: 'Stocks',
       label: 'Speculative',
     },
     {

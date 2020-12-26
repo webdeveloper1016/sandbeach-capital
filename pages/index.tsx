@@ -27,9 +27,14 @@ const HomePage = () => (
           header="Slices:"
           subheader="*Holdings can be in more than one slice."
           columns={[
-            { Header: 'Region', accessor: 'label' },
+            { Header: 'Type', accessor: 'label' },
+            { Header: 'Asset Class', accessor: 'assetClass' },
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
+            {
+              Header: 'Asset Class Weight',
+              accessor: 'assetClassWeight.display',
+            },
           ]}
           data={data.accounts.insights.sliceDetails}
           layout="fixed"
