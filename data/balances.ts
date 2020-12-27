@@ -22,6 +22,9 @@ export const currentMarketData = {
   },
   rJamieRoll: {
     qqq: 133
+  },
+  rJamieIRA: {
+    vt: 440
   }
 }
 

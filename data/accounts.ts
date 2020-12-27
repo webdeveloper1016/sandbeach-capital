@@ -42,12 +42,19 @@ const accounts: PortfolioAccountModel = {
           sector: 'Income',
           nickname: 'SCHD',
           targetPercent: 0.25,
+          sliceDetails: {
+            income: 1
+          },     
         },
         {
           assetClass: 'Stocks',
           sector: 'Intl',
           nickname: 'IDV',
           targetPercent: 0.25,
+          sliceDetails: {
+            income: 1,
+            intl: 1
+          },   
         },
         {
           assetClass: 'Bonds',
@@ -72,7 +79,7 @@ const accounts: PortfolioAccountModel = {
       timeHorizon: '5+ years',
       category: 'long-term',
       approach: 'Self Directed',
-      risk: 3,
+      risk: 4,
       active: true,
       balance: currentBalances.ltDiversified,
       biWeeklySavings: currentContributions.ltDiversified,
@@ -83,9 +90,10 @@ const accounts: PortfolioAccountModel = {
           nickname: 'Growth',
           targetPercent: 0.6,
           sliceDetails: {
-            active: 0.25,
+            active: 0.25, // arkkk
+            speculative: 0.25, // arkk
             tech: 0.25,
-            speculative: 0.25,
+            smallcap: 0.25,
           },
         },
         {
@@ -95,6 +103,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.4,
           sliceDetails: {
             intl: 0.25,
+            income: 1
           },
         },
       ],
@@ -128,6 +137,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.4,
           sliceDetails: {
             active: 1,
+            income: 1,
           },
         },
       ],
@@ -231,18 +241,27 @@ const accounts: PortfolioAccountModel = {
       balance: currentBalances.rJamieIRA,
       biWeeklySavings: currentContributions.rJamieIRA,
       approach: 'Self Directed',
+
       pie: [
         {
           assetClass: 'Stocks',
           sector: 'US Stocks',
           nickname: 'US Stocks',
           targetPercent: 0.6,
+          marketData: {
+            ticker: 'VT',
+            shares: currentMarketData.rJamieIRA.vt,
+            market: 'stock',
+          },
         },
         {
           assetClass: 'Stocks',
           sector: 'Intl',
           nickname: 'Foreign Stocks',
           targetPercent: 0.4,
+          sliceDetails: {
+            intl: 1,
+          },
         },
       ],
     },
@@ -262,13 +281,19 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'US Stocks',
           nickname: 'US Stocks',
-          targetPercent: 0.6,
+          targetPercent: 0.64,
+          sliceDetails: {
+            smallcap: 0.15,
+          },
         },
         {
           assetClass: 'Stocks',
           sector: 'Intl',
           nickname: 'Foreign Stocks',
-          targetPercent: 0.4,
+          targetPercent: 0.36,
+          sliceDetails: {
+            intl: 1,
+          },
         },
       ],
     },
@@ -290,7 +315,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.6,
           sliceDetails: {
             esg: 0.05,
-            smallCap: 0.15,
+            smallcap: 0.15,
             momentum: 0.15,
             quality: 0.15,
             income: 0.1,

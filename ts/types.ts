@@ -2,6 +2,18 @@ export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
 export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
 
+export type FactorTypes =
+  | 'growth'
+  | 'active'
+  | 'speculative'
+  | 'tech'
+  | 'income'
+  | 'esg'
+  | 'quality'
+  | 'momentum'
+  | 'smallcap'
+  | 'intl';
+
 export type SectorType =
   | 'US Stocks'
   | 'Foreign Stocks'
@@ -59,7 +71,7 @@ export interface ValueWeightModel {
 
 export interface SliceDetailsAnalysisModel extends ValueWeightModel {
   assetClassWeight?: NumberDisplayModel;
-  assetClass?: AssetClassType
+  assetClass?: AssetClassType;
 }
 
 export interface MarketDataModel {
@@ -78,7 +90,7 @@ export interface PieModel {
   targetPercent: number;
   assetClass: AssetClassType;
   sector: SectorStrategyType;
-  sliceDetails?: any;
+  sliceDetails?: { [key in FactorTypes]?: number };
   marketData?: MarketDataModel;
 }
 

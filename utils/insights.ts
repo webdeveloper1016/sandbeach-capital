@@ -8,6 +8,8 @@ import {
   PieModelExtended,
   PortfolioAccountModelExtended,
   SliceDetailsAnalysisModel,
+  FactorTypes,
+  AssetClassType,
 } from '../ts/types';
 import { percentDisplay, currencyDisplay, sumAccounts, sumPies } from './calc';
 
@@ -91,6 +93,30 @@ export const calcRiskSplit = (
   return formatted;
 };
 
+const calcFactor = (
+  withDetails: PieModelExtended[],
+  factor: FactorTypes,
+  options: {
+    totalBalance: number;
+    assetClassBalance: number;
+    label: string;
+    assetClass: AssetClassType;
+  },
+): SliceDetailsAnalysisModel => {
+  const sum = withDetails.reduce(
+    (accum, current) =>
+      accum + current.approxVal.val * (current.sliceDetails[factor] || 0),
+    0,
+  );
+  return {
+    value: currencyDisplay(sum),
+    weight: percentDisplay(sum, options.totalBalance),
+    assetClassWeight: percentDisplay(sum, options.assetClassBalance),
+    assetClass: options.assetClass,
+    label: options.label,
+  };
+};
+
 export const sliceDetailsAnalysis = (
   initialAnalysis: PortfolioAccountModelExtended,
   pieData: PieModelExtended[],
@@ -102,88 +128,118 @@ export const sliceDetailsAnalysis = (
     (p) => p.assetClass === 'Stocks',
   ).value.val;
 
-  const speculative = withDetails.reduce(
-    (accum, current) =>
-      accum + current.approxVal.val * (current.sliceDetails.speculative || 0),
-    0,
-  );
-
   return [
     {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Active',
+      ...calcFactor(withDetails, 'active', {
+        assetClass: 'Stocks',
+        label: 'Active',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
     },
     {
-      value: currencyDisplay(speculative),
-      weight: percentDisplay(speculative, totalBalance),
-      assetClassWeight: percentDisplay(speculative, stockSectorBalance),
-      assetClass: 'Stocks',
-      label: 'Speculative',
+      ...calcFactor(withDetails, 'speculative', {
+        assetClass: 'Stocks',
+        label: 'Speculative',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
+    {
+      ...calcFactor(withDetails, 'income', {
+        assetClass: 'Stocks',
+        label: 'Income',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
+    {
+      ...calcFactor(withDetails, 'tech', {
+        assetClass: 'Stocks',
+        label: 'Tech',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
+    {
+      ...calcFactor(withDetails, 'momentum', {
+        assetClass: 'Stocks',
+        label: 'Momentum',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
+    {
+      ...calcFactor(withDetails, 'quality', {
+        assetClass: 'Stocks',
+        label: 'Quality',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
+    {
+      ...calcFactor(withDetails, 'esg', {
+        assetClass: 'Stocks',
+        label: 'ESG',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
+    {
+      ...calcFactor(withDetails, 'smallcap', {
+        assetClass: 'Stocks',
+        label: 'Small Cap',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
+    {
+      ...calcFactor(withDetails, 'intl', {
+        assetClass: 'Stocks',
+        label: 'Intl',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
     },
     {
       ...initialAnalysis.portfolioSectorWeights.find(
         (p) => p.assetClass === 'Crypto',
       ),
       label: 'Crypto',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Growth',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Income',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Tech',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Momentum',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Quality',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'ESG',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Small Cap',
-    },
-    {
-      value: currencyDisplay(0),
-      weight: percentDisplay(1, 2),
-      label: 'Intl',
+      assetClassWeight: {
+        display: '-',
+        val: 1
+      }
     },
     {
       ...initialAnalysis.portfolioSectorWeights.find(
         (p) => p.assetClass === 'Alts',
       ),
       label: 'Alts',
+      assetClassWeight: {
+        display: '-',
+        val: 1
+      }
     },
     {
       ...initialAnalysis.portfolioSectorWeights.find(
         (p) => p.assetClass === 'Bonds',
       ),
       label: 'Bonds',
+      assetClassWeight: {
+        display: '-',
+        val: 1
+      }
     },
     {
       ...initialAnalysis.portfolioSectorWeights.find(
         (p) => p.assetClass === 'Cash',
       ),
       label: 'Cash',
+      assetClassWeight: {
+        display: '-',
+        val: 1
+      }
     },
   ];
 };
