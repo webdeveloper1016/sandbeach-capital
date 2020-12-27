@@ -201,45 +201,5 @@ export const sliceDetailsAnalysis = (
         assetClassBalance: stockSectorBalance,
       }),
     },
-    {
-      ...initialAnalysis.portfolioSectorWeights.find(
-        (p) => p.assetClass === 'Crypto',
-      ),
-      label: 'Crypto',
-      assetClassWeight: {
-        display: '-',
-        val: 1
-      }
-    },
-    {
-      ...initialAnalysis.portfolioSectorWeights.find(
-        (p) => p.assetClass === 'Alts',
-      ),
-      label: 'Alts',
-      assetClassWeight: {
-        display: '-',
-        val: 1
-      }
-    },
-    {
-      ...initialAnalysis.portfolioSectorWeights.find(
-        (p) => p.assetClass === 'Bonds',
-      ),
-      label: 'Bonds',
-      assetClassWeight: {
-        display: '-',
-        val: 1
-      }
-    },
-    {
-      ...initialAnalysis.portfolioSectorWeights.find(
-        (p) => p.assetClass === 'Cash',
-      ),
-      label: 'Cash',
-      assetClassWeight: {
-        display: '-',
-        val: 1
-      }
-    },
   ];
 };

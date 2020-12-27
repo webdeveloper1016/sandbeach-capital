@@ -1,3 +1,4 @@
+import orderBy from 'lodash.orderby';
 import PortfolioData from '../components/PortfolioData';
 import TableSection from '../components/TableSection';
 
@@ -21,7 +22,7 @@ const HomePage = () => (
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
-          data={data.accounts.portfolioSectorWeights}
+          data={orderBy(data.accounts.portfolioSectorWeights, ['weight.val'], ['desc'])}
         />
         <TableSection
           header="Factors:"
@@ -36,7 +37,7 @@ const HomePage = () => (
               accessor: 'assetClassWeight.display',
             },
           ]}
-          data={data.accounts.insights.sliceDetails}
+          data={orderBy(data.accounts.insights.sliceDetails, ['assetClassWeight.val'], ['desc'])}
           layout="fixed"
         />
         <TableSection
