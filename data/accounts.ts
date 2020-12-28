@@ -43,8 +43,8 @@ const accounts: PortfolioAccountModel = {
           nickname: 'SCHD',
           targetPercent: 0.25,
           sliceDetails: {
-            income: 1
-          },     
+            income: 1,
+          },
         },
         {
           assetClass: 'Stocks',
@@ -53,8 +53,8 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.25,
           sliceDetails: {
             income: 1,
-            intl: 1
-          },   
+            intl: 1,
+          },
         },
         {
           assetClass: 'Bonds',
@@ -103,7 +103,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.4,
           sliceDetails: {
             intl: 0.25,
-            income: 1
+            income: 1,
           },
         },
       ],
@@ -158,11 +158,13 @@ const accounts: PortfolioAccountModel = {
           sector: 'Crypto',
           nickname: 'Bitcoin',
           targetPercent: 0.88,
-          marketData: {
-            ticker: 'BTC',
-            shares: currentMarketData.cryptoCoinbase.btc,
-            market: 'crypto',
-          },
+          marketData: [
+            {
+              ticker: 'BTC',
+              shares: currentMarketData.cryptoCoinbase.btc,
+              market: 'crypto',
+            },
+          ],
         },
         {
           assetClass: 'Crypto',
@@ -188,11 +190,13 @@ const accounts: PortfolioAccountModel = {
           sector: 'Crypto',
           nickname: 'Bitcoin',
           targetPercent: 0.94,
-          marketData: {
-            ticker: 'BTC',
-            shares: currentMarketData.cryptoBlockFi.btc,
-            market: 'crypto',
-          },
+          marketData: [
+            {
+              ticker: 'BTC',
+              shares: currentMarketData.cryptoBlockFi.btc,
+              market: 'crypto',
+            },
+          ],
         },
         {
           assetClass: 'Crypto',
@@ -220,11 +224,13 @@ const accounts: PortfolioAccountModel = {
           sector: 'Tech',
           nickname: 'QQQ',
           targetPercent: 1.0,
-          marketData: {
-            ticker: 'QQQ',
-            shares: currentMarketData.rJamieRoll.qqq,
-            market: 'stock',
-          },
+          marketData: [
+            {
+              ticker: 'QQQ',
+              shares: currentMarketData.rJamieRoll.qqq,
+              market: 'stock',
+            },
+          ],
           sliceDetails: {
             tech: 1,
           },
@@ -241,27 +247,27 @@ const accounts: PortfolioAccountModel = {
       balance: currentBalances.rJamieIRA,
       biWeeklySavings: currentContributions.rJamieIRA,
       approach: 'Self Directed',
-
       pie: [
         {
           assetClass: 'Stocks',
           sector: 'US Stocks',
-          nickname: 'US Stocks',
-          targetPercent: 0.6,
-          marketData: {
-            ticker: 'VT',
-            shares: currentMarketData.rJamieIRA.vt,
-            market: 'stock',
-          },
-        },
-        {
-          assetClass: 'Stocks',
-          sector: 'Intl',
-          nickname: 'Foreign Stocks',
-          targetPercent: 0.4,
+          nickname: 'VT',
+          targetPercent: 1,
           sliceDetails: {
-            intl: 1,
+            intl: 0.4,
           },
+          marketData: [
+            {
+              ticker: 'VT',
+              shares: currentMarketData.rJamieIRA.vt,
+              market: 'stock',
+            },
+            {
+              ticker: 'VTWAX',
+              shares: currentMarketData.rJamieIRA.vtwax,
+              market: 'stock',
+            },
+          ],
         },
       ],
     },

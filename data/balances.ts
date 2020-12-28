@@ -24,7 +24,8 @@ export const currentMarketData = {
     qqq: 133
   },
   rJamieIRA: {
-    vt: 440
+    vt: 440.645,
+    vtwax: 96.236
   }
 }
 

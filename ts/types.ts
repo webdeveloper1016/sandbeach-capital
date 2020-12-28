@@ -91,7 +91,7 @@ export interface PieModel {
   assetClass: AssetClassType;
   sector: SectorStrategyType;
   sliceDetails?: { [key in FactorTypes]?: number };
-  marketData?: MarketDataModel;
+  marketData?: MarketDataModel[];
 }
 
 export interface AccountModel {

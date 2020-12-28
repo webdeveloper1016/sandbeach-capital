@@ -9,7 +9,8 @@ export const extractTickers = (data: PortfolioModel): TickerModel => {
     .map((a) => a.pie)
     .flat()
     .filter((p) => p.marketData)
-    .map((m) => m.marketData);
+    .map((m) => m.marketData)
+    .flat();
 
   return {
     stock: [
