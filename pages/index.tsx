@@ -25,7 +25,7 @@ const HomePage = () => (
           data={orderBy(data.accounts.portfolioSectorWeights, ['weight.val'], ['desc'])}
         />
         <TableSection
-          header="Factors:"
+          header="Factor Tilts:"
           subheader="*Holdings can be in more than one factor."
           columns={[
             { Header: 'Type', accessor: 'label' },

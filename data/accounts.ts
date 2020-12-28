@@ -90,10 +90,10 @@ const accounts: PortfolioAccountModel = {
           nickname: 'Growth',
           targetPercent: 0.6,
           sliceDetails: {
-            active: 0.25, // arkkk
-            speculative: 0.25, // arkk
-            tech: 0.25,
-            smallcap: 0.25,
+            active: 0.35, // arkkk
+            speculative: 0.35, // arkk
+            momentum: 0.3,
+            smallcap: 0.35,
           },
         },
         {
@@ -124,7 +124,7 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Growth',
-          targetPercent: 0.6,
+          targetPercent: 0.8,
           sliceDetails: {
             active: 1,
             speculative: 1,
@@ -134,7 +134,7 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Income',
           nickname: 'Income',
-          targetPercent: 0.4,
+          targetPercent: 0.2,
           sliceDetails: {
             active: 1,
             income: 1,
@@ -323,10 +323,11 @@ const accounts: PortfolioAccountModel = {
             esg: 0.05,
             smallcap: 0.15,
             momentum: 0.15,
-            quality: 0.15,
-            income: 0.1,
+            quality: 0.15 + (.2 * .2), // 20% of All Stocks
+            income: 0.1 + (.15 * .2), // 15% of All Stocks
             active: 0.4,
             speculative: 0.3, // all of thematic ETFs, half of All Stocks
+            value: (.15 * .2), // 15% of All Stocks
           },
         },
         {

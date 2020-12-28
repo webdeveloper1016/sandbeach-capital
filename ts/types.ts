@@ -8,6 +8,7 @@ export type FactorTypes =
   | 'speculative'
   | 'tech'
   | 'income'
+  | 'value'
   | 'esg'
   | 'quality'
   | 'momentum'

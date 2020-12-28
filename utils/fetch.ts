@@ -5,6 +5,10 @@ export const fetcher = (url) =>
     (res) => res.json() as Promise<{ data: PortfolioModel; token: string }>,
   );
 
+  // todo: fetch crypto
+  // function to build iex url
+  // fetch url params?
+  // inject quote into account data
 export const fetchQuotes = (
   tickers: TickerModel,
   token: string,

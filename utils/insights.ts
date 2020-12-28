@@ -201,5 +201,13 @@ export const sliceDetailsAnalysis = (
         assetClassBalance: stockSectorBalance,
       }),
     },
+    {
+      ...calcFactor(withDetails, 'value', {
+        assetClass: 'Stocks',
+        label: 'Value',
+        totalBalance,
+        assetClassBalance: stockSectorBalance,
+      }),
+    },
   ];
 };
