@@ -1,4 +1,8 @@
-import { NumberDisplayModel, AccountModel, PieModelExtended } from '../ts/types';
+import {
+  NumberDisplayModel,
+  AccountModel,
+  PieModelExtended,
+} from '../ts/types';
 
 export const sumAccounts = (data: AccountModel[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
@@ -19,7 +23,10 @@ export const percentDisplay = (a: number, b: number): NumberDisplayModel => ({
   display: percentFormatter(a, b),
 });
 
-export const currencyDisplay = (a: number): NumberDisplayModel => ({
+export const currencyDisplay = (
+  a: number,
+  annotate = '',
+): NumberDisplayModel => ({
   val: a,
-  display: currencyFormatter.format(a),
+  display: `${currencyFormatter.format(a)}${annotate}`,
 });

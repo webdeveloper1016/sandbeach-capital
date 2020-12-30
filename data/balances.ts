@@ -8,7 +8,7 @@ export const currentBalances = {
   stSavings: 12493,
   stEmergency: 862,
   stStablecoins: 186,
-  ltM1: [1077, 853].reduce((a, b) => a + b, 0),
+  ltM1: [1077, 853],
   cryptoCoinbase: 1022,
   cryptoBlockFi: 4151,
   rJamieIRA: 43095,

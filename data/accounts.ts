@@ -119,7 +119,7 @@ const accounts: PortfolioAccountModel = {
       approach: 'Self Directed',
       risk: 4,
       active: true,
-      balance: currentBalances.ltM1,
+      balance: currentBalances.ltM1.reduce((a, b) => a + b, 0),
       biWeeklySavings: currentContributions.ltM1,
       pie: [
         {
@@ -127,6 +127,7 @@ const accounts: PortfolioAccountModel = {
           sector: 'Growth',
           nickname: 'ETFs',
           targetPercent: 0.5,
+          balance: currentBalances.ltM1[0],
           sliceDetails: {
             active: 0.6 * 0.35, // arkkk
             speculative: 0.6 * 0.35, // arkk
@@ -141,6 +142,7 @@ const accounts: PortfolioAccountModel = {
           sector: 'US Stocks',
           nickname: 'Stocks',
           targetPercent: 0.5,
+          balance: currentBalances.ltM1[1],
           sliceDetails: {
             active: 1,
             speculative: 0.6,

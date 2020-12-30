@@ -97,7 +97,10 @@ export const dataEnricher = (
       categoryLabel: categoryLabels[i.category],
       pie: i.pie.map((p) => ({
         ...p,
-        approxVal: currencyDisplay(i.balance * p.targetPercent),
+        approxVal: currencyDisplay(
+          p.balance || i.balance * p.targetPercent,
+          p.balance ? ' ⚡️' : '',
+        ),
         targetPercentDisplay: percentDisplay(p.targetPercent, 1),
         metadata: i,
       })),
