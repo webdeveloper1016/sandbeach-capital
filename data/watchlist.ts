@@ -1,6 +1,6 @@
 export const watchlist = {
-  growth: ['BYND', 'DOCU', 'TSLA', 'TWLO', 'SPLK'],
-  value: ['WFC', 'BAC', 'LMT', 'PSA', 'CVS'],
-  like: ['AAPL', 'TGT', 'CMCSA', 'WMT', 'HD', 'BLK'],
-  radar: ['JOET']
+  growth: ['CRWD', 'PLAN', 'FSLY', 'PSTG', 'SPLK'],
+  value: ['BAC', 'LMT', 'GM'],
+  like: ['GM'],
+  radar: ['JOET', 'KOMP']
 };
