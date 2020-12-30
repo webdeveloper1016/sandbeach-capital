@@ -9,11 +9,11 @@ const accounts: PortfolioAccountModel = {
   shortTerm: [
     {
       account: 'Cash',
-      institution: 'Betterment',
+      institution: 'M1',
       goal: 'Liquid checking account',
       timeHorizon: 'sub 1 year',
       category: 'short-term',
-      approach: 'Robo',
+      approach: 'Other',
       risk: 1,
       balance: currentBalances.stCash,
       biWeeklySavings: currentContributions.stCash,
@@ -40,7 +40,7 @@ const accounts: PortfolioAccountModel = {
         {
           assetClass: 'Cash',
           sector: 'Cash',
-          nickname: 'Betterment Cash',
+          nickname: 'Savings',
           targetPercent: 1.0,
         },
       ],

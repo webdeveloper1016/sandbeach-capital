@@ -30,7 +30,7 @@ export const runSavingsAnalysis = (
     .filter((a) => a.category === 'retirement')
     .reduce((accum, current) => accum + current.biWeeklySavings, 0);
 
-  const weeksSoFar = getWeek(new Date());
+  const weeksSoFar = getWeek(new Date(), {weekStartsOn: 1, firstWeekContainsDate: 7});
   const savingsYTD =
     allBiWeekSavings * (weeksSoFar / 2) + savingsGoals.unscheduledContributions;
   const savingsProjected =
@@ -78,7 +78,7 @@ export const runSavingsAnalysis = (
     },
     // recurring plus one off
     {
-      label: 'YTD',
+      label: '~YTD',
       value: currencyDisplay(savingsYTD),
       weight: percentDisplay(savingsYTD, savingsGoals.annualIncome),
     },

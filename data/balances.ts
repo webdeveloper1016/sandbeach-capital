@@ -6,9 +6,9 @@ export const currentAnnualIncome = [95000, 4000, 5000].reduce(
 export const currentBalances = {
   stCash: 3000,
   stSavings: 12493,
-  stEmergency: 862,
+  stEmergency: 910,
   stStablecoins: 186,
-  ltM1: [1077, 853],
+  ltM1: [1198, 943],
   cryptoCoinbase: 1022,
   cryptoBlockFi: 4151,
   rJamieIRA: 43095,
