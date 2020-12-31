@@ -175,6 +175,11 @@ const accounts: PortfolioAccountModel = {
               shares: currentMarketData.cryptoCoinbase.btc,
               market: 'crypto',
             },
+            {
+              ticker: 'ETH',
+              shares: currentMarketData.cryptoCoinbase.btc,
+              market: 'crypto',
+            },
           ],
         },
         {
