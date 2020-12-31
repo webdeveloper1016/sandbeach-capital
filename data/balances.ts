@@ -24,7 +24,7 @@ export const unscheduledContributions = [100, 100, 2400].reduce(
 
 export const currentContributions = {
   stCash: 0,
-  stSavings: [36.57].reduce((a, b) => a + b, 0),
+  stSavings: [36.57, 21.69].reduce((a, b) => a + b, 0),
   stEmergency: 50,
   stM1: 50,
   stStablecoins: 0,

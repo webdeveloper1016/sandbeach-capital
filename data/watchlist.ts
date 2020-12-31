@@ -1,6 +1,6 @@
 export const watchlist = {
-  growth: ['CRWD', 'PLAN', 'FSLY', 'PSTG', 'SPLK'],
-  value: ['BAC', 'LMT', 'GM'],
-  like: ['GM'],
+  potentialAdditions: ['U', 'AI'],
+  growth: ['CRWD', 'PLAN', 'NOW', 'SPLK'],
+  incomeValue: ['BAC', 'LMT', 'GM', 'TDG'],
   radar: ['JOET', 'KOMP']
 };

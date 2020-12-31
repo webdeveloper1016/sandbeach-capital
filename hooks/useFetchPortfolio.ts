@@ -5,9 +5,9 @@ import { extractTickers } from '../utils/quotes';
 import { PortfolioModelExtended } from '../ts/types';
 
 const getPortfolio = async (): Promise<PortfolioModelExtended> => {
-  const { data, token } = await fetcher('/api/portfolio');
+  const { data, iex } = await fetcher('/api/portfolio');
   const tickers = extractTickers(data);
-  const quotes = await fetchQuotes(tickers, token);
+  const quotes = await fetchQuotes(tickers, iex);
   console.log(quotes);
 
   return runAnalysis(data);

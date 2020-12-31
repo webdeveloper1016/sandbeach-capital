@@ -1,11 +1,19 @@
 import data from '../../data';
 
+const prod = false;
+
+// https://nextjs.org/docs/basic-features/environment-variables
+const iex = {
+  token: prod ? process.env.API_TOKEN : process.env.SB_API_TOKEN,
+  baseUrl: prod
+    ? 'https://iexapis.com/stable'
+    : 'https://sandbox.iexapis.com/stable',
+};
+
 const handler = (req, res) => {
-  const token = process.env.SB_API_TOKEN;
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
-  // https://nextjs.org/docs/basic-features/environment-variables
-  res.end(JSON.stringify({ data, token }));
+  res.end(JSON.stringify({ data, iex }));
 };
 
 export default handler;
