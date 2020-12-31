@@ -6,10 +6,7 @@ export const fetcher = (url) =>
     (res) => res.json() as Promise<{ data: PortfolioModel; iex: IexUrlModel }>,
   );
 
-// todo: fetch crypto
 
-// fetch url params?
-// inject quote into account data
 
 export const iexUrl = (
   iex: IexUrlModel,
@@ -26,6 +23,11 @@ export const iexUrl = (
   }
 };
 
+// TODO
+// format crypto requests via ticker array
+// format/standardize resp
+// inject quote into account data
+
 export const fetchQuotes = (
   tickers: TickerModel,
   iex: IexUrlModel,
@@ -33,10 +35,12 @@ export const fetchQuotes = (
   const batch = iexUrl(iex, 'batch', tickers.stock.join(','));
   const btc = iexUrl(iex, 'crypto', 'btcusd');
   console.log(tickers);
-  console.log(batch);
-  console.log(btc);
-  return fetch(batch).then((res) => {
-    const data = res.json();
-    return data;
-  });
+
+  const requests = [batch, btc].map((url) => fetch(url));
+  return Promise.all(requests)
+    .then((resp) => Promise.all(resp.map((r) => r.json())))
+    .then((data) => ({
+      stock: data[0],
+      crypto: data[1],
+    }));
 };
