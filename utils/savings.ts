@@ -1,4 +1,4 @@
-import { getWeek } from 'date-fns';
+import { differenceInCalendarWeeks, parseISO } from 'date-fns';
 import {
   ValueWeightModel,
   AccountModelExtended,
@@ -20,6 +20,7 @@ export const runSavingsAnalysis = (
     (accum, current) => accum + current.biWeeklySavings,
     0,
   );
+
   const allSavingST = allAccounts
     .filter((a) => a.category === 'short-term')
     .reduce((accum, current) => accum + current.biWeeklySavings, 0);
@@ -30,9 +31,15 @@ export const runSavingsAnalysis = (
     .filter((a) => a.category === 'retirement')
     .reduce((accum, current) => accum + current.biWeeklySavings, 0);
 
-  const weeksSoFar = getWeek(new Date(), {weekStartsOn: 1, firstWeekContainsDate: 7});
+  // attempt to calc how many pay periods have passed
+  const weeksSoFar = differenceInCalendarWeeks(
+    new Date(),
+    parseISO(savingsGoals.bryanSalary.firstPay as string),
+  );
+  const payPeriods = weeksSoFar > 0 ? Math.round(weeksSoFar / 2) : 0;
+
   const savingsYTD =
-    allBiWeekSavings * (weeksSoFar / 2) + savingsGoals.unscheduledContributions;
+    allBiWeekSavings * payPeriods + savingsGoals.unscheduledContributions;
   const savingsProjected =
     allBiWeekSavings * 26 + savingsGoals.unscheduledContributions;
 

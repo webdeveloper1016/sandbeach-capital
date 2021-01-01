@@ -173,6 +173,11 @@ export interface SavingsGoalModel {
   }[];
   biWeeklySavingsGoal: number;
   unscheduledContributions: number;
+  bryanSalary: {
+    annual: number,
+    postTax: number,
+    firstPay: string | Date,
+  };
 }
 
 export interface PortfolioAccountModel {

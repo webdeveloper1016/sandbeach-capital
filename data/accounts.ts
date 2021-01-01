@@ -1,8 +1,5 @@
-import {
-  currentBalances,
-  currentContributions,
-  currentMarketData,
-} from './balances';
+import { currentBalances, currentMarketData } from './balances';
+import { currentContributions } from './contributions';
 import { PortfolioAccountModel } from '../ts/types';
 
 const accounts: PortfolioAccountModel = {
@@ -213,6 +210,12 @@ const accounts: PortfolioAccountModel = {
               market: 'crypto',
             },
           ],
+        },
+        {
+          assetClass: 'Crypto',
+          sector: 'Stablecoin',
+          nickname: 'USDC',
+          targetPercent: 0,
         },
       ],
     },
