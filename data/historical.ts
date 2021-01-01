@@ -1,7 +1,7 @@
 export const balancesYearStart = {
-  2021: { // snapshot on 1/1/2021 at 12:30 PM
+  2021: { // snapshot on 1/1/2021 at 1:03 PM
     stCash: 2000,
-    stSavings: 12493,
+    stSavings: 11878,
     stEmergency: 911,
     stStablecoins: 1000,
     ltM1: [1208, 951],
