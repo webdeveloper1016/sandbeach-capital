@@ -1,4 +1,4 @@
-import { formatCryptoQuote } from './iex';
+import { formatCryptoQuote, formatStockQuote } from './iex';
 import { PortfolioModel, TickerModel } from '../ts/types';
 import {
   IexUrlModel,
@@ -26,10 +26,6 @@ export const iexUrl = (
   }
 };
 
-// TODO
-// clean up and type resp
-// inject quote into account data
-
 export const fetchQuotes = (
   tickers: TickerModel,
   iex: IexUrlModel,
@@ -47,7 +43,7 @@ export const fetchQuotes = (
       return {
         stock: Object.keys(stockData).reduce((acc, key) => {
           acc[key] = {
-            ...stockData[key].quote,
+            ...formatStockQuote(stockData[key].quote),
           };
           return acc;
         }, {}),

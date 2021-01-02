@@ -10,6 +10,9 @@ const getPortfolio = async (): Promise<PortfolioModelExtended> => {
   const quotes = await fetchQuotes(tickers, iex);
   console.log(quotes);
 
+  // TODO
+  // test live API data
+  // inject quote into account data
   return runAnalysis(data);
 };
 

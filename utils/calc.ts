@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import {
   NumberDisplayModel,
   AccountModel,
@@ -30,3 +31,6 @@ export const currencyDisplay = (
   val: a,
   display: `${currencyFormatter.format(a)}${annotate}`,
 });
+
+export const dateDisplay = (dateIn: number | Date): string =>
+  format(dateIn, 'MM/dd/yyyy p');

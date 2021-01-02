@@ -20,9 +20,16 @@ export interface IexCryptoQuoteModelEnriched {
 export interface IexStockQuoteModel {
   symbol: string;
   latestPrice: number;
+  latestUpdate: number;
+}
+
+export interface IexStockQuoteModelEnriched {
+  api: IexStockQuoteModel;
+  price: NumberDisplayModel;
+  updatedAt: string;
 }
 export interface IexFetchSimpleQuoteModel {
-  stock: Record<string, IexStockQuoteModel>;
+  stock: Record<string, IexStockQuoteModelEnriched>;
   crypto: Record<string, IexCryptoQuoteModelEnriched>;
   allData: unknown[];
 }
