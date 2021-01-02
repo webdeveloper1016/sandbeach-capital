@@ -99,7 +99,7 @@ export const dataEnricher = (
         ...p,
         approxVal: currencyDisplay(
           p.balance || i.balance * p.targetPercent,
-          p.balance ? ' ⚡️' : '',
+          p.balance ? ' ⚖️' : '',
         ),
         targetPercentDisplay: percentDisplay(p.targetPercent, 1),
         metadata: i,

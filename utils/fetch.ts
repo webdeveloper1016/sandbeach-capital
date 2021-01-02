@@ -1,6 +1,10 @@
-import groupBy from 'lodash.groupby';
+import { formatCryptoQuote } from './iex';
 import { PortfolioModel, TickerModel } from '../ts/types';
-import { IexUrlModel, IexUrlVariants, IexFetchSimpleQuoteModel } from '../ts/iex';
+import {
+  IexUrlModel,
+  IexUrlVariants,
+  IexFetchSimpleQuoteModel,
+} from '../ts/iex';
 
 export const fetcher = (url) =>
   fetch(url).then(
@@ -49,7 +53,9 @@ export const fetchQuotes = (
         }, {}),
         crypto: tickers.crypto.reduce(
           (acc, curr) => (
-            (acc[curr] = data.slice(1).find((f) => f.symbol === `${curr}USD`)),
+            (acc[curr] = formatCryptoQuote(
+              data.slice(1).find((f) => f.symbol === `${curr}USD`),
+            )),
             acc
           ),
           {},
