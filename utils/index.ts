@@ -4,6 +4,8 @@ import {
   CategoryType,
   SectorWeightModel,
   MarketDataModel,
+  NumberDisplayModel,
+  PieModel,
   AccountModel,
   AccountModelExtended,
   PortfolioModel,
@@ -47,6 +49,7 @@ export const categoryLabels: Record<CategoryType, string> = {
 };
 
 export const flattenData = (data: PortfolioAccountModel): AccountModel[] => {
+  console.log(data);
   return Object.keys(data)
     .map((k) => {
       return data[k];
@@ -67,9 +70,9 @@ export const injectLiveQuotes = (
     }
 
     // map over each pie
-    const t = a.pie.map((p) => {
+    const pieWithLiveData: PieModel[] | null = a.pie.map((p) => {
       // map over market data if it exists
-      if (!p.marketData) return p;
+      if (!p.marketData) return null;
       const enrichedMarketData = p.marketData.map((m) => {
         const match: IexQuoteModelEnriched | undefined = get(
           liveQuotes,
@@ -78,21 +81,35 @@ export const injectLiveQuotes = (
         );
         if (!match) return m;
 
-        console.log(m);
-        console.log(match);
         return {
           ...m,
           liveQuote: match,
-          liveBalance: m.shares * match.price.val
+          balance: m.shares * match.price.val,
+          liveBalance: true,
         };
       });
       return {
         ...p,
-        marketData: enrichedMarketData
-      }
+        balance: enrichedMarketData.reduce(
+          (accum, current) => accum + current.balance || 0,
+          0,
+        ),
+        liveBalance: true,
+        marketData: enrichedMarketData,
+      };
     });
-    console.log(t);
-    return a;
+
+    return {
+      ...a,
+      balance: pieWithLiveData
+        ? pieWithLiveData.reduce(
+            (accum, current) => accum + current.balance || 0,
+            0,
+          )
+        : undefined,
+      liveBalance: Boolean(pieWithLiveData),
+      pie: pieWithLiveData || a.pie,
+    };
   });
 };
 
@@ -128,6 +145,42 @@ export const calcSectorWeights = (
   });
 };
 
+export const determineBalanceDisplay = (
+  account: number,
+  accountLive: boolean,
+  pie: number,
+  pieLive: boolean,
+  target: number,
+): NumberDisplayModel => {
+  let balance = 0;
+  let annotate = '';
+
+  console.log(account)
+  switch (true) {
+    // we have live data at the slice level
+    case Boolean(pieLive):
+      console.log('HERE!!')
+      balance = pie;
+      annotate = ' ⚡️';
+      break;
+    // we have manual data at the slice level
+    case Boolean(pie):
+      console.log('HERE!')
+      balance = pie;
+      annotate = ' 🥧';
+    // we have live data at the account level, but need to calc percent for pie
+    case Boolean(accountLive):
+      balance = account * target;
+      annotate = ' ⚡️';
+    // no live data, approx value based on target weight
+    default:
+      balance = account * target;
+      break;
+  }
+
+  return currencyDisplay(balance, annotate);
+};
+
 export const dataEnricher = (
   data: AccountModel[],
   sumCat: number,
@@ -142,9 +195,16 @@ export const dataEnricher = (
       categoryLabel: categoryLabels[i.category],
       pie: i.pie.map((p) => ({
         ...p,
-        approxVal: currencyDisplay(
-          p.balance || i.balance * p.targetPercent,
-          p.balance ? ' ⚖️' : '',
+        // approxVal: currencyDisplay(
+        //   p.liveBalance || i.balance * p.targetPercent,
+        //   p.liveBalance ? ' ⚡️' : '',
+        // ),
+        approxVal: determineBalanceDisplay(
+          i.balance,
+          i.liveBalance,
+          p.balance,
+          p.liveBalance,
+          p.targetPercent,
         ),
         targetPercentDisplay: percentDisplay(p.targetPercent, 1),
         metadata: i,
@@ -159,10 +219,25 @@ export const runInitialAnalysis = (
 ): PortfolioAccountModelExtended => {
   // group and sum data
   const flatData = flattenData(data);
+
   const withLiveQuotes = injectLiveQuotes(flatData, liveQuotes);
-  const sumST = sumAccounts(data.shortTerm);
-  const sumLT = sumAccounts(data.longTerm);
-  const sumR = sumAccounts(data.retirement);
+
+  const liveData = {
+    s: {
+      data: withLiveQuotes.filter((f) => f.category === 'short-term'),
+    },
+    l: {
+      data: withLiveQuotes.filter((f) => f.category === 'long-term'),
+    },
+    r: {
+      data: withLiveQuotes.filter((f) => f.category === 'retirement'),
+    },
+  };
+
+  const sumST = sumAccounts(liveData.s.data);
+  // const sumLT = sumAccounts(data.longTerm);
+  const sumLT = sumAccounts(liveData.l.data);
+  const sumR = sumAccounts(liveData.r.data);
   const totalBalance = sumST + sumLT + sumR;
 
   // build out analysis object
@@ -204,18 +279,18 @@ export const runInitialAnalysis = (
     ),
     shortTerm: {
       balance: currencyDisplay(sumST),
-      categorySectorWeights: calcSectorWeights(data.shortTerm, sumST),
-      data: dataEnricher(data.shortTerm, sumST, totalBalance),
+      categorySectorWeights: calcSectorWeights(liveData.s.data, sumST),
+      data: dataEnricher(liveData.s.data, sumST, totalBalance),
     },
     longTerm: {
       balance: currencyDisplay(sumLT),
-      categorySectorWeights: calcSectorWeights(data.longTerm, sumLT),
-      data: dataEnricher(data.longTerm, sumLT, totalBalance),
+      categorySectorWeights: calcSectorWeights(liveData.l.data, sumLT),
+      data: dataEnricher(liveData.l.data, sumLT, totalBalance),
     },
     retirement: {
       balance: currencyDisplay(sumR),
-      categorySectorWeights: calcSectorWeights(data.retirement, sumR),
-      data: dataEnricher(data.retirement, sumR, totalBalance),
+      categorySectorWeights: calcSectorWeights(liveData.r.data, sumR),
+      data: dataEnricher(liveData.r.data, sumR, totalBalance),
     },
   };
 };

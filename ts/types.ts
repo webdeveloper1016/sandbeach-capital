@@ -81,7 +81,7 @@ export interface MarketDataModel {
   ticker: string;
   shares: number;
   market: 'stock' | 'crypto';
-  liveBalance?: number;
+  balance?: number;
   liveQuote?: IexQuoteModelEnriched;
 }
 
@@ -98,7 +98,7 @@ export interface PieModel {
   sliceDetails?: { [key in FactorTypes]?: number };
   marketData?: MarketDataModel[];
   balance?: number;
-  liveBalance?: number;
+  liveBalance?: boolean;
 }
 
 export interface AccountModel {
@@ -110,7 +110,7 @@ export interface AccountModel {
   approach: ApproachType;
   risk: 1 | 2 | 3 | 4 | 5;
   balance: number;
-  liveBalance?: number;
+  liveBalance?: boolean;
   biWeeklySavings: number;
   active?: boolean;
   preTax?: boolean;
