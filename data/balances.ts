@@ -14,10 +14,11 @@ export const currentBalances = {
 
 export const currentMarketData = {
   cryptoCoinbase: {
-    btc: 0.02931281,
+    btc: [0.03040964, 0.01127824].reduce((a, b) => a + b, 0),
+    eth: 0.122735
   },
   cryptoBlockFi: {
-    btc: 0.14778107,
+    btc: 0.15666763,
     usdc: 1000,
   },
   rJamieRoll: {

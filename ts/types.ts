@@ -94,6 +94,7 @@ export interface PieModel {
   sliceDetails?: { [key in FactorTypes]?: number };
   marketData?: MarketDataModel[];
   balance?: number;
+  liveBalance?: number;
 }
 
 export interface AccountModel {
@@ -105,6 +106,7 @@ export interface AccountModel {
   approach: ApproachType;
   risk: 1 | 2 | 3 | 4 | 5;
   balance: number;
+  liveBalance?: number;
   biWeeklySavings: number;
   active?: boolean;
   preTax?: boolean;

@@ -165,7 +165,7 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Crypto',
           sector: 'Crypto',
           nickname: 'Bitcoin',
-          targetPercent: 0.88,
+          targetPercent: 1,
           marketData: [
             {
               ticker: 'BTC',
@@ -174,16 +174,10 @@ const accounts: PortfolioAccountModel = {
             },
             {
               ticker: 'ETH',
-              shares: currentMarketData.cryptoCoinbase.btc,
+              shares: currentMarketData.cryptoCoinbase.eth,
               market: 'crypto',
             },
           ],
-        },
-        {
-          assetClass: 'Crypto',
-          sector: 'Crypto',
-          nickname: 'Misc Coins',
-          targetPercent: 0.12,
         },
       ],
     },

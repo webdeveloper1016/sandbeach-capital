@@ -1,6 +1,6 @@
 import data from '../../data';
 
-const prod = true;
+const prod = false;
 
 // https://nextjs.org/docs/basic-features/environment-variables
 const iex = {

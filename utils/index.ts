@@ -9,6 +9,7 @@ import {
   PortfolioAccountModelExtended,
   PortfolioAccountModel,
 } from '../ts/types';
+import { IexFetchSimpleQuoteModel } from '../ts/iex';
 import {
   sumAccounts,
   currencyFormatter,
@@ -49,6 +50,14 @@ export const flattenData = (data: PortfolioAccountModel): AccountModel[] => {
       return data[k];
     })
     .flat();
+};
+
+export const injectLiveQuotes = (
+  data: AccountModel[],
+  liveQuotes: IexFetchSimpleQuoteModel,
+) => {
+  console.log(data);
+  console.log(liveQuotes);
 };
 
 export const sumByAsset = (
@@ -110,9 +119,11 @@ export const dataEnricher = (
 
 export const runInitialAnalysis = (
   data: PortfolioAccountModel,
+  liveQuotes: IexFetchSimpleQuoteModel,
 ): PortfolioAccountModelExtended => {
   // group and sum data
   const flatData = flattenData(data);
+  const withLiveQuotes = injectLiveQuotes(flatData, liveQuotes);
   const sumST = sumAccounts(data.shortTerm);
   const sumLT = sumAccounts(data.longTerm);
   const sumR = sumAccounts(data.retirement);
@@ -173,9 +184,12 @@ export const runInitialAnalysis = (
   };
 };
 
-export const runAnalysis = (data: PortfolioModel): PortfolioModelExtended => {
+export const runAnalysis = (
+  data: PortfolioModel,
+  liveQuotes: IexFetchSimpleQuoteModel,
+): PortfolioModelExtended => {
   // analyze account data
-  const initialAnalysis = runInitialAnalysis(data.accounts);
+  const initialAnalysis = runInitialAnalysis(data.accounts, liveQuotes);
   const allAccounts = [
     ...initialAnalysis.shortTerm.data,
     ...initialAnalysis.longTerm.data,
