@@ -1,3 +1,5 @@
+import { IexQuoteModelEnriched } from './iex';
+
 export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
 export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
@@ -79,6 +81,8 @@ export interface MarketDataModel {
   ticker: string;
   shares: number;
   market: 'stock' | 'crypto';
+  liveBalance?: number;
+  liveQuote?: IexQuoteModelEnriched;
 }
 
 export interface TickerModel {
@@ -176,9 +180,9 @@ export interface SavingsGoalModel {
   biWeeklySavingsGoal: number;
   unscheduledContributions: number;
   bryanSalary: {
-    annual: number,
-    postTax: number,
-    firstPay: string | Date,
+    annual: number;
+    postTax: number;
+    firstPay: string | Date;
   };
 }
 

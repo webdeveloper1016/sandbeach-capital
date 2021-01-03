@@ -1,7 +1,9 @@
+import get from 'lodash.get';
 import {
   AssetClassType,
   CategoryType,
   SectorWeightModel,
+  MarketDataModel,
   AccountModel,
   AccountModelExtended,
   PortfolioModel,
@@ -9,7 +11,7 @@ import {
   PortfolioAccountModelExtended,
   PortfolioAccountModel,
 } from '../ts/types';
-import { IexFetchSimpleQuoteModel } from '../ts/iex';
+import { IexFetchSimpleQuoteModel, IexQuoteModelEnriched } from '../ts/iex';
 import {
   sumAccounts,
   currencyFormatter,
@@ -55,9 +57,43 @@ export const flattenData = (data: PortfolioAccountModel): AccountModel[] => {
 export const injectLiveQuotes = (
   data: AccountModel[],
   liveQuotes: IexFetchSimpleQuoteModel,
-) => {
+): AccountModel[] => {
   console.log(data);
   console.log(liveQuotes);
+  return data.map((a) => {
+    // for each account...
+    if (a.account !== 'Jamie - Traditional IRA') {
+      return a;
+    }
+
+    // map over each pie
+    const t = a.pie.map((p) => {
+      // map over market data if it exists
+      if (!p.marketData) return p;
+      const enrichedMarketData = p.marketData.map((m) => {
+        const match: IexQuoteModelEnriched | undefined = get(
+          liveQuotes,
+          [m.market, m.ticker],
+          undefined,
+        );
+        if (!match) return m;
+
+        console.log(m);
+        console.log(match);
+        return {
+          ...m,
+          liveQuote: match,
+          liveBalance: m.shares * match.price.val
+        };
+      });
+      return {
+        ...p,
+        marketData: enrichedMarketData
+      }
+    });
+    console.log(t);
+    return a;
+  });
 };
 
 export const sumByAsset = (
