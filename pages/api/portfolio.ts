@@ -1,12 +1,12 @@
 import data from '../../data';
 
-const prod = false;
+const prod = true;
 
 // https://nextjs.org/docs/basic-features/environment-variables
 const iex = {
   token: prod ? process.env.API_TOKEN : process.env.SB_API_TOKEN,
   baseUrl: prod
-    ? 'https://iexapis.com/stable'
+    ? 'https://cloud.iexapis.com/stable'
     : 'https://sandbox.iexapis.com/stable',
 };
 
