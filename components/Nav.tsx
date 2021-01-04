@@ -9,6 +9,9 @@ const Nav = () => (
           <a className="text-green-500 no-underline">Home</a>
         </Link>
       </li>
+      <li>
+        TODO: IEX status here
+      </li>
       <ul className="flex items-center justify-between space-x-4">
         {links.map(({ href, label }) => (
           <li key={`${href}${label}`}>
