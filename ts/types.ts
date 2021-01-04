@@ -1,4 +1,4 @@
-import { IexQuoteModelEnriched } from './iex';
+import { IexUrlModel, IexQuoteModelEnriched } from './iex';
 
 export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
@@ -211,4 +211,5 @@ export interface PortfolioModel {
 export interface PortfolioModelExtended {
   accounts: PortfolioAccountModelEnriched;
   goals: PortfolioGoalsModelEnriched;
+  iex: IexUrlModel
 }

@@ -1,6 +1,7 @@
 import { NumberDisplayModel } from '../ts/types';
 
 export interface IexUrlModel {
+  env: 'Live' | 'Sandbox';
   token: string;
   baseUrl: string;
 }
@@ -29,7 +30,9 @@ export interface IexStockQuoteModelEnriched {
   updatedAt: string;
 }
 
-export type IexQuoteModelEnriched = IexCryptoQuoteModelEnriched | IexStockQuoteModelEnriched
+export type IexQuoteModelEnriched =
+  | IexCryptoQuoteModelEnriched
+  | IexStockQuoteModelEnriched;
 export interface IexFetchSimpleQuoteModel {
   stock: Record<string, IexStockQuoteModelEnriched>;
   crypto: Record<string, IexCryptoQuoteModelEnriched>;

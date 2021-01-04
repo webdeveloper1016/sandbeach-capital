@@ -4,6 +4,7 @@ const prod = false;
 
 // https://nextjs.org/docs/basic-features/environment-variables
 const iex = {
+  env: prod ? 'Live' : 'Sandbox',
   token: prod ? process.env.API_TOKEN : process.env.SB_API_TOKEN,
   baseUrl: prod
     ? 'https://cloud.iexapis.com/stable'
