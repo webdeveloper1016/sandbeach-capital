@@ -6,7 +6,7 @@ import {
 } from '../ts/iex';
 import { currencyDisplay, dateDisplay } from './calc';
 
-const priceAnnotate = ' ⚡️';
+export const priceAnnotate = ' ⚡';
 
 export const formatCryptoQuote = (
   data?: IexCryptoQuoteModel,

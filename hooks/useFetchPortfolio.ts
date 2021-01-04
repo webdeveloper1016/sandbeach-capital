@@ -8,7 +8,6 @@ const getPortfolio = async (): Promise<PortfolioModelExtended> => {
   const { data, iex } = await fetcher('/api/portfolio');
   const tickers = extractTickers(data);
   const quotes = await fetchQuotes(tickers, iex);
-console.log(data)
   return runAnalysis(data, quotes);
 };
 
