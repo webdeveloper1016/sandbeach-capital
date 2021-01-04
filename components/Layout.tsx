@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
       <Nav />
-      <div className="container p-4 md:p-8 container-extended">{children}</div>
+      <div className="container p-4 md:px-8 lg:px-20 container-extended">{children}</div>
     </div>
   );
 };
