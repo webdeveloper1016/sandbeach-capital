@@ -16,7 +16,7 @@ const PortfolioData = ({ children }: PortfolioDataProps) => {
         <div>
           <PageTitle
             title="Total Portfolio Value:"
-            subtitle={data.accounts.totalBalance.display}
+            subtitle={`${data.accounts.totalBalance.display}    1.5 BTC`}
           />
           {children(data)}
         </div>
