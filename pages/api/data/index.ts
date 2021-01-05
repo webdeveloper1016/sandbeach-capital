@@ -1,6 +1,6 @@
 import accounts from './accounts';
 import goals from './goals';
-import { PortfolioModel } from '../ts/types';
+import { PortfolioModel } from '../../../ts/types';
 
 const data: PortfolioModel = {
   accounts,
