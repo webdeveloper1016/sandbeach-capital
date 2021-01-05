@@ -1,6 +1,6 @@
-export const unscheduledContributions = [0].reduce((a, b) => a + b, 0);
+export const unscheduledContributions = [2400].reduce((a, b) => a + b, 0);
 
-export const unscheduledIncome = [0].reduce((a, b) => a + b, 0);
+export const unscheduledIncome = [2400].reduce((a, b) => a + b, 0);
 
 export const bryanSalary = {
   annual: 95000,

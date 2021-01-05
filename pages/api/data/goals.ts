@@ -2,7 +2,7 @@ import {
   SavingsGoalModel,
   QuotesModel,
   PortfolioGoalsModel,
-} from '../ts/types';
+} from '../../../ts/types';
 import { currentAnnualIncome, unscheduledContributions } from './contributions';
 import { bryanSalary } from './contributions';
 

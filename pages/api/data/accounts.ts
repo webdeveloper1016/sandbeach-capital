@@ -1,6 +1,6 @@
 import { currentBalances, currentMarketData } from './balances';
 import { currentContributions } from './contributions';
-import { PortfolioAccountModel } from '../ts/types';
+import { PortfolioAccountModel } from '../../../ts/types';
 
 const accounts: PortfolioAccountModel = {
   shortTerm: [
@@ -108,7 +108,7 @@ const accounts: PortfolioAccountModel = {
   ],
   longTerm: [
     {
-      account: 'M1',
+      account: 'Taxable',
       institution: 'M1',
       goal: 'Liquid capital appriciation',
       timeHorizon: '5+ years',
@@ -116,36 +116,110 @@ const accounts: PortfolioAccountModel = {
       approach: 'Self Directed',
       risk: 4,
       active: true,
-      balance: currentBalances.ltM1.reduce((a, b) => a + b, 0),
+      balance: currentBalances.ltM1[0],
       biWeeklySavings: currentContributions.ltM1,
       pie: [
         {
           assetClass: 'Stocks',
           sector: 'Growth',
-          nickname: 'ETFs',
-          targetPercent: 0.5,
-          balance: currentBalances.ltM1[0],
+          nickname: 'Factor ETFs',
+          targetPercent: 0.2,
           sliceDetails: {
-            active: 0.6 * 0.35, // arkkk
-            speculative: 0.6 * 0.35, // arkk
-            momentum: 0.6 * 0.3,
-            smallcap: 0.6 * 0.35,
-            intl: 0.4 * 0.25,
-            income: 0.4 * 1,
+            momentum: 0.25,
+            smallcap: 0.5,
+            quality: 0.25,
           },
         },
         {
           assetClass: 'Stocks',
-          sector: 'US Stocks',
-          nickname: 'Stocks',
-          targetPercent: 0.5,
+          sector: 'Income',
+          nickname: 'Income ETFs',
+          targetPercent: 0.2,
+          sliceDetails: {
+            income: 1,
+            intl: 0.25,
+          },
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Growth',
+          nickname: 'Innovation ETFs',
+          targetPercent: 0.13,
+          sliceDetails: {
+            active: 0.6,
+            speculative: 1,
+          },
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Growth',
+          nickname: 'Quality Stocks',
+          targetPercent: 0.13,
+          sliceDetails: {
+            active: 1,
+            quality: 1
+          },
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Growth',
+          nickname: 'Dividend Stocks',
+          targetPercent: 0.13,
+          sliceDetails: {
+            active: 1,
+            income: 1
+          },
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Growth',
+          nickname: 'Value Stocks',
+          targetPercent: 0.11,
+          sliceDetails: {
+            active: 1,  
+            value: 1
+          },
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Growth',
+          nickname: 'ARKK',
+          targetPercent: 0.1,
+          marketData: [
+            {
+              ticker: 'ARKK',
+              shares: 5,
+              market: 'stock',
+            },
+          ],
+          sliceDetails: {
+            active: 1,
+            speculative: 1,
+          },
+        },
+      ],
+    },
+    {
+      account: 'Speculative',
+      institution: 'M1',
+      goal: 'Liquid capital appriciation',
+      timeHorizon: '5+ years',
+      category: 'long-term',
+      approach: 'Self Directed',
+      risk: 5,
+      active: true,
+      balance: currentBalances.ltM1[1],
+      biWeeklySavings: currentContributions.ltM1,
+      pie: [
+        {
+          assetClass: 'Stocks',
+          sector: 'Growth',
+          nickname: 'Speculative',
+          targetPercent: 1,
           balance: currentBalances.ltM1[1],
           sliceDetails: {
             active: 1,
-            speculative: 0.6,
-            quality: 0.14,
-            income: 0.14,
-            value: 0.12,
+            speculative: 1,
           },
         },
       ],
