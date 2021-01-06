@@ -1,25 +1,22 @@
-import get from 'lodash.get';
 import {
   AssetClassType,
   CategoryType,
   SectorWeightModel,
-  MarketDataModel,
-  NumberDisplayModel,
-  PieModel,
   AccountModel,
   AccountModelExtended,
   PortfolioModel,
-  PortfolioModelExtended,
+  PortfolioModelAnalyzed,
   PortfolioAccountModelExtended,
   PortfolioAccountModel,
 } from '../ts/types';
-import { IexFetchSimpleQuoteModel, IexQuoteModelEnriched } from '../ts/iex';
+import { IexFetchSimpleQuoteModel } from '../ts/iex';
 import {
   sumAccounts,
   currencyFormatter,
   percentDisplay,
   currencyDisplay,
 } from './calc';
+import { determineBalanceDisplay, injectLiveQuotes } from './balances';
 import {
   calcGlobalSplit,
   calcActiveSplit,
@@ -57,62 +54,6 @@ export const flattenData = (data: PortfolioAccountModel): AccountModel[] => {
     .flat();
 };
 
-export const injectLiveQuotes = (
-  data: AccountModel[],
-  liveQuotes: IexFetchSimpleQuoteModel,
-): AccountModel[] => {
-  return data.map((a) => {
-    // for each account, map over each pie slice...
-    const pieWithLiveData: PieModel[] = a.pie
-      .map((p) => {
-        // if no market data, return null, we .filter it below and fall back to manual balance
-        if (!p.marketData) return null;
-        // map over market data
-        // cross ref with IEX data
-        const enrichedMarketData = p.marketData.map((m) => {
-          const match: IexQuoteModelEnriched | undefined = get(
-            liveQuotes,
-            [m.market, m.ticker],
-            undefined,
-          );
-          if (!match) return m;
-
-          return {
-            ...m,
-            liveQuote: match,
-            balance: m.shares * match.price.val,
-            liveBalance: true,
-          };
-        });
-        return {
-          ...p,
-          balance: enrichedMarketData.reduce(
-            (accum, current) => accum + current.balance || 0,
-            0,
-          ),
-          liveBalance: true,
-          marketData: enrichedMarketData,
-        };
-      })
-      .filter((x) => x);
-
-    // if we have cross referenced live data, use that
-    // if not, return existing manual balance
-    const haveLiveBalance = pieWithLiveData.length > 0;
-    return {
-      ...a,
-      balance: haveLiveBalance
-        ? pieWithLiveData.reduce(
-            (accum, current) => accum + current.balance || 0,
-            0,
-          )
-        : a.balance,
-      liveBalance: haveLiveBalance,
-      pie: haveLiveBalance ? pieWithLiveData : a.pie,
-    };
-  });
-};
-
 export const sumByAsset = (
   data: AccountModel[],
   value: AssetClassType,
@@ -145,69 +86,32 @@ export const calcSectorWeights = (
   });
 };
 
-export const determineBalanceDisplay = (
-  account: number,
-  accountLive: boolean,
-  pie: number,
-  pieLive: boolean,
-  target: number,
-  other: any,
-): NumberDisplayModel => {
-  let balance = 0;
-  let annotate = '';
-
-  switch (true) {
-    // we have live data at the slice level
-    case Boolean(pieLive):
-      balance = pie;
-      annotate = priceAnnotate;
-      break;
-    // we have manual data at the slice level
-    case Boolean(pie):
-      balance = pie;
-      annotate = ' 🥧';
-      break;
-    // we have live data at the account level, but need to calc percent for pie
-    case Boolean(accountLive):
-      balance = account * target;
-      annotate = priceAnnotate;
-      break;
-    // no live data, approx value based on target weight
-    default:
-      balance = account * target;
-      break;
-  }
-
-  return currencyDisplay(balance, annotate);
-};
-
 export const dataEnricher = (
   data: AccountModel[],
   sumCat: number,
   totalBalance: number,
 ): AccountModelExtended[] => {
-  return data.map((i) => {
+  return data.map((account) => {
     return {
-      ...i,
+      ...account,
       value: currencyDisplay(
-        i.balance,
-        i.liveBalance ? priceAnnotate : undefined,
+        account.balance,
+        account.liveBalance ? priceAnnotate : undefined,
       ),
-      categoryWeight: percentDisplay(i.balance, sumCat),
-      portfolioWeight: percentDisplay(i.balance, totalBalance),
-      categoryLabel: categoryLabels[i.category],
-      pie: i.pie.map((p) => ({
-        ...p,
+      categoryWeight: percentDisplay(account.balance, sumCat),
+      portfolioWeight: percentDisplay(account.balance, totalBalance),
+      categoryLabel: categoryLabels[account.category],
+      pie: account.pie.map((pie) => ({
+        ...pie,
         approxVal: determineBalanceDisplay(
-          i.balance,
-          i.liveBalance,
-          p.balance,
-          p.liveBalance,
-          p.targetPercent,
-          { i, p },
+          account.balance,
+          account.liveBalance,
+          pie.balance,
+          pie.liveBalance,
+          pie.targetPercent,
         ),
-        targetPercentDisplay: percentDisplay(p.targetPercent, 1),
-        metadata: i,
+        targetPercentDisplay: percentDisplay(pie.targetPercent, 1),
+        metadata: account,
       })),
     };
   });
@@ -295,7 +199,7 @@ export const runInitialAnalysis = (
 export const runAnalysis = (
   data: PortfolioModel,
   liveQuotes: IexFetchSimpleQuoteModel,
-): PortfolioModelExtended => {
+): PortfolioModelAnalyzed => {
   // analyze account data
   const initialAnalysis = runInitialAnalysis(data.accounts, liveQuotes);
   const allAccounts = [

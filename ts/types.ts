@@ -207,6 +207,12 @@ export interface PortfolioModel {
   goals: PortfolioGoalsModel;
 }
 
+// this is return by analysis
+export interface PortfolioModelAnalyzed {
+  accounts: PortfolioAccountModelEnriched;
+  goals: PortfolioGoalsModelEnriched;
+}
+
 // this is return by react-query
 export interface PortfolioModelExtended {
   accounts: PortfolioAccountModelEnriched;
