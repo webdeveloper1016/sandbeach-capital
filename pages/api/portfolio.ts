@@ -1,6 +1,6 @@
 import data from './data';
 
-const prod = false;
+const prod = process.env.NODE_ENV === 'production'
 
 // https://nextjs.org/docs/basic-features/environment-variables
 const iex = {

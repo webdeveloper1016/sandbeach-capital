@@ -83,7 +83,6 @@ export const injectLiveQuotes = (
     // if we have cross referenced live data, use that
     // if not, return existing manual balance
     const haveLiveBalance = pieWithLiveData.find((s) => s.liveBalance);
-    console.log(pieWithLiveData)
     return {
       ...account,
       balance: pieWithLiveData.reduce(
