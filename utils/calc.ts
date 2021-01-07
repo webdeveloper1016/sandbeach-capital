@@ -16,6 +16,8 @@ export const currencyFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
+export const numberFormatter = new Intl.NumberFormat('en-US');
+
 export const percentFormatter = (a: number, b: number): string =>
   `${Math.round((a / b) * 100 * 100) / 100}%`;
 

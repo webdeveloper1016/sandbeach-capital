@@ -1,7 +1,7 @@
 export interface HeaderProps {
   size: 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
-  content: string;
-  subheader?: string;
+  content: string | React.ReactElement;
+  subheader?: string | React.ReactElement;
   noGutter?: boolean;
 }
 

@@ -8,7 +8,7 @@ const getPortfolio = async (): Promise<PortfolioModelExtended> => {
   const { data, iex } = await fetcher('/api/portfolio');
   const tickers = extractTickers(data);
   const quotes = await fetchQuotes(tickers, iex);
-  return {...runAnalysis(data, quotes), iex};
+  return {...runAnalysis(data, quotes), iex, quotes};
 };
 
 const useFetchPortfolio = (): QueryResult<PortfolioModelExtended> => {

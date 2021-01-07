@@ -2,7 +2,7 @@ import Header from './Header';
 
 interface PageTitleProps {
   title: string;
-  subtitle: string;
+  subtitle: string | React.ReactElement;
 }
 
 const PageTitle = ({title, subtitle}: PageTitleProps) => (
