@@ -1,4 +1,5 @@
 import { currentBalances, currentMarketData } from './balances';
+import { cryptoHoldings } from './crypto-holdings';
 import { currentContributions } from './contributions';
 import { PortfolioAccountModel } from '../../../ts/types';
 
@@ -86,29 +87,10 @@ const accounts: PortfolioAccountModel = {
         },
       ],
     },
-    {
-      account: 'Stablecoin',
-      institution: 'BlockFi',
-      goal: 'Crypto account with interest',
-      timeHorizon: '5+ years',
-      category: 'short-term',
-      risk: 2,
-      balance: currentBalances.stStablecoins,
-      biWeeklySavings: currentContributions.stStablecoins,
-      approach: 'Self Directed',
-      pie: [
-        {
-          assetClass: 'Crypto',
-          sector: 'Stablecoin',
-          nickname: 'Stablecoins',
-          targetPercent: 1,
-        },
-      ],
-    },
   ],
   longTerm: [
     {
-      account: 'Taxable',
+      account: 'M1 - Taxable',
       institution: 'M1',
       goal: 'Liquid capital appriciation',
       timeHorizon: '5+ years',
@@ -116,8 +98,8 @@ const accounts: PortfolioAccountModel = {
       approach: 'Self Directed',
       risk: 4,
       active: true,
-      balance: currentBalances.ltM1[0],
-      biWeeklySavings: currentContributions.ltM1,
+      balance: currentBalances.ltM1Taxable,
+      biWeeklySavings: currentContributions.ltM1Taxable,
       pie: [
         {
           assetClass: 'Stocks',
@@ -157,7 +139,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.13,
           sliceDetails: {
             active: 1,
-            quality: 1
+            quality: 1,
           },
         },
         {
@@ -167,7 +149,7 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.13,
           sliceDetails: {
             active: 1,
-            income: 1
+            income: 1,
           },
         },
         {
@@ -176,8 +158,8 @@ const accounts: PortfolioAccountModel = {
           nickname: 'Value Stocks',
           targetPercent: 0.11,
           sliceDetails: {
-            active: 1,  
-            value: 1
+            active: 1,
+            value: 1,
           },
         },
         {
@@ -200,7 +182,7 @@ const accounts: PortfolioAccountModel = {
       ],
     },
     {
-      account: 'Speculative',
+      account: 'M1 - Speculative',
       institution: 'M1',
       goal: 'Liquid capital appriciation',
       timeHorizon: '5+ years',
@@ -208,15 +190,15 @@ const accounts: PortfolioAccountModel = {
       approach: 'Self Directed',
       risk: 5,
       active: true,
-      balance: currentBalances.ltM1[1],
-      biWeeklySavings: currentContributions.ltM1,
+      balance: currentBalances.ltM1Spec,
+      biWeeklySavings: currentContributions.ltM1Spec,
       pie: [
         {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Speculative',
           targetPercent: 1,
-          balance: currentBalances.ltM1[1],
+          balance: currentBalances.ltM1Spec,
           sliceDetails: {
             active: 1,
             speculative: 1,
@@ -225,7 +207,7 @@ const accounts: PortfolioAccountModel = {
       ],
     },
     {
-      account: 'Coinbase',
+      account: 'Crypto - Coinbase',
       institution: 'Coinbase',
       goal: 'Exposure to cryptocurrencies',
       timeHorizon: '5+ years',
@@ -234,29 +216,10 @@ const accounts: PortfolioAccountModel = {
       balance: currentBalances.cryptoCoinbase,
       biWeeklySavings: currentContributions.cryptoCoinbase,
       approach: 'Self Directed',
-      pie: [
-        {
-          assetClass: 'Crypto',
-          sector: 'Crypto',
-          nickname: 'Bitcoin',
-          targetPercent: 1,
-          marketData: [
-            {
-              ticker: 'BTC',
-              shares: currentMarketData.cryptoCoinbase.btc,
-              market: 'crypto',
-            },
-            {
-              ticker: 'ETH',
-              shares: currentMarketData.cryptoCoinbase.eth,
-              market: 'crypto',
-            },
-          ],
-        },
-      ],
+      pie: cryptoHoldings.coinbase,
     },
     {
-      account: 'BlockFi',
+      account: 'Crypto - BlockFi',
       institution: 'BlockFi',
       goal: 'Crypto account with interest',
       timeHorizon: '5+ years',
@@ -265,30 +228,54 @@ const accounts: PortfolioAccountModel = {
       balance: currentBalances.cryptoBlockFi,
       biWeeklySavings: currentContributions.cryptoBlockFi,
       approach: 'Self Directed',
-      pie: [
-        {
-          assetClass: 'Crypto',
-          sector: 'Crypto',
-          nickname: 'Bitcoin',
-          targetPercent: 1,
-          marketData: [
-            {
-              ticker: 'BTC',
-              shares: currentMarketData.cryptoBlockFi.btc,
-              market: 'crypto',
-            },
-          ],
-        },
-        {
-          assetClass: 'Crypto',
-          sector: 'Stablecoin',
-          nickname: 'USDC',
-          targetPercent: 0,
-        },
-      ],
+      pie: cryptoHoldings.blockfi,
+    },
+    {
+      account: 'Crypto - Celsius',
+      institution: 'Celsius Network',
+      goal: 'Crypto account with interest',
+      timeHorizon: '5+ years',
+      category: 'long-term',
+      risk: 2,
+      balance: currentBalances.cryptoCelsius,
+      biWeeklySavings: currentContributions.cryptoCelsius,
+      approach: 'Self Directed',
+      pie: cryptoHoldings.celsius
     },
   ],
   retirement: [
+    {
+      account: 'Bryan - 401(k)',
+      institution: 'Merril Lynch',
+      goal: 'Long term capital appreciation',
+      timeHorizon: '25+ years',
+      category: 'retirement',
+      approach: 'Self Directed',
+      preTax: true,
+      balance: currentBalances.rBryan401k,
+      biWeeklySavings: currentContributions.rBryan401k,
+      risk: 4,
+      pie: [
+        {
+          assetClass: 'Stocks',
+          sector: 'US Stocks',
+          nickname: 'US Stocks',
+          targetPercent: 0.64,
+          sliceDetails: {
+            smallcap: 0.15,
+          },
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Intl',
+          nickname: 'Foreign Stocks',
+          targetPercent: 0.36,
+          sliceDetails: {
+            intl: 1,
+          },
+        },
+      ],
+    },
     {
       account: 'Bryan - Roth IRA',
       institution: 'M1',
@@ -401,38 +388,6 @@ const accounts: PortfolioAccountModel = {
               market: 'stock',
             },
           ],
-        },
-      ],
-    },
-    {
-      account: 'Bryan - 401(k)',
-      institution: 'Merril Lynch',
-      goal: 'Long term capital appreciation',
-      timeHorizon: '25+ years',
-      category: 'retirement',
-      approach: 'Self Directed',
-      preTax: true,
-      balance: currentBalances.rBryan401k,
-      biWeeklySavings: currentContributions.rBryan401k,
-      risk: 4,
-      pie: [
-        {
-          assetClass: 'Stocks',
-          sector: 'US Stocks',
-          nickname: 'US Stocks',
-          targetPercent: 0.64,
-          sliceDetails: {
-            smallcap: 0.15,
-          },
-        },
-        {
-          assetClass: 'Stocks',
-          sector: 'Intl',
-          nickname: 'Foreign Stocks',
-          targetPercent: 0.36,
-          sliceDetails: {
-            intl: 1,
-          },
         },
       ],
     },

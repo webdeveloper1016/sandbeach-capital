@@ -1,11 +1,13 @@
 export const currentBalances = {
   stCash: 2000,
-  stSavings: 11878,
+  stSavings: 10008,
   stEmergency: 911,
   stStablecoins: 1000,
-  ltM1: [1208, 951],
+  ltM1Taxable: 1208,
+  ltM1Spec: 951,
   cryptoCoinbase: [1144, 340].reduce((a, b) => a + b, 0),
   cryptoBlockFi: 4589,
+  cryptoCelsius: 903,
   rJamieIRA: 43953,
   rJamieRoll: 41728,
   rBryanIRA: [1914, 30925.43].reduce((a, b) => a + b, 0),
@@ -19,7 +21,10 @@ export const currentMarketData = {
   },
   cryptoBlockFi: {
     btc: 0.15666763,
-    usdc: 1000,
+  },
+  cryptoCelsius: {
+    usdc: 844.56,
+    comp: 0.34110
   },
   rJamieRoll: {
     qqq: 133,
