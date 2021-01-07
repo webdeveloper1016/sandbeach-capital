@@ -23,7 +23,7 @@ export const determineBalanceDisplay = (
     // we have live data at the account level, but need to calc percent for pie
     case Boolean(accountLive):
       balance = account * target;
-      annotate = priceAnnotate;
+      annotate = '*';
       break;
     // no live data, approx value based on target weight
     default:
@@ -83,6 +83,7 @@ export const injectLiveQuotes = (
     // if we have cross referenced live data, use that
     // if not, return existing manual balance
     const haveLiveBalance = pieWithLiveData.find((s) => s.liveBalance);
+    console.log(pieWithLiveData)
     return {
       ...account,
       balance: pieWithLiveData.reduce(
