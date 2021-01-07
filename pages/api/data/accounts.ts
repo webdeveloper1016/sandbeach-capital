@@ -144,7 +144,7 @@ const accounts: PortfolioAccountModel = {
         },
         {
           assetClass: 'Stocks',
-          sector: 'Growth',
+          sector: 'Income',
           nickname: 'Dividend Stocks',
           targetPercent: 0.13,
           sliceDetails: {
@@ -154,7 +154,7 @@ const accounts: PortfolioAccountModel = {
         },
         {
           assetClass: 'Stocks',
-          sector: 'Growth',
+          sector: 'Value',
           nickname: 'Value Stocks',
           targetPercent: 0.11,
           sliceDetails: {
@@ -240,7 +240,7 @@ const accounts: PortfolioAccountModel = {
       balance: currentBalances.cryptoCelsius,
       biWeeklySavings: currentContributions.cryptoCelsius,
       approach: 'Self Directed',
-      pie: cryptoHoldings.celsius
+      pie: cryptoHoldings.celsius,
     },
   ],
   retirement: [
@@ -294,12 +294,12 @@ const accounts: PortfolioAccountModel = {
           targetPercent: 0.6,
           sliceDetails: {
             esg: 0.05,
-            smallcap: 0.15,
-            momentum: 0.15,
-            quality: 0.15 + 0.2 * 0.2, // 20% of All Stocks
+            smallcap: 0.4 * 0.5,
+            momentum: 0.4 * 0.25,
+            quality: 0.4 * 0.25 + 0.2 * 0.2, // 20% of All Stocks
             income: 0.1 + 0.15 * 0.2, // 15% of All Stocks
-            active: 0.4,
-            speculative: 0.3, // all of thematic ETFs, half of All Stocks
+            active: 0.3,
+            speculative: 0.35, // all of thematic ETFs, half of All Stocks, ARKK
             value: 0.15 * 0.2, // 15% of All Stocks
           },
         },
