@@ -4,7 +4,7 @@ export const unscheduledIncome = [2400].reduce((a, b) => a + b, 0);
 
 export const bryanSalary = {
   annual: 95000,
-  postTax: 2631,
+  postTax: 2586.35,
   firstPay: new Date(2021, 1, 8),
 };
 
