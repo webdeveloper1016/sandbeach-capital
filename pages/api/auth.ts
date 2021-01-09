@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 const prod = process.env.NODE_ENV === 'production';
 
 interface ReqModel {
@@ -13,21 +15,26 @@ const handler = (req: ReqModel, res) => {
       // check for body
       if (!body.secret) {
         res.status(400).send('Bad Request');
-        return
+        return;
       }
 
       // validate token
       if (body.secret !== process.env.APP_SECRET) {
         res.status(401).send('Unauthorized');
-        return
+        return;
       }
 
       // gen token and send it back
+      const token = jwt.sign(
+        {
+          data: null,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: '90d' },
+      );
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.end(
-        JSON.stringify({ token: '1234'}),
-      );
+      res.end(JSON.stringify({ token }));
     } catch (error) {
       res.status(500).send(
         prod

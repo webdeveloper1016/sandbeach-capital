@@ -1,6 +1,6 @@
 import data from './data';
 
-const prod = process.env.NODE_ENV === 'production'
+const prod = process.env.NODE_ENV === 'production';
 
 // https://nextjs.org/docs/basic-features/environment-variables
 const iex = {
@@ -12,9 +12,18 @@ const iex = {
 };
 
 const handler = (req, res) => {
+  let other = null
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.split(' ')[0] === 'Bearer'
+  ) {
+    // Authorization: Bearer g1jipjgi1ifjioj
+    // Handle token presented as a Bearer token in the Authorization header
+    other = req.headers.authorization.split(' ')[1];
+  }
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify({ data, iex }));
+  res.end(JSON.stringify({ data, iex, other }));
 };
 
 export default handler;
