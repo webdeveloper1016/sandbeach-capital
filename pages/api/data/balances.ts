@@ -16,15 +16,19 @@ export const currentBalances = {
 
 export const currentMarketData = {
   cryptoCoinbase: {
-    btc: [0.03040964, 0.01127824].reduce((a, b) => a + b, 0),
-    eth: 0.122735
+    btc: [
+      0.03099707, // cb
+      0.0314624, // cb pro
+    ].reduce((a, b) => a + b, 0),
   },
   cryptoBlockFi: {
     btc: 0.15666763,
   },
   cryptoCelsius: {
     usdc: 844.56,
-    comp: 0.34110
+    comp: 0.3411,
+    eth: 0.18075,
+    snx: 1.74425,
   },
   rJamieRoll: {
     qqq: 133,
