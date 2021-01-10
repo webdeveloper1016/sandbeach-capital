@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Head>
-        <title>Portfolio Manager</title>
+        <title>Sand Beach Capital</title>
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
       <Nav />

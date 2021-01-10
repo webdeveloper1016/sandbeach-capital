@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { formatCryptoQuote, formatStockQuote } from './iex';
 import { PortfolioModel, TickerModel } from '../ts/types';
 import {
@@ -6,17 +7,36 @@ import {
   IexFetchSimpleQuoteModel,
 } from '../ts/iex';
 
-export const fetcher = (url: string, token: string) =>
-  fetch(url, {
-    method: 'GET',
-    credentials: 'include',
+// export const fetcher = (url: string, token: string) =>
+//   fetch(url, {
+//     method: 'GET',
+//     credentials: 'include',
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//       'Content-Type': 'application/json',
+//     },
+//   }).then((res) => {
+//     const t = res.json();
+//     console.log(t);
+//     return { ...t, status: res.status } as Promise<{
+//       data: PortfolioModel;
+//       iex: IexUrlModel;
+//       status: number;
+//     }>;
+//   });
+
+export const fetcher = async (
+  url: string,
+  token: string,
+): Promise<{ data: PortfolioModel; iex: IexUrlModel; status: number }> => {
+  const data = await axios.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
     },
-  }).then(
-    (res) => res.json() as Promise<{ data: PortfolioModel; iex: IexUrlModel }>,
-  );
+  });
+
+  return { ...data.data, status: data.status };
+};
 
 export const iexUrl = (
   iex: IexUrlModel,
