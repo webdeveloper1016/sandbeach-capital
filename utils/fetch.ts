@@ -6,8 +6,15 @@ import {
   IexFetchSimpleQuoteModel,
 } from '../ts/iex';
 
-export const fetcher = (url) =>
-  fetch(url).then(
+export const fetcher = (url: string, token: string) =>
+  fetch(url, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(
     (res) => res.json() as Promise<{ data: PortfolioModel; iex: IexUrlModel }>,
   );
 

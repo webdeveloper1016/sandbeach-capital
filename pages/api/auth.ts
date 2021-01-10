@@ -30,7 +30,7 @@ const handler = (req: ReqModel, res) => {
           data: null,
         },
         process.env.JWT_SECRET,
-        { expiresIn: '90d' },
+        { expiresIn: '1h' },
       );
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
