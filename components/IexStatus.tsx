@@ -1,12 +1,13 @@
 import { format } from 'date-fns';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
-const IexStatus = (): React.ReactElement => {
+const IexStatus = (): React.ReactElement | null => {
   const { data, updatedAt, status } = useFetchPortfolio();
 
   if (status !== 'success') {
-    return <li className=" animate-pulse h-4 bg-green-500 rounded w-1/4"></li>;
+    return null;
   }
+
   return (
     <li>
       <a href="https://iexcloud.io" className="mx-2 text-green-300 underline">

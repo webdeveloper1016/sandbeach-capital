@@ -1,32 +1,37 @@
 import { useQuery, QueryResult } from 'react-query';
+import { AxiosError } from 'axios';
 import useAuth from '../hooks/useAuth';
 import { runAnalysis } from '../utils';
 import { fetcher, fetchQuotes } from '../utils/fetch';
 import { extractTickers } from '../utils/quotes';
 import { PortfolioModelExtended } from '../ts/types';
 
-// TODO:
-// catch token error and send to login
-// at login, check local storage for token
-const useGetPortfolio = async (
-  key: string,
-  token: string,
-): Promise<PortfolioModelExtended> => {
-  console.log(token);
-  const { data, iex, status } = await fetcher('/api/portfolio', token);
+/** Fetch and process the API data */
+const useGetPortfolio = async (params: {
+  token: string;
+  logout: () => void;
+}): Promise<PortfolioModelExtended> => {
+  try {
+    const { data, iex } = await fetcher('/api/portfolio', params.token);
+    const tickers = extractTickers(data);
+    const quotes = await fetchQuotes(tickers, iex);
+    return { ...runAnalysis(data, quotes), iex, quotes };
+  } catch (error) {
+    if (error.response) {
+      if (error.response.status === 401) {
+        params.logout();
+        return;
+      }
+    }
 
-  if (status === 401) {
-    throw new Error('Unauthorized');
+    throw new Error(error);
   }
-  console.log(data);
-  const tickers = extractTickers(data);
-  const quotes = await fetchQuotes(tickers, iex);
-  return { ...runAnalysis(data, quotes), iex, quotes };
 };
 
+/** React Query hook to get the data */
 const useFetchPortfolio = (): QueryResult<PortfolioModelExtended> => {
-  const { token } = useAuth();
-  return useQuery(['portfolio', token], useGetPortfolio);
+  const auth = useAuth();
+  return useQuery(['portfolio'], () => useGetPortfolio(auth));
 };
 
 export default useFetchPortfolio;
