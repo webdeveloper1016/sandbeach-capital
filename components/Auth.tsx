@@ -1,6 +1,6 @@
 import React from 'react';
-import Section from './Section';
-import Header from './Header';
+import Login from './Login';
+
 export interface AuthContextModel {
   token: string | null;
   logout: () => void;
@@ -45,19 +45,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   if (showLogin) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        <div className="container mx-auto bg-green-500 shadow rounded-md p-5">
-          <Header content="Login" size="lg" />
-          <input
-            placeholder="Enter the password"
-            className="border  rounded-md py-2 px-3 text-grey-darkest focus:outline-none focus:ring focus:border-blue-300"
-            name="password"
-            type="password"
-          />
-        </div>
-      </div>
-    );
+    return <Login />;
   }
 
   return <div>Loading...</div>;
