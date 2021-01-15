@@ -2,12 +2,15 @@ import jwt from 'jsonwebtoken';
 
 const prod = process.env.NODE_ENV === 'production';
 
+const TOKEN_EXP = '1d';
+
 interface ReqModel {
   method: 'POST' | 'GET';
   body: {
     secret: string;
   };
 }
+
 const handler = (req: ReqModel, res) => {
   if (req.method === 'POST') {
     try {
@@ -30,7 +33,7 @@ const handler = (req: ReqModel, res) => {
           data: null,
         },
         process.env.JWT_SECRET,
-        { expiresIn: '1d' },
+        { expiresIn: TOKEN_EXP },
       );
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');

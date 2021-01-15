@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = () => {
     if (typeof window !== 'undefined') {
+      setShowLogin(true);
       localStorage.removeItem('token');
       setToken(null);
     }
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       localStorage.setItem('token', data.token);
       setToken(data.token);
       setStatus(null);
+      setShowLogin(false);
     } catch (error) {
       setStatus('error');
     }
@@ -68,5 +70,5 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return <Login status={status} onLoginTry={login} />;
   }
 
-  return <div/>;
+  return <div />;
 };

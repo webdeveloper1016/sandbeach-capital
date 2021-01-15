@@ -31,7 +31,9 @@ const useGetPortfolio = async (params: {
 /** React Query hook to get the data */
 const useFetchPortfolio = (): QueryResult<PortfolioModelExtended> => {
   const auth = useAuth();
-  return useQuery(['portfolio'], () => useGetPortfolio(auth));
+  return useQuery(['portfolio'], () => useGetPortfolio(auth), {
+    refetchInterval: 1000 * 60,
+  });
 };
 
 export default useFetchPortfolio;
