@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Login from './Login';
 
 export interface AuthContextModel {
@@ -12,14 +13,33 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
+interface AuthRespModel {
+  token: string;
+}
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = React.useState(null);
   const [showLogin, setShowLogin] = React.useState(false);
+  const [status, setStatus] = React.useState<'loading' | 'error' | null>(null);
 
   const logout = () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('token');
       setToken(null);
+    }
+  };
+
+  const login = async (pwd: string) => {
+    setStatus('loading');
+    try {
+      const { data } = await axios.post<AuthRespModel>('/api/auth', {
+        secret: pwd,
+      });
+      localStorage.setItem('token', data.token);
+      setToken(data.token);
+      setStatus(null);
+    } catch (error) {
+      setStatus('error');
     }
   };
 
@@ -45,8 +65,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   if (showLogin) {
-    return <Login />;
+    return <Login status={status} onLoginTry={login} />;
   }
 
-  return <div>Loading...</div>;
+  return <div/>;
 };
