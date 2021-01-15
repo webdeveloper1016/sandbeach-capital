@@ -30,17 +30,6 @@ export const cryptoHoldings: Record<string, PieModel[]> = {
         },
       ],
     },
-    {
-      ...base,
-      nickname: 'ETH',
-      marketData: [
-        {
-          ticker: 'ETH',
-          shares: currentMarketData.cryptoCoinbase.eth,
-          market: 'crypto',
-        },
-      ],
-    },
   ],
   blockfi: [
     {
@@ -58,9 +47,27 @@ export const cryptoHoldings: Record<string, PieModel[]> = {
   celsius: [
     {
       ...base,
+      assetClass: 'Stablecoin',
       sector: 'Stablecoin',
       nickname: 'USDC',
       targetPercent: 0.95,
+    },
+    {
+      ...base,
+      nickname: 'ETH',
+      targetPercent: 0.05,
+      marketData: [
+        {
+          ticker: 'ETH',
+          shares: currentMarketData.cryptoCelsius.eth,
+          market: 'crypto',
+        },
+      ],
+    },
+    {
+      ...base,
+      nickname: 'SNX',
+      targetPercent: 0.05,
     },
     {
       ...base,

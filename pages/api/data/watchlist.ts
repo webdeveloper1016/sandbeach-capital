@@ -1,6 +1,6 @@
 export const watchlist = {
-  potentialAdditions: ['IPOE', 'CLOV', 'SPCE', 'PENN'],
-  growth: ['CRWD', 'PLAN', 'NOW', 'SPLK'],
-  incomeValue: [],
-  radar: ['JOET', 'KOMP', 'XT', 'BUG', 'UFO, space custom pie?'],
+  potentialAdditions: [],
+  growth: ['CRWD','PENN', 'PLAN', 'NOW', 'SPLK', , 'SPOT', 'NIO'], // at the right price
+  incomeValue: ['HSY'],
+  radar: ['ARKX', 'JOET', 'KOMP', 'XT', 'BUG', ],
 };

@@ -2,7 +2,7 @@ import { IexUrlModel, IexQuoteModelEnriched, IexFetchSimpleQuoteModel } from './
 
 export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
-export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Cash';
+export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Stablecoin' | 'Cash';
 
 export type FactorTypes =
   | 'growth'
