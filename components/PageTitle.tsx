@@ -7,8 +7,8 @@ interface PageTitleProps {
 
 const PageTitle = ({title, subtitle}: PageTitleProps) => (
   <div className="mb-5">
-    <Header size="2xl" content={title} />
-    <Header size="5xl" content={subtitle} noGutter />
+    <Header size="text-2xl" content={title} />
+    <Header size="text-5xl" content={subtitle} noGutter />
   </div>
 );
 

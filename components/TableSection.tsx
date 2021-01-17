@@ -15,7 +15,7 @@ const TableSection = ({
   subheader,
 }: TableSectionProps) => (
   <Section>
-    <Header size="2xl" content={header} subheader={subheader} />
+    <Header size="text-2xl" content={header} subheader={subheader} />
     <Table columns={columns} data={data} layout={layout} />
   </Section>
 );

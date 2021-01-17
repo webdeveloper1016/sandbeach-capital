@@ -10,7 +10,7 @@ const GoalsPage = () => {
         return (
           <div>
             <Section>
-              <Header size="2xl" content="Remember:" />
+              <Header size="text-2xl" content="Remember:" />
               <ul>
                 {data.goals.quotes.map((q, k) => (
                   <li key={k}>

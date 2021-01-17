@@ -21,11 +21,11 @@ const AccountsPage = () => (
           data={data.accounts.allAccounts}
         />
         <Section>
-          <Header size="2xl" content="Details:" />
+          <Header size="text-2xl" content="Details:" />
           {data.accounts.allAccounts.map((a, k) => (
             <div className="px-2 pb-6" key={k}>
               <Header
-                size="lg"
+                size="text-lg"
                 content={`Pie: ${a.account}`}
                 subheader={`Goal: ${a.goal} | Risk Level: ${a.risk}`}
               />

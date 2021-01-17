@@ -1,5 +1,5 @@
 export interface HeaderProps {
-  size: 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
+  size: 'text-lg' | 'text-xl' | 'text-2xl' | 'text-3xl' | 'text-4xl' | 'text-5xl';
   content: string | React.ReactElement;
   subheader?: string | React.ReactElement;
   noGutter?: boolean;
@@ -7,10 +7,14 @@ export interface HeaderProps {
 
 const Header = ({ size, content, subheader, noGutter }: HeaderProps) => (
   <div className={`${noGutter && subheader ? 'mb-0' : 'mb-2'}`}>
-    <div className={`text-${size} ${noGutter || subheader ? 'mb-0' : 'mb-2'}`}>
+    <div className={`${size} ${noGutter || subheader ? 'mb-0' : 'mb-2'}`}>
       {content}
     </div>
-    {subheader && <div className="text-gray-500 text-sm -mt-1 font-extralight">{subheader}</div>}
+    {subheader && (
+      <div className="text-gray-500 text-sm -mt-1 font-extralight">
+        {subheader}
+      </div>
+    )}
   </div>
 );
 
