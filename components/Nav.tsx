@@ -52,7 +52,7 @@ export const Header = () => {
   return (
     <div className="ml-16">
       <header className="flex justify-between items-center p-2">
-        <h1 className="text-2xl">Sand Beach Capital</h1>
+        <h1 className="text-2xl hidden md:block">Sand Beach Capital</h1>
         <IexStatus />
         <button className="md:hidden"><Burger /></button>
       </header>
