@@ -1,6 +1,6 @@
 export const watchlist = {
   potentialAdditions: [],
-  growth: ['CRWD','PENN', 'PLAN', 'NOW', 'SPLK', 'SPOT', 'NIO'], // at the right price
-  incomeValue: ['HSY'],
+  growth: ['PLAN', 'SPLK', 'SPOT', 'NIO'], // at the right price
+  incomeValue: [],
   radar: ['ARKX', 'JOET', 'KOMP', 'XT', 'BUG', ],
 };

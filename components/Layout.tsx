@@ -1,12 +1,15 @@
-import Nav from './Nav';
+import { Nav, Header, Container } from './Nav';
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <Nav />
-      <div className="container p-4 md:px-8 lg:px-20 container-extended">
-        {children}
-      </div>
+      <Header />
+      <Container>{children}</Container>
     </div>
   );
 };

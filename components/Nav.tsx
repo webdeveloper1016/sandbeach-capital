@@ -3,7 +3,7 @@ import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
 
-const Nav = () => {
+const Nav1 = () => {
   const auth = useAuth();
   return (
     <nav>
@@ -24,11 +24,49 @@ const Nav = () => {
               </Link>
             </li>
           ))}
-          <li className="cursor-pointer" onClick={auth.logout}>Logout</li>
+          <li className="cursor-pointer" onClick={auth.logout}>
+            Logout
+          </li>
         </ul>
       </ul>
     </nav>
   );
 };
 
-export default Nav;
+export const Nav = () => {
+  return (
+    <nav className="fixed top-0 left-0 min-h-screen border-r border-current shadow w-16">
+      <ul>
+        <li>Home</li>
+        <li>Accounts</li>
+        <li>Goals</li>
+        <li>Watchlist</li>
+        <li>Logout</li>
+      </ul>
+    </nav>
+  );
+};
+
+export const Header = () => {
+  return (
+    <header className="ml-16">
+      <h1>Sand Beach Capital</h1>
+      <IexStatus />
+      <div>Burger</div>
+    </header>
+  );
+};
+
+interface ContainerProps {
+  children: React.ReactNode;
+}
+
+export const Container = ({ children }: ContainerProps) => {
+  return (
+    <div className="ml-16">
+      <main className="container container-extended p-4 md:px-8 lg:px-20">
+        {children}
+      </main>
+    </div>
+  );
+};
