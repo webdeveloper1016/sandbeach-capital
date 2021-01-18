@@ -2,47 +2,40 @@ import Link from 'next/link';
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
-import { Burger } from './Icons'
-
-const Nav1 = () => {
-  const auth = useAuth();
-  return (
-    <nav>
-      <ul className="flex items-center justify-between p-8">
-        <li>
-          <Link href="/">
-            <a className="text-green-500 no-underline">Home</a>
-          </Link>
-        </li>
-        <IexStatus />
-        <ul className="flex items-center justify-between space-x-4">
-          {links.map(({ href, label }) => (
-            <li key={`${href}${label}`}>
-              <Link href={href}>
-                <a className="no-underline px-4 py-2 font-bold text-white bg-green-500 rounded">
-                  {label}
-                </a>
-              </Link>
-            </li>
-          ))}
-          <li className="cursor-pointer" onClick={auth.logout}>
-            Logout
-          </li>
-        </ul>
-      </ul>
-    </nav>
-  );
-};
+import { Burger, Home, Accounts, Watchlist, Goals, Logout } from './Icons';
 
 export const Nav = () => {
+  const auth = useAuth();
   return (
     <nav className="fixed top-0 left-0 min-h-screen border-r border-current shadow w-16">
-      <ul>
-        <li>Home</li>
-        <li>Accounts</li>
-        <li>Goals</li>
-        <li>Watchlist</li>
-        <li>Logout</li>
+      <ul className="mx-1 my-2">
+        {links.map(({ href, label, icon }) => (
+          <li key={`${href}${label}`} className="flex justify-center px-2 py-4">
+            <Link href={href}>
+              <a className="">
+                {(() => {
+                  switch (icon) {
+                    case 'home':
+                      return <Home />;
+                    case 'accounts':
+                      return <Accounts />;
+                    case 'goals':
+                      return <Goals />;
+                    case 'watchlist':
+                      return <Watchlist />;
+                    default:
+                      return null;
+                  }
+                })()}
+              </a>
+            </Link>
+          </li>
+        ))}
+        <li className="flex justify-center px-2 py-4">
+          <button onClick={auth.logout}>
+            <Logout />
+          </button>
+        </li>
       </ul>
     </nav>
   );
@@ -54,7 +47,9 @@ export const Header = () => {
       <header className="flex justify-between items-center p-2">
         <h1 className="text-2xl hidden md:block">Sand Beach Capital</h1>
         <IexStatus />
-        <button className="md:hidden"><Burger /></button>
+        <button className="md:hidden">
+          <Burger />
+        </button>
       </header>
     </div>
   );
