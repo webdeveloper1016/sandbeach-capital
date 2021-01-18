@@ -9,12 +9,12 @@ const IexStatus = (): React.ReactElement | null => {
   }
 
   return (
-    <li>
+    <div>
       <a href="https://iexcloud.io" className="mx-2 text-green-300 underline">
         IEX Cloud {data.iex.env}
       </a>
       <span>{format(updatedAt, 'p')}</span>
-    </li>
+    </div>
   );
 };
 

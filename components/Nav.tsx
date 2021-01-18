@@ -2,6 +2,7 @@ import Link from 'next/link';
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
+import { Burger } from './Icons'
 
 const Nav1 = () => {
   const auth = useAuth();
@@ -49,11 +50,13 @@ export const Nav = () => {
 
 export const Header = () => {
   return (
-    <header className="ml-16">
-      <h1>Sand Beach Capital</h1>
-      <IexStatus />
-      <div>Burger</div>
-    </header>
+    <div className="ml-16">
+      <header className="flex justify-between items-center p-2">
+        <h1 className="text-2xl">Sand Beach Capital</h1>
+        <IexStatus />
+        <button className="md:invisible"><Burger /></button>
+      </header>
+    </div>
   );
 };
 
