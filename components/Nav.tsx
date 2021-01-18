@@ -54,7 +54,7 @@ export const Header = () => {
       <header className="flex justify-between items-center p-2">
         <h1 className="text-2xl">Sand Beach Capital</h1>
         <IexStatus />
-        <button className="md:invisible"><Burger /></button>
+        <button className="md:hidden"><Burger /></button>
       </header>
     </div>
   );
