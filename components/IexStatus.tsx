@@ -1,11 +1,11 @@
 import { format } from 'date-fns';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
-const IexStatus = (): React.ReactElement | null => {
+const IexStatus = (): React.ReactElement => {
   const { data, updatedAt, status } = useFetchPortfolio();
 
   if (status !== 'success') {
-    return null;
+    return <div />;
   }
 
   return (
