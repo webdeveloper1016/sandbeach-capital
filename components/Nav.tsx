@@ -51,7 +51,7 @@ interface HeaderProps {
 }
 export const Header = ({ onClick, status }: HeaderProps) => {
   return (
-    <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'}`}>
+    <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
       <header className="flex justify-between items-center p-2">
         <h1 className="text-2xl hidden md:block">Sand Beach Capital</h1>
         <IexStatus />
@@ -70,7 +70,7 @@ interface ContainerProps {
 
 export const Container = ({ children, status }: ContainerProps) => {
   return (
-    <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'}`}>
+    <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
       <main className="container container-extended p-4 md:px-8 lg:px-20">
         {children}
       </main>
