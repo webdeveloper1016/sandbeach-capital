@@ -1,7 +1,8 @@
 import { format } from 'date-fns';
+import ErrorBoundary from './ErrorBoundary';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
-const IexStatus = (): React.ReactElement => {
+const IexStatusComp = (): React.ReactElement => {
   const { data, updatedAt, status } = useFetchPortfolio();
 
   if (status !== 'success') {
@@ -17,5 +18,11 @@ const IexStatus = (): React.ReactElement => {
     </div>
   );
 };
+
+const IexStatus = () => (
+  <ErrorBoundary fallback={<div/>}>
+    <IexStatusComp />
+  </ErrorBoundary>
+);
 
 export default IexStatus;
