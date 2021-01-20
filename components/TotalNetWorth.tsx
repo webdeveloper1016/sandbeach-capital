@@ -1,5 +1,4 @@
 import React from 'react';
-import PageTitle from './PageTitle';
 import { numberFormatter } from '../utils/calc';
 
 interface PortfolioValModel {
@@ -30,18 +29,18 @@ const TotalNetWorth = ({ btcPrice, portfolioTotal }: TotalNetWorthProps) => {
   }, [btcPrice, portfolioTotal]);
 
   return (
-    <PageTitle
-      title="Total Portfolio Value:"
-      subtitle={
+    <div className="mb-5">
+      <div className="md:text-xl md:mb-1">Total Portfolio Value:</div>
+      <div className="text-xl md:text-4xl mb-2">
         <span>
           <span className="flex">
-            <span className="text-base mr-1 mt-1">$</span>
+            <span className="text-base mr-1 mt-0.5">$</span>
             <span className="">{portfolioValues.display}</span>
-            {btcPrice > 0 && <span className="text-sm ml-1 mt-1">BTC</span>}
+            {btcPrice > 0 && <span className="text-sm ml-1 mt-0.5">BTC</span>}
           </span>
         </span>
-      }
-    />
+      </div>
+    </div>
   );
 };
 
