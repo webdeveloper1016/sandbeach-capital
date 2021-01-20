@@ -17,6 +17,10 @@ const base: BasePieModel = {
   targetPercent: 1,
 };
 
+export const cryptoHoldingsDirect = {
+  
+}
+
 export const cryptoHoldings: Record<string, PieModel[]> = {
   coinbase: [
     {
@@ -25,7 +29,10 @@ export const cryptoHoldings: Record<string, PieModel[]> = {
       marketData: [
         {
           ticker: 'BTC',
-          shares: currentMarketData.cryptoCoinbase.btc,
+          shares: [
+            0.03585229, // cb
+            0.00871754, // cb pro
+          ].reduce((a, b) => a + b, 0),
           market: 'crypto',
         },
       ],
@@ -38,7 +45,7 @@ export const cryptoHoldings: Record<string, PieModel[]> = {
       marketData: [
         {
           ticker: 'BTC',
-          shares: currentMarketData.cryptoBlockFi.btc,
+          shares: 0.18386188,
           market: 'crypto',
         },
       ],
@@ -59,7 +66,7 @@ export const cryptoHoldings: Record<string, PieModel[]> = {
       marketData: [
         {
           ticker: 'ETH',
-          shares: currentMarketData.cryptoCelsius.eth,
+          shares: 0.22407,
           market: 'crypto',
         },
       ],
@@ -72,6 +79,11 @@ export const cryptoHoldings: Record<string, PieModel[]> = {
     {
       ...base,
       nickname: 'COMP',
+      targetPercent: 0.05,
+    },
+    {
+      ...base,
+      nickname: 'UNI',
       targetPercent: 0.05,
     },
   ],
