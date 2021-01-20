@@ -23,7 +23,7 @@ const AccountsPage = () => (
         <Section>
           <Header size="text-2xl" content="Details:" />
           {data.accounts.allAccounts.map((a, k) => (
-            <div className="px-2 pb-6" key={k}>
+            <div className="px-2 pb-6 overflow-x-auto" key={k}>
               <Header
                 size="text-lg"
                 content={`Pie: ${a.account}`}

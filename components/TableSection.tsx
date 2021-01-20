@@ -15,8 +15,10 @@ const TableSection = ({
   subheader,
 }: TableSectionProps) => (
   <Section>
-    <Header size="text-2xl" content={header} subheader={subheader} />
-    <Table columns={columns} data={data} layout={layout} />
+    <div className="overflow-x-auto">
+      <Header size="text-2xl" content={header} subheader={subheader} />
+      <Table columns={columns} data={data} layout={layout} />
+    </div>
   </Section>
 );
 
