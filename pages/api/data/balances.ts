@@ -1,40 +1,41 @@
 export const currentBalances = {
   stCash: 2000,
   stSavings: 10008,
-  stEmergency: 911,
-  stStablecoins: 1000,
-  ltM1Taxable: 1208,
-  ltM1Spec: 951,
+  stEmergency: 1045,
+  stStablecoins: 845,
+  ltM1Taxable: 1333,
+  ltM1Spec: 1238,
   cryptoCoinbase: [1144, 340].reduce((a, b) => a + b, 0),
-  cryptoBlockFi: 4589,
+  cryptoBlockFi: 6347,
   cryptoCelsius: 903,
-  rJamieIRA: 43953,
-  rJamieRoll: 41728,
-  rBryanIRA: [1914, 30925.43].reduce((a, b) => a + b, 0),
-  rBryan401k: 3270,
+  rJamieIRA: 45693,
+  rJamieRoll: 43219,
+  rBryanIRA: 34228.71,
+  rBryan401k: 4041,
 };
 
 export const currentMarketData = {
   cryptoCoinbase: {
     btc: [
-      0.03099707, // cb
-      0.0314624, // cb pro
+      0.03585229, // cb
+      0.00871754, // cb pro
     ].reduce((a, b) => a + b, 0),
   },
   cryptoBlockFi: {
-    btc: 0.15666763,
+    btc: 0.18386188,
   },
   cryptoCelsius: {
-    usdc: 844.56,
+    usdc: 846.59,
     comp: 0.3411,
-    eth: 0.18075,
+    eth: 0.22407,
     snx: 1.74425,
+    uni: 6.53
   },
   rJamieRoll: {
-    qqq: 133,
+    qqq: 133.239,
   },
   rJamieIRA: {
     vt: 440.645,
-    vtwax: 96.236,
+    vtwax: 97.790,
   },
 };

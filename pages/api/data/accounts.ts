@@ -44,7 +44,7 @@ const accounts: PortfolioAccountModel = {
       ],
     },
     {
-      account: 'Emergency',
+      account: 'M1 - Emergency',
       institution: 'M1',
       goal: 'Liquid, conservative emergency fund backup',
       timeHorizon: 'next 5 years',
@@ -77,13 +77,13 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Bonds',
           sector: 'US Bonds',
           nickname: 'BND',
-          targetPercent: 0.25,
+          targetPercent: 0.35,
         },
         {
           assetClass: 'Bonds',
           sector: 'Foreign Bonds',
           nickname: 'BNDX',
-          targetPercent: 0.25,
+          targetPercent: 0.15,
         },
       ],
     },
@@ -105,21 +105,33 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'Factor ETFs',
-          targetPercent: 0.2,
+          targetPercent: 0.15,
           sliceDetails: {
-            momentum: 0.25,
-            smallcap: 0.5,
-            quality: 0.25,
+            momentum: 0.2,
+            smallcap: 0.4,
+            quality: 0.2,
+            esg: 0.2,
           },
         },
         {
           assetClass: 'Stocks',
           sector: 'Income',
           nickname: 'Income ETFs',
-          targetPercent: 0.2,
+          targetPercent: 0.15,
           sliceDetails: {
             income: 1,
             intl: 0.25,
+          },
+        },
+        {
+          assetClass: 'Stocks',
+          sector: 'Intl',
+          nickname: 'Intl ETFs',
+          targetPercent: 0.14,
+          sliceDetails: {
+            income: .3,
+            momentum: 0.1,
+            intl: 1,
           },
         },
         {
@@ -135,8 +147,8 @@ const accounts: PortfolioAccountModel = {
         {
           assetClass: 'Stocks',
           sector: 'Growth',
-          nickname: 'Quality Stocks',
-          targetPercent: 0.13,
+          nickname: 'Mega Cap Stocks',
+          targetPercent: 0.1,
           sliceDetails: {
             active: 1,
             quality: 1,
@@ -146,7 +158,7 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Income',
           nickname: 'Dividend Stocks',
-          targetPercent: 0.13,
+          targetPercent: 0.1,
           sliceDetails: {
             active: 1,
             income: 1,
@@ -156,7 +168,7 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Value',
           nickname: 'Value Stocks',
-          targetPercent: 0.11,
+          targetPercent: 0.1,
           sliceDetails: {
             active: 1,
             value: 1,
@@ -166,11 +178,11 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'ARKK',
-          targetPercent: 0.1,
+          targetPercent: 0.13,
           marketData: [
             {
               ticker: 'ARKK',
-              shares: 5,
+              shares: 0.99672,
               market: 'stock',
             },
           ],
@@ -291,16 +303,16 @@ const accounts: PortfolioAccountModel = {
           assetClass: 'Stocks',
           sector: 'Growth',
           nickname: 'US Stocks',
-          targetPercent: 0.6,
+          targetPercent: 0.62,
           sliceDetails: {
-            esg: 0.05,
-            smallcap: 0.4 * 0.5,
-            momentum: 0.4 * 0.25,
-            quality: 0.4 * 0.25 + 0.2 * 0.2, // 20% of All Stocks
-            income: 0.1 + 0.15 * 0.2, // 15% of All Stocks
-            active: 0.3,
-            speculative: 0.35, // all of thematic ETFs, half of All Stocks, ARKK
-            value: 0.15 * 0.2, // 15% of All Stocks
+            esg: 0.4 * 0.2,
+            smallcap: 0.4 * 0.4,
+            momentum: 0.4 * 0.2,
+            quality: 0.4 * 0.2 + 0.2 * 0.25, // 20% of All Stocks
+            income: 0.1 + 0.2 * 0.25, // 15% of All Stocks
+            active: 0.12 + 0.15 + 0.25, // all stocks, all thematic, ARKK
+            speculative: 0.12 + 0.15 + 0.4 * 0.25, // all of thematic ETFs, half of All Stocks, ARKK
+            value: 0.2 * 0.2, // 15% of All Stocks
           },
         },
         {
@@ -313,18 +325,6 @@ const accounts: PortfolioAccountModel = {
             momentum: 0.1,
             income: 0.3,
           },
-        },
-        {
-          assetClass: 'Bonds',
-          sector: 'Global Bond Mix',
-          nickname: 'Bonds',
-          targetPercent: 0.01,
-        },
-        {
-          assetClass: 'Alts',
-          sector: 'REIT',
-          nickname: 'Alts',
-          targetPercent: 0.01,
         },
       ],
     },
