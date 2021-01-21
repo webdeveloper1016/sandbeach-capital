@@ -17,9 +17,33 @@ const base: BasePieModel = {
   targetPercent: 1,
 };
 
-export const cryptoHoldingsDirect = {
-  
-}
+export const cryptoHoldingsDirect = [
+  {
+    location: 'BlockFi',
+    coin: 'BTC',
+    amount: 0.18386188,
+  },
+  {
+    location: 'Coinbase',
+    coin: 'BTC',
+    amount: 0.03585229,
+  },
+  {
+    location: 'Coinbase',
+    coin: 'AAVE',
+    amount: 0.354,
+  },
+  {
+    location: 'Coinbase',
+    coin: 'ALGO',
+    amount: 109.155009,
+  },
+  {
+    location: 'Coinbase',
+    coin: 'ATOM',
+    amount: 5.279059,
+  },
+];
 
 export const cryptoHoldings: Record<string, PieModel[]> = {
   coinbase: [
