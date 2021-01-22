@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { apiErr } from './apiErr';
 
 const prod = process.env.NODE_ENV === 'production';
 
-export const authMiddleware = (handler) => (
+export const authMiddleware = (handler) => async (
   req: NextApiRequest,
   res: NextApiResponse,
 ) => {
@@ -16,16 +17,17 @@ export const authMiddleware = (handler) => (
     const token = req.headers.authorization.split(' ')[1];
 
     // verify token
-    jwt.verify(token, process.env.JWT_SECRET, (err) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (err) => {
       if (err) {
-        res.status(401).send(prod ? 'Unauthorized' : JSON.stringify(err));
-        return;
+        return res
+          .status(401)
+          .send(prod ? 'Unauthorized' : JSON.stringify(err));
       }
+      console.log('TOKEN OK2');
       // if valid pass the request along
-      return handler(req, res);
+      return await handler(req, res);
     });
   } else {
-    res.status(401).send('Unauthorized');
-    return;
+    return res.status(401).send('Unauthorized');
   }
 };
