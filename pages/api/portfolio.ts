@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next';
+import { auth, errResp } from '../../middleware';
 import data from './data';
-import { authMiddleware } from '../../utils/authMiddleware';
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -10,22 +10,14 @@ const iex = {
   baseUrl: process.env.IEX_API_URL,
 };
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ data, iex }));
+    // check auth before proceeding
+    await auth(req);
+    res.status(200).json({ data, iex });
   } catch (error) {
-    console.error(error);
-    res.status(500).send(
-      prod
-        ? 'Server Error'
-        : JSON.stringify({
-            status: 'Server Error',
-            message: error.message,
-          }),
-    );
+    res.status(error.status || 500).end(errResp(prod, error, error.status));
   }
 };
 
-export default authMiddleware(handler);
+export default handler;

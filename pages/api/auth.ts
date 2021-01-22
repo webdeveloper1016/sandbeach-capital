@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { errResp } from '../../middleware';
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -17,13 +18,13 @@ const handler = (req: ReqModel, res) => {
       const body = req.body;
       // check for body
       if (!body.secret) {
-        res.status(400).send('Bad Request');
+        res.status(400).end(errResp(prod, 'Bad Request', 400));
         return;
       }
 
       // validate token
       if (body.secret !== process.env.APP_SECRET) {
-        res.status(401).send('Unauthorized');
+        res.status(401).end(errResp(prod, 'Unauthorized', 401));
         return;
       }
 
@@ -35,22 +36,13 @@ const handler = (req: ReqModel, res) => {
         process.env.JWT_SECRET,
         { expiresIn: TOKEN_EXP },
       );
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({ token }));
+      res.status(200).json({ token });
     } catch (error) {
-      res.status(500).send(
-        prod
-          ? 'Server Error'
-          : JSON.stringify({
-              status: 'Server Error',
-              message: error.message,
-            }),
-      );
+      res.status(error.status || 500).end(errResp(prod, error, 500));
     }
   } else {
     // Handle any other HTTP method
-    res.status(405).send('Unsupported Method!');
+    res.status(405).end(errResp(prod, 'Method Not Allowed', 405));
   }
 };
 
