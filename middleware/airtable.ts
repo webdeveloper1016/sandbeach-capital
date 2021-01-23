@@ -4,9 +4,9 @@ const base = new AirtableConnect({ apiKey: process.env.AIRTABLE_API_KEY }).base(
   process.env.AIRTABLE_BASE,
 );
 
-export const airtable = (
+export const airtable = <T>(
   table: 'Crypto' | 'Stocks' | 'Watchlist',
-): Promise<Record<string, unknown>[]> => {
+): Promise<T> => {
   return new Promise((resolve, reject) => {
     try {
       base(table)
@@ -22,7 +22,7 @@ export const airtable = (
           // process data
           const data = records.map((r) => r.fields);
 
-          resolve(data);
+          resolve(data as unknown as T);
         });
     } catch (error) {
       reject(error);

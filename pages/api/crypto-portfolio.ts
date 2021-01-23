@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import _ from 'lodash';
 import { airtable, auth, errResp, fetchCoincap } from '../../middleware';
-import { CoinCapAssetRespModel } from '../../ts/coincap';
+import { AirTableCryptoModel } from '../../ts/airtable';
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -11,21 +11,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     await auth(req);
 
     // fetch from DB
-    const holdings = await airtable('Crypto');
+    const holdings = await airtable<AirTableCryptoModel[]>('Crypto');
+
     // fetch prices
-    const prices = await fetchCoincap([
-      'bitcoin',
-      'ethereum',
-      'aave',
-      'uniswap',
-      'compound',
-      'algorand',
-      'synthetix-network-token',
-      'cosmos',
-      'yearn-finance',
-      'maker',
-      'tezos',
-    ]);
+    const prices = await fetchCoincap(
+      _.uniqBy(holdings, 'Coin').map((x) => x.Coin),
+    );
+    
     res.status(200).json({ data: { prices, holdings } });
   } catch (error) {
     res.status(error.status || 500).end(errResp(prod, error, error.status));
