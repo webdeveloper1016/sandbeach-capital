@@ -19,11 +19,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       _.uniqBy(holdings, 'Coin').map((x) => x.Coin),
     );
 
-    res
-      .status(200)
-      .json({
-        data: { values: enrichCrypto(holdings, prices), prices, holdings },
-      });
+    res.status(200).json({
+      data: enrichCrypto(holdings, prices),
+    });
   } catch (error) {
     res.status(error.status || 500).end(errResp(prod, error, error.status));
   }
