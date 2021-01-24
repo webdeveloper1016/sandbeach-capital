@@ -54,8 +54,24 @@ export const enrichAccounts = (
     0,
   );
 
+  const exCryptoPortfolioTotal = data.filter(a => !a.crypto).reduce(
+    (accum, current) => accum + current.totalValue,
+    0,
+  );
+
   return {
-    portfolioTotal: currencyDisplay(portfolioTotal),
+    summary: {
+      portfolioTotal: currencyDisplay(portfolioTotal),
+      exCryptoPortfolioTotal: currencyDisplay(exCryptoPortfolioTotal),
+      cryptoPortfolioTotal: cryptoData.portfolioTotal,
+      cryptoPortfolioTotalExStable: cryptoData.portfolioTotalExStable,
+    },
+    stats: {
+      byTimeFrame: [],
+      byAssetClass: [],
+      byFactor: [],
+      byRisk: [],
+    },
     accounts: data,
   };
 };
