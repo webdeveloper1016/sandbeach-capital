@@ -1,21 +1,20 @@
-// import _ from 'lodash';
-import { AirTableCryptoModel } from '../ts/airtable';
-import { CoinCapAssetModel } from '../ts/coincap';
+import { AirTableCryptoModel, CoinCapAssetModel } from '../ts';
+import { currencyDisplay } from './calc';
 
 export const enrichCrypto = (
   holdings: AirTableCryptoModel[],
   prices: CoinCapAssetModel[],
 ) => {
   const coins = prices.map((p) => {
-    const locations = holdings.filter((h) => h.Coin === p.id);
-    const totalAmount = locations.reduce(
-      (accum, current) => accum + current.Amount,
+    const accounts = holdings.filter((h) => h.coin === p.id);
+    const totalAmount = accounts.reduce(
+      (accum, current) => accum + current.amount,
       0,
     );
     return {
       ...p,
-      stablecoin: Boolean(locations.find((l) => l.Stablecoin)),
-      locations,
+      stablecoin: Boolean(accounts.find((l) => l.stablecoin)),
+      accounts,
       totalAmount,
       totalValue: totalAmount * p.priceUsdNumber,
     };
@@ -30,5 +29,9 @@ export const enrichCrypto = (
     .filter((c) => !c.stablecoin)
     .reduce((accum, current) => accum + current.totalValue, 0);
 
-  return { portfolioTotal, portfolioTotalExStable, coins };
+  return {
+    portfolioTotal: currencyDisplay(portfolioTotal),
+    portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),
+    coins,
+  };
 };

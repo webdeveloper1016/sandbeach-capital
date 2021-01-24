@@ -1,8 +1,4 @@
 export interface AssetModel {
-  // id: string;
-  // symbol: string;
-  // name: string;
-  // priceUsd: string;
   id: string;
   rank: string;
   symbol: string;
@@ -14,6 +10,7 @@ export interface AssetModel {
   priceUsd: string;
   changePercent24Hr: string;
   vwap24Hr: string;
+  explorer: string;
 }
 export interface CoinCapAssetRespModel {
   data: AssetModel[];

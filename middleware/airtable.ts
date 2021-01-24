@@ -1,12 +1,11 @@
 import AirtableConnect from 'airtable';
+import { AirTableTablesType } from '../ts';
 
 const base = new AirtableConnect({ apiKey: process.env.AIRTABLE_API_KEY }).base(
   process.env.AIRTABLE_BASE,
 );
 
-export const airtable = <T>(
-  table: 'Crypto' | 'Stocks' | 'Watchlist',
-): Promise<T> => {
+export const airtable = <T>(table: AirTableTablesType): Promise<T> => {
   return new Promise((resolve, reject) => {
     try {
       base(table)
@@ -22,7 +21,7 @@ export const airtable = <T>(
           // process data
           const data = records.map((r) => r.fields);
 
-          resolve(data as unknown as T);
+          resolve((data as unknown) as T);
         });
     } catch (error) {
       reject(error);
