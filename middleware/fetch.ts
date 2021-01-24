@@ -44,6 +44,7 @@ export const fetchStockHoldings = async (
   symbols: string[],
   iex: IexUrlModel,
 ): Promise<IexSimpleQuoteModel> => {
+  console.log(symbols)
   const batch = iexUrl(iex, 'batch', symbols.join(','));
   const { data } = await axios.get(batch);
   return Object.keys(data).reduce((acc, key) => {

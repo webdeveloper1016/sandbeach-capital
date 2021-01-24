@@ -16,12 +16,17 @@ export interface AirTableCryptoModel {
   stablecoin?: boolean;
 }
 
+export interface AirTableCryptoModelExtended extends AirTableCryptoModel {
+  sliceTotalValue: number;
+}
+
 export interface AirTableAccountModel {
   id: string;
   nickname: string;
   institution: string;
   timeframe: string;
   contribution?: number;
+  crypto?: boolean;
 }
 
 export interface AirTablePieModel {
