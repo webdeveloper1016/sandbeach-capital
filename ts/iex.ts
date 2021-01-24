@@ -39,3 +39,5 @@ export interface IexFetchSimpleQuoteModel {
   crypto: Record<string, IexCryptoQuoteModelEnriched>;
   allData: unknown[];
 }
+
+export type IexSimpleQuoteModel = Record<string, IexStockQuoteModelEnriched>
