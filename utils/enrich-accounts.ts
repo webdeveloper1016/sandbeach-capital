@@ -1,5 +1,7 @@
+import { currencyDisplay } from './calc';
 import {
-  AirTableAccountModel, AirTablePieModel, 
+  AirTableAccountModel,
+  AirTablePieModel,
   IexSimpleQuoteModel,
 } from '../ts';
 
@@ -9,20 +11,32 @@ export const enrichAccounts = (
   quotes: IexSimpleQuoteModel,
 ) => {
   const data = accounts.map((a) => {
-    const findPie = pies.filter((p) => p.account === a.id)
-    const pie = findPie.map(p => {
+    const findPie = pies.filter((p) => p.account === a.id);
+    const pie = findPie.map((slice) => {
+      const quote = quotes[slice.symbol] || null;
       return {
-        ...p,
-        quote: quotes[p.symbol]
-      }
-    })
+        ...slice,
+        sliceTotalValue: quote ? quote.price.val * slice.shares : slice.shares,
+      };
+    });
     return {
       ...a,
       pie,
+      totalValue: pie.reduce(
+        (accum, current) => accum + current.sliceTotalValue,
+        0,
+      ),
     };
   });
 
-  // console.log(prices)
+  const portfolioTotal = data.reduce(
+    (accum, current) => accum + current.totalValue,
+    0,
+  );
 
-  return { data, meta: {accounts, pies, quotes} };
+  return {
+    portfolioTotal: currencyDisplay(portfolioTotal),
+    accounts: data,
+    meta: { accounts, pies, quotes },
+  };
 };
