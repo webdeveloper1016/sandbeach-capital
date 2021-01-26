@@ -1,15 +1,14 @@
 import { currencyDisplay } from './calc';
+import { enrichSummary } from './enrich-summary'
+import { enrichStats } from './enrich-stats';
 import {
   AirTableAccountModel,
   AirTablePieModel,
   IexSimpleQuoteModel,
   EnrichedCryptoModel,
+  AirTablePieModelExtended,
+  AirTableCryptoModelExtended
 } from '../ts';
-
-interface PieModel {
-  [x: string]: any;
-  sliceTotalValue: number;
-}
 
 export const enrichAccounts = (
   accounts: AirTableAccountModel[],
@@ -18,7 +17,7 @@ export const enrichAccounts = (
   cryptoData: EnrichedCryptoModel,
 ) => {
   const data = accounts.map((account) => {
-    let pie: PieModel[] = [];
+    let pie = [];
     // enrich account with crypto or stock data
     if (account.crypto) {
       // crypto data already has prices and rolled up values
@@ -54,24 +53,13 @@ export const enrichAccounts = (
     0,
   );
 
-  const exCryptoPortfolioTotal = data.filter(a => !a.crypto).reduce(
-    (accum, current) => accum + current.totalValue,
-    0,
-  );
+  const exCryptoPortfolioTotal = data
+    .filter((a) => !a.crypto)
+    .reduce((accum, current) => accum + current.totalValue, 0);
 
   return {
-    summary: {
-      portfolioTotal: currencyDisplay(portfolioTotal),
-      exCryptoPortfolioTotal: currencyDisplay(exCryptoPortfolioTotal),
-      cryptoPortfolioTotal: cryptoData.portfolioTotal,
-      cryptoPortfolioTotalExStable: cryptoData.portfolioTotalExStable,
-    },
-    stats: {
-      byTimeFrame: [],
-      byAssetClass: [],
-      byFactor: [],
-      byRisk: [],
-    },
+    summary: enrichSummary(portfolioTotal, exCryptoPortfolioTotal, cryptoData),
+    stats: enrichStats(data, portfolioTotal),
     accounts: data,
   };
 };

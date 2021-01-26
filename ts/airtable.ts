@@ -37,3 +37,12 @@ export interface AirTablePieModel {
   shares: number;
   symbol?: string;
 }
+
+export interface AirTablePieModelExtended extends AirTablePieModel {
+  sliceTotalValue: number;
+}
+
+export interface AirTableAccountModelExtended extends AirTableAccountModel {
+  pie: AirTablePieModelExtended[];
+  totalValue: number;
+}
