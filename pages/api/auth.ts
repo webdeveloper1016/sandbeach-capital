@@ -3,7 +3,7 @@ import { errResp } from '../../middleware';
 
 const prod = process.env.NODE_ENV === 'production';
 
-const TOKEN_EXP = '1d';
+const TOKEN_EXP = '30d';
 
 interface ReqModel {
   method: 'POST' | 'GET';
