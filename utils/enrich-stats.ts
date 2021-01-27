@@ -1,11 +1,14 @@
+import _ from 'lodash';
 import { percentDisplay, currencyDisplay } from './calc';
 import {
   CategoryType,
   AssetClassType,
+  AirTablePieModelExtended,
   AirTableAccountModelExtended,
+  StatWeightModel,
 } from '../ts';
 
-export const assetClasses: AssetClassType[] = [
+const assetClasses: AssetClassType[] = [
   'Stocks',
   'Bonds',
   'Alts',
@@ -15,25 +18,22 @@ export const assetClasses: AssetClassType[] = [
   'Real Estate',
 ];
 
-export const categories: CategoryType[] = [
-  'short-term',
-  'long-term',
-  'retirement',
-];
-
-export const categoryLabels: Record<CategoryType, string> = {
+const categoryLabels: Record<CategoryType, string> = {
   'short-term': 'Short Term',
   'long-term': 'Long Term',
   retirement: 'Retirement',
 };
 
-export const sumAccounts = (data: AirTableAccountModelExtended[]): number =>
+const sumAccounts = (data: AirTableAccountModelExtended[]): number =>
   data.reduce((accum, current) => accum + current.totalValue, 0);
+
+const sumSlices = (data: AirTablePieModelExtended[]): number =>
+  data.reduce((accum, current) => accum + current.sliceTotalValue, 0);
 
 export const byTimeFrame = (
   accountData: AirTableAccountModelExtended[],
   totalBalance: number,
-) => {
+): StatWeightModel[] => {
   return Object.keys(categoryLabels).map((cat) => {
     const filtered = sumAccounts(
       accountData.filter((a) => a.timeframe === cat),
@@ -46,14 +46,32 @@ export const byTimeFrame = (
   });
 };
 
+export const byAssetClass = (
+  slices: AirTablePieModelExtended[],
+  totalBalance: number,
+): StatWeightModel[] => {
+  const byAsset =  assetClasses.map((assetClass) => {
+    const filtered = sumSlices(
+      slices.filter((a) => a.assetClass === assetClass),
+    );
+    return {
+      label: assetClass,
+      value: currencyDisplay(filtered),
+      weight: percentDisplay(filtered, totalBalance),
+    };
+  });
+
+  return _.orderBy(byAsset, ['weight.val'], ['desc'])
+};
+
 export const enrichStats = (
   accountData: AirTableAccountModelExtended[],
   totalBalance: number,
 ) => {
-  const allPies = accountData.flatMap(a => a.pie)
+  const allSlices = accountData.flatMap((a) => a.pie);
   return {
     byTimeFrame: byTimeFrame(accountData, totalBalance),
-    byAssetClass: allPies,
+    byAssetClass: byAssetClass(allSlices, totalBalance),
     byFactor: [],
     byRisk: [],
   };
