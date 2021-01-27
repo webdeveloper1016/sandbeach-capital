@@ -1,5 +1,19 @@
 import { percentDisplay, currencyDisplay } from './calc';
-import { CategoryType, AirTableAccountModelExtended } from '../ts';
+import {
+  CategoryType,
+  AssetClassType,
+  AirTableAccountModelExtended,
+} from '../ts';
+
+export const assetClasses: AssetClassType[] = [
+  'Stocks',
+  'Bonds',
+  'Alts',
+  'Crypto',
+  'Stablecoin',
+  'Cash',
+  'Real Estate',
+];
 
 export const categories: CategoryType[] = [
   'short-term',
@@ -16,9 +30,14 @@ export const categoryLabels: Record<CategoryType, string> = {
 export const sumAccounts = (data: AirTableAccountModelExtended[]): number =>
   data.reduce((accum, current) => accum + current.totalValue, 0);
 
-export const byTimeFrame = (accountData: AirTableAccountModelExtended[], totalBalance: number) => {
+export const byTimeFrame = (
+  accountData: AirTableAccountModelExtended[],
+  totalBalance: number,
+) => {
   return Object.keys(categoryLabels).map((cat) => {
-    const filtered = sumAccounts(accountData.filter(a => a.timeframe === cat))
+    const filtered = sumAccounts(
+      accountData.filter((a) => a.timeframe === cat),
+    );
     return {
       value: currencyDisplay(filtered),
       weight: percentDisplay(filtered, totalBalance),
@@ -27,11 +46,15 @@ export const byTimeFrame = (accountData: AirTableAccountModelExtended[], totalBa
   });
 };
 
-export const enrichStats = (accountData: AirTableAccountModelExtended[], totalBalance: number) => {
+export const enrichStats = (
+  accountData: AirTableAccountModelExtended[],
+  totalBalance: number,
+) => {
+  const allPies = accountData.flatMap(a => a.pie)
   return {
     byTimeFrame: byTimeFrame(accountData, totalBalance),
-    byAssetClass: [],
+    byAssetClass: allPies,
     byFactor: [],
     byRisk: [],
-  }
-}
+  };
+};

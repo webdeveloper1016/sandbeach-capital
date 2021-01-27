@@ -17,7 +17,7 @@ export const enrichCrypto = (
     );
     return {
       ...p,
-      stablecoin: Boolean(accounts.find((l) => l.stablecoin)),
+      stablecoin: Boolean(accounts.find((l) => l.assetClass === 'Stablecoin')),
       accounts,
       totalAmount,
       totalValue: totalAmount * p.priceUsdNumber,

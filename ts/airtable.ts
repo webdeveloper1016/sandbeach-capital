@@ -1,4 +1,4 @@
-import { AssetClassType } from './types';
+import { StockAssetClassType, CryptoAssetClassType } from './types';
 
 export type AirTableTablesType =
   | 'Crypto'
@@ -13,7 +13,7 @@ export interface AirTableCryptoModel {
   symbol: string;
   coin: string;
   amount: number;
-  stablecoin?: boolean;
+  assetClass: CryptoAssetClassType;
 }
 
 export interface AirTableCryptoModelExtended extends AirTableCryptoModel {
@@ -32,7 +32,7 @@ export interface AirTableAccountModel {
 export interface AirTablePieModel {
   id: string;
   account: string;
-  assetClass: AssetClassType;
+  assetClass: StockAssetClassType;
   sector: string;
   shares: number;
   symbol?: string;

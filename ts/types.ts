@@ -1,8 +1,25 @@
-import { IexUrlModel, IexQuoteModelEnriched, IexFetchSimpleQuoteModel } from './iex';
+import {
+  IexUrlModel,
+  IexQuoteModelEnriched,
+  IexFetchSimpleQuoteModel,
+} from './iex';
 
 export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
-export type AssetClassType = 'Stocks' | 'Bonds' | 'Alts' | 'Crypto' | 'Stablecoin' | 'Cash';
+
+export type StockAssetClassType =
+  | 'Stocks'
+  | 'Bonds'
+  | 'Alts'
+  | 'Cash'
+  | 'Real Estate';
+
+  export type CryptoAssetClassType =
+  | 'Crypto'
+  | 'Stablecoin'
+
+
+export type AssetClassType = StockAssetClassType | CryptoAssetClassType
 
 export type FactorTypes =
   | 'growth'
@@ -217,6 +234,6 @@ export interface PortfolioModelAnalyzed {
 export interface PortfolioModelExtended {
   accounts: PortfolioAccountModelEnriched;
   goals: PortfolioGoalsModelEnriched;
-  iex: IexUrlModel
-  quotes: IexFetchSimpleQuoteModel
+  iex: IexUrlModel;
+  quotes: IexFetchSimpleQuoteModel;
 }
