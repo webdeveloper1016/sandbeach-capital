@@ -18,16 +18,16 @@ const AccountsPage = () => (
             { Header: 'Institution', accessor: 'institution' },
             { Header: 'Risk', accessor: 'risk' },
           ]}
-          data={data.accounts.allAccounts}
+          data={data.accounts}
         />
         <Section>
           <Header size="text-2xl" content="Details:" />
-          {data.accounts.allAccounts.map((a, k) => (
+          {data.accounts.map((a, k) => (
             <div className="px-2 pb-6 overflow-x-auto" key={k}>
               <Header
                 size="text-lg"
-                content={`Pie: ${a.account}`}
-                subheader={`Goal: ${a.goal} | Risk Level: ${a.risk}`}
+                content={`Pie: ${a.nickname}`}
+                // subheader={`Goal: ${a.goal} | Risk Level: ${a.risk}`}
               />
               <Table
                 layout="fixed"
@@ -43,7 +43,7 @@ const AccountsPage = () => (
                 ]}
                 data={a.pie}
               />
-              {k + 1 !== data.accounts.allAccounts.length && (
+              {k + 1 !== data.accounts.length && (
                 <div className="border-b mx-8 mt-6 border-green-500" />
               )}
             </div>

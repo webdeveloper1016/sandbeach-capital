@@ -1,12 +1,11 @@
 import React from 'react';
-import get from 'lodash.get';
 import Status from './Status';
 import TotalNetWorth from './TotalNetWorth';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
-import { PortfolioModelExtended } from '../ts/types';
+import { APIAccountModel } from '../ts';
 
 interface PortfolioDataProps {
-  children: (data: PortfolioModelExtended) => React.ReactNode;
+  children: (data: APIAccountModel) => React.ReactNode;
 }
 
 const PortfolioData = ({ children }: PortfolioDataProps) => {
@@ -17,8 +16,8 @@ const PortfolioData = ({ children }: PortfolioDataProps) => {
       {data && (
         <div>
           <TotalNetWorth
-            portfolioTotal={data.accounts.totalBalance.val}
-            btcPrice={get(data, 'quotes.crypto.BTC.price.val', 0)}
+            portfolioTotal={data.summary.portfolioTotal.val}
+            btcPrice={data.summary.btcLast.priceUsdNumber}
           />
           {children(data)}
         </div>

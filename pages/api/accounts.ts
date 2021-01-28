@@ -51,6 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         pies,
         quotes,
         enrichCrypto(crypto, cryptoQuotes),
+        iex,
       ),
     });
   } catch (error) {

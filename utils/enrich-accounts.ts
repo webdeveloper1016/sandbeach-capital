@@ -1,4 +1,3 @@
-import { currencyDisplay } from './calc';
 import { enrichSummary } from './enrich-summary';
 import { enrichStats } from './enrich-stats';
 import {
@@ -7,6 +6,7 @@ import {
   IexSimpleQuoteModel,
   EnrichedCryptoModel,
   APIAccountModel,
+  IexUrlModel,
 } from '../ts';
 
 export const enrichAccounts = (
@@ -14,6 +14,7 @@ export const enrichAccounts = (
   pies: AirTablePieModel[],
   quotes: IexSimpleQuoteModel,
   cryptoData: EnrichedCryptoModel,
+  iex: IexUrlModel,
 ): APIAccountModel => {
   const data = accounts.map((account) => {
     let pie = [];
@@ -55,10 +56,11 @@ export const enrichAccounts = (
   const exCryptoPortfolioTotal = data
     .filter((a) => !a.crypto)
     .reduce((accum, current) => accum + current.totalValue, 0);
-
+  console.log(iex);
   return {
     summary: enrichSummary(portfolioTotal, exCryptoPortfolioTotal, cryptoData),
     stats: enrichStats(data, portfolioTotal),
     accounts: data,
+    iex,
   };
 };

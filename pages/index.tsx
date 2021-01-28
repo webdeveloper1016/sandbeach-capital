@@ -13,7 +13,7 @@ const HomePage = () => (
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
-          data={data.accounts.categorySummary}
+          data={data.stats.byTimeFrame}
         />
         <TableSection
           header="Asset Class:"
@@ -22,7 +22,7 @@ const HomePage = () => (
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
-          data={orderBy(data.accounts.portfolioSectorWeights, ['weight.val'], ['desc'])}
+          data={data.stats.byAssetClass}
         />
         <TableSection
           header="Factor Tilts:"
@@ -37,7 +37,7 @@ const HomePage = () => (
               accessor: 'assetClassWeight.display',
             },
           ]}
-          data={orderBy(data.accounts.insights.sliceDetails, ['assetClassWeight.val'], ['desc'])}
+          data={data.stats.byFactor}
           layout="fixed"
         />
         <TableSection
@@ -47,7 +47,17 @@ const HomePage = () => (
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
-          data={data.accounts.insights.riskSplit}
+          data={data.stats.byRisk}
+          layout="fixed"
+        />
+        <TableSection
+          header="Savings Details:"
+          columns={[
+            { Header: 'Label', accessor: 'label' },
+            { Header: 'Amount', accessor: 'value.display' },
+            { Header: 'Percent', accessor: 'weight.display' },
+          ]}
+          data={data.stats.byContribution}
           layout="fixed"
         />
       </div>

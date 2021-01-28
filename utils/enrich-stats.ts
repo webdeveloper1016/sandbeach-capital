@@ -75,5 +75,6 @@ export const enrichStats = (
     byAssetClass: byAssetClass(allSlices, totalBalance),
     byFactor: [],
     byRisk: [],
+    byContribution: [],
   };
 };

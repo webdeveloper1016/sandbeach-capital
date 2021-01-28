@@ -11,4 +11,5 @@ export interface AccountStatsModel {
   byAssetClass: StatWeightModel[];
   byFactor: StatWeightModel[];
   byRisk: StatWeightModel[];
+  byContribution: StatWeightModel[];
 }
