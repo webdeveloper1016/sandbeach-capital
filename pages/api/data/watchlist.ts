@@ -4,6 +4,7 @@ export const watchlist = {
     'SPOT',
     'NIO',
     'WDAY',
+    'SBUX',
     'TSLA',
     'ABNB',
   ], // at the right price

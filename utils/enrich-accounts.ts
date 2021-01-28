@@ -1,13 +1,12 @@
 import { currencyDisplay } from './calc';
-import { enrichSummary } from './enrich-summary'
+import { enrichSummary } from './enrich-summary';
 import { enrichStats } from './enrich-stats';
 import {
   AirTableAccountModel,
   AirTablePieModel,
   IexSimpleQuoteModel,
   EnrichedCryptoModel,
-  AirTablePieModelExtended,
-  AirTableCryptoModelExtended
+  APIAccountModel,
 } from '../ts';
 
 export const enrichAccounts = (
@@ -15,7 +14,7 @@ export const enrichAccounts = (
   pies: AirTablePieModel[],
   quotes: IexSimpleQuoteModel,
   cryptoData: EnrichedCryptoModel,
-) => {
+): APIAccountModel => {
   const data = accounts.map((account) => {
     let pie = [];
     // enrich account with crypto or stock data

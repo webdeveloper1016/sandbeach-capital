@@ -6,6 +6,7 @@ import {
   AirTablePieModelExtended,
   AirTableAccountModelExtended,
   StatWeightModel,
+  AccountStatsModel,
 } from '../ts';
 
 const assetClasses: AssetClassType[] = [
@@ -50,7 +51,7 @@ export const byAssetClass = (
   slices: AirTablePieModelExtended[],
   totalBalance: number,
 ): StatWeightModel[] => {
-  const byAsset =  assetClasses.map((assetClass) => {
+  const byAsset = assetClasses.map((assetClass) => {
     const filtered = sumSlices(
       slices.filter((a) => a.assetClass === assetClass),
     );
@@ -61,13 +62,13 @@ export const byAssetClass = (
     };
   });
 
-  return _.orderBy(byAsset, ['weight.val'], ['desc'])
+  return _.orderBy(byAsset, ['weight.val'], ['desc']);
 };
 
 export const enrichStats = (
   accountData: AirTableAccountModelExtended[],
   totalBalance: number,
-) => {
+): AccountStatsModel => {
   const allSlices = accountData.flatMap((a) => a.pie);
   return {
     byTimeFrame: byTimeFrame(accountData, totalBalance),
