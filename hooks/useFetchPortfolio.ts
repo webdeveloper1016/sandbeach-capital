@@ -10,7 +10,7 @@ const useGetPortfolio = async (params: {
 }): Promise<APIAccountModel> => {
   try {
     const { data } = await axiosGet<APIAccountModelResp>(
-      '/api/accounts',
+      '/api/portfolio',
       params.token,
     );
 
