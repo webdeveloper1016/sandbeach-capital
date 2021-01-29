@@ -39,7 +39,6 @@ export const byTimeFrame = (
     const filtered = sumAccounts(
       accountData.filter((a) => a.timeframe === categoryLabels[cat]),
     );
-    console.log(filtered)
     return {
       value: currencyDisplay(filtered),
       weight: percentDisplay(filtered, totalBalance),
