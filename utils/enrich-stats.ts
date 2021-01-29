@@ -37,8 +37,9 @@ export const byTimeFrame = (
 ): StatWeightModel[] => {
   return Object.keys(categoryLabels).map((cat) => {
     const filtered = sumAccounts(
-      accountData.filter((a) => a.timeframe === cat),
+      accountData.filter((a) => a.timeframe === categoryLabels[cat]),
     );
+    console.log(filtered)
     return {
       value: currencyDisplay(filtered),
       weight: percentDisplay(filtered, totalBalance),
