@@ -18,7 +18,7 @@ const HomePage = () => (
         <TableSection
           header="Asset Class:"
           columns={[
-            { Header: 'Asset Class', accessor: 'assetClass' },
+            { Header: 'Asset Class', accessor: 'label' },
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
