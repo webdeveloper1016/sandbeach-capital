@@ -56,7 +56,7 @@ export const enrichAccounts = (
   const exCryptoPortfolioTotal = data
     .filter((a) => !a.crypto)
     .reduce((accum, current) => accum + current.totalValue, 0);
-  console.log(iex);
+
   return {
     summary: enrichSummary(portfolioTotal, exCryptoPortfolioTotal, cryptoData),
     stats: enrichStats(data, portfolioTotal),

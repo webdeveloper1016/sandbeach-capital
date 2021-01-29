@@ -197,48 +197,48 @@ export const runInitialAnalysis = (
   };
 };
 
-export const runAnalysis = (
-  data: PortfolioModel,
-  liveQuotes: IexFetchSimpleQuoteModel,
-): PortfolioModelAnalyzed => {
-  // analyze account data
-  const initialAnalysis = runInitialAnalysis(data.accounts, liveQuotes);
-  const allAccounts = [
-    ...initialAnalysis.shortTerm.data,
-    ...initialAnalysis.longTerm.data,
-    ...initialAnalysis.retirement.data,
-  ];
-  const allPies = allAccounts.map((a) => a.pie).flat();
+// export const runAnalysis1 = (
+//   data: PortfolioModel,
+//   liveQuotes: IexFetchSimpleQuoteModel,
+// ): PortfolioModelAnalyzed => {
+//   // analyze account data
+//   const initialAnalysis = runInitialAnalysis(data.accounts, liveQuotes);
+//   const allAccounts = [
+//     ...initialAnalysis.shortTerm.data,
+//     ...initialAnalysis.longTerm.data,
+//     ...initialAnalysis.retirement.data,
+//   ];
+//   const allPies = allAccounts.map((a) => a.pie).flat();
 
-  // return data
-  return {
-    // existing data
-    ...data,
-    // enriched goal data
-    goals: {
-      ...data.goals,
-      savingsAnalysis: runSavingsAnalysis(allAccounts, data.goals.savings),
-    },
-    // enriched account data
-    accounts: {
-      ...initialAnalysis,
-      allAccounts,
-      allPies,
-      insights: {
-        globalSplit: calcGlobalSplit(
-          initialAnalysis.portfolioSectorWeights.find(
-            (s) => s.assetClass === 'Stocks',
-          ),
-          allPies.filter((p) => p.assetClass === 'Stocks'),
-        ),
-        activeSplit: calcActiveSplit(initialAnalysis.totalBalance, allAccounts),
-        riskSplit: calcRiskSplit(initialAnalysis.totalBalance, allAccounts),
-        sliceDetails: sliceDetailsAnalysis(
-          initialAnalysis,
-          allPies,
-          allAccounts,
-        ),
-      },
-    },
-  };
-};
+//   // return data
+//   return {
+//     // existing data
+//     ...data,
+//     // enriched goal data
+//     goals: {
+//       ...data.goals,
+//       savingsAnalysis: runSavingsAnalysis(allAccounts, data.goals.savings),
+//     },
+//     // enriched account data
+//     accounts: {
+//       ...initialAnalysis,
+//       allAccounts,
+//       allPies,
+//       insights: {
+//         globalSplit: calcGlobalSplit(
+//           initialAnalysis.portfolioSectorWeights.find(
+//             (s) => s.assetClass === 'Stocks',
+//           ),
+//           allPies.filter((p) => p.assetClass === 'Stocks'),
+//         ),
+//         activeSplit: calcActiveSplit(initialAnalysis.totalBalance, allAccounts),
+//         riskSplit: calcRiskSplit(initialAnalysis.totalBalance, allAccounts),
+//         sliceDetails: sliceDetailsAnalysis(
+//           initialAnalysis,
+//           allPies,
+//           allAccounts,
+//         ),
+//       },
+//     },
+//   };
+// };
