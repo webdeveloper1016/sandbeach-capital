@@ -3,7 +3,7 @@ import {
   CoinCapAssetModel,
   EnrichedCryptoModel,
 } from '../ts';
-import { currencyDisplay } from './calc';
+import { currencyDisplay, percentDisplay } from './calc';
 
 export const enrichCrypto = (
   holdings: AirTableCryptoModel[],
@@ -29,6 +29,7 @@ export const enrichCrypto = (
     sliceTotalValue: currencyDisplay(
       prices.find((p) => p.id === h.coin)?.priceUsdNumber * h.amount,
     ),
+    sliceWeight: percentDisplay(1,1)
   }));
 
   const portfolioTotal = coins.reduce(

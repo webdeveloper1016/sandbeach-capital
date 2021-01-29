@@ -1,14 +1,13 @@
 import { format } from 'date-fns';
 import {
   NumberDisplayModel,
-  AccountModel,
-  PieModelExtended,
+
 } from '../ts/types';
 
-export const sumAccounts = (data: AccountModel[]): number =>
+export const sumAccounts = (data: any[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
 
-export const sumPies = (data: PieModelExtended[]): number =>
+export const sumPies = (data: any[]): number =>
   data.reduce((accum, current) => accum + current.approxVal.val, 0);
 
 export const currencyFormatter = new Intl.NumberFormat('en-US', {
