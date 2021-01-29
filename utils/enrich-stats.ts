@@ -19,17 +19,17 @@ const assetClasses: AssetClassType[] = [
   'Real Estate',
 ];
 
-const categoryLabels: Record<CategoryType, string> = {
+export const categoryLabels: Record<CategoryType, string> = {
   'short-term': 'Short Term',
   'long-term': 'Long Term',
   retirement: 'Retirement',
 };
 
 const sumAccounts = (data: AirTableAccountModelExtended[]): number =>
-  data.reduce((accum, current) => accum + current.totalValue, 0);
+  data.reduce((accum, current) => accum + current.totalValue.val, 0);
 
 const sumSlices = (data: AirTablePieModelExtended[]): number =>
-  data.reduce((accum, current) => accum + current.sliceTotalValue, 0);
+  data.reduce((accum, current) => accum + current.sliceTotalValue.val, 0);
 
 export const byTimeFrame = (
   accountData: AirTableAccountModelExtended[],

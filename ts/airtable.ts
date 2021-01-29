@@ -1,4 +1,8 @@
-import { StockAssetClassType, CryptoAssetClassType } from './types';
+import {
+  StockAssetClassType,
+  CryptoAssetClassType,
+  NumberDisplayModel,
+} from './types';
 
 export type AirTableTablesType =
   | 'Crypto'
@@ -17,7 +21,7 @@ export interface AirTableCryptoModel {
 }
 
 export interface AirTableCryptoModelExtended extends AirTableCryptoModel {
-  sliceTotalValue: number;
+  sliceTotalValue: NumberDisplayModel;
 }
 
 export interface AirTableAccountModel {
@@ -39,10 +43,11 @@ export interface AirTablePieModel {
 }
 
 export interface AirTablePieModelExtended extends AirTablePieModel {
-  sliceTotalValue: number;
+  sliceTotalValue: NumberDisplayModel;
 }
 
 export interface AirTableAccountModelExtended extends AirTableAccountModel {
   pie: AirTablePieModelExtended[];
-  totalValue: number;
+  totalValue: NumberDisplayModel;
+  weight: NumberDisplayModel;
 }

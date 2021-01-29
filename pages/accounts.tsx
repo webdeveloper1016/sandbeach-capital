@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import PortfolioData from '../components/PortfolioData';
 import TableSection from '../components/TableSection';
 import Header from '../components/Header';
@@ -11,12 +12,10 @@ const AccountsPage = () => (
         <TableSection
           header="Overview:"
           columns={[
-            { Header: 'Account', accessor: 'account' },
-            { Header: 'Category', accessor: 'categoryLabel' },
-            { Header: 'Balance', accessor: 'value.display' },
-            { Header: 'Weight', accessor: 'portfolioWeight.display' },
-            { Header: 'Institution', accessor: 'institution' },
-            { Header: 'Risk', accessor: 'risk' },
+            { Header: 'Account', accessor: 'nickname' },
+            { Header: 'Category', accessor: 'timeframe' },
+            { Header: 'Balance', accessor: 'totalValue.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
           ]}
           data={data.accounts}
         />
@@ -26,21 +25,18 @@ const AccountsPage = () => (
             <div className="px-2 pb-6 overflow-x-auto" key={k}>
               <Header
                 size="text-lg"
-                content={`Pie: ${a.nickname}`}
+                content={`${a.nickname} | ${a.totalValue.display}`}
                 // subheader={`Goal: ${a.goal} | Risk Level: ${a.risk}`}
               />
               <Table
                 layout="fixed"
-                columns={[
-                  { Header: 'Slice', accessor: 'nickname' },
+                columns={_.compact([
+                  { Header: 'Symbol', accessor: 'symbol' },
+                  { Header: 'Shares', accessor: 'shares' },
+                  { Header: 'Equity', accessor: 'sliceTotalValue.display' },
                   { Header: 'Class', accessor: 'assetClass' },
-                  { Header: 'Sector', accessor: 'sector' },
-                  { Header: 'Approx Balance', accessor: 'approxVal.display' },
-                  {
-                    Header: 'Target Weight',
-                    accessor: 'targetPercentDisplay.display',
-                  },
-                ]}
+                  !a.crypto ? { Header: 'Sector', accessor: 'sector' } : null,
+                ])}
                 data={a.pie}
               />
               {k + 1 !== data.accounts.length && (

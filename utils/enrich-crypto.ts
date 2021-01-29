@@ -26,7 +26,9 @@ export const enrichCrypto = (
 
   const holdingsByAccount = holdings.map((h) => ({
     ...h,
-    sliceTotalValue: prices.find((p) => p.id === h.coin)?.priceUsdNumber * h.amount,
+    sliceTotalValue: currencyDisplay(
+      prices.find((p) => p.id === h.coin)?.priceUsdNumber * h.amount,
+    ),
   }));
 
   const portfolioTotal = coins.reduce(
