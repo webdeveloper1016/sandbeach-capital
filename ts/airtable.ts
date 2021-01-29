@@ -22,6 +22,7 @@ export interface AirTableCryptoModel {
 
 export interface AirTableCryptoModelExtended extends AirTableCryptoModel {
   sliceTotalValue: NumberDisplayModel;
+  sliceWeight: NumberDisplayModel;
 }
 
 export interface AirTableAccountModel {
@@ -44,6 +45,7 @@ export interface AirTablePieModel {
 
 export interface AirTablePieModelExtended extends AirTablePieModel {
   sliceTotalValue: NumberDisplayModel;
+  sliceWeight: NumberDisplayModel;
 }
 
 export interface AirTableAccountModelExtended extends AirTableAccountModel {

@@ -15,7 +15,7 @@ const AccountsPage = () => (
             { Header: 'Account', accessor: 'nickname' },
             { Header: 'Category', accessor: 'timeframe' },
             { Header: 'Balance', accessor: 'totalValue.display' },
-            { Header: 'Weight', accessor: 'weight.display' },
+            { Header: 'Portfolio Weight', accessor: 'weight.display' },
           ]}
           data={data.accounts}
         />
@@ -33,8 +33,9 @@ const AccountsPage = () => (
                 columns={_.compact([
                   { Header: 'Symbol', accessor: 'symbol' },
                   { Header: 'Shares', accessor: 'shares' },
-                  { Header: 'Equity', accessor: 'sliceTotalValue.display' },
-                  { Header: 'Class', accessor: 'assetClass' },
+                  { Header: 'Equity', accessor: 'sliceTotalValue.display' },//sliceWeight
+                  { Header: 'Weight', accessor: 'sliceWeight.display' },
+                  // { Header: 'Class', accessor: 'assetClass' },
                   !a.crypto ? { Header: 'Sector', accessor: 'sector' } : null,
                 ])}
                 data={a.pie}

@@ -51,10 +51,15 @@ export const enrichAccounts = (
       0,
     );
 
+    const pieWithWeight = pie.map(p => ({
+      ...p,
+      sliceWeight: percentDisplay(p.sliceTotalValue.val, sumAccount)
+    }))
+
     return {
       ...account,
       timeframe: categoryLabels[account.timeframe],
-      pie: _.orderBy(pie, ['sliceTotalValue.val'], ['desc']),
+      pie: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc']),
       totalValue: currencyDisplay(sumAccount),
       weight: percentDisplay(sumAccount, 0),
     };
