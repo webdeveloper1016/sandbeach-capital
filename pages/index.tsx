@@ -1,4 +1,3 @@
-import orderBy from 'lodash.orderby';
 import PortfolioData from '../components/PortfolioData';
 import TableSection from '../components/TableSection';
 
