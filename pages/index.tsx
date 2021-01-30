@@ -54,7 +54,6 @@ const HomePage = () => (
           columns={[
             { Header: 'Label', accessor: 'label' },
             { Header: 'Amount', accessor: 'value.display' },
-            { Header: 'Percent', accessor: 'weight.display' },
           ]}
           data={data.stats.byContribution}
           layout="fixed"

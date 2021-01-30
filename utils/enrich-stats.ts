@@ -75,6 +75,16 @@ export const enrichStats = (
     byAssetClass: byAssetClass(allSlices, totalBalance),
     byFactor: [],
     byRisk: [],
-    byContribution: [],
+    byContribution: [
+      {
+        label: 'YOY Recurring',
+        value: currencyDisplay(
+          accountData.reduce(
+            (accum, current) => accum + current.annualContribution,
+            0,
+          ),
+        ),
+      },
+    ],
   };
 };

@@ -31,6 +31,7 @@ export interface AirTableAccountModel {
   institution: string;
   timeframe: string;
   contribution?: number;
+  annualContribution: number;
   crypto?: boolean;
 }
 
