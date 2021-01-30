@@ -31,7 +31,7 @@ const sumAccounts = (data: AirTableAccountModelExtended[]): number =>
 const sumSlices = (data: AirTablePieModelExtended[]): number =>
   data.reduce((accum, current) => accum + current.sliceTotalValue.val, 0);
 
-export const byTimeFrame = (
+const byTimeFrame = (
   accountData: AirTableAccountModelExtended[],
   totalBalance: number,
 ): StatWeightModel[] => {
@@ -47,7 +47,7 @@ export const byTimeFrame = (
   });
 };
 
-export const byAssetClass = (
+const byAssetClass = (
   slices: AirTablePieModelExtended[],
   totalBalance: number,
 ): StatWeightModel[] => {
@@ -65,6 +65,43 @@ export const byAssetClass = (
   return _.orderBy(byAsset, ['weight.val'], ['desc']);
 };
 
+const byRisk = (
+  slices: AirTablePieModelExtended[],
+  totalBalance: number,
+): StatWeightModel[] => {
+  // get individual risk levels
+  const riskLevels = Object.keys(_.groupBy(slices, 'risk'));
+  const byRisk = riskLevels.map((risk) => {
+    const filtered = sumSlices(slices.filter((a) => a.risk === Number(risk)));
+    return {
+      label: risk,
+      value: currencyDisplay(filtered),
+      weight: percentDisplay(filtered, totalBalance),
+    };
+  });
+
+  return byRisk;
+};
+
+const byFactor = (
+  slices: AirTablePieModelExtended[],
+  totalBalance: number,
+): StatWeightModel[] => {
+  // get individual factors
+  const factors = _.uniq(_.compact(slices.flatMap(s => s.factors)))
+
+  const byRisk = factors.map((factor) => {
+    const filtered = sumSlices(slices.filter((a) => _.includes(a.factors, factor)));
+    return {
+      label: factor,
+      value: currencyDisplay(filtered),
+      weight: percentDisplay(filtered, totalBalance),
+    };
+  });
+
+  return byRisk;
+};
+
 export const enrichStats = (
   accountData: AirTableAccountModelExtended[],
   totalBalance: number,
@@ -73,8 +110,8 @@ export const enrichStats = (
   return {
     byTimeFrame: byTimeFrame(accountData, totalBalance),
     byAssetClass: byAssetClass(allSlices, totalBalance),
-    byFactor: [],
-    byRisk: [],
+    byFactor: byFactor(allSlices, totalBalance),
+    byRisk: byRisk(allSlices, totalBalance),
     byContribution: [
       {
         label: 'YOY Recurring',

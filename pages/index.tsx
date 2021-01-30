@@ -27,17 +27,11 @@ const HomePage = () => (
           header="Factor Tilts:"
           subheader="*Holdings can be in more than one factor."
           columns={[
-            { Header: 'Type', accessor: 'label' },
-            { Header: 'Asset Class', accessor: 'assetClass' },
+            { Header: 'Factor', accessor: 'label' },
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
-            {
-              Header: 'Asset Class Weight',
-              accessor: 'assetClassWeight.display',
-            },
           ]}
           data={data.stats.byFactor}
-          layout="fixed"
         />
         <TableSection
           header="Risk Levels:"
@@ -47,7 +41,6 @@ const HomePage = () => (
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
           data={data.stats.byRisk}
-          layout="fixed"
         />
         <TableSection
           header="Savings Details:"
@@ -56,7 +49,6 @@ const HomePage = () => (
             { Header: 'Amount', accessor: 'value.display' },
           ]}
           data={data.stats.byContribution}
-          layout="fixed"
         />
       </div>
     )}

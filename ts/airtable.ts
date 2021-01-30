@@ -42,6 +42,8 @@ export interface AirTablePieModel {
   sector: string;
   shares: number;
   symbol?: string;
+  risk: number;
+  factors?: string[]
 }
 
 export interface AirTablePieModelExtended extends AirTablePieModel {
