@@ -1,48 +1,61 @@
-import jwt from 'jsonwebtoken';
-import data from './data';
+import { NextApiRequest, NextApiResponse } from 'next';
+import _ from 'lodash';
+import {
+  airtable,
+  auth,
+  errResp,
+  fetchStockHoldings,
+  fetchCoincap,
+} from '../../middleware';
+import { enrichAccounts } from '../../utils/enrich-accounts';
+import { enrichCrypto } from '../../utils/enrich-crypto';
+import {
+  AirTableAccountModel,
+  AirTablePieModel,
+  IexUrlModel,
+  AirTableCryptoModel,
+} from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
 
-const iex = {
+const iex: IexUrlModel = {
   env: process.env.IEX_API_URL.includes('sandbox') ? 'Sandbox' : 'Live',
   token: process.env.IEX_API_TOKEN,
   baseUrl: process.env.IEX_API_URL,
 };
 
-const handler = (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    // check for jwt in header
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.split(' ')[0] === 'Bearer'
-    ) {
-      // extract token from header
-      const token = req.headers.authorization.split(' ')[1];
+    // check auth before proceeding
+    await auth(req);
 
-      // verify token
-      jwt.verify(token, process.env.JWT_SECRET, (err) => {
-        if (err) {
-          res.status(401).send(prod ? 'Unauthorized' : JSON.stringify(err));
-          return;
-        }
-        // send response if no error
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ data, iex }));
-      });
-    } else {
-      res.status(401).send('Unauthorized');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(
-      prod
-        ? 'Server Error'
-        : JSON.stringify({
-            status: 'Server Error',
-            message: error.message,
-          }),
+    // fetch from DB
+    const accounts = await airtable<AirTableAccountModel[]>('Accounts');
+    const crypto = await airtable<AirTableCryptoModel[]>('Crypto');
+    const pies = await airtable<AirTablePieModel[]>('Pies');
+
+    // fetch quotes
+    const quotes = await fetchStockHoldings(
+      _.uniqBy(pies, 'symbol')
+        .map((x) => x.symbol)
+        .filter((x) => x),
+      iex,
     );
+    const cryptoQuotes = await fetchCoincap(
+      _.uniqBy(crypto, 'coin').map((x) => x.coin),
+    );
+
+    res.status(200).json({
+      data: enrichAccounts(
+        accounts,
+        pies,
+        quotes,
+        enrichCrypto(crypto, cryptoQuotes),
+        iex,
+      ),
+    });
+  } catch (error) {
+    res.status(error.status || 500).end(errResp(prod, error, error.status));
   }
 };
 

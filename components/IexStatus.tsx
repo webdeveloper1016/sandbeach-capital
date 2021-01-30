@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import _ from 'lodash';
 import ErrorBoundary from './ErrorBoundary';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
@@ -12,7 +13,7 @@ const IexStatusComp = (): React.ReactElement => {
   return (
     <div>
       <a href="https://iexcloud.io" className="mx-2 text-green-300 underline">
-        IEX Cloud {data.iex.env}
+        IEX Cloud {_.get(data, 'iex.env', '')}
       </a>
       <span>{format(updatedAt, 'p')}</span>
     </div>
@@ -20,7 +21,7 @@ const IexStatusComp = (): React.ReactElement => {
 };
 
 const IexStatus = () => (
-  <ErrorBoundary fallback={<div/>}>
+  <ErrorBoundary fallback={<div />}>
     <IexStatusComp />
   </ErrorBoundary>
 );
