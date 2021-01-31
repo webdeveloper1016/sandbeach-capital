@@ -53,11 +53,43 @@ export interface IexStockQuoteModelEnriched {
 }
 
 export interface IexStockQuoteDetailedModelEnriched {
-  logo: {
-    url: string;
+  symbol: string;
+  companyName: string;
+  shares: number;
+  equity: NumberDisplayModel;
+  weight: NumberDisplayModel;
+  prices: {
+    previousClose: NumberDisplayModel;
+    open: NumberDisplayModel;
+    high: NumberDisplayModel;
+    low: NumberDisplayModel;
+    close: NumberDisplayModel;
+    latest: NumberDisplayModel;
   };
-  latestPrice: NumberDisplayModel;
-  updatedAt: string;
+  volume: {
+    prev: NumberDisplayModel;
+    current: NumberDisplayModel;
+  };
+  change: NumberDisplayModel;
+  changePercent: NumberDisplayModel;
+  equityPrevClose: NumberDisplayModel;
+  logo: string;
+  stats: {
+    marketCap: NumberDisplayModel;
+    peRatio: number | null;
+    week52High: NumberDisplayModel;
+    week52Low: NumberDisplayModel;
+    ytdChange: NumberDisplayModel;
+  };
+}
+
+export interface EnrichedDetailedQuoteModel {
+  summary: {
+    balance: NumberDisplayModel;
+    prevBalance: NumberDisplayModel;
+    dayChange: NumberDisplayModel;
+  };
+  quotes: IexStockQuoteDetailedModelEnriched[];
 }
 
 export type IexQuoteModelEnriched =
