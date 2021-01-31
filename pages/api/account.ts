@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import { airtable, auth, errResp, fetchStockHoldings } from '../../middleware';
+import { airtable, auth, errResp, fetchStockHoldingsDetailed } from '../../middleware';
+import { enrichDetailedQuotes } from '../../utils/enrich-detailed-quote'
 import { AirTablePieModel, IexUrlModel } from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
@@ -27,7 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const pies = await airtable<AirTablePieModel[]>('Pies', `{account} = '${account}'`);
 
     // fetch quotes
-    const quotes = await fetchStockHoldings(
+    const quotes = await fetchStockHoldingsDetailed(
       _.uniqBy(pies, 'symbol')
         .map((x) => x.symbol)
         .filter((x) => x),
@@ -35,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     res.status(200).json({
-      data: quotes,
+      data: enrichDetailedQuotes(pies, quotes),
     });
   } catch (error) {
     res.status(error.status || 500).end(errResp(prod, error, error.status));

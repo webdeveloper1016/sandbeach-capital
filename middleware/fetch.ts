@@ -5,8 +5,10 @@ import {
   IexUrlModel,
   IexUrlVariants,
   IexSimpleQuoteModel,
+  IexBatchRequestDetailed,
+  IexDetailedQuoteModel
 } from '../ts';
-import { formatStockQuote } from '../utils/iex';
+import { formatStockQuote, formatStockQuoteDetailed } from '../utils/iex';
 
 // https://docs.coincap.io/#89deffa0-ab03-4e0a-8d92-637a857d2c91
 export const fetchCoincap = async (
@@ -35,6 +37,8 @@ export const iexUrl = (
   switch (variant) {
     case 'batch':
       return `${iex.baseUrl}/stock/market/batch?types=quote&symbols=${symbols}&token=${iex.token}`;
+    case 'batch-logo':
+      return `${iex.baseUrl}/stock/market/batch?types=quote,logo&symbols=${symbols}&token=${iex.token}`;
     default:
       return '';
   }
@@ -44,12 +48,27 @@ export const fetchStockHoldings = async (
   symbols: string[],
   iex: IexUrlModel,
 ): Promise<IexSimpleQuoteModel> => {
-  console.log(symbols)
+  console.log(symbols);
   const batch = iexUrl(iex, 'batch', symbols.join(','));
   const { data } = await axios.get(batch);
   return Object.keys(data).reduce((acc, key) => {
     acc[key] = {
       ...formatStockQuote(data[key].quote),
+    };
+    return acc;
+  }, {});
+};
+
+export const fetchStockHoldingsDetailed = async (
+  symbols: string[],
+  iex: IexUrlModel,
+): Promise<IexDetailedQuoteModel> => {
+  console.log(symbols);
+  const batch = iexUrl(iex, 'batch-logo', symbols.join(','));
+  const { data } = await axios.get<IexBatchRequestDetailed>(batch);
+  return Object.keys(data).reduce((acc, key) => {
+    acc[key] = {
+      ...formatStockQuoteDetailed(data[key]),
     };
     return acc;
   }, {});

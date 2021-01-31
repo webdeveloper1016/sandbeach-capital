@@ -6,7 +6,7 @@ export interface IexUrlModel {
   baseUrl: string;
 }
 
-export type IexUrlVariants = 'batch' | 'crypto';
+export type IexUrlVariants = 'batch' | 'batch-logo';
 
 export interface IexCryptoQuoteModel {
   symbol: string;
@@ -24,20 +24,37 @@ export interface IexStockQuoteModel {
   latestUpdate: number;
 }
 
+export interface IexBatchRequestDetailed {
+  quote: IexStockQuoteModel;
+  logo: {
+    url: string;
+  };
+}
+
 export interface IexStockQuoteModelEnriched {
   api: IexStockQuoteModel;
   price: NumberDisplayModel;
   updatedAt: string;
 }
 
+export interface IexStockQuoteDetailedModelEnriched {
+  logo: {
+    url: string;
+  };
+  latestPrice: NumberDisplayModel;
+  updatedAt: string;
+}
+
 export type IexQuoteModelEnriched =
   | IexCryptoQuoteModelEnriched
   | IexStockQuoteModelEnriched;
-  
+
 export interface IexFetchSimpleQuoteModel {
   stock: Record<string, IexStockQuoteModelEnriched>;
   crypto: Record<string, IexCryptoQuoteModelEnriched>;
   allData: unknown[];
 }
 
-export type IexSimpleQuoteModel = Record<string, IexStockQuoteModelEnriched>
+export type IexSimpleQuoteModel = Record<string, IexStockQuoteModelEnriched>;
+
+export type IexDetailedQuoteModel = Record<string, IexStockQuoteDetailedModelEnriched>
