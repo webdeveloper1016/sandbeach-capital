@@ -20,8 +20,23 @@ export interface IexCryptoQuoteModelEnriched {
 }
 export interface IexStockQuoteModel {
   symbol: string;
+  companyName: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
   latestPrice: number;
   latestUpdate: number;
+  previousClose: number;
+  previousVolume: number;
+  change: number;
+  changePercent: number;
+  volume: number;
+  marketCap: number;
+  peRatio: number | null;
+  week52High: number;
+  week52Low: number;
+  ytdChange: number;
 }
 
 export interface IexBatchRequestDetailed {
@@ -57,4 +72,4 @@ export interface IexFetchSimpleQuoteModel {
 
 export type IexSimpleQuoteModel = Record<string, IexStockQuoteModelEnriched>;
 
-export type IexDetailedQuoteModel = Record<string, IexStockQuoteDetailedModelEnriched>
+export type IexDetailedQuoteModel = Record<string, IexBatchRequestDetailed>;

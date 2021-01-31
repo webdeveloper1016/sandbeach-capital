@@ -1,8 +1,6 @@
 import { format } from 'date-fns';
-import {
-  NumberDisplayModel,
-
-} from '../ts/types';
+import numeral from 'numeral';
+import { NumberDisplayModel } from '../ts/types';
 
 export const sumAccounts = (data: any[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
@@ -31,6 +29,11 @@ export const currencyDisplay = (
 ): NumberDisplayModel => ({
   val: a,
   display: `${currencyFormatter.format(a)}${annotate}`,
+});
+
+export const numberDisplay = (a: number): NumberDisplayModel => ({
+  val: a,
+  display: numeral(a).format('0.0a'),
 });
 
 export const dateDisplay = (dateIn: number | Date): string =>

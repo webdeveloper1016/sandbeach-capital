@@ -5,10 +5,9 @@ import {
   IexUrlModel,
   IexUrlVariants,
   IexSimpleQuoteModel,
-  IexBatchRequestDetailed,
   IexDetailedQuoteModel
 } from '../ts';
-import { formatStockQuote, formatStockQuoteDetailed } from '../utils/iex';
+import { formatStockQuote } from '../utils/iex';
 
 // https://docs.coincap.io/#89deffa0-ab03-4e0a-8d92-637a857d2c91
 export const fetchCoincap = async (
@@ -65,11 +64,6 @@ export const fetchStockHoldingsDetailed = async (
 ): Promise<IexDetailedQuoteModel> => {
   console.log(symbols);
   const batch = iexUrl(iex, 'batch-logo', symbols.join(','));
-  const { data } = await axios.get<IexBatchRequestDetailed>(batch);
-  return Object.keys(data).reduce((acc, key) => {
-    acc[key] = {
-      ...formatStockQuoteDetailed(data[key]),
-    };
-    return acc;
-  }, {});
+  const { data } = await axios.get<IexDetailedQuoteModel>(batch);
+  return data;
 };
