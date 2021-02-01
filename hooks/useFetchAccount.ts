@@ -13,11 +13,11 @@ const useGetAccount = async (params: {
   token: string;
   logout: () => void;
 }): Promise<APIAccountModel> => {
-  console.log(params.account);
   try {
     const { data } = await axiosGet<APIAccountModelResp>(
-      '/api/portfolio',
+      '/api/account',
       params.token,
+      { account: params.account },
     );
 
     return data;
