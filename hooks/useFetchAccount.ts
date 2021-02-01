@@ -14,6 +14,9 @@ const useGetAccount = async (params: {
   logout: () => void;
 }): Promise<APIAccountModel> => {
   try {
+    if (!params.account) {
+      return null
+    }
     const { data } = await axiosGet<APIAccountModelResp>(
       '/api/account',
       params.token,

@@ -1,7 +1,7 @@
 import useFetchAccount from '../hooks/useFetchAccount';
 
 const AccountsPage = () => {
-  const { data, status } = useFetchAccount('robinhood');
+  const { data, status } = useFetchAccount('m1-taxable');
 
   if (status === 'loading') {
     return <div className="text-green-500">loading...</div>;
