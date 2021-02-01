@@ -1,7 +1,7 @@
-import useFetchPortfolio from '../hooks/useFetchPortfolio';
+import useFetchAccount from '../hooks/useFetchAccount';
 
 const AccountsPage = () => {
-  const { data, status } = useFetchPortfolio();
+  const { data, status } = useFetchAccount('robinhood');
 
   if (status === 'loading') {
     return <div className="text-green-500">loading...</div>;
