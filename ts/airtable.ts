@@ -46,6 +46,7 @@ export interface AirTablePieModel {
   symbol?: string;
   risk: number;
   factors?: string[]
+  tags?: string[]
 }
 
 export interface AirTablePieModelExtended extends AirTablePieModel {

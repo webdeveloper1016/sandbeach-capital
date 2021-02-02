@@ -10,7 +10,7 @@ import {
 export const enrichDetailedQuotes = (
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
-):EnrichedDetailedQuoteModel => {
+): EnrichedDetailedQuoteModel => {
   const data = pies
     .map((slice) => {
       const iexData = _.get(quotes, [slice.symbol], null);
@@ -40,11 +40,25 @@ export const enrichDetailedQuotes = (
         changePercent: percentDisplay(quote.changePercent, 1),
         equityPrevClose: currencyDisplay(quote.previousClose * slice.shares),
         logo: logo.url,
+        tags: slice.tags ? slice.tags.join(',') : '',
         stats: {
           marketCap: numberDisplay(quote.marketCap),
           peRatio: quote.peRatio,
           week52High: currencyDisplay(quote.week52High),
           week52Low: currencyDisplay(quote.week52Low),
+          week52Range: `${currencyDisplay(quote.week52Low).display} - ${
+            currencyDisplay(quote.week52High).display
+          }`,
+          week52OffHighPercent:
+            quote.latestPrice >= quote.week52High
+              ? {
+                  display: '0%',
+                  val: 0,
+                }
+              : percentDisplay(
+                  quote.week52High - quote.latestPrice,
+                  quote.week52High,
+                ),
           ytdChange: percentDisplay(quote.ytdChange, 1),
         },
       };

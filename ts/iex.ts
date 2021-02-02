@@ -74,12 +74,15 @@ export interface IexStockQuoteDetailedModelEnriched {
   changePercent: NumberDisplayModel;
   equityPrevClose: NumberDisplayModel;
   logo: string;
+  tags: string;
   stats: {
     marketCap: NumberDisplayModel;
     peRatio: number | null;
     week52High: NumberDisplayModel;
     week52Low: NumberDisplayModel;
     ytdChange: NumberDisplayModel;
+    week52Range: string;
+    week52OffHighPercent: NumberDisplayModel;
   };
 }
 
