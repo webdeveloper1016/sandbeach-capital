@@ -1,4 +1,7 @@
 import { useRouter } from 'next/router';
+import _ from 'lodash';
+import { Row as SkeletonRow } from '../../components/Skeleton';
+import Error from '../../components/Error';
 import useFetchAccount from '../../hooks/useFetchAccount';
 import { AirTableStockAccounts } from '../../ts';
 
@@ -9,11 +12,24 @@ const IndividualAccountPage = () => {
   const { data, status } = useFetchAccount(account as AirTableStockAccounts);
 
   if (status === 'loading' || !data) {
-    return <div className="text-green-500">loading...</div>;
+    return (
+      <div>
+        <div className="mb-5">
+          <h3 className="text-gray-500 text-lg">Account: {account}</h3>
+        </div>
+        <div className=" flex space-x-4">
+          <div className="flex-1 space-y-4 py-1 mb-10">
+            {_.range(5).map((r) => (
+              <SkeletonRow key={r} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (status === 'error') {
-    return <div className="text-red-500">error...</div>;
+    return <Error />;
   }
 
   console.log(data);

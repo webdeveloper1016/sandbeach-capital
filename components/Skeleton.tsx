@@ -5,7 +5,7 @@ const Title = () => (
   </div>
 );
 
-const Row = () => (
+export const Row = () => (
   <div className="space-y-2">
     <div className="h-4 bg-green-500 rounded"></div>
     <div className="h-4 bg-green-500 rounded w-5/6"></div>
