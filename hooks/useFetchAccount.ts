@@ -2,8 +2,9 @@ import { useQuery, QueryResult } from 'react-query';
 import useAuth from '../hooks/useAuth';
 import { axiosGet } from '../utils/fetch';
 import {
+  APIPortfolioModelResp,
   APIAccountModelResp,
-  APIAccountModel,
+  EnrichedDetailedQuoteModel,
   AirTableStockAccounts,
 } from '../ts';
 
@@ -12,7 +13,7 @@ const useGetAccount = async (params: {
   account: AirTableStockAccounts;
   token: string;
   logout: () => void;
-}): Promise<APIAccountModel> => {
+}): Promise<EnrichedDetailedQuoteModel> => {
   try {
     if (!params.account) {
       return null
@@ -39,7 +40,7 @@ const useGetAccount = async (params: {
 /** React Query hook to get the data */
 const useFetchAccount = (
   account: AirTableStockAccounts,
-): QueryResult<APIAccountModel> => {
+): QueryResult<EnrichedDetailedQuoteModel> => {
   const auth = useAuth();
   return useQuery(
     ['account', { account }],

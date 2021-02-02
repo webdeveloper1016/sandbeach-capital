@@ -2,10 +2,10 @@ import React from 'react';
 import Status from './Status';
 import TotalNetWorth from './TotalNetWorth';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
-import { APIAccountModel } from '../ts';
+import { APIPortfolioModel } from '../ts';
 
 interface PortfolioDataProps {
-  children: (data: APIAccountModel) => React.ReactNode;
+  children: (data: APIPortfolioModel) => React.ReactNode;
 }
 
 const PortfolioData = ({ children }: PortfolioDataProps) => {

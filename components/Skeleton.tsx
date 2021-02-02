@@ -1,4 +1,4 @@
-const Title = () => (
+export const Title = () => (
   <div className="space-y-2 pb-1">
     <div className="h-4 bg-green-500 rounded w-1/4"></div>
     <div className="h-4 bg-green-500 rounded w-1/2"></div>
