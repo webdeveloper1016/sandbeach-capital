@@ -82,11 +82,20 @@ export const enrichDetailedQuotes = (
     weight: percentDisplay(p.equity.val, sumAccount),
   }));
 
+  const dayChangePerc = percentDisplay(
+    sumAccount - sumPrevClose,
+    sumAccount,
+    true,
+  );
+
   return {
     summary: {
       balance: currencyDisplay(sumAccount),
       prevBalance: currencyDisplay(sumPrevClose),
-      dayChange: percentDisplay(sumAccount - sumPrevClose, sumAccount),
+      dayChange: {
+        class: dayChangePerc.val > 0 ? 'text-green-500' : 'text-red-500',
+        perc: dayChangePerc,
+      },
     },
     quotes: _.orderBy(accountWithWeight, ['equity.val'], ['desc']),
   };

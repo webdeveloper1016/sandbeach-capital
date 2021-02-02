@@ -90,7 +90,10 @@ export interface EnrichedDetailedQuoteModel {
   summary: {
     balance: NumberDisplayModel;
     prevBalance: NumberDisplayModel;
-    dayChange: NumberDisplayModel;
+    dayChange: {
+      class: string;
+      perc: NumberDisplayModel;
+    };
   };
   quotes: IexStockQuoteDetailedModelEnriched[];
 }

@@ -18,10 +18,20 @@ export const numberFormatter = new Intl.NumberFormat('en-US');
 export const percentFormatter = (a: number, b: number): string =>
   `${Math.round((a / b) * 100 * 100) / 100}%`;
 
-export const percentDisplay = (a: number, b: number): NumberDisplayModel => ({
-  val: a / b,
-  display: percentFormatter(a, b),
-});
+export const percentDisplay = (
+  a: number,
+  b: number,
+  annoatePositive?: boolean,
+): NumberDisplayModel => {
+  const val = a / b;
+  return {
+    val,
+    display:
+      annoatePositive && val > 0
+        ? `+${percentFormatter(a, b)}`
+        : percentFormatter(a, b),
+  };
+};
 
 export const currencyDisplay = (
   a: number,
