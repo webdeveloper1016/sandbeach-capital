@@ -45,19 +45,19 @@ export const AccountTable = ({ columns, data }: TableProps) => {
 
   return (
     <div className="border border-current rounded-md">
-      <div className="overflow-x-auto mx-2">
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden shadow-dashboard md:px-2 pt-3">
+      <div className="overflow-x-auto">
+        <div className="align-middle inline-block min-w-full shadow overflow-hidden shadow-dashboard pt-3">
           <table className="min-w-full" {...getTableProps()}>
             <TableHead headerGroups={headerGroups} />
             <tbody {...getTableBodyProps()}>
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr {...row.getRowProps()} className="border-b border-gray-600 last:border-0 hover:bg-gray-800">
                     {row.cells.map((cell) => {
                       return (
                         <td
-                          className="px-6 py-4 whitespace-no-wrap border-b border-gray-600 text-sm leading-5"
+                          className="px-6 py-4 whitespace-no-wrap  text-sm leading-5"
                           {...cell.getCellProps()}
                         >
                           {cell.render('Cell')}
