@@ -3,8 +3,8 @@ import { labels } from './AccountBalanceHeader';
 import { AirTableStockAccounts } from '../ts';
 
 const accountLinks: AirTableStockAccounts[] = [
-  'robinhood',
   'm1-taxable',
+  'robinhood',
   'm1-emergency',
   'bryan-roth',
 ];

@@ -75,6 +75,7 @@ export interface IexStockQuoteDetailedModelEnriched {
   equityPrevClose: NumberDisplayModel;
   logo: string;
   tags: string;
+  sector: string;
   stats: {
     marketCap: NumberDisplayModel;
     peRatio: number | null;

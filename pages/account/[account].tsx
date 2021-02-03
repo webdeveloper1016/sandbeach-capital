@@ -44,6 +44,7 @@ const IndividualAccountPage = () => {
           { Header: '52 Week Range', accessor: 'stats.week52Range' },
           { Header: 'YTD', accessor: 'stats.ytdChange.display' },
           { Header: 'PE', accessor: 'stats.peRatio' },
+          { Header: 'Sector', accessor: 'sector' },
           { Header: 'Tags', accessor: 'tags' },
         ]}
         data={data.quotes}
