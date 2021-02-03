@@ -1,6 +1,6 @@
 import { AirTableStockAccounts } from '../ts';
 
-const labels: Record<AirTableStockAccounts, string> = {
+export const labels: Record<AirTableStockAccounts, string> = {
   robinhood: 'Robinhood',
   'm1-emergency': 'M1 Emergency',
   'm1-taxable': 'M1 Taxable',

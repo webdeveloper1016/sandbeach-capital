@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { AccountLabelHeader } from './AccountBalanceHeader';
+import AccountWatchlistLinks from './AccountWatchlistLinks';
 import { AirTableStockAccounts } from '../ts';
 
 export const Title = () => (
@@ -44,6 +45,7 @@ export const AccountViewSkeleton = ({
   accountName: AirTableStockAccounts;
 }) => (
   <div>
+    <AccountWatchlistLinks active={accountName} />
     <div className="mb-5">
       <AccountLabelHeader accountName={accountName} />
       <div className="animate-pulse">

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { AccountViewSkeleton } from '../../components/Skeleton';
 import Error from '../../components/Error';
+import AccountWatchlistLinks from '../../components/AccountWatchlistLinks';
 import { AccountBalanceHeader } from '../../components/AccountBalanceHeader';
 import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
@@ -24,6 +25,7 @@ const IndividualAccountPage = () => {
 
   return (
     <div>
+      <AccountWatchlistLinks active={account} />
       <AccountBalanceHeader
         accountName={account}
         balance={data.summary.balance.display}
@@ -35,11 +37,14 @@ const IndividualAccountPage = () => {
           { Header: 'Symbol', accessor: 'symbol' },
           { Header: 'Shares', accessor: 'shares' },
           { Header: 'Equity', accessor: 'equity.display' },
-          { Header: 'Day Change', accessor: 'changePercent.display' },
-          { Header: 'Symbol', accessor: 'symbol1' },
-          { Header: 'Shares', accessor: 'shares1' },
-          { Header: 'Equity', accessor: 'equity1.display' },
-          { Header: 'Day Change', accessor: 'changePercent1.display' },
+          { Header: 'Weight', accessor: 'weight.display' },
+          { Header: 'Day', accessor: 'changePercent.display' },
+          { Header: 'Volume', accessor: 'volume.current.display' },
+          { Header: 'Market Cap', accessor: 'stats.marketCap.display' },
+          { Header: '52 Week Range', accessor: 'stats.week52Range' },
+          { Header: 'YTD', accessor: 'stats.ytdChange.display' },
+          { Header: 'PE', accessor: 'stats.peRatio' },
+          { Header: 'Tags', accessor: 'tags' },
         ]}
         data={data.quotes}
       />
