@@ -71,7 +71,10 @@ export interface IexStockQuoteDetailedModelEnriched {
     current: NumberDisplayModel;
   };
   change: NumberDisplayModel;
-  changePercent: NumberDisplayModel;
+  changePercent: {
+    class: string;
+    perc: NumberDisplayModel;
+  };
   equityPrevClose: NumberDisplayModel;
   logo: string;
   tags: string;

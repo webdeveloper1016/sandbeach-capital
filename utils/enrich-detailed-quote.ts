@@ -37,7 +37,10 @@ export const enrichDetailedQuotes = (
           current: numberDisplay(quote.volume),
         },
         change: currencyDisplay(quote.change),
-        changePercent: percentDisplay(quote.changePercent, 1),
+        changePercent:{
+          class: quote.changePercent > 0 ? 'text-green-500' : 'text-red-500',
+          perc: percentDisplay(quote.changePercent, 1, true),
+        }, 
         equityPrevClose: currencyDisplay(quote.previousClose * slice.shares),
         logo: logo.url,
         tags: slice.tags ? slice.tags.join(',') : '',
@@ -60,7 +63,7 @@ export const enrichDetailedQuotes = (
                   quote.week52High - quote.latestPrice,
                   quote.week52High,
                 ),
-          ytdChange: percentDisplay(quote.ytdChange, 1),
+          ytdChange: percentDisplay(quote.ytdChange, 1, true),
         },
       };
     })

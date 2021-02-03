@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import _ from 'lodash'
 import numeral from 'numeral';
 import { NumberDisplayModel } from '../ts/types';
 
@@ -43,7 +44,7 @@ export const currencyDisplay = (
 
 export const numberDisplay = (a: number): NumberDisplayModel => ({
   val: a,
-  display: numeral(a).format('0.0a'),
+  display: _.toUpper(numeral(a).format('0.0a')),
 });
 
 export const dateDisplay = (dateIn: number | Date): string =>

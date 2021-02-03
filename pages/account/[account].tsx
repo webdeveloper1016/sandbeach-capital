@@ -38,14 +38,26 @@ const IndividualAccountPage = () => {
           { Header: 'Shares', accessor: 'shares' },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
-          { Header: 'Day', accessor: 'changePercent.display' },
+          { Header: 'Day', accessor: 'changePercent.perc.display' },
           { Header: 'Volume', accessor: 'volume.current.display' },
-          { Header: 'Market Cap', accessor: 'stats.marketCap.display' },
-          { Header: '52 Week Range', accessor: 'stats.week52Range' },
+          {
+            Header: 'Market Cap',
+            accessor: 'stats.marketCap.display',
+            style: { minWidth: '135px' },
+          },
+          {
+            Header: '52 Week Range',
+            accessor: 'stats.week52Range',
+            style: { minWidth: '200px' },
+          },
           { Header: 'YTD', accessor: 'stats.ytdChange.display' },
           { Header: 'PE', accessor: 'stats.peRatio' },
-          { Header: 'Sector', accessor: 'sector' },
-          { Header: 'Tags', accessor: 'tags' },
+          {
+            Header: 'Sector',
+            accessor: 'sector',
+            style: { minWidth: '150px' },
+          },
+          { Header: 'Tags', accessor: 'tags', style: { minWidth: '150px' } },
         ]}
         data={data.quotes}
       />

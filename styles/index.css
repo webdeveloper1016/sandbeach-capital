@@ -23,3 +23,6 @@ body {
 /* Stop purging. */
 
 /* Your own custom utilities */
+.min-table-width {
+  min-width: 100px;
+}
