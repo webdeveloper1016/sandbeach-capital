@@ -35,7 +35,7 @@ const CryptoPage = () => {
       <AccountTable
         columns={[
           { Header: 'Symbol', accessor: 'symbol' },
-          { Header: 'Price', accessor: 'prices.latest.display' },
+          { Header: 'Price', accessor: 'priceDisplay' },
           { Header: 'Shares', accessor: 'shares' },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },

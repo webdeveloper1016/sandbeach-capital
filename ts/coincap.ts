@@ -21,6 +21,7 @@ export interface CoinCapAssetRespModel {
 
 export interface CoinCapAssetModel extends AssetModel {
   priceUsdNumber: number;
+  priceDisplay: string;
 }
 
 export interface EnrichedCryptoModel {
