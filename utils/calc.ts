@@ -1,8 +1,7 @@
 import { format } from 'date-fns';
-import {
-  NumberDisplayModel,
-
-} from '../ts/types';
+import _ from 'lodash'
+import numeral from 'numeral';
+import { NumberDisplayModel } from '../ts/types';
 
 export const sumAccounts = (data: any[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
@@ -20,10 +19,20 @@ export const numberFormatter = new Intl.NumberFormat('en-US');
 export const percentFormatter = (a: number, b: number): string =>
   `${Math.round((a / b) * 100 * 100) / 100}%`;
 
-export const percentDisplay = (a: number, b: number): NumberDisplayModel => ({
-  val: a / b,
-  display: percentFormatter(a, b),
-});
+export const percentDisplay = (
+  a: number,
+  b: number,
+  annoatePositive?: boolean,
+): NumberDisplayModel => {
+  const val = a / b;
+  return {
+    val,
+    display:
+      annoatePositive && val > 0
+        ? `+${percentFormatter(a, b)}`
+        : percentFormatter(a, b),
+  };
+};
 
 export const currencyDisplay = (
   a: number,
@@ -31,6 +40,11 @@ export const currencyDisplay = (
 ): NumberDisplayModel => ({
   val: a,
   display: `${currencyFormatter.format(a)}${annotate}`,
+});
+
+export const numberDisplay = (a: number): NumberDisplayModel => ({
+  val: a,
+  display: _.toUpper(numeral(a).format('0.0a')),
 });
 
 export const dateDisplay = (dateIn: number | Date): string =>

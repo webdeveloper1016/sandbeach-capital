@@ -11,6 +11,8 @@ export type AirTableTablesType =
   | 'Accounts'
   | 'Pies';
 
+  export type AirTableStockAccounts = 'robinhood' | 'm1-emergency' | 'm1-taxable' | 'bryan-roth'
+
 export interface AirTableCryptoModel {
   id: string;
   account: string;
@@ -44,6 +46,7 @@ export interface AirTablePieModel {
   symbol?: string;
   risk: number;
   factors?: string[]
+  tags?: string[]
 }
 
 export interface AirTablePieModelExtended extends AirTablePieModel {

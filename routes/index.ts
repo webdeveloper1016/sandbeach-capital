@@ -1,5 +1,5 @@
 export const links = [
   { href: '/', label: 'Home', icon: 'home' },
   { href: '/accounts', label: 'Accounts', icon: 'accounts' },
-  { href: '/watchlist', label: 'Watchlist', icon: 'watchlist' },
+  { href: '/account/m1-taxable', label: 'Watchlists', icon: 'watchlist' },
 ];

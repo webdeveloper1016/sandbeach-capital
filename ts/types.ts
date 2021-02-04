@@ -21,3 +21,8 @@ export interface ValueWeightModel {
   value: NumberDisplayModel;
   weight: NumberDisplayModel;
 }
+
+export interface PercChangeModel {
+  class: string;
+  perc: NumberDisplayModel;
+}

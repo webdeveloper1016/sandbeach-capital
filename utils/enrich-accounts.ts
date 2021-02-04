@@ -7,7 +7,7 @@ import {
   AirTablePieModel,
   IexSimpleQuoteModel,
   EnrichedCryptoModel,
-  APIAccountModel,
+  APIPortfolioModel,
   IexUrlModel,
 } from '../ts';
 
@@ -17,7 +17,7 @@ export const enrichAccounts = (
   quotes: IexSimpleQuoteModel,
   cryptoData: EnrichedCryptoModel,
   iex: IexUrlModel,
-): APIAccountModel => {
+): APIPortfolioModel => {
   const accountsWithQuotes = accounts.map((account) => {
     let pie = [];
     // enrich account with crypto or stock data

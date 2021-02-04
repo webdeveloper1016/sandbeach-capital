@@ -1,27 +1,30 @@
-import useFetchPortfolio from '../hooks/useFetchPortfolio';
+import Link from 'next/link';
+import { AirTableStockAccounts } from '../ts';
+
+const accountLinks: AirTableStockAccounts[] = [
+  'robinhood',
+  'm1-taxable',
+  'm1-emergency',
+  'bryan-roth',
+];
 
 const AccountsPage = () => {
-  const { data, status } = useFetchPortfolio();
-
-  if (status === 'loading') {
-    return <div className="text-green-500">loading...</div>;
-  }
-
-  if (status === 'error') {
-    return <div className="text-red-500">error...</div>;
-  }
-
-  console.log(data);
-
   return (
     <div>
       <div className="mb-5">
         <h3 className="text-gray-500 text-lg">Watchlist:</h3>
       </div>
-      <pre className="text-gray-500 my-8">{JSON.stringify(data, null, 4)}</pre>
+      <ul>
+        {accountLinks.map((l) => (
+          <li key={l}>
+            <Link href={`/account/${l}`}>
+              <a>{l}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 export default AccountsPage;
-
