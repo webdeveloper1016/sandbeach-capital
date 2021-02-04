@@ -43,7 +43,7 @@ export const enrichDetailedQuotes = (
         }, 
         equityPrevClose: currencyDisplay(quote.previousClose * slice.shares),
         logo: logo.url,
-        tags: slice.tags ? slice.tags.join(',') : '',
+        tags: slice.tags ? slice.tags : [],
         sector: slice.sector,
         stats: {
           marketCap: numberDisplay(quote.marketCap),

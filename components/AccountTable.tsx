@@ -26,7 +26,7 @@ export const TableHead = ({ headerGroups }: TableHeaderProps) => (
       <tr {...headerGroup.getHeaderGroupProps()}>
         {headerGroup.headers.map((column) => (
           <th
-            className="px-6 py-3 border-b-2 border-gray-500 text-left text-sm leading-4 text-green-500 tracking-wider min-table-width"
+            className="px-4 pt-4 pb-7 border-b-2 border-gray-500 text-left text-sm leading-4 text-green-500 tracking-wider min-table-width"
             {...column.getHeaderProps([
               {
                 // className: column.className,
@@ -74,7 +74,7 @@ export const AccountTable = ({ columns, data }: TableProps) => {
                     {row.cells.map((cell) => {
                       return (
                         <td
-                          className="px-6 py-4 text-sm leading-5 min-w-full mx-8"
+                          className="px-4 py-4 text-sm leading-5 min-w-full mx-8"
                           {...cell.getCellProps()}
                         >
                           {cell.render('Cell')}

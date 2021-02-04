@@ -74,7 +74,7 @@ export interface IexStockQuoteDetailedModelEnriched {
   changePercent: PercChangeModel;
   equityPrevClose: NumberDisplayModel;
   logo: string;
-  tags: string;
+  tags: string[];
   sector: string;
   stats: {
     marketCap: NumberDisplayModel;

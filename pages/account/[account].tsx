@@ -3,6 +3,7 @@ import { AccountViewSkeleton } from '../../components/Skeleton';
 import Error from '../../components/Error';
 import AccountWatchlistLinks from '../../components/AccountWatchlistLinks';
 import { AccountBalanceHeader } from '../../components/AccountBalanceHeader';
+import Pill from '../../components/Pill';
 import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
 import { AirTableStockAccounts, PercChangeModel } from '../../ts';
@@ -45,7 +46,7 @@ const IndividualAccountPage = () => {
           {
             Header: 'Day',
             accessor: 'changePercent',
-            Cell: (instance: { value: PercChangeModel }, column) => {
+            Cell: (instance: { value: PercChangeModel }) => {
               return (
                 <div className={instance.value.class}>
                   {instance.value.perc.display}
@@ -62,16 +63,33 @@ const IndividualAccountPage = () => {
           {
             Header: '52 Week Range',
             accessor: 'stats.week52Range',
-            style: { minWidth: '200px' },
+            style: { minWidth: '170px' },
           },
           { Header: 'YTD', accessor: 'stats.ytdChange.display' },
-          { Header: 'PE', accessor: 'stats.peRatio' },
           {
             Header: 'Sector',
             accessor: 'sector',
-            style: { minWidth: '150px' },
+            style: { minWidth: '170px' },
+            Cell: (instance: { value: string }) => (
+              <div className="flex ">
+                <Pill color="blue" content={instance.value} />
+              </div>
+            ),
           },
-          { Header: 'Tags', accessor: 'tags', style: { minWidth: '150px' } },
+          {
+            Header: 'Tags',
+            accessor: 'tags',
+            style: { minWidth: '225px' },
+            Cell: (instance: { value: string[] }) => (
+              <div className="flex ">
+                {instance.value.map((v) => (
+                  <span className="mr-1 last:mr-0">
+                    <Pill color="yellow" content={v} key={v} />
+                  </span>
+                ))}
+              </div>
+            ),
+          },
         ]}
         data={data.quotes}
       />
