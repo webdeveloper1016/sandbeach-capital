@@ -40,6 +40,7 @@ const IndividualAccountPage = () => {
       <AccountTable
         columns={[
           { Header: 'Symbol', accessor: 'symbol' },
+          { Header: 'Price', accessor: 'prices.latest.display' },
           { Header: 'Shares', accessor: 'shares' },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
