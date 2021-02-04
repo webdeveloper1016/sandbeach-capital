@@ -78,10 +78,10 @@ const IndividualAccountPage = () => {
             accessor: 'tags',
             style: { minWidth: '225px' },
             Cell: (instance: { value: string[] }) => (
-              <div className="flex ">
+              <div className="flex">
                 {instance.value.map((v) => (
-                  <span className="mr-1 last:mr-0">
-                    <Pill color="yellow" content={v} key={v} />
+                  <span className="mr-1 last:mr-0" key={v}>
+                    <Pill color="yellow" content={v} />
                   </span>
                 ))}
               </div>

@@ -5,9 +5,10 @@ import {
   IexUrlModel,
   IexUrlVariants,
   IexSimpleQuoteModel,
-  IexDetailedQuoteModel
+  IexDetailedQuoteModel,
 } from '../ts';
 import { formatStockQuote } from '../utils/iex';
+import { formatCoincap } from '../utils/coincap';
 
 // https://docs.coincap.io/#89deffa0-ab03-4e0a-8d92-637a857d2c91
 export const fetchCoincap = async (
@@ -22,10 +23,7 @@ export const fetchCoincap = async (
     },
   );
 
-  return data.data.map((i) => ({
-    ...i,
-    priceUsdNumber: Number(i.priceUsd),
-  }));
+  return formatCoincap(data.data);
 };
 
 export const iexUrl = (

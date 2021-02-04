@@ -25,7 +25,7 @@ const CryptoPage = () => {
       <AccountWatchlistLinks active={'crypto'} />
       <AccountBalanceHeader
         accountName={'crypto'}
-        balance={data.portfolioTotal.display}
+        balance={data.portfolioTotalExStable.display}
         percChange=""
         percClass=""
         // balance={data.summary.balance.display}
