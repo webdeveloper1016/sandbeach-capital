@@ -9,6 +9,12 @@ export interface TableProps {
   columns: {
     accessor: string;
     Header: string;
+    Cell?: (
+      instance: {
+        value: any;
+      },
+      column: any,
+    ) => React.ReactNode;
     style?: React.CSSProperties;
   }[];
   data: Record<any, any>[];

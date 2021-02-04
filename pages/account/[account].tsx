@@ -5,7 +5,11 @@ import AccountWatchlistLinks from '../../components/AccountWatchlistLinks';
 import { AccountBalanceHeader } from '../../components/AccountBalanceHeader';
 import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
-import { AirTableStockAccounts } from '../../ts';
+import { AirTableStockAccounts, PercChangeModel } from '../../ts';
+
+const t = (a, b) => {
+  console.log(a, b);
+};
 
 const IndividualAccountPage = () => {
   const router = useRouter();
@@ -38,7 +42,17 @@ const IndividualAccountPage = () => {
           { Header: 'Shares', accessor: 'shares' },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
-          { Header: 'Day', accessor: 'changePercent.perc.display' },
+          {
+            Header: 'Day',
+            accessor: 'changePercent',
+            Cell: (instance: { value: PercChangeModel }, column) => {
+              return (
+                <div className={instance.value.class}>
+                  {instance.value.perc.display}
+                </div>
+              );
+            },
+          },
           { Header: 'Volume', accessor: 'volume.current.display' },
           {
             Header: 'Market Cap',

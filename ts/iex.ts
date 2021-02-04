@@ -1,4 +1,4 @@
-import { NumberDisplayModel } from '../ts/types';
+import { NumberDisplayModel, PercChangeModel } from '../ts/types';
 
 export interface IexUrlModel {
   env: 'Live' | 'Sandbox';
@@ -71,10 +71,7 @@ export interface IexStockQuoteDetailedModelEnriched {
     current: NumberDisplayModel;
   };
   change: NumberDisplayModel;
-  changePercent: {
-    class: string;
-    perc: NumberDisplayModel;
-  };
+  changePercent: PercChangeModel;
   equityPrevClose: NumberDisplayModel;
   logo: string;
   tags: string;
@@ -94,10 +91,7 @@ export interface EnrichedDetailedQuoteModel {
   summary: {
     balance: NumberDisplayModel;
     prevBalance: NumberDisplayModel;
-    dayChange: {
-      class: string;
-      perc: NumberDisplayModel;
-    };
+    dayChange: PercChangeModel;
   };
   quotes: IexStockQuoteDetailedModelEnriched[];
 }
