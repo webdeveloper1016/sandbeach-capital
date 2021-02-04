@@ -1,20 +1,21 @@
-import { AirTableStockAccounts } from '../ts';
+import { AirTableAccountRoutes } from '../ts';
 
-export const labels: Record<AirTableStockAccounts, string> = {
+export const labels: Record<AirTableAccountRoutes, string> = {
   robinhood: 'Robinhood',
   'm1-emergency': 'M1 Emergency',
   'm1-taxable': 'M1 Taxable',
   'bryan-roth': 'M1 Roth',
+  'crypto': 'Crypto'
 };
 
 export const AccountLabelHeader = ({
   accountName,
 }: {
-  accountName: AirTableStockAccounts;
+  accountName: AirTableAccountRoutes;
 }) => <div className="text-xl">{labels[accountName]}</div>;
 
 interface AccountBalanceHeaderProps {
-  accountName: AirTableStockAccounts;
+  accountName: AirTableAccountRoutes;
   balance: string;
   percChange: string;
   percClass: string;

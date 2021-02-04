@@ -1,18 +1,19 @@
 import Link from 'next/link';
 import { labels } from './AccountBalanceHeader';
-import { AirTableStockAccounts } from '../ts';
+import { AirTableAccountRoutes } from '../ts';
 
-const accountLinks: AirTableStockAccounts[] = [
+const accountLinks: AirTableAccountRoutes[] = [
   'm1-taxable',
   'robinhood',
   'm1-emergency',
   'bryan-roth',
+  'crypto',
 ];
 
 const AccountWatchlistLinks = ({
   active,
 }: {
-  active: AirTableStockAccounts;
+  active: AirTableAccountRoutes;
 }) => {
   return (
     <div className="mb-4 mt-2 overflow-x-auto ">

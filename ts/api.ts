@@ -2,6 +2,7 @@ import { AirTableAccountModelExtended } from './airtable';
 import { AccountSummaryModel } from './summary';
 import { AccountStatsModel } from './stats';
 import { IexUrlModel, EnrichedDetailedQuoteModel } from './iex';
+import { EnrichedCryptoModel } from './coincap';
 
 export interface APIPortfolioModel {
   summary: AccountSummaryModel;
@@ -15,5 +16,9 @@ export interface APIPortfolioModelResp {
 }
 
 export interface APIAccountModelResp {
-  data: EnrichedDetailedQuoteModel
+  data: EnrichedDetailedQuoteModel;
+}
+
+export interface APICryptoModelResp {
+  data: EnrichedCryptoModel;
 }
