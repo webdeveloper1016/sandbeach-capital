@@ -41,7 +41,7 @@ export interface IexStockQuoteModel {
 
 export interface IexBatchRequestDetailed {
   quote: IexStockQuoteModel;
-  logo: {
+  logo?: {
     url: string;
   };
 }
@@ -55,6 +55,10 @@ export interface IexStockQuoteModelEnriched {
 export interface IexStockQuoteDetailedModelEnriched {
   symbol: string;
   companyName: string;
+  symboCompany: {
+    symbol: string;
+    name: string;
+  };
   shares: number;
   equity: NumberDisplayModel;
   weight: NumberDisplayModel;
@@ -73,7 +77,7 @@ export interface IexStockQuoteDetailedModelEnriched {
   change: NumberDisplayModel;
   changePercent: PercChangeModel;
   equityPrevClose: NumberDisplayModel;
-  logo: string;
+  logo: string | null;
   tags: string[];
   sector: string;
   stats: {

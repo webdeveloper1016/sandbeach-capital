@@ -61,7 +61,7 @@ export const fetchStockHoldingsDetailed = async (
   iex: IexUrlModel,
 ): Promise<IexDetailedQuoteModel> => {
   console.log(symbols);
-  const batch = iexUrl(iex, 'batch-logo', symbols.join(','));
+  const batch = iexUrl(iex, 'batch', symbols.join(','));
   const { data } = await axios.get<IexDetailedQuoteModel>(batch);
   return data;
 };
