@@ -31,8 +31,16 @@ export interface CoinCapAssetModel extends AssetModel {
   supplyDisplay: NumberDisplayModel;
 }
 
+export interface CoinCapAssetModelExteded extends CoinCapAssetModel {
+  stablecoin: boolean;
+  weight: NumberDisplayModel;
+  weightExStable: NumberDisplayModel;
+  accountTags: string[];
+}
+
 export interface EnrichedCryptoModel {
-  coins: CoinCapAssetModel[];
+  coins: CoinCapAssetModelExteded[];
+  coinsWithAmount: CoinCapAssetModelExteded[];
   portfolioTotal: NumberDisplayModel;
   portfolioTotalExStable: NumberDisplayModel;
   holdingsByAccount: AirTableCryptoModelExtended[];

@@ -39,9 +39,12 @@ const CryptoPage = () => {
         columns={[
           { Header: 'Symbol', accessor: 'symbol' },
           { Header: 'Price', accessor: 'priceDisplay.display' },
-          { Header: 'Amount', accessor: 'shares' },
-          { Header: 'Value', accessor: 'equity.display' },
-          { Header: 'Weight', accessor: 'weight.display' },
+          { Header: 'Amount', accessor: 'totalAmount.display' },
+          { Header: 'Value', accessor: 'totalValue.display' },
+          {
+            Header: 'Weight',
+            accessor: showStable ? 'weight.display' : 'weightExStable.display',
+          },
           {
             Header: 'Day',
             accessor: 'changePercent',
@@ -67,16 +70,23 @@ const CryptoPage = () => {
           {
             Header: 'Accounts',
             accessor: 'accountTags',
-            style: { minWidth: '170px' },
-            // Cell: (instance: { value: string }) => (
-            //   <div className="flex ">
-            //     <Pill color="blue" content={instance.value} />
-            //   </div>
-            // ),
+            style: { minWidth: '350px' },
+            Cell: (instance: { value: string[] }) => (
+              <div className="flex">
+                {instance.value.map((v) => (
+                  <span className="mr-1 last:mr-0" key={v}>
+                    <Pill color="blue" content={v} />
+                  </span>
+                ))}
+              </div>
+            ),
           },
         ]}
-        data={data.coins}
-        // data={showStable ? data.coins : data.coins.filter(c => !c.stablecoin)}
+        data={
+          showStable
+            ? data.coinsWithAmount
+            : data.coinsWithAmount.filter((c) => !c.stablecoin)
+        }
       />
     </div>
   );
