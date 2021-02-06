@@ -17,7 +17,7 @@ const PortfolioData = ({ children }: PortfolioDataProps) => {
         <div>
           <TotalNetWorth
             portfolioTotal={data.summary.portfolioTotal.val}
-            btcPrice={data.summary.btcLast.priceUsdNumber}
+            btcPrice={data.summary.btcLast.priceDisplay.val}
           />
           {children(data)}
         </div>
