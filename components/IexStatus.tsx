@@ -4,11 +4,11 @@ import _ from 'lodash';
 import ErrorBoundary from './ErrorBoundary';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 import useFetchAccount from '../hooks/useFetchAccount';
-import { AirTableStockAccounts } from '../ts';
+import { AirTableAccountRoutes } from '../ts';
 
 const IexStatusComp = (): React.ReactElement => {
   const router = useRouter();
-  const account = router.query.account as AirTableStockAccounts;
+  const account = router.query.account as AirTableAccountRoutes;
   const { data, updatedAt, status } = useFetchPortfolio();
   const {
     data: accountData,

@@ -5,12 +5,12 @@ import {
   APIPortfolioModelResp,
   APIAccountModelResp,
   EnrichedDetailedQuoteModel,
-  AirTableStockAccounts,
+  AirTableAccountRoutes,
 } from '../ts';
 
 /** Fetch and process the API data */
 const useGetAccount = async (params: {
-  account: AirTableStockAccounts;
+  account: AirTableAccountRoutes;
   token: string;
   logout: () => void;
 }): Promise<EnrichedDetailedQuoteModel> => {
@@ -39,7 +39,7 @@ const useGetAccount = async (params: {
 
 /** React Query hook to get the data */
 const useFetchAccount = (
-  account: AirTableStockAccounts,
+  account: AirTableAccountRoutes,
 ): QueryResult<EnrichedDetailedQuoteModel> => {
   const auth = useAuth();
   return useQuery(

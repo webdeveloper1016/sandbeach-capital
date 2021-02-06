@@ -22,6 +22,10 @@ export const enrichDetailedQuotes = (
       return {
         symbol: slice.symbol,
         companyName: quote.companyName,
+        symbolCompany: {
+          symbol: slice.symbol,
+          name: quote.companyName,
+        },
         shares: slice.shares,
         equity: currencyDisplay(quote.latestPrice * slice.shares),
         prices: {
@@ -37,12 +41,12 @@ export const enrichDetailedQuotes = (
           current: numberDisplay(quote.volume),
         },
         change: currencyDisplay(quote.change),
-        changePercent:{
+        changePercent: {
           class: quote.changePercent > 0 ? 'text-green-500' : 'text-red-500',
           perc: percentDisplay(quote.changePercent, 1, true),
-        }, 
+        },
         equityPrevClose: currencyDisplay(quote.previousClose * slice.shares),
-        logo: logo.url,
+        logo: logo ? logo.url : null,
         tags: slice.tags ? slice.tags : [],
         sector: slice.sector,
         stats: {

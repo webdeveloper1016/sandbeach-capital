@@ -47,5 +47,10 @@ export const numberDisplay = (a: number): NumberDisplayModel => ({
   display: _.toUpper(numeral(a).format('0.0a')),
 });
 
+export const numberDisplayLong = (a: number): NumberDisplayModel => ({
+  val: a,
+  display: _.toUpper(numeral(a).format('0.000000a')),
+});
+
 export const dateDisplay = (dateIn: number | Date): string =>
   format(dateIn, 'MM/dd/yyyy p');

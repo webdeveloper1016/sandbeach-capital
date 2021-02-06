@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import {
   AirTableCryptoModel,
   CoinCapAssetModel,
   EnrichedCryptoModel,
 } from '../ts';
-import { currencyDisplay, percentDisplay } from './calc';
+import { currencyDisplay, percentDisplay, numberDisplayLong } from './calc';
 
 export const enrichCrypto = (
   holdings: AirTableCryptoModel[],
@@ -19,32 +20,44 @@ export const enrichCrypto = (
       ...p,
       stablecoin: Boolean(accounts.find((l) => l.assetClass === 'Stablecoin')),
       accounts,
-      totalAmount,
-      totalValue: totalAmount * p.priceUsdNumber,
+      totalAmount: numberDisplayLong(totalAmount),
+      totalValue: currencyDisplay(totalAmount * p.priceDisplay.val),
+      accountTags: accounts.map((a) => a.account),
     };
   });
 
   const holdingsByAccount = holdings.map((h) => ({
     ...h,
     sliceTotalValue: currencyDisplay(
-      prices.find((p) => p.id === h.coin)?.priceUsdNumber * h.amount,
+      prices.find((p) => p.id === h.coin)?.priceDisplay.val * h.amount,
     ),
-    sliceWeight: percentDisplay(1,1)
+    sliceWeight: percentDisplay(1, 1),
   }));
 
   const portfolioTotal = coins.reduce(
-    (accum, current) => accum + current.totalValue,
+    (accum, current) => accum + current.totalValue.val,
     0,
   );
 
   const portfolioTotalExStable = coins
     .filter((c) => !c.stablecoin)
-    .reduce((accum, current) => accum + current.totalValue, 0);
+    .reduce((accum, current) => accum + current.totalValue.val, 0);
+
+  const coinsWithWeight = coins.map((c) => ({
+    ...c,
+    weight: percentDisplay(c.totalValue.val, portfolioTotal),
+    weightExStable: percentDisplay(c.totalValue.val, portfolioTotalExStable),
+  }));
 
   return {
+    coins: _.orderBy(coinsWithWeight, ['totalValue.val'], ['desc']),
+    coinsWithAmount: _.orderBy(
+      coinsWithWeight.filter((c) => c.totalValue.val > 0),
+      ['totalValue.val'],
+      ['desc'],
+    ),
     holdingsByAccount,
     portfolioTotal: currencyDisplay(portfolioTotal),
     portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),
-    coins,
   };
 };

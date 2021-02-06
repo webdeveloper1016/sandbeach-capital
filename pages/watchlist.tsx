@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { AirTableStockAccounts } from '../ts';
+import { AirTableAccountRoutes } from '../ts';
 
-const accountLinks: AirTableStockAccounts[] = [
+const accountLinks: AirTableAccountRoutes[] = [
   'robinhood',
   'm1-taxable',
   'm1-emergency',

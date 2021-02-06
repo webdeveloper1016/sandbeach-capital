@@ -6,15 +6,11 @@ import { AccountBalanceHeader } from '../../components/AccountBalanceHeader';
 import Pill from '../../components/Pill';
 import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
-import { AirTableStockAccounts, PercChangeModel } from '../../ts';
-
-const t = (a, b) => {
-  console.log(a, b);
-};
+import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
 
 const IndividualAccountPage = () => {
   const router = useRouter();
-  const account = router.query.account as AirTableStockAccounts;
+  const account = router.query.account as AirTableAccountRoutes;
 
   const { data, status } = useFetchAccount(account);
 
@@ -82,10 +78,10 @@ const IndividualAccountPage = () => {
             accessor: 'tags',
             style: { minWidth: '225px' },
             Cell: (instance: { value: string[] }) => (
-              <div className="flex ">
+              <div className="flex">
                 {instance.value.map((v) => (
-                  <span className="mr-1 last:mr-0">
-                    <Pill color="yellow" content={v} key={v} />
+                  <span className="mr-1 last:mr-0" key={v}>
+                    <Pill color="yellow" content={v} />
                   </span>
                 ))}
               </div>
