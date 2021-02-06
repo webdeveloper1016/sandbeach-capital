@@ -23,10 +23,10 @@ export interface CoinCapAssetModel extends AssetModel {
   symbolName: {
     symbol: string;
     name: string;
-  };
-  url: {
-    coincap: string;
-    messari: string;
+    urls: {
+      coincap: string;
+      messari: string;
+    };
   };
   priceDisplay: NumberDisplayModel;
   marketCapDisplay: NumberDisplayModel;
