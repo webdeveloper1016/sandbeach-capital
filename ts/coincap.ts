@@ -1,5 +1,5 @@
-import { NumberDisplayModel } from './types'
-import { AirTableCryptoModelExtended } from './airtable'
+import { NumberDisplayModel, PercChangeModel } from './types';
+import { AirTableCryptoModelExtended } from './airtable';
 export interface AssetModel {
   id: string;
   rank: string;
@@ -20,13 +20,20 @@ export interface CoinCapAssetRespModel {
 }
 
 export interface CoinCapAssetModel extends AssetModel {
-  priceUsdNumber: number;
-  priceDisplay: string;
+  symbolName: {
+    symbol: string;
+    name: string;
+  };
+  priceDisplay: NumberDisplayModel;
+  marketCapDisplay: NumberDisplayModel;
+  volumeDisplay: NumberDisplayModel;
+  changePercent: PercChangeModel;
+  supplyDisplay: NumberDisplayModel;
 }
 
 export interface EnrichedCryptoModel {
   coins: CoinCapAssetModel[];
   portfolioTotal: NumberDisplayModel;
   portfolioTotalExStable: NumberDisplayModel;
-  holdingsByAccount: AirTableCryptoModelExtended[]
+  holdingsByAccount: AirTableCryptoModelExtended[];
 }

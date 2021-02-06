@@ -20,16 +20,16 @@ export const enrichCrypto = (
       stablecoin: Boolean(accounts.find((l) => l.assetClass === 'Stablecoin')),
       accounts,
       totalAmount,
-      totalValue: totalAmount * p.priceUsdNumber,
+      totalValue: totalAmount * p.priceDisplay.val,
     };
   });
 
   const holdingsByAccount = holdings.map((h) => ({
     ...h,
     sliceTotalValue: currencyDisplay(
-      prices.find((p) => p.id === h.coin)?.priceUsdNumber * h.amount,
+      prices.find((p) => p.id === h.coin)?.priceDisplay.val * h.amount,
     ),
-    sliceWeight: percentDisplay(1,1)
+    sliceWeight: percentDisplay(1, 1),
   }));
 
   const portfolioTotal = coins.reduce(
@@ -42,9 +42,9 @@ export const enrichCrypto = (
     .reduce((accum, current) => accum + current.totalValue, 0);
 
   return {
+    coins,
     holdingsByAccount,
     portfolioTotal: currencyDisplay(portfolioTotal),
     portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),
-    coins,
   };
 };

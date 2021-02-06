@@ -55,7 +55,7 @@ export interface IexStockQuoteModelEnriched {
 export interface IexStockQuoteDetailedModelEnriched {
   symbol: string;
   companyName: string;
-  symboCompany: {
+  symbolCompany: {
     symbol: string;
     name: string;
   };

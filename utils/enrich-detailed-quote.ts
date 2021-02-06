@@ -22,7 +22,7 @@ export const enrichDetailedQuotes = (
       return {
         symbol: slice.symbol,
         companyName: quote.companyName,
-        symboCompany: {
+        symbolCompany: {
           symbol: slice.symbol,
           name: quote.companyName,
         },

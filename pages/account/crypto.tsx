@@ -1,3 +1,4 @@
+import React from 'react';
 import { AccountViewSkeleton } from '../../components/Skeleton';
 import Error from '../../components/Error';
 import AccountWatchlistLinks from '../../components/AccountWatchlistLinks';
@@ -9,6 +10,7 @@ import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
 
 const CryptoPage = () => {
   const { data, status } = useFetchCrypto();
+  const [showStable, setShowStable] = React.useState(false);
 
   if (status === 'loading' || !data) {
     return <AccountViewSkeleton accountName={'crypto'} />;
@@ -25,69 +27,56 @@ const CryptoPage = () => {
       <AccountWatchlistLinks active={'crypto'} />
       <AccountBalanceHeader
         accountName={'crypto'}
-        balance={data.portfolioTotalExStable.display}
+        balance={
+          showStable
+            ? data.portfolioTotal.display
+            : data.portfolioTotalExStable.display
+        }
         percChange=""
         percClass=""
-        // balance={data.summary.balance.display}
-        // percChange={data.summary.dayChange.perc.display}
-        // percClass={data.summary.dayChange.class}
       />
       <AccountTable
         columns={[
           { Header: 'Symbol', accessor: 'symbol' },
-          { Header: 'Price', accessor: 'priceDisplay' },
-          { Header: 'Shares', accessor: 'shares' },
-          { Header: 'Equity', accessor: 'equity.display' },
+          { Header: 'Price', accessor: 'priceDisplay.display' },
+          { Header: 'Amount', accessor: 'shares' },
+          { Header: 'Value', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
-          // {
-          //   Header: 'Day',
-          //   accessor: 'changePercent',
-          //   Cell: (instance: { value: PercChangeModel }) => {
-          //     return (
-          //       <div className={instance.value.class}>
-          //         {instance.value.perc.display}
-          //       </div>
-          //     );
-          //   },
-          // },
-          { Header: 'Volume', accessor: 'volume.current.display' },
+          {
+            Header: 'Day',
+            accessor: 'changePercent',
+            Cell: (instance: { value: PercChangeModel }) => {
+              return (
+                <div className={instance.value.class}>
+                  {instance.value.perc.display}
+                </div>
+              );
+            },
+          },
+          { Header: 'Volume', accessor: 'volumeDisplay.display' },
           {
             Header: 'Market Cap',
-            accessor: 'stats.marketCap.display',
+            accessor: 'marketCapDisplay.display',
             style: { minWidth: '135px' },
           },
           {
-            Header: '52 Week Range',
-            accessor: 'stats.week52Range',
+            Header: 'Max Supply',
+            accessor: 'supplyDisplay.display',
             style: { minWidth: '170px' },
           },
-          { Header: 'YTD', accessor: 'stats.ytdChange.display' },
-          // {
-          //   Header: 'Sector',
-          //   accessor: 'sector',
-          //   style: { minWidth: '170px' },
-          //   Cell: (instance: { value: string }) => (
-          //     <div className="flex ">
-          //       <Pill color="blue" content={instance.value} />
-          //     </div>
-          //   ),
-          // },
-          // {
-          //   Header: 'Tags',
-          //   accessor: 'tags',
-          //   style: { minWidth: '225px' },
-          //   Cell: (instance: { value: string[] }) => (
-          //     <div className="flex ">
-          //       {instance.value.map((v) => (
-          //         <span className="mr-1 last:mr-0">
-          //           <Pill color="yellow" content={v} key={v} />
-          //         </span>
-          //       ))}
-          //     </div>
-          //   ),
-          // },
+          {
+            Header: 'Accounts',
+            accessor: 'accountTags',
+            style: { minWidth: '170px' },
+            // Cell: (instance: { value: string }) => (
+            //   <div className="flex ">
+            //     <Pill color="blue" content={instance.value} />
+            //   </div>
+            // ),
+          },
         ]}
         data={data.coins}
+        // data={showStable ? data.coins : data.coins.filter(c => !c.stablecoin)}
       />
     </div>
   );
