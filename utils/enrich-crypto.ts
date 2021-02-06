@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   AirTableCryptoModel,
   CoinCapAssetModel,
@@ -49,8 +50,12 @@ export const enrichCrypto = (
   }));
 
   return {
-    coins: coinsWithWeight,
-    coinsWithAmount: coinsWithWeight.filter((c) => c.totalValue.val > 0),
+    coins: _.orderBy(coinsWithWeight, ['totalValue.val'], ['desc']),
+    coinsWithAmount: _.orderBy(
+      coinsWithWeight.filter((c) => c.totalValue.val > 0),
+      ['totalValue.val'],
+      ['desc'],
+    ),
     holdingsByAccount,
     portfolioTotal: currencyDisplay(portfolioTotal),
     portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),

@@ -8,6 +8,10 @@ export const formatCoincap = (data: AssetModel[]): CoinCapAssetModel[] => {
       symbol: i.symbol,
       name: i.name,
     },
+    url: {
+      coincap: `https://coincap.io/assets/${i.id}`,
+      messari: `https://messari.io/asset/${i.id}`,
+    },
     priceDisplay: currencyDisplay(Number(i.priceUsd)),
     marketCapDisplay: numberDisplay(Number(i.marketCapUsd)),
     volumeDisplay: numberDisplay(Number(i.volumeUsd24Hr)),

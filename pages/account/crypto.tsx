@@ -20,8 +20,6 @@ const CryptoPage = () => {
     return <Error />;
   }
 
-  console.log(data);
-
   return (
     <div>
       <AccountWatchlistLinks active={'crypto'} />
@@ -62,6 +60,7 @@ const CryptoPage = () => {
             accessor: 'marketCapDisplay.display',
             style: { minWidth: '135px' },
           },
+          { Header: 'Rank', accessor: 'rank' },
           {
             Header: 'Max Supply',
             accessor: 'supplyDisplay.display',
@@ -70,7 +69,7 @@ const CryptoPage = () => {
           {
             Header: 'Accounts',
             accessor: 'accountTags',
-            style: { minWidth: '350px' },
+            style: { minWidth: '340px' },
             Cell: (instance: { value: string[] }) => (
               <div className="flex">
                 {instance.value.map((v) => (
