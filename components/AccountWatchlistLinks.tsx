@@ -5,9 +5,9 @@ import { AirTableAccountRoutes } from '../ts';
 const accountLinks: AirTableAccountRoutes[] = [
   'm1-taxable',
   'robinhood',
-  'm1-emergency',
-  'bryan-roth',
   'crypto',
+  'bryan-roth',
+  'm1-emergency',
 ];
 
 const AccountWatchlistLinks = ({
