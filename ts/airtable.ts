@@ -66,6 +66,9 @@ export interface AirTablePieModelExtended extends AirTablePieModel {
 
 export interface AirTableAccountModelExtended extends AirTableAccountModel {
   pie: AirTablePieModelExtended[];
+  pieSlim: AirTablePieModelExtended[];
+  pieSlimTopOnly: boolean;
+  pieSlimTopOnlyCount: number;
   totalValue: NumberDisplayModel;
   weight: NumberDisplayModel;
 }

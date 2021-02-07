@@ -11,6 +11,8 @@ import {
   IexUrlModel,
 } from '../ts';
 
+const pieSlimTop = 10;
+
 export const enrichAccounts = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
@@ -60,6 +62,11 @@ export const enrichAccounts = (
       ...account,
       timeframe: categoryLabels[account.timeframe],
       pie: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc']),
+      pieSlim: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc'])
+        .filter((i) => i.sliceTotalValue.val > 0)
+        .slice(0, pieSlimTop),
+      pieSlimTopOnly: pieWithWeight.length > pieSlimTop,
+      pieSlimTopOnlyCount: pieSlimTop,
       totalValue: currencyDisplay(sumAccount),
       weight: percentDisplay(sumAccount, 0),
     };

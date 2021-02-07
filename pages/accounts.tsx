@@ -29,6 +29,11 @@ const AccountsPage = () => (
                 <Header
                   size="text-lg"
                   content={`${a.nickname} | ${a.totalValue.display}`}
+                  subheader={
+                    a.pieSlimTopOnly
+                      ? `* Displaying ${a.pieSlimTopOnlyCount} top holdings only`
+                      : undefined
+                  }
                 />
                 <AccountTable
                   columns={_.compact([
@@ -38,7 +43,7 @@ const AccountsPage = () => (
                     { Header: 'Weight', accessor: 'sliceWeight.display' },
                     !a.crypto ? { Header: 'Sector', accessor: 'sector' } : null,
                   ])}
-                  data={a.pie}
+                  data={a.pieSlim}
                 />
               </div>
             ))}
