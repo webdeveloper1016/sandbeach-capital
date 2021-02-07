@@ -5,6 +5,9 @@ import Header from '../components/Header';
 import Section from '../components/Section';
 import { Table } from '../components/Table';
 
+// TODO: limit to top five holdings
+// TODO: filter out zero balance holdings
+// TODO: use new table layout
 const AccountsPage = () => (
   <PortfolioData>
     {(data) => (

@@ -10,6 +10,7 @@ import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
 
 const CryptoPage = () => {
   const { data, status } = useFetchCrypto();
+  // TODO: add radio button to toggle stablecoins
   const [showStable, setShowStable] = React.useState(false);
 
   if (status === 'loading' || !data) {
@@ -35,7 +36,7 @@ const CryptoPage = () => {
       />
       <AccountTable
         columns={[
-          { Header: 'Symbol', accessor: 'symbol' },
+          { Header: 'Symbol', accessor: 'symbol' }, // TODO: combine symbol/company/url
           { Header: 'Price', accessor: 'priceDisplay.display' },
           { Header: 'Amount', accessor: 'totalAmount.display' },
           { Header: 'Value', accessor: 'totalValue.display' },

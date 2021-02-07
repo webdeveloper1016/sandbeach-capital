@@ -10,6 +10,7 @@ const accountLinks: AirTableAccountRoutes[] = [
   'm1-emergency',
 ];
 
+// TODO: fix watchlist menu on mobile
 const AccountWatchlistLinks = ({
   active,
 }: {
