@@ -62,7 +62,7 @@ const byAssetClass = (
     };
   });
 
-  return _.orderBy(byAsset, ['weight.val'], ['desc']);
+  return _.orderBy(byAsset, ['weight.val'], ['desc']).filter(i => i.value.val > 0);
 };
 
 const byRisk = (
