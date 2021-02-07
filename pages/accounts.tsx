@@ -6,7 +6,6 @@ import { AccountTable } from '../components/AccountTable';
 
 // TODO: limit to top five holdings
 // TODO: filter out zero balance holdings
-// TODO: use new table layout
 const AccountsPage = () => (
   <PortfolioData>
     {(data) => (
