@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import AirtableConnect from 'airtable';
 import { AirTableTablesType } from '../ts';
 
@@ -27,6 +28,38 @@ export const airtable = <T>(
 
           resolve((data as unknown) as T);
         });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const airtablePaged = <T>(
+  table: AirTableTablesType,
+  formula = '',
+): Promise<T[]> => {
+  return new Promise((resolve, reject) => {
+    let collectedData: T[] = [];
+    try {
+      base(table)
+        .select({
+          view: 'Grid view',
+          filterByFormula: formula,
+        })
+        .eachPage(
+          (records, nextPage) => {
+            // process data
+            const data = records.map((r) => r.fields);
+            collectedData = [...collectedData, data] as T[];
+            nextPage();
+          },
+          (err) => {
+            if (err) {
+              reject(err);
+            }
+            resolve(_.flatten(collectedData));
+          },
+        );
     } catch (error) {
       reject(error);
     }
