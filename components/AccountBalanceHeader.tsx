@@ -5,7 +5,7 @@ export const labels: Record<AirTableAccountRoutes, string> = {
   'm1-emergency': 'M1 Emergency',
   'm1-taxable': 'M1 Taxable',
   'bryan-roth': 'M1 Roth',
-  'crypto': 'Crypto'
+  crypto: 'Crypto',
 };
 
 export const AccountLabelHeader = ({

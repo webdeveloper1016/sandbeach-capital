@@ -36,7 +36,7 @@ const AccountsPage = () => (
                 columns={_.compact([
                   { Header: 'Symbol', accessor: 'symbol' },
                   { Header: 'Shares', accessor: 'shares' },
-                  { Header: 'Equity', accessor: 'sliceTotalValue.display' },//sliceWeight
+                  { Header: 'Equity', accessor: 'sliceTotalValue.display' }, //sliceWeight
                   { Header: 'Weight', accessor: 'sliceWeight.display' },
                   // { Header: 'Class', accessor: 'assetClass' },
                   !a.crypto ? { Header: 'Sector', accessor: 'sector' } : null,

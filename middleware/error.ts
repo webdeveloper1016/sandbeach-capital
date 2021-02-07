@@ -20,7 +20,7 @@ export const errResp = (
   error: Error | string,
   code?: StatusCodeType,
 ): string => {
-  console.error(error)
+  console.error(error);
   const respCode = statusCode(code);
   return prod ? respCode : JSON.stringify(error);
 };

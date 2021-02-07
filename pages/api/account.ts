@@ -1,7 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import { airtable, auth, errResp, fetchStockHoldingsDetailed } from '../../middleware';
-import { enrichDetailedQuotes } from '../../utils/enrich-detailed-quote'
+import {
+  airtable,
+  auth,
+  errResp,
+  fetchStockHoldingsDetailed,
+} from '../../middleware';
+import { enrichDetailedQuotes } from '../../utils/enrich-detailed-quote';
 import { AirTablePieModel, IexUrlModel } from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
@@ -17,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // check auth before proceeding
     await auth(req);
 
-    const account = req.query.account
+    const account = req.query.account;
 
     if (!account) {
       res.status(400).end(errResp(prod, 'Must include account param', 400));
@@ -25,7 +30,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // fetch from DB
-    const pies = await airtable<AirTablePieModel[]>('Pies', `{account} = '${account}'`);
+    const pies = await airtable<AirTablePieModel[]>(
+      'Pies',
+      `{account} = '${account}'`,
+    );
 
     // fetch quotes
     const quotes = await fetchStockHoldingsDetailed(

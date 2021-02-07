@@ -14,5 +14,5 @@ export interface AccountStatsModel {
   byContribution: {
     label: string;
     value: NumberDisplayModel;
-  }[]
+  }[];
 }

@@ -16,7 +16,7 @@ const useGetAccount = async (params: {
 }): Promise<EnrichedDetailedQuoteModel> => {
   try {
     if (!params.account) {
-      return null
+      return null;
     }
     const { data } = await axiosGet<APIAccountModelResp>(
       '/api/account',

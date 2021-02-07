@@ -88,10 +88,12 @@ const byFactor = (
   totalBalance: number,
 ): StatWeightModel[] => {
   // get individual factors
-  const factors = _.uniq(_.compact(slices.flatMap(s => s.factors)))
+  const factors = _.uniq(_.compact(slices.flatMap((s) => s.factors)));
 
   const byRisk = factors.map((factor) => {
-    const filtered = sumSlices(slices.filter((a) => _.includes(a.factors, factor)));
+    const filtered = sumSlices(
+      slices.filter((a) => _.includes(a.factors, factor)),
+    );
     return {
       label: factor,
       value: currencyDisplay(filtered),

@@ -11,7 +11,7 @@ export interface TableProps {
     Header: string;
   }[];
   data: Record<any, any>[];
-  layout?: 'fixed' | 'auto'
+  layout?: 'fixed' | 'auto';
 }
 
 export const TableHead = ({ headerGroups }: TableHeaderProps) => (
@@ -22,14 +22,16 @@ export const TableHead = ({ headerGroups }: TableHeaderProps) => (
         {...headerGroup.getHeaderGroupProps()}
       >
         {headerGroup.headers.map((column) => (
-          <th className="px-2 md:px-0" {...column.getHeaderProps()}>{column.render('Header')}</th>
+          <th className="px-2 md:px-0" {...column.getHeaderProps()}>
+            {column.render('Header')}
+          </th>
         ))}
       </tr>
     ))}
   </thead>
 );
 
-export const Table = ({ columns, data, layout="auto" }: TableProps) => {
+export const Table = ({ columns, data, layout = 'auto' }: TableProps) => {
   const colMemo = React.useMemo(() => columns, [columns]);
   const dataMemo = React.useMemo(() => data, [data]);
   const tableInstance = useTable({ columns: colMemo, data: dataMemo });
@@ -43,7 +45,10 @@ export const Table = ({ columns, data, layout="auto" }: TableProps) => {
   } = tableInstance;
 
   return (
-    <table className={`w-full text-left table-auto md:table-${layout}`} {...getTableProps()}>
+    <table
+      className={`w-full text-left table-auto md:table-${layout}`}
+      {...getTableProps()}
+    >
       <TableHead headerGroups={headerGroups} />
       <tbody className="align-baseline" {...getTableBodyProps()}>
         {rows.map((row) => {
@@ -51,7 +56,14 @@ export const Table = ({ columns, data, layout="auto" }: TableProps) => {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                return <td className="px-2 md:px-0 pt-1 min-w-full" {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                return (
+                  <td
+                    className="px-2 md:px-0 pt-1 min-w-full"
+                    {...cell.getCellProps()}
+                  >
+                    {cell.render('Cell')}
+                  </td>
+                );
               })}
             </tr>
           );

@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write **/*.ts{,x}",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "airtable": "^0.10.1",

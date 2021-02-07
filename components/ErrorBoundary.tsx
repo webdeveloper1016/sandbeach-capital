@@ -44,7 +44,13 @@ class ErrorBoundary extends React.Component<
     const { error } = this.state;
     const { fallback, children } = this.props;
     if (error) {
-      return fallback || <div className="p-3 flex justify-center"><Error /></div>;
+      return (
+        fallback || (
+          <div className="p-3 flex justify-center">
+            <Error />
+          </div>
+        )
+      );
     }
     return children;
   }

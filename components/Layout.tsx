@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Nav, NavStatusType, Header, Container } from './Nav';
 
 interface LayoutProps {
@@ -6,14 +6,14 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [menuStatus, setMenuStatus] = React.useState<NavStatusType>('hidden')
+  const [menuStatus, setMenuStatus] = React.useState<NavStatusType>('hidden');
 
   const handleToggle = () => {
-    setMenuStatus(menuStatus === 'hidden' ? 'flex' : 'hidden')
-  }
+    setMenuStatus(menuStatus === 'hidden' ? 'flex' : 'hidden');
+  };
   return (
     <div>
-      <Nav status={menuStatus}/>
+      <Nav status={menuStatus} />
       <Header status={menuStatus} onClick={handleToggle} />
       <Container status={menuStatus}>{children}</Container>
     </div>

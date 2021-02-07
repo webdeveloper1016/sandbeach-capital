@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import _ from 'lodash'
+import _ from 'lodash';
 import numeral from 'numeral';
 import { NumberDisplayModel } from '../ts/types';
 
