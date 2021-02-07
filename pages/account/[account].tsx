@@ -57,12 +57,13 @@ const IndividualAccountPage = () => {
             accessor: 'stats.marketCap.display',
             style: { minWidth: '135px' },
           },
+          { Header: 'YTD', accessor: 'stats.ytdChange.display' },
           {
-            Header: '52 Week Range',
+            Header: '52W Range',
             accessor: 'stats.week52Range',
             style: { minWidth: '170px' },
           },
-          { Header: 'YTD', accessor: 'stats.ytdChange.display' },
+
           {
             Header: 'Sector',
             accessor: 'sector',
