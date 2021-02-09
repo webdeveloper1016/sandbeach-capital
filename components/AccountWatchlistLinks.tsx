@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { usePopper } from 'react-popper';
 import Link from 'next/link';
 import { labels } from './AccountBalanceHeader';
 import { AirTableAccountRoutes } from '../ts';
@@ -15,9 +17,15 @@ const AccountWatchlistLinks = ({
 }: {
   active: AirTableAccountRoutes;
 }) => {
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const [arrowElement, setArrowElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
+  });
   return (
-    <div className="mb-4 mt-2 overflow-x-auto ">
-      <div className="flex justify-between items-center">
+    <div className="mb-4 mt-2">
+      <div className="hidden md:flex justify-between items-center">
         {accountLinks.map((l) => (
           <Link href={`/account/${l}`} key={l}>
             <a
@@ -29,6 +37,16 @@ const AccountWatchlistLinks = ({
             </a>
           </Link>
         ))}
+      </div>
+      <div
+        className="sm:hidden border border-current rounded py-1 px-2 hover:bg-gray-900"
+        ref={setReferenceElement}
+      >
+        Accounts
+      </div>
+      <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+        Popper element
+        <div ref={setArrowElement} style={styles.arrow} />
       </div>
     </div>
   );
