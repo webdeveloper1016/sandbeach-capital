@@ -2,6 +2,7 @@ import PortfolioData from '../components/PortfolioData';
 import TableSection from '../components/TableSection';
 import Pill from '../components/Pill';
 
+// TODO: cash equiv holdings section
 const HomePage = () => (
   <PortfolioData>
     {(data) => (
