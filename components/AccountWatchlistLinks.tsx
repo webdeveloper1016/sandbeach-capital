@@ -65,6 +65,7 @@ const MobileMenu = ({ active }: { active: AirTableAccountRoutes }) => {
                     className={`border border-current rounded py-1 px-2 my-2 ${
                       active === l && 'text-green-500'
                     }`}
+                    onClick={() => setShowPopper(false)}
                   >
                     {labels[l]}
                   </a>
