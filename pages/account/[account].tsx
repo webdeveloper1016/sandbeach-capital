@@ -14,15 +14,18 @@ const IndividualAccountPage = () => {
 
   const { data, status } = useFetchAccount(account);
 
+  if (status === 'error') {
+    return (
+      <div>
+        <AccountWatchlistLinks active={account} />
+        <Error />
+      </div>
+    );
+  }
+
   if (status === 'loading' || !data) {
     return <AccountViewSkeleton accountName={account} />;
   }
-
-  if (status === 'error') {
-    return <Error />;
-  }
-
-  console.log(data);
 
   return (
     <div>
