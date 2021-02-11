@@ -30,7 +30,9 @@ const useGetCrypto = async (params: {
 /** React Query hook to get the data */
 const useFetchCrypto = (): QueryResult<EnrichedCryptoModel> => {
   const auth = useAuth();
-  return useQuery(['crypto'], () => useGetCrypto(auth));
+  return useQuery(['crypto'], () => useGetCrypto(auth), {
+    refetchInterval: 1000 * 60,
+  });
 };
 
 export default useFetchCrypto;

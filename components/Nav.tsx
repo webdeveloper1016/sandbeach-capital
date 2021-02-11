@@ -45,6 +45,7 @@ export const Nav = ({ status }: { status: NavStatusType }) => {
   );
 };
 
+// TODO: add SPY, QQQ, ARKK, BTC prices to header
 interface HeaderProps {
   status: NavStatusType;
   onClick: () => void;
@@ -52,7 +53,7 @@ interface HeaderProps {
 export const Header = ({ onClick, status }: HeaderProps) => {
   return (
     <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
-      <header className="flex justify-between items-center p-2">
+      <header className="flex justify-between items-center py-2 px-2 md:px-4">
         <h1 className="text-2xl hidden md:block">Sand Beach Capital</h1>
         <IexStatus />
         <button className="md:hidden" onClick={onClick}>

@@ -4,19 +4,24 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write **/*.ts{,x}",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@popperjs/core": "^2.6.0",
     "airtable": "^0.10.1",
     "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "next": "10.0.2",
+    "next-pwa": "^5.0.5",
     "numeral": "^2.0.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^6.14.1",
+    "react-popper": "^2.2.4",
     "react-query": "^2.26.3",
     "react-table": "^7.6.2"
   },

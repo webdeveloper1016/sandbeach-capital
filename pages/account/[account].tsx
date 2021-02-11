@@ -8,21 +8,25 @@ import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
 import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
 
+// TODO: add trading view chart popover
 const IndividualAccountPage = () => {
   const router = useRouter();
   const account = router.query.account as AirTableAccountRoutes;
 
   const { data, status } = useFetchAccount(account);
 
+  if (status === 'error') {
+    return (
+      <div>
+        <AccountWatchlistLinks active={account} />
+        <Error />
+      </div>
+    );
+  }
+
   if (status === 'loading' || !data) {
     return <AccountViewSkeleton accountName={account} />;
   }
-
-  if (status === 'error') {
-    return <Error />;
-  }
-
-  console.log(data);
 
   return (
     <div>
@@ -57,12 +61,13 @@ const IndividualAccountPage = () => {
             accessor: 'stats.marketCap.display',
             style: { minWidth: '135px' },
           },
+          { Header: 'YTD', accessor: 'stats.ytdChange.display' },
           {
-            Header: '52 Week Range',
+            Header: '52W Range',
             accessor: 'stats.week52Range',
             style: { minWidth: '170px' },
           },
-          { Header: 'YTD', accessor: 'stats.ytdChange.display' },
+
           {
             Header: 'Sector',
             accessor: 'sector',

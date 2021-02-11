@@ -12,7 +12,6 @@ export type AirTableTablesType =
   | 'Pies';
 
 export type AirTableStockAccounts =
-  | 'robinhood'
   | 'm1-emergency'
   | 'm1-taxable'
   | 'bryan-roth';
@@ -66,6 +65,9 @@ export interface AirTablePieModelExtended extends AirTablePieModel {
 
 export interface AirTableAccountModelExtended extends AirTableAccountModel {
   pie: AirTablePieModelExtended[];
+  pieSlim: AirTablePieModelExtended[];
+  pieSlimTopOnly: boolean;
+  pieSlimTopOnlyCount: number;
   totalValue: NumberDisplayModel;
   weight: NumberDisplayModel;
 }

@@ -18,7 +18,13 @@ const Pill = ({
   color: 'blue' | 'yellow';
   content: string;
 }) => (
-  <div className={`rounded-full py-1 px-2.5 border text-xs text-center ${setColor(color)}`}>{content}</div>
+  <div
+    className={`rounded-full py-1 px-2.5 border text-xs text-center ${setColor(
+      color,
+    )}`}
+  >
+    {content}
+  </div>
 );
 
 export default Pill;

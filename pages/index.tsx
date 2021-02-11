@@ -1,6 +1,8 @@
 import PortfolioData from '../components/PortfolioData';
 import TableSection from '../components/TableSection';
+import Pill from '../components/Pill';
 
+// TODO: cash equiv holdings section
 const HomePage = () => (
   <PortfolioData>
     {(data) => (
@@ -27,7 +29,15 @@ const HomePage = () => (
           header="Factor Tilts:"
           subheader="*Holdings can be in more than one factor."
           columns={[
-            { Header: 'Factor', accessor: 'label' },
+            {
+              Header: 'Factor',
+              accessor: 'label',
+              Cell: (instance: { value: string }) => (
+                <div className="flex">
+                  <Pill color="blue" content={instance.value} />
+                </div>
+              ),
+            },
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
@@ -36,7 +46,10 @@ const HomePage = () => (
         <TableSection
           header="Risk Levels:"
           columns={[
-            { Header: 'Level', accessor: 'label' },
+            {
+              Header: 'Level',
+              accessor: 'label',
+            },
             { Header: 'Balance', accessor: 'value.display' },
             { Header: 'Weight', accessor: 'weight.display' },
           ]}

@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash';
 import { percentDisplay, currencyDisplay } from './calc';
 import { enrichSummary } from './enrich-summary';
 import { enrichStats, categoryLabels } from './enrich-stats';
@@ -10,6 +10,8 @@ import {
   APIPortfolioModel,
   IexUrlModel,
 } from '../ts';
+
+const pieSlimTop = 10;
 
 export const enrichAccounts = (
   accounts: AirTableAccountModel[],
@@ -26,11 +28,11 @@ export const enrichAccounts = (
       const findPie = cryptoData.holdingsByAccount.filter(
         (p) => p.account === account.id,
       );
-      pie = findPie.map(p => ({
+      pie = findPie.map((p) => ({
         ...p,
         shares: p.amount,
         sector: 'N/A',
-      }))
+      }));
     } else {
       // filter pies by account and calc value with iex data
       const findPie = pies.filter((p) => p.account === account.id);
@@ -51,15 +53,20 @@ export const enrichAccounts = (
       0,
     );
 
-    const pieWithWeight = pie.map(p => ({
+    const pieWithWeight = pie.map((p) => ({
       ...p,
-      sliceWeight: percentDisplay(p.sliceTotalValue.val, sumAccount)
-    }))
+      sliceWeight: percentDisplay(p.sliceTotalValue.val, sumAccount),
+    }));
 
     return {
       ...account,
       timeframe: categoryLabels[account.timeframe],
       pie: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc']),
+      pieSlim: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc'])
+        .filter((i) => i.sliceTotalValue.val > 0)
+        .slice(0, pieSlimTop),
+      pieSlimTopOnly: pieWithWeight.length > pieSlimTop,
+      pieSlimTopOnlyCount: pieSlimTop,
       totalValue: currencyDisplay(sumAccount),
       weight: percentDisplay(sumAccount, 0),
     };

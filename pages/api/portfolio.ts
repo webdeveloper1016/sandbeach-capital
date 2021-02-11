@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
 import {
   airtable,
+  airtablePaged,
   auth,
   errResp,
   fetchStockHoldings,
@@ -32,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // fetch from DB
     const accounts = await airtable<AirTableAccountModel[]>('Accounts');
     const crypto = await airtable<AirTableCryptoModel[]>('Crypto');
-    const pies = await airtable<AirTablePieModel[]>('Pies');
+    const pies = await airtablePaged<AirTablePieModel>('Pies');
 
     // fetch quotes
     const quotes = await fetchStockHoldings(

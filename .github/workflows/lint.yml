@@ -1,0 +1,19 @@
+name: Lint
+
+on: [push]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: run CI
+        run: |
+          yarn install
+          yarn lint
