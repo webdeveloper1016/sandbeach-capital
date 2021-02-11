@@ -8,6 +8,7 @@ import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
 import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
 
+// TODO: add trading view chart popover
 const IndividualAccountPage = () => {
   const router = useRouter();
   const account = router.query.account as AirTableAccountRoutes;

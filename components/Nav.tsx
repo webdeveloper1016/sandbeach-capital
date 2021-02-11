@@ -45,6 +45,7 @@ export const Nav = ({ status }: { status: NavStatusType }) => {
   );
 };
 
+// TODO: add SPY, QQQ, ARKK, BTC prices to header
 interface HeaderProps {
   status: NavStatusType;
   onClick: () => void;
