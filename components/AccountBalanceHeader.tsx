@@ -8,7 +8,7 @@ export const labels: Record<AirTableAccountRoutes, string> = {
 };
 
 export const subheader: Record<AirTableAccountRoutes, string | null> = {
-  'm1-taxable': 'Combined view of M1 and Robinhood accounts',
+  'm1-taxable': null,
   'bryan-roth': null,
   'm1-emergency': null,
   crypto: null,
