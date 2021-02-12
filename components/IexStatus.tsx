@@ -6,6 +6,8 @@ import useFetchPortfolio from '../hooks/useFetchPortfolio';
 import useFetchAccount from '../hooks/useFetchAccount';
 import { AirTableAccountRoutes } from '../ts';
 
+// TODO: this time update is not always working
+
 const IexStatusComp = (): React.ReactElement => {
   const router = useRouter();
   const account = router.query.account as AirTableAccountRoutes;

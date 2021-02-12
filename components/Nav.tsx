@@ -46,6 +46,7 @@ export const Nav = ({ status }: { status: NavStatusType }) => {
 };
 
 // TODO: add SPY, QQQ, ARKK, BTC prices to header
+// TODO: add refrech btn on mobile
 interface HeaderProps {
   status: NavStatusType;
   onClick: () => void;
