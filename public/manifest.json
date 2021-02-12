@@ -1,12 +1,12 @@
 {
   "theme_color": "#10b981",
   "background_color": "#000",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
   "name": "Sand Beach Capital",
-  "short_name": "SB Capital",
+  "short_name": "SB Cap",
   "icons": [
     {
       "src": "icons/icon-192x192.png",

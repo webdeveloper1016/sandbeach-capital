@@ -11,7 +11,7 @@ const Head = (): React.ReactElement => (
     <meta name="description" content="A comprehensive view of your portfolio" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="SB Cap" />
+    <meta name="apple-mobile-web-app-title" content="SB Capital" />
     <meta name="theme-color" content="#10b981" />
     <title>Sand Beach Capital</title>
     <link rel="shortcut icon" href="/favicon.png" />
