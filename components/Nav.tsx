@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useSwipeable } from 'react-swipeable';
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
@@ -8,8 +9,17 @@ export type NavStatusType = 'hidden' | 'flex';
 
 export const Nav = ({ status }: { status: NavStatusType }) => {
   const auth = useAuth();
+  const handlers = useSwipeable({
+    // onSwipedLeft: () => slide(NEXT),
+    // onSwipedRight: () => slide(PREV),
+    onSwipedLeft: () => console.log('close'),
+    onSwipedRight: () => console.log('right'),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
   return (
     <nav
+      {...handlers}
       className={`${status} fixed md:flex top-0 left-0 min-h-screen border-r border-current shadow w-16`}
     >
       <ul className="mx-1 my-2">
@@ -71,8 +81,20 @@ interface ContainerProps {
 }
 
 export const Container = ({ children, status }: ContainerProps) => {
+  const handlers = useSwipeable({
+    // onSwipedLeft: () => slide(NEXT),
+    // onSwipedRight: () => slide(PREV),
+    onSwipedRight: () => console.log('open'),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
   return (
-    <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
+    <div
+      {...handlers}
+      className={`${
+        status === 'flex' ? 'ml-16' : 'ml-0'
+      } md:ml-16 min-h-screen`}
+    >
       <main className="container container-extended p-4 md:px-8 lg:px-20">
         {children}
       </main>
