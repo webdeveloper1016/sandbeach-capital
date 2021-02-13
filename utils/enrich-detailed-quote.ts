@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { currencyDisplay, percentDisplay, numberDisplay } from '../utils/calc';
+import { currencyDisplay, percentDisplay, numberDisplay, percDisplayWithClass } from '../utils/calc';
 import {
   AirTablePieModel,
   IexDetailedQuoteModel,
@@ -41,10 +41,7 @@ export const enrichDetailedQuotes = (
           current: numberDisplay(quote.volume),
         },
         change: currencyDisplay(quote.change),
-        changePercent: {
-          class: quote.changePercent > 0 ? 'text-green-500' : 'text-red-500',
-          perc: percentDisplay(quote.changePercent, 1, true),
-        },
+        changePercent: percDisplayWithClass(quote.changePercent, 1, true),
         equityPrevClose: currencyDisplay(quote.previousClose * slice.shares),
         logo: logo ? logo.url : null,
         tags: slice.tags ? slice.tags : [],
