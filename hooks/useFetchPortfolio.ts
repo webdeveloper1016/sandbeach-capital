@@ -30,7 +30,7 @@ const useGetPortfolio = async (params: {
 /** React Query hook to get the data */
 const useFetchPortfolio = (): UseQueryResult<APIPortfolioModel> => {
   const auth = useAuth();
-  return useQuery(['portfolio'], () => useGetPortfolio(auth));
+  return useQuery('portfolio', () => useGetPortfolio(auth));
 };
 
 export default useFetchPortfolio;

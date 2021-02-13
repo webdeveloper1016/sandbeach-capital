@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from 'react-query'; // TODO: update react query
+import { useQuery, UseQueryResult } from 'react-query';
 import useAuth from '../hooks/useAuth';
 import { axiosGet } from '../utils/fetch';
 import {
