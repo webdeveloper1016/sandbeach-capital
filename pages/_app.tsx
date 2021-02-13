@@ -5,7 +5,6 @@ import { AuthProvider } from '../components/Auth';
 import Layout from '../components/Layout';
 import ErrorBoundary from '../components/ErrorBoundary';
 
-// TODO: PWA
 function MyApp({ Component, pageProps }) {
   return (
     <div>
