@@ -11,17 +11,17 @@ import { AirTableAccountRoutes } from '../ts';
 const IexStatusComp = (): React.ReactElement => {
   const router = useRouter();
   const account = router.query.account as AirTableAccountRoutes;
-  const { data, updatedAt, status } = useFetchPortfolio();
+  const { data, dataUpdatedAt, status } = useFetchPortfolio();
   const {
     data: accountData,
     status: accountStatus,
-    updatedAt: accountUpdatedAt,
+    dataUpdatedAt: accountUpdatedAt,
   } = useFetchAccount(account);
 
   const mergedRQ = {
     q: account ? 'account' : 'portfolio',
     rqStatus: account ? accountStatus : status,
-    rqUpdatedAt: account ? accountUpdatedAt : updatedAt,
+    rqUpdatedAt: account ? accountUpdatedAt : dataUpdatedAt,
   };
 
   if (mergedRQ.rqStatus !== 'success') {

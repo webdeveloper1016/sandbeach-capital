@@ -1,4 +1,4 @@
-import { useQuery, QueryResult } from 'react-query';
+import { useQuery, UseQueryResult } from 'react-query';
 import useAuth from '../hooks/useAuth';
 import { axiosGet } from '../utils/fetch';
 import { APIPortfolioModelResp, APIPortfolioModel } from '../ts';
@@ -28,7 +28,7 @@ const useGetPortfolio = async (params: {
 };
 
 /** React Query hook to get the data */
-const useFetchPortfolio = (): QueryResult<APIPortfolioModel> => {
+const useFetchPortfolio = (): UseQueryResult<APIPortfolioModel> => {
   const auth = useAuth();
   return useQuery(['portfolio'], () => useGetPortfolio(auth));
 };

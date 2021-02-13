@@ -1,6 +1,8 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Nav, NavStatusType, Header, Container } from './Nav';
 
+const queryClient = new QueryClient();
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -14,9 +16,11 @@ const Layout = ({ children }: LayoutProps) => {
   };
   return (
     <div>
-      <Nav status={menuStatus} />
-      <Header status={menuStatus} onClick={handleToggle} />
-      <Container status={menuStatus}>{children}</Container>
+      <QueryClientProvider client={queryClient}>
+        <Nav status={menuStatus} />
+        <Header status={menuStatus} onClick={handleToggle} />
+        <Container status={menuStatus}>{children}</Container>
+      </QueryClientProvider>
     </div>
   );
 };
