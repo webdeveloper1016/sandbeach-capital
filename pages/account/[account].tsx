@@ -3,7 +3,12 @@ import { AccountViewSkeleton } from '../../components/Skeleton';
 import Error from '../../components/Error';
 import AccountWatchlistLinks from '../../components/AccountWatchlistLinks';
 import { AccountBalanceHeader } from '../../components/AccountBalanceHeader';
-import Pill from '../../components/Pill';
+import {
+  SymbolNameCell,
+  TagCell,
+  TagListCell,
+  PercChangeCell,
+} from '../../components/TableCells';
 import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
 import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
@@ -39,22 +44,24 @@ const IndividualAccountPage = () => {
       />
       <AccountTable
         columns={[
-          { Header: 'Symbol', accessor: 'symbol' },
+          {
+            Header: 'Symbol',
+            accessor: 'symbolCompany',
+            Cell: (instance: { value: { symbol: string; name: string } }) => (
+              <SymbolNameCell value={instance.value} />
+            ),
+          },
           { Header: 'Price', accessor: 'prices.latest.display' },
-          { Header: 'Shares', accessor: 'shares' },
-          { Header: 'Equity', accessor: 'equity.display' },
-          { Header: 'Weight', accessor: 'weight.display' },
           {
             Header: 'Day',
             accessor: 'changePercent',
-            Cell: (instance: { value: PercChangeModel }) => {
-              return (
-                <div className={instance.value.class}>
-                  {instance.value.perc.display}
-                </div>
-              );
-            },
+            Cell: (instance: { value: PercChangeModel }) => (
+              <PercChangeCell value={instance.value} />
+            ),
           },
+          { Header: 'Equity', accessor: 'equity.display' },
+          { Header: 'Weight', accessor: 'weight.display' },
+          { Header: 'Shares', accessor: 'shares' },
           { Header: 'Volume', accessor: 'volume.current.display' },
           {
             Header: 'Market Cap',
@@ -73,9 +80,7 @@ const IndividualAccountPage = () => {
             accessor: 'sector',
             style: { minWidth: '170px' },
             Cell: (instance: { value: string }) => (
-              <div className="flex ">
-                <Pill color="blue" content={instance.value} />
-              </div>
+              <TagCell value={instance.value} />
             ),
           },
           {
@@ -83,13 +88,7 @@ const IndividualAccountPage = () => {
             accessor: 'tags',
             style: { minWidth: '225px' },
             Cell: (instance: { value: string[] }) => (
-              <div className="flex">
-                {instance.value.map((v) => (
-                  <span className="mr-1 last:mr-0" key={v}>
-                    <Pill color="yellow" content={v} />
-                  </span>
-                ))}
-              </div>
+              <TagListCell value={instance.value} />
             ),
           },
         ]}

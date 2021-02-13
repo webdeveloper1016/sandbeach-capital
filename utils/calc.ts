@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import _ from 'lodash';
 import numeral from 'numeral';
-import { NumberDisplayModel } from '../ts/types';
+import { NumberDisplayModel, PercChangeModel } from '../ts/types';
 
 export const sumAccounts = (data: any[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
@@ -31,6 +31,29 @@ export const percentDisplay = (
       annoatePositive && val > 0
         ? `+${percentFormatter(a, b)}`
         : percentFormatter(a, b),
+  };
+};
+
+export const percDisplayWithClass = (
+  a: number,
+  b: number,
+  annoatePositive?: boolean,
+): PercChangeModel => {
+  const perc = percentDisplay(a, b, annoatePositive);
+  const css = (): string => {
+    switch (true) {
+      case perc.val > 0:
+        return 'text-green-500';
+      case perc.val < 0:
+        return 'text-red-500';
+      default:
+        return '';
+    }
+  };
+
+  return {
+    class: css(),
+    perc,
   };
 };
 
