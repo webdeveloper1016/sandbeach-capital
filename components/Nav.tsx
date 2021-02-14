@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useSwipeable } from 'react-swipeable';
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
@@ -6,17 +7,38 @@ import { Burger, Home, Accounts, Watchlist, Goals, Logout } from './Icons';
 
 export type NavStatusType = 'hidden' | 'flex';
 
-export const Nav = ({ status }: { status: NavStatusType }) => {
+const swipeConfig = {
+  preventDefaultTouchmoveEvent: true,
+  trackMouse: true,
+};
+
+export const Nav = ({
+  status,
+  onSwipedLeft,
+  onItemClick,
+}: {
+  status: NavStatusType;
+  onSwipedLeft: () => void;
+  onItemClick: () => void;
+}) => {
   const auth = useAuth();
+  const handlers = useSwipeable({
+    onSwipedLeft,
+    ...swipeConfig,
+  });
   return (
     <nav
+      {...handlers}
       className={`${status} fixed md:flex top-0 left-0 min-h-screen border-r border-current shadow w-16`}
     >
       <ul className="mx-1 my-2">
         {links.map(({ href, label, icon }) => (
           <li key={`${href}${label}`} className="flex justify-center px-2 py-4">
             <Link href={href}>
-              <a className="">
+              <a
+                className=""
+                onClick={window.innerWidth < 641 ? () => onItemClick() : undefined}
+              >
                 {(() => {
                   switch (icon) {
                     case 'home':
@@ -67,12 +89,29 @@ export const Header = ({ onClick, status }: HeaderProps) => {
 
 interface ContainerProps {
   status: NavStatusType;
+  onSwipedRight: () => void;
+  onSwipedLeft: () => void;
   children: React.ReactNode;
 }
 
-export const Container = ({ children, status }: ContainerProps) => {
+export const Container = ({
+  children,
+  status,
+  onSwipedLeft,
+  onSwipedRight,
+}: ContainerProps) => {
+  const handlers = useSwipeable({
+    onSwipedLeft,
+    onSwipedRight,
+    ...swipeConfig,
+  });
   return (
-    <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
+    <div
+      {...handlers}
+      className={`${
+        status === 'flex' ? 'ml-16' : 'ml-0'
+      } md:ml-16 min-h-screen`}
+    >
       <main className="container container-extended p-4 md:px-8 lg:px-20">
         {children}
       </main>

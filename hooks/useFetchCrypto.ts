@@ -1,4 +1,4 @@
-import { useQuery, QueryResult } from 'react-query';
+import { useQuery, UseQueryResult } from 'react-query';
 import useAuth from '../hooks/useAuth';
 import { axiosGet } from '../utils/fetch';
 import { APICryptoModelResp, EnrichedCryptoModel } from '../ts';
@@ -28,9 +28,9 @@ const useGetCrypto = async (params: {
 };
 
 /** React Query hook to get the data */
-const useFetchCrypto = (): QueryResult<EnrichedCryptoModel> => {
+const useFetchCrypto = (): UseQueryResult<EnrichedCryptoModel> => {
   const auth = useAuth();
-  return useQuery(['crypto'], () => useGetCrypto(auth), {
+  return useQuery('crypto', () => useGetCrypto(auth), {
     refetchInterval: 1000 * 60,
   });
 };

@@ -1,4 +1,4 @@
-import { useQuery, QueryResult } from 'react-query'; // TODO: update react query
+import { useQuery, UseQueryResult } from 'react-query';
 import useAuth from '../hooks/useAuth';
 import { axiosGet } from '../utils/fetch';
 import {
@@ -40,7 +40,7 @@ const useGetAccount = async (params: {
 /** React Query hook to get the data */
 const useFetchAccount = (
   account: AirTableAccountRoutes,
-): QueryResult<EnrichedDetailedQuoteModel> => {
+): UseQueryResult<EnrichedDetailedQuoteModel> => {
   const auth = useAuth();
   return useQuery(
     ['account', { account }],

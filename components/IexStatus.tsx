@@ -1,30 +1,24 @@
-import { useRouter } from 'next/router';
+import { useQueryClient } from 'react-query';
 import { format } from 'date-fns';
 import _ from 'lodash';
 import ErrorBoundary from './ErrorBoundary';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
-import useFetchAccount from '../hooks/useFetchAccount';
-import { AirTableAccountRoutes } from '../ts';
-
-// TODO: this time update is not always working
 
 const IexStatusComp = (): React.ReactElement => {
-  const router = useRouter();
-  const account = router.query.account as AirTableAccountRoutes;
-  const { data, updatedAt, status } = useFetchPortfolio();
-  const {
-    data: accountData,
-    status: accountStatus,
-    updatedAt: accountUpdatedAt,
-  } = useFetchAccount(account);
+  const queryClient = useQueryClient();
+  const queries = queryClient
+    .getQueryCache()
+    .findAll()
+    .map((q) => ({ updatedAt: q.state.dataUpdatedAt, hash: q.queryHash }));
+  const latest = _.chain(queries)
+    .orderBy('updatedAt', 'desc')
+    .head()
+    .get('updatedAt', null)
+    .value() as number;
 
-  const mergedRQ = {
-    q: account ? 'account' : 'portfolio',
-    rqStatus: account ? accountStatus : status,
-    rqUpdatedAt: account ? accountUpdatedAt : updatedAt,
-  };
+  const { data } = useFetchPortfolio();
 
-  if (mergedRQ.rqStatus !== 'success') {
+  if (!latest) {
     return <div />;
   }
 
@@ -33,7 +27,7 @@ const IexStatusComp = (): React.ReactElement => {
       <a href="https://iexcloud.io" className="mx-2 text-green-300 underline">
         IEX Cloud {_.get(data, 'iex.env', '')}
       </a>
-      <span>{format(mergedRQ.rqUpdatedAt, 'p')}</span>
+      <span>{format(latest, 'p')}</span>
     </div>
   );
 };
