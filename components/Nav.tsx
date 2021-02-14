@@ -7,15 +7,24 @@ import { Burger, Home, Accounts, Watchlist, Goals, Logout } from './Icons';
 
 export type NavStatusType = 'hidden' | 'flex';
 
-export const Nav = ({ status }: { status: NavStatusType }) => {
+const swipeConfig = {
+  preventDefaultTouchmoveEvent: true,
+  trackMouse: true,
+};
+
+export const Nav = ({
+  status,
+  onSwipedLeft,
+  onItemClick,
+}: {
+  status: NavStatusType;
+  onSwipedLeft: () => void;
+  onItemClick: () => void;
+}) => {
   const auth = useAuth();
   const handlers = useSwipeable({
-    // onSwipedLeft: () => slide(NEXT),
-    // onSwipedRight: () => slide(PREV),
-    onSwipedLeft: () => console.log('close'),
-    onSwipedRight: () => console.log('right'),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
+    onSwipedLeft,
+    ...swipeConfig,
   });
   return (
     <nav
@@ -26,7 +35,10 @@ export const Nav = ({ status }: { status: NavStatusType }) => {
         {links.map(({ href, label, icon }) => (
           <li key={`${href}${label}`} className="flex justify-center px-2 py-4">
             <Link href={href}>
-              <a className="">
+              <a
+                className=""
+                onClick={window.innerWidth < 641 ? () => onItemClick() : undefined}
+              >
                 {(() => {
                   switch (icon) {
                     case 'home':
@@ -77,16 +89,21 @@ export const Header = ({ onClick, status }: HeaderProps) => {
 
 interface ContainerProps {
   status: NavStatusType;
+  onSwipedRight: () => void;
+  onSwipedLeft: () => void;
   children: React.ReactNode;
 }
 
-export const Container = ({ children, status }: ContainerProps) => {
+export const Container = ({
+  children,
+  status,
+  onSwipedLeft,
+  onSwipedRight,
+}: ContainerProps) => {
   const handlers = useSwipeable({
-    // onSwipedLeft: () => slide(NEXT),
-    // onSwipedRight: () => slide(PREV),
-    onSwipedRight: () => console.log('open'),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
+    onSwipedLeft,
+    onSwipedRight,
+    ...swipeConfig,
   });
   return (
     <div

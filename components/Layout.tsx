@@ -15,9 +15,19 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <Nav status={menuStatus} />
+        <Nav
+          status={menuStatus}
+          onSwipedLeft={() => setMenuStatus('hidden')}
+          onItemClick={() => setMenuStatus('hidden')}
+        />
         <Header status={menuStatus} onClick={handleToggle} />
-        <Container status={menuStatus}>{children}</Container>
+        <Container
+          status={menuStatus}
+          onSwipedLeft={() => setMenuStatus('hidden')}
+          onSwipedRight={() => setMenuStatus('flex')}
+        >
+          {children}
+        </Container>
       </QueryClientProvider>
     </div>
   );
