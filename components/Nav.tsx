@@ -3,7 +3,7 @@ import { useSwipeable } from 'react-swipeable';
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
-import { Burger, Home, Accounts, Watchlist, Goals, Logout } from './Icons';
+import { Burger, Home, Accounts, Watchlist, Goals, Logout, Crypto } from './Icons';
 
 export type NavStatusType = 'hidden' | 'flex';
 
@@ -37,7 +37,9 @@ export const Nav = ({
             <Link href={href}>
               <a
                 className=""
-                onClick={window.innerWidth < 641 ? () => onItemClick() : undefined}
+                onClick={
+                  window.innerWidth < 641 ? () => onItemClick() : undefined
+                }
               >
                 {(() => {
                   switch (icon) {
@@ -49,6 +51,8 @@ export const Nav = ({
                       return <Goals />;
                     case 'watchlist':
                       return <Watchlist />;
+                    case 'crypto':
+                      return <Crypto />;
                     default:
                       return null;
                   }
@@ -90,18 +94,15 @@ export const Header = ({ onClick, status }: HeaderProps) => {
 interface ContainerProps {
   status: NavStatusType;
   onSwipedRight: () => void;
-  onSwipedLeft: () => void;
   children: React.ReactNode;
 }
 
 export const Container = ({
   children,
   status,
-  onSwipedLeft,
   onSwipedRight,
 }: ContainerProps) => {
   const handlers = useSwipeable({
-    onSwipedLeft,
     onSwipedRight,
     ...swipeConfig,
   });

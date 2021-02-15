@@ -23,7 +23,6 @@ const Layout = ({ children }: LayoutProps) => {
         <Header status={menuStatus} onClick={handleToggle} />
         <Container
           status={menuStatus}
-          onSwipedLeft={() => setMenuStatus('hidden')}
           onSwipedRight={() => setMenuStatus('flex')}
         >
           {children}
