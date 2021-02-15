@@ -3,7 +3,15 @@ import { useSwipeable } from 'react-swipeable';
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
-import { Burger, Home, Accounts, Watchlist, Goals, Logout, Crypto } from './Icons';
+import {
+  Burger,
+  Home,
+  Accounts,
+  Watchlist,
+  Goals,
+  Logout,
+  Crypto,
+} from './Icons';
 
 export type NavStatusType = 'hidden' | 'flex';
 
@@ -93,22 +101,12 @@ export const Header = ({ onClick, status }: HeaderProps) => {
 
 interface ContainerProps {
   status: NavStatusType;
-  onSwipedRight: () => void;
   children: React.ReactNode;
 }
 
-export const Container = ({
-  children,
-  status,
-  onSwipedRight,
-}: ContainerProps) => {
-  const handlers = useSwipeable({
-    onSwipedRight,
-    ...swipeConfig,
-  });
+export const Container = ({ children, status }: ContainerProps) => {
   return (
     <div
-      {...handlers}
       className={`${
         status === 'flex' ? 'ml-16' : 'ml-0'
       } md:ml-16 min-h-screen`}

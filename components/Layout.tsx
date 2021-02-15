@@ -21,12 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
           onItemClick={() => setMenuStatus('hidden')}
         />
         <Header status={menuStatus} onClick={handleToggle} />
-        <Container
-          status={menuStatus}
-          onSwipedRight={() => setMenuStatus('flex')}
-        >
-          {children}
-        </Container>
+        <Container status={menuStatus}>{children}</Container>
       </QueryClientProvider>
     </div>
   );
