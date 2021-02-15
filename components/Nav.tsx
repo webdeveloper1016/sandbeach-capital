@@ -90,18 +90,15 @@ export const Header = ({ onClick, status }: HeaderProps) => {
 interface ContainerProps {
   status: NavStatusType;
   onSwipedRight: () => void;
-  onSwipedLeft: () => void;
   children: React.ReactNode;
 }
 
 export const Container = ({
   children,
   status,
-  onSwipedLeft,
   onSwipedRight,
 }: ContainerProps) => {
   const handlers = useSwipeable({
-    onSwipedLeft,
     onSwipedRight,
     ...swipeConfig,
   });
