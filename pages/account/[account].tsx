@@ -14,6 +14,7 @@ import useFetchAccount from '../../hooks/useFetchAccount';
 import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
 
 // TODO: add trading view chart popover
+// https://www.tradingview.com/widget/mini-chart/
 const IndividualAccountPage = () => {
   const router = useRouter();
   const account = router.query.account as AirTableAccountRoutes;
