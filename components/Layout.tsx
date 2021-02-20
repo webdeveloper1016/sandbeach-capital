@@ -2,6 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Nav, NavStatusType, Header, Container } from './Nav';
 
+
 const queryClient = new QueryClient();
 interface LayoutProps {
   children: React.ReactNode;
