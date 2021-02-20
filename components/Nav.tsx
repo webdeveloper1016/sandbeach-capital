@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useSwipeable } from 'react-swipeable';
+import { useQueryClient } from 'react-query'
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
 import IexStatus from './IexStatus';
@@ -12,6 +13,7 @@ import {
   Logout,
   Crypto,
   Sparkle,
+  Refresh,
 } from './Icons';
 
 export type NavStatusType = 'hidden' | 'flex';
@@ -83,20 +85,25 @@ export const Nav = ({
 };
 
 // TODO: add SPY, QQQ, ARKK, BTC prices to header
-// TODO: add refrech btn on mobile
 interface HeaderProps {
   status: NavStatusType;
   onClick: () => void;
 }
 export const Header = ({ onClick, status }: HeaderProps) => {
+  const queryClient = useQueryClient()
   return (
     <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
       <header className="flex justify-between items-center py-2 px-2 md:px-4">
         <h1 className="text-2xl hidden md:block">Sand Beach Capital</h1>
         <IexStatus />
-        <button className="md:hidden" onClick={onClick}>
-          <Burger />
-        </button>
+        <div className="md:hidden">
+          <button className="md:hidden mx-1" onClick={() => queryClient.refetchQueries()}>
+            <Refresh />
+          </button>
+          <button className="md:hidden" onClick={onClick}>
+            <Burger />
+          </button>
+        </div>
       </header>
     </div>
   );
