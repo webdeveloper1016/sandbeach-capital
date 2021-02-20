@@ -11,6 +11,7 @@ import {
   Goals,
   Logout,
   Crypto,
+  Sparkle,
 } from './Icons';
 
 export type NavStatusType = 'hidden' | 'flex';
@@ -61,6 +62,8 @@ export const Nav = ({
                       return <Watchlist />;
                     case 'crypto':
                       return <Crypto />;
+                    case 'kids':
+                      return <Sparkle />;
                     default:
                       return null;
                   }
