@@ -2,9 +2,13 @@ import React from 'react';
 
 export const AppBarTicker = () => {
   const trRef = React.useRef(null);
+  const [tickerMounted, setTickerMounted] = React.useState(false);
 
   React.useEffect(() => {
-    console.log(trRef.current)
+    setTickerMounted(true);
+    if (tickerMounted) {
+      return;
+    }
     const script = document.createElement('script');
     script.src =
       'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
@@ -12,16 +16,16 @@ export const AppBarTicker = () => {
     script.innerHTML = JSON.stringify({
       symbols: [
         {
-          proName: 'FOREXCOM:SPXUSD',
+          proName: 'AMEX:SPY',
           title: 'S&P 500',
         },
         {
-          proName: 'FOREXCOM:NSXUSD',
+          proName: 'NASDAQ:QQQ',
           title: 'Nasdaq 100',
         },
         {
-          proName: 'FX_IDC:EURUSD',
-          title: 'EUR/USD',
+          proName: 'AMEX:ARKK',
+          title: 'ARKK',
         },
         {
           proName: 'BITSTAMP:BTCUSD',
@@ -35,7 +39,7 @@ export const AppBarTicker = () => {
       showSymbolLogo: true,
       colorTheme: 'dark',
       isTransparent: true,
-      displayMode: 'adaptive',
+      displayMode: 'regular',
       locale: 'en',
     });
     trRef.current.appendChild(script);
