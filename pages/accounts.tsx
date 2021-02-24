@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import Section from '../components/Section';
 import { AccountTable } from '../components/AccountTable';
 
+// TODO: jump down to account
+// TODO: dont show account details if no balance
 const AccountsPage = () => (
   <PortfolioData>
     {(data) => (
