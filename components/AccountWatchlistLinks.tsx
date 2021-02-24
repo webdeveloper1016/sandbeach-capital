@@ -8,7 +8,7 @@ const accountLinks: AirTableAccountRoutes[] = [
   'm1-taxable',
   'crypto',
   'bryan-roth',
-  'm1-emergency',
+  'betterment-emergency',
 ];
 
 const MobileMenu = ({ active }: { active: AirTableAccountRoutes }) => {

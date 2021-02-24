@@ -12,7 +12,7 @@ export type AirTableTablesType =
   | 'Pies';
 
 export type AirTableStockAccounts =
-  | 'm1-emergency'
+  | 'betterment-emergency'
   | 'm1-taxable'
   | 'bryan-roth';
 
