@@ -60,6 +60,10 @@ export const enrichAccounts = (
 
     return {
       ...account,
+      nicknameId: {
+        nickname: account.nickname,
+        id: account.id,
+      },
       timeframe: categoryLabels[account.timeframe],
       pie: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc']),
       pieSlim: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc'])
@@ -77,10 +81,12 @@ export const enrichAccounts = (
     0,
   );
 
-  const accountsWithWeight = accountsWithQuotes.map((a) => ({
-    ...a,
-    weight: percentDisplay(a.totalValue.val, portfolioTotal),
-  }));
+  const accountsWithWeight = accountsWithQuotes
+    .map((a) => ({
+      ...a,
+      weight: percentDisplay(a.totalValue.val, portfolioTotal),
+    }))
+    .filter((x) => x.totalValue.val > 0);
 
   const exCryptoPortfolioTotal = accountsWithWeight
     .filter((a) => !a.crypto)

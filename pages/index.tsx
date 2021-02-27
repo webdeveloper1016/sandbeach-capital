@@ -2,11 +2,19 @@ import PortfolioData from '../components/PortfolioData';
 import TableSection from '../components/TableSection';
 import Pill from '../components/Pill';
 
-// TODO: cash equiv holdings section
 const HomePage = () => (
   <PortfolioData>
     {(data) => (
       <div>
+        <TableSection
+          header="Cash Equivalents:"
+          columns={[
+            { Header: 'Asset Class', accessor: 'label' },
+            { Header: 'Balance', accessor: 'value.display' },
+            { Header: 'Weight', accessor: 'weight.display' },
+          ]}
+          data={data.stats.byCashEq}
+        />
         <TableSection
           header="Time Horizon:"
           columns={[

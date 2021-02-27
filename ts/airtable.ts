@@ -29,6 +29,7 @@ export interface AirTableCryptoModel {
   coin: string;
   amount: number;
   assetClass: CryptoAssetClassType;
+  subAssetClass: StockAssetClassType;
 }
 
 export interface AirTableCryptoModelExtended extends AirTableCryptoModel {
@@ -50,6 +51,7 @@ export interface AirTablePieModel {
   id: string;
   account: string;
   assetClass: StockAssetClassType;
+  subAssetClass: StockAssetClassType;
   sector: string;
   shares: number;
   symbol?: string;
@@ -64,6 +66,10 @@ export interface AirTablePieModelExtended extends AirTablePieModel {
 }
 
 export interface AirTableAccountModelExtended extends AirTableAccountModel {
+  nicknameId: {
+    nickname: string;
+    id: string;
+  }
   pie: AirTablePieModelExtended[];
   pieSlim: AirTablePieModelExtended[];
   pieSlimTopOnly: boolean;

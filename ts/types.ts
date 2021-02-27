@@ -1,15 +1,19 @@
 export type CategoryType = 'short-term' | 'long-term' | 'retirement';
 
 export type StockAssetClassType =
-  | 'Stocks'
-  | 'Bonds'
-  | 'Alts'
-  | 'Cash'
+  | 'Equities'
+  | 'Fixed Income'
+  | 'Commodities'
   | 'Real Estate';
+
+export type CashEquivalentsClassType = 'Cash' | 'Cash Equivalents';
 
 export type CryptoAssetClassType = 'Crypto' | 'Stablecoin';
 
-export type AssetClassType = StockAssetClassType | CryptoAssetClassType;
+export type AssetClassType =
+  | StockAssetClassType
+  | CryptoAssetClassType
+  | CashEquivalentsClassType;
 
 export interface NumberDisplayModel {
   val: number;

@@ -9,10 +9,11 @@ export interface HeaderProps {
   content: string | React.ReactElement;
   subheader?: string | React.ReactElement;
   noGutter?: boolean;
+  id?: string;
 }
 
-const Header = ({ size, content, subheader, noGutter }: HeaderProps) => (
-  <div className={`${noGutter && subheader ? 'mb-0' : 'mb-2'}`}>
+const Header = ({ size, content, subheader, noGutter, id }: HeaderProps) => (
+  <div className={`${noGutter && subheader ? 'mb-0' : 'mb-2'}`} id={id}>
     <div className={`${size} ${noGutter || subheader ? 'mb-0' : 'mb-2'}`}>
       {content}
     </div>
