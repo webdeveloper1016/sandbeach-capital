@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Section from '../components/Section';
 import { AccountTable } from '../components/AccountTable';
 
+// TODO: add scroll to top of pg functionality
 const AccountsPage = () => (
   <PortfolioData>
     {(data) => (
