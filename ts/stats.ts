@@ -9,6 +9,7 @@ export interface StatWeightModel {
 export interface AccountStatsModel {
   byTimeFrame: StatWeightModel[];
   byAssetClass: StatWeightModel[];
+  byCashEq: StatWeightModel[];
   byFactor: StatWeightModel[];
   byRisk: StatWeightModel[];
   byContribution: {

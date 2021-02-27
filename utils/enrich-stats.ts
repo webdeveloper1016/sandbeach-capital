@@ -10,14 +10,17 @@ import {
 } from '../ts';
 
 const assetClasses: AssetClassType[] = [
-  'Stocks',
-  'Bonds',
-  'Alts',
+  'Equities',
+  'Fixed Income',
+  'Commodities',
   'Crypto',
   'Stablecoin',
   'Cash',
   'Real Estate',
+  'Cash Equivalents',
 ];
+
+const cashEqClasses: AssetClassType[] = ['Stablecoin', 'Cash'];
 
 export const categoryLabels: Record<CategoryType, string> = {
   'short-term': 'Short Term',
@@ -47,6 +50,40 @@ const byTimeFrame = (
   });
 };
 
+const byCashEqClass = (
+  slices: AirTablePieModelExtended[],
+  totalBalance: number,
+): StatWeightModel[] => {
+  const byAsset = cashEqClasses.map((assetClass) => {
+    const filtered = sumSlices(
+      slices.filter((a) => a.subAssetClass === assetClass),
+    );
+    return {
+      label: assetClass,
+      value: currencyDisplay(filtered),
+      weight: percentDisplay(filtered, totalBalance),
+    };
+  });
+
+  const withTotal = byAsset.reduce(
+    (accum, current) => accum + current.value.val,
+    0,
+  );
+
+  const bySubAssetClasses = [
+    ...byAsset,
+    {
+      label: 'Total',
+      value: currencyDisplay(withTotal),
+      weight: percentDisplay(withTotal, totalBalance),
+    }
+  ]
+
+  return _.orderBy(bySubAssetClasses, ['weight.val'], ['asc']).filter(
+    (i) => i.value.val > 0,
+  );
+};
+
 const byAssetClass = (
   slices: AirTablePieModelExtended[],
   totalBalance: number,
@@ -62,7 +99,9 @@ const byAssetClass = (
     };
   });
 
-  return _.orderBy(byAsset, ['weight.val'], ['desc']).filter(i => i.value.val > 0);
+  return _.orderBy(byAsset, ['weight.val'], ['desc']).filter(
+    (i) => i.value.val > 0,
+  );
 };
 
 const byRisk = (
@@ -112,6 +151,7 @@ export const enrichStats = (
   return {
     byTimeFrame: byTimeFrame(accountData, totalBalance),
     byAssetClass: byAssetClass(allSlices, totalBalance),
+    byCashEq: byCashEqClass(allSlices, totalBalance),
     byFactor: byFactor(allSlices, totalBalance),
     byRisk: byRisk(allSlices, totalBalance),
     byContribution: [
