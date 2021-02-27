@@ -5,7 +5,6 @@ import Section from '../components/Section';
 import { AccountTable } from '../components/AccountTable';
 
 // TODO: jump down to account
-// TODO: dont show account details if no balance
 const AccountsPage = () => (
   <PortfolioData>
     {(data) => (
@@ -13,7 +12,8 @@ const AccountsPage = () => (
         <div className="pb-4">
           <AccountTable
             columns={[
-              { Header: 'Account', accessor: 'nickname' },
+              { Header: 'Account', accessor: 'nickname' }, //institution
+              { Header: 'Institution', accessor: 'institution' }, //institution
               { Header: 'Category', accessor: 'timeframe' },
               { Header: 'Balance', accessor: 'totalValue.display' },
               { Header: 'Portfolio Weight', accessor: 'weight.display' },
