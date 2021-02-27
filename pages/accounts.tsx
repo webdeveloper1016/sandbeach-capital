@@ -1,10 +1,10 @@
 import _ from 'lodash';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import PortfolioData from '../components/PortfolioData';
 import Header from '../components/Header';
 import Section from '../components/Section';
 import { AccountTable } from '../components/AccountTable';
 
-// TODO: jump down to account
 const AccountsPage = () => (
   <PortfolioData>
     {(data) => (
@@ -12,7 +12,17 @@ const AccountsPage = () => (
         <div className="pb-4">
           <AccountTable
             columns={[
-              { Header: 'Account', accessor: 'nickname' }, //institution
+              {
+                Header: 'Account',
+                accessor: 'nicknameId',
+                Cell: (instance: {
+                  value: { nickname: string; id: string };
+                }) => (
+                  <AnchorLink href={`#${instance.value.id}`}>
+                    {instance.value.nickname}
+                  </AnchorLink>
+                ),
+              }, //institution
               { Header: 'Institution', accessor: 'institution' }, //institution
               { Header: 'Category', accessor: 'timeframe' },
               { Header: 'Balance', accessor: 'totalValue.display' },
@@ -27,6 +37,7 @@ const AccountsPage = () => (
             {data.accounts.map((a, k) => (
               <div className="px-2 pb-6 overflow-x-auto" key={k}>
                 <Header
+                  id={a.id}
                   size="text-lg"
                   content={`${a.nickname} | ${a.totalValue.display}`}
                   subheader={

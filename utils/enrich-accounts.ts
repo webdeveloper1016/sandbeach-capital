@@ -60,6 +60,10 @@ export const enrichAccounts = (
 
     return {
       ...account,
+      nicknameId: {
+        nickname: account.nickname,
+        id: account.id,
+      },
       timeframe: categoryLabels[account.timeframe],
       pie: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc']),
       pieSlim: _.orderBy(pieWithWeight, ['sliceTotalValue.val'], ['desc'])
