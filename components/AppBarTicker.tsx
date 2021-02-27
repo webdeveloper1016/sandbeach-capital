@@ -4,8 +4,8 @@ const src = 'embed-widget-ticker-tape';
 const config = {
   symbols: [
     {
-      proName: 'AMEX:SPY',
-      title: 'SPY',
+      proName: 'AMEX:IVV',
+      title: 'IVV',
     },
     {
       proName: 'NASDAQ:QQQ',
@@ -15,6 +15,19 @@ const config = {
       proName: 'AMEX:ARKK',
       title: 'ARKK',
     },
+    {
+      proName: 'NASDAQ:TSLA',
+      title: 'TSLA',
+    },
+    {
+      proName: 'AMEX:IEFA',
+      title: 'IEFA',
+    },
+    {
+      proName: 'AMEX:IMTB',
+      title: '10YR',
+    },
+
     {
       proName: 'BITSTAMP:BTCUSD',
       title: 'BTC/USD',
