@@ -14,6 +14,7 @@ export type AirTableTablesType =
 export type AirTableStockAccounts =
   | 'betterment-emergency'
   | 'm1-taxable'
+  | 'm1-income'
   | 'bryan-roth';
 
 export type AirTableCryptoAccounts = 'crypto';
@@ -69,7 +70,7 @@ export interface AirTableAccountModelExtended extends AirTableAccountModel {
   nicknameId: {
     nickname: string;
     id: string;
-  }
+  };
   pie: AirTablePieModelExtended[];
   pieSlim: AirTablePieModelExtended[];
   pieSlimTopOnly: boolean;
