@@ -8,7 +8,7 @@ export type StockAssetClassType =
 
 export type CashEquivalentsClassType = 'Cash' | 'Cash Equivalents';
 
-export type CryptoAssetClassType = 'Crypto' | 'Stablecoin';
+export type CryptoAssetClassType = 'Crypto' | 'Stablecoin' | CashEquivalentsClassType
 
 export type AssetClassType =
   | StockAssetClassType
