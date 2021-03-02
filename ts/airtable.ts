@@ -30,7 +30,7 @@ export interface AirTableCryptoModel {
   coin: string;
   amount: number;
   assetClass: CryptoAssetClassType;
-  subAssetClass: StockAssetClassType;
+  subAssetClass: CryptoAssetClassType;
 }
 
 export interface AirTableCryptoModelExtended extends AirTableCryptoModel {

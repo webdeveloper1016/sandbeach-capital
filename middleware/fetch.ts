@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 import {
   CoinCapAssetRespModel,
   CoinCapAssetModel,
@@ -6,6 +7,7 @@ import {
   IexUrlVariants,
   IexSimpleQuoteModel,
   IexDetailedQuoteModel,
+  IexStockQuoteModel,
 } from '../ts';
 import { formatStockQuote } from '../utils/iex';
 import { formatCoincap } from '../utils/coincap';
@@ -41,16 +43,36 @@ export const iexUrl = (
   }
 };
 
+const fetchIEXBatch = async (
+  symbols: string[],
+  iex: IexUrlModel,
+): Promise<IexDetailedQuoteModel> => {
+  const chunks = _.chunk(symbols, 50);
+  console.log(
+    `Fetching ${symbols.length} symbols, in ${chunks.length} chunk(s)`,
+  );
+  const batches = await Promise.all(
+    chunks.map((c) =>
+      axios.get<IexStockQuoteModel>(iexUrl(iex, 'batch', c.join(','))),
+    ),
+  );
+
+  return batches.reduce((acc, current) => {
+    return {
+      ...current.data,
+      ...acc,
+    };
+  }, {});
+};
+
 export const fetchStockHoldings = async (
   symbols: string[],
   iex: IexUrlModel,
 ): Promise<IexSimpleQuoteModel> => {
-  console.log(`Fetching ${symbols.length} symbols`);
-  const batch = iexUrl(iex, 'batch', symbols.join(','));
-  const { data } = await axios.get(batch);
-  return Object.keys(data).reduce((acc, key) => {
+  const allData = await fetchIEXBatch(symbols, iex);
+  return Object.keys(allData).reduce((acc, key) => {
     acc[key] = {
-      ...formatStockQuote(data[key].quote),
+      ...formatStockQuote(allData[key].quote),
     };
     return acc;
   }, {});
@@ -60,8 +82,6 @@ export const fetchStockHoldingsDetailed = async (
   symbols: string[],
   iex: IexUrlModel,
 ): Promise<IexDetailedQuoteModel> => {
-  console.log(`Fetching ${symbols.length} symbols`);
-  const batch = iexUrl(iex, 'batch', symbols.join(','));
-  const { data } = await axios.get<IexDetailedQuoteModel>(batch);
-  return data;
+  const allData = await fetchIEXBatch(symbols, iex);
+  return allData;
 };
