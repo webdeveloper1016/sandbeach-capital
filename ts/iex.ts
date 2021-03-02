@@ -113,3 +113,5 @@ export interface IexFetchSimpleQuoteModel {
 export type IexSimpleQuoteModel = Record<string, IexStockQuoteModelEnriched>;
 
 export type IexDetailedQuoteModel = Record<string, IexBatchRequestDetailed>;
+
+// export type IexDetailedQuoteModel = Record<string, IexStockQuoteModel>;
