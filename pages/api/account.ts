@@ -17,6 +17,8 @@ const iex: IexUrlModel = {
   baseUrl: process.env.IEX_API_URL,
 };
 
+
+// TODO: add key stats --> https://iexcloud.io/docs/api/#key-stats
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     // check auth before proceeding
