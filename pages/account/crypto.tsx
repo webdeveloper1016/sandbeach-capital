@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import { AccountViewSkeleton } from '../../components/Skeleton';
 import Error from '../../components/Error';
 import AccountWatchlistLinks from '../../components/AccountWatchlistLinks';
@@ -9,14 +9,23 @@ import {
   PercChangeCell,
 } from '../../components/TableCells';
 import { AccountTable } from '../../components/AccountTable';
+import { ToggleCheckbox } from '../../components/ToggleCheckbox';
 import useFetchCrypto from '../../hooks/useFetchCrypto';
 import { PercChangeModel } from '../../ts';
 
 const CryptoPage = () => {
+  // hooks
   const { data, status } = useFetchCrypto();
-  // TODO: add radio button to toggle stablecoins
+
+  // state
   const [showStable, setShowStable] = React.useState(false);
 
+  // functions
+  const handleToggleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setShowStable(event.target.checked);
+  };
+
+  // render
   if (status === 'loading' || !data) {
     return <AccountViewSkeleton accountName={'crypto'} />;
   }
@@ -37,6 +46,11 @@ const CryptoPage = () => {
         }
         percChange=""
         percClass=""
+      />
+      <ToggleCheckbox
+        id="stablecoins"
+        label="Show Stablecoins"
+        onChange={handleToggleCheckbox}
       />
       <AccountTable
         columns={[
