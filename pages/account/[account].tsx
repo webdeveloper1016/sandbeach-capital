@@ -13,6 +13,8 @@ import { AccountTable } from '../../components/AccountTable';
 import useFetchAccount from '../../hooks/useFetchAccount';
 import { AirTableAccountRoutes, PercChangeModel } from '../../ts';
 
+// TODO: add page for viewing all stocks!!!
+
 // TODO: add trading view chart popover
 // https://www.tradingview.com/widget/mini-chart/
 const IndividualAccountPage = () => {
