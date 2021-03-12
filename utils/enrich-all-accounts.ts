@@ -1,3 +1,11 @@
+import _ from 'lodash';
+import {
+  currencyDisplay,
+  percentDisplay,
+  numberDisplay,
+  percDisplayWithClass,
+} from '../utils/calc';
+import { formatDetailedQuote } from '../utils/iex';
 import {
   AirTableAccountModel,
   AirTablePieModel,
@@ -11,19 +19,13 @@ export const enrichAllAccounts = (
   quotes: IexSimpleQuoteModel,
   iex: IexUrlModel,
 ) => {
-  return Object.keys(quotes).map((k) => {
-    const quote = quotes[k].api;
+  const holdings = Object.keys(quotes).map((symbol) => {
+    const quote = quotes[symbol].api;
     const shares = pies
-      .filter((p) => p.symbol === k)
+      .filter((p) => p.symbol === symbol)
       .reduce((accum, current) => accum + current.shares, 0);
-    return {
-      symbol: k,
-      companyName: quote.companyName,
-      symbolCompany: {
-        symbol: k,
-        name: quote.companyName,
-      },
-      shares,
-    };
+    return { ...formatDetailedQuote(symbol, shares, quote) };
   });
+
+  return _.orderBy(holdings, ['equity.val'], ['desc']);
 };
