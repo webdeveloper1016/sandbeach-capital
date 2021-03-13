@@ -4,8 +4,8 @@ import {
   percentDisplay,
   numberDisplay,
   percDisplayWithClass,
-} from '../utils/calc';
-import { formatDetailedQuote } from '../utils/iex';
+} from './calc';
+import { formatDetailedQuote } from './iex';
 import {
   AirTableAccountModel,
   AirTablePieModel,
@@ -13,11 +13,10 @@ import {
   IexUrlModel,
 } from '../ts';
 
-export const enrichAllAccounts = (
-  accounts: AirTableAccountModel[],
+export const enrichAllHoldings = (
+  // accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
   quotes: IexSimpleQuoteModel,
-  iex: IexUrlModel,
 ) => {
   const holdings = Object.keys(quotes).map((symbol) => {
     const quote = quotes[symbol].api;

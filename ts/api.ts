@@ -8,6 +8,7 @@ export interface APIPortfolioModel {
   summary: AccountSummaryModel;
   stats: AccountStatsModel;
   accounts: AirTableAccountModelExtended[];
+  aggregatedHoldings: any; // TODO: type this
   iex: IexUrlModel;
 }
 
