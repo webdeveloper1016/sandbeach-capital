@@ -4,14 +4,13 @@ import {
   IexStockQuoteModel,
   IexStockQuoteModelEnriched,
   IexStockQuoteDetailedModel,
-  IexStockQuoteDetailedModelEnriched
 } from '../ts/iex';
 import {
   currencyDisplay,
   dateDisplay,
-  percentDisplay,
   numberDisplay,
   percDisplayWithClass,
+  percDisplayWithClassThreshold,
 } from './calc';
 
 export const priceAnnotate = ' ⚡';
@@ -53,6 +52,7 @@ export const formatDetailedQuote = (
       name: quote.companyName,
     },
     shares,
+    sharesDisplay: numberDisplay(shares),
     equity: currencyDisplay(quote.latestPrice * shares),
     prices: {
       previousClose: currencyDisplay(quote.previousClose),
@@ -69,9 +69,6 @@ export const formatDetailedQuote = (
     change: currencyDisplay(quote.change),
     changePercent: percDisplayWithClass(quote.changePercent, 1, true),
     equityPrevClose: currencyDisplay(quote.previousClose * shares),
-    // logo: logo ? logo.url : null,
-    // tags: slice.tags ? slice.tags : [],
-    // sector: slice.sector,
     stats: {
       marketCap: numberDisplay(quote.marketCap),
       peRatio: quote.peRatio,
@@ -81,16 +78,17 @@ export const formatDetailedQuote = (
         currencyDisplay(quote.week52High).display
       }`,
       week52OffHighPercent:
-        quote.latestPrice >= quote.week52High
+        quote.close >= quote.week52High
           ? {
-              display: '0%',
-              val: 0,
+              perc: { display: '-', val: 0 },
+              class: '',
             }
-          : percentDisplay(
-              quote.week52High - quote.latestPrice,
+          : percDisplayWithClassThreshold(
+              quote.close - quote.week52High,
               quote.week52High,
+              { positive: -.05, negative: -.15 },
             ),
-      ytdChange: percentDisplay(quote.ytdChange, 1, true),
+      ytdChange: percDisplayWithClass(quote.ytdChange, 1, true),
     },
   };
 };

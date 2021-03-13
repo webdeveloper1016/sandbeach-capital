@@ -60,6 +60,7 @@ export interface IexStockQuoteDetailedModel {
     name: string;
   };
   shares: number;
+  sharesDisplay: NumberDisplayModel;
   equity: NumberDisplayModel;
   prices: {
     previousClose: NumberDisplayModel;
@@ -81,9 +82,9 @@ export interface IexStockQuoteDetailedModel {
     peRatio: number | null;
     week52High: NumberDisplayModel;
     week52Low: NumberDisplayModel;
-    ytdChange: NumberDisplayModel;
+    ytdChange: PercChangeModel;
     week52Range: string;
-    week52OffHighPercent: NumberDisplayModel;
+    week52OffHighPercent: PercChangeModel;
   };
 }
 
@@ -93,6 +94,9 @@ export interface IexStockQuoteDetailedModelEnriched
   logo: string | null;
   tags?: string[];
   sector?: string;
+  accounts?: string[];
+  accountsJoined?: string;
+  rank?: number;
 }
 
 export interface EnrichedDetailedQuoteModel {

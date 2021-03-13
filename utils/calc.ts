@@ -57,6 +57,33 @@ export const percDisplayWithClass = (
   };
 };
 
+export const percDisplayWithClassThreshold = (
+  a: number,
+  b: number,
+  threshold: {
+    positive: number,
+    negative: number,
+  },
+  annoatePositive?: boolean,
+): PercChangeModel => {
+  const perc = percentDisplay(a, b, annoatePositive);
+  const css = (): string => {
+    switch (true) {
+      case perc.val > threshold.positive:
+        return 'text-green-500';
+      case perc.val < threshold.negative:
+        return 'text-red-500';
+      default:
+        return '';
+    }
+  };
+
+  return {
+    class: css(),
+    perc,
+  };
+};
+
 export const currencyDisplay = (
   a: number,
   annotate = '',

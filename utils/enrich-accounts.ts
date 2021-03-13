@@ -97,7 +97,12 @@ export const enrichAccounts = (
     summary: enrichSummary(portfolioTotal, exCryptoPortfolioTotal, cryptoData),
     stats: enrichStats(accountsWithWeight, portfolioTotal),
     accounts: accountsWithWeight,
-    aggregatedHoldings: enrichAllHoldings(pies, quotes, portfolioTotal),
+    aggregatedHoldings: enrichAllHoldings(
+      accounts,
+      pies,
+      quotes,
+      portfolioTotal,
+    ),
     iex,
   };
 };
