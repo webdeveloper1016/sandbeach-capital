@@ -33,7 +33,7 @@ const AllAccountsPage = () => (
               { Header: 'Weight', accessor: 'weight.display' },
               { Header: 'Shares', accessor: 'sharesDisplay.display' },
               {
-                Header: 'Market Cap',
+                Header: 'Mkt Cap',
                 accessor: 'stats.marketCap.display',
                 // style: { minWidth: '135px' },
               },

@@ -65,17 +65,28 @@ const IndividualAccountPage = () => {
           { Header: 'Shares', accessor: 'shares' },
           { Header: 'Volume', accessor: 'volume.current.display' },
           {
-            Header: 'Market Cap',
+            Header: 'Mkt Cap',
             accessor: 'stats.marketCap.display',
-            style: { minWidth: '135px' },
           },
-          { Header: 'YTD', accessor: 'stats.ytdChange.display' },
+          {
+            Header: 'YTD',
+            accessor: 'stats.ytdChange',
+            Cell: (instance: { value: PercChangeModel }) => (
+              <PercChangeCell value={instance.value} />
+            ),
+          },
           {
             Header: '52W Range',
             accessor: 'stats.week52Range',
             style: { minWidth: '170px' },
           },
-
+          {
+            Header: 'Off High',
+            accessor: 'stats.week52OffHighPercent',
+            Cell: (instance: { value: PercChangeModel }) => (
+              <PercChangeCell value={instance.value} />
+            ),
+          },
           {
             Header: 'Sector',
             accessor: 'sector',
