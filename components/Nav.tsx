@@ -15,6 +15,7 @@ import {
   Crypto,
   Sparkle,
   Refresh,
+  Chart,
 } from './Icons';
 
 export type NavStatusType = 'hidden' | 'flex';
@@ -67,6 +68,8 @@ export const Nav = ({
                       return <Crypto />;
                     case 'kids':
                       return <Sparkle />;
+                    case 'chart':
+                      return <Chart />;
                     default:
                       return null;
                   }
