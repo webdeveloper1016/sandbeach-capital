@@ -3,12 +3,16 @@ import { PercChangeModel } from '../ts';
 
 export const SymbolNameCell = ({
   value,
+  maxWidth,
 }: {
   value: { symbol: string; name: string };
+  maxWidth?: string;
 }) => (
   <div className="flex flex-col">
     <span className="text-base">{value.symbol}</span>
-    <span className="text-xs truncate sb-max-w-xs">{value.name}</span>
+    <span className={`text-xs truncate ${maxWidth || 'sb-max-w-xs'}`}>
+      {value.name}
+    </span>
   </div>
 );
 

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { percentDisplay, currencyDisplay } from './calc';
 import { enrichSummary } from './enrich-summary';
+import { enrichAllHoldings } from './enrich-all-holdings';
 import { enrichStats, categoryLabels } from './enrich-stats';
 import {
   AirTableAccountModel,
@@ -96,6 +97,12 @@ export const enrichAccounts = (
     summary: enrichSummary(portfolioTotal, exCryptoPortfolioTotal, cryptoData),
     stats: enrichStats(accountsWithWeight, portfolioTotal),
     accounts: accountsWithWeight,
+    aggregatedHoldings: enrichAllHoldings(
+      accounts,
+      pies,
+      quotes,
+      portfolioTotal,
+    ),
     iex,
   };
 };
