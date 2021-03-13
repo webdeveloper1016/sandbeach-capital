@@ -1,14 +1,18 @@
 import { AirTableAccountModelExtended } from './airtable';
 import { AccountSummaryModel } from './summary';
 import { AccountStatsModel } from './stats';
-import { IexUrlModel, EnrichedDetailedQuoteModel } from './iex';
+import {
+  IexUrlModel,
+  EnrichedDetailedQuoteModel,
+  IexStockQuoteDetailedModelEnriched,
+} from './iex';
 import { EnrichedCryptoModel } from './coincap';
 
 export interface APIPortfolioModel {
   summary: AccountSummaryModel;
   stats: AccountStatsModel;
   accounts: AirTableAccountModelExtended[];
-  aggregatedHoldings: any; // TODO: type this
+  aggregatedHoldings: IexStockQuoteDetailedModelEnriched[];
   iex: IexUrlModel;
 }
 

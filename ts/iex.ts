@@ -52,7 +52,7 @@ export interface IexStockQuoteModelEnriched {
   updatedAt: string;
 }
 
-export interface IexStockQuoteDetailedModelEnriched {
+export interface IexStockQuoteDetailedModel {
   symbol: string;
   companyName: string;
   symbolCompany: {
@@ -61,7 +61,6 @@ export interface IexStockQuoteDetailedModelEnriched {
   };
   shares: number;
   equity: NumberDisplayModel;
-  weight: NumberDisplayModel;
   prices: {
     previousClose: NumberDisplayModel;
     open: NumberDisplayModel;
@@ -77,9 +76,6 @@ export interface IexStockQuoteDetailedModelEnriched {
   change: NumberDisplayModel;
   changePercent: PercChangeModel;
   equityPrevClose: NumberDisplayModel;
-  logo: string | null;
-  tags: string[];
-  sector: string;
   stats: {
     marketCap: NumberDisplayModel;
     peRatio: number | null;
@@ -89,6 +85,14 @@ export interface IexStockQuoteDetailedModelEnriched {
     week52Range: string;
     week52OffHighPercent: NumberDisplayModel;
   };
+}
+
+export interface IexStockQuoteDetailedModelEnriched
+  extends IexStockQuoteDetailedModel {
+  weight: NumberDisplayModel;
+  logo: string | null;
+  tags?: string[];
+  sector?: string;
 }
 
 export interface EnrichedDetailedQuoteModel {

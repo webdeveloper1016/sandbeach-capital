@@ -3,6 +3,8 @@ import {
   IexCryptoQuoteModelEnriched,
   IexStockQuoteModel,
   IexStockQuoteModelEnriched,
+  IexStockQuoteDetailedModel,
+  IexStockQuoteDetailedModelEnriched
 } from '../ts/iex';
 import {
   currencyDisplay,
@@ -42,7 +44,7 @@ export const formatDetailedQuote = (
   symbol: string,
   shares: number,
   quote: IexStockQuoteModel,
-) => {
+): IexStockQuoteDetailedModel => {
   return {
     symbol,
     companyName: quote.companyName,
