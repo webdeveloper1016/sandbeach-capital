@@ -8,6 +8,9 @@ import {
   AirTableAccountModel
 } from '../ts';
 
+// TODO: filter mutual funds
+// TODO: add BTC
+// TODO: add target perc field
 export const enrichAllHoldings = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
