@@ -9,7 +9,6 @@ import {
 } from '../ts';
 
 // TODO: add BTC
-// TODO: update ticker
 export const enrichAllHoldings = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
