@@ -11,6 +11,7 @@ import {
 // TODO: filter mutual funds
 // TODO: add BTC
 // TODO: add target perc field
+// TODO: update ticker
 export const enrichAllHoldings = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
