@@ -31,6 +31,7 @@ const AllAccountsPage = () => (
               },
               { Header: 'Equity', accessor: 'equity.display' },
               { Header: 'Weight', accessor: 'weight.display' },
+              { Header: 'Target', accessor: 'targetPercent.display' },
               { Header: 'Shares', accessor: 'sharesDisplay.display' },
               {
                 Header: 'Mkt Cap',

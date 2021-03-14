@@ -97,6 +97,8 @@ export interface IexStockQuoteDetailedModelEnriched
   accounts?: string[];
   accountsJoined?: string;
   rank?: number;
+  exclude?: boolean;
+  targetPercent?: NumberDisplayModel;
 }
 
 export interface EnrichedDetailedQuoteModel {

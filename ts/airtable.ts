@@ -46,6 +46,7 @@ export interface AirTableAccountModel {
   contribution?: number;
   annualContribution: number;
   crypto?: boolean;
+  excludeFromAnalysis?: boolean;
 }
 
 export interface AirTablePieModel {
@@ -55,6 +56,7 @@ export interface AirTablePieModel {
   subAssetClass: StockAssetClassType;
   sector: string;
   shares: number;
+  targetPercent?: number;
   symbol?: string;
   risk: number;
   factors?: string[];
