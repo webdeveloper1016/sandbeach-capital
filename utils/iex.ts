@@ -9,6 +9,7 @@ import {
   currencyDisplay,
   dateDisplay,
   numberDisplay,
+  percentDisplay,
   percDisplayWithClass,
   percDisplayWithClassThreshold,
 } from './calc';

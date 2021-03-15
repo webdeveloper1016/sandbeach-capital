@@ -4,37 +4,32 @@ const src = 'embed-widget-ticker-tape';
 const config = {
   symbols: [
     {
-      proName: 'AMEX:IVV',
-      title: 'IVV',
+      proName: 'AMEX:VT',
+      title: 'VT',
     },
     {
       proName: 'NASDAQ:QQQ',
       title: 'QQQ',
     },
     {
-      proName: 'AMEX:ARKK',
-      title: 'ARKK',
-    },
-    {
-      proName: 'NASDAQ:TSLA',
-      title: 'TSLA',
-    },
-    {
-      proName: 'AMEX:IEFA',
-      title: 'IEFA',
-    },
-    {
-      proName: 'AMEX:IMTB',
-      title: '10YR',
-    },
-
-    {
       proName: 'BITSTAMP:BTCUSD',
       title: 'BTC/USD',
     },
     {
-      proName: 'BITSTAMP:ETHUSD',
-      title: 'ETH/USD',
+      proName: 'AMEX:ARKK',
+      title: 'ARKK',
+    },
+    {
+      proName: 'NYSE:SQ',
+      title: 'SQ',
+    },
+    {
+      proName: 'NASDAQ:CRWD',
+      title: 'CRWD',
+    },
+    {
+      proName: 'NYSE:NET',
+      title: 'NET',
     },
   ],
 };
