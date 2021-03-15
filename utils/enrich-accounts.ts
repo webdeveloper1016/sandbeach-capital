@@ -21,6 +21,7 @@ export const enrichAccounts = (
   cryptoData: EnrichedCryptoModel,
   iex: IexUrlModel,
 ): APIPortfolioModel => {
+
   const accountsWithQuotes = accounts.map((account) => {
     let pie = [];
     // enrich account with crypto or stock data
@@ -101,6 +102,7 @@ export const enrichAccounts = (
       accounts,
       pies,
       quotes,
+      cryptoData,
       portfolioTotal,
     ),
     iex,

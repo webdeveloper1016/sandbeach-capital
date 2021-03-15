@@ -6,6 +6,7 @@ import {
   IexSimpleQuoteModel,
   IexStockQuoteDetailedModelEnriched,
   AirTableAccountModel,
+  EnrichedCryptoModel,
 } from '../ts';
 
 // TODO: add BTC
@@ -13,8 +14,10 @@ export const enrichAllHoldings = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
   quotes: IexSimpleQuoteModel,
+  cryptoData: EnrichedCryptoModel,
   portfolioTotal: number,
 ): IexStockQuoteDetailedModelEnriched[] => {
+  // console.log(cryptoData.coinsWithAmount.filter((c) => c.symbol === 'BTC'));
   const holdings = Object.keys(quotes)
     .map((symbol) => {
       const quote = quotes[symbol].api;
