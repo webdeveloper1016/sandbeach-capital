@@ -40,6 +40,9 @@ export interface CoinCapAssetModelExteded extends CoinCapAssetModel {
   weight: NumberDisplayModel;
   weightExStable: NumberDisplayModel;
   accountTags: string[];
+  totalAmount: NumberDisplayModel;
+  totalValue: NumberDisplayModel;
+  assetClass: string;
 }
 
 export interface EnrichedCryptoModel {
