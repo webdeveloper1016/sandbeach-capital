@@ -5,11 +5,12 @@ import { labels } from './AccountBalanceHeader';
 import { AirTableAccountRoutes } from '../ts';
 
 const accountLinks: AirTableAccountRoutes[] = [
+  'robinhood-core',
+  'robinhood-moon',
+  'crypto',
   'm1-taxable',
   'm1-income',
-  'crypto',
   'bryan-roth',
-  'betterment-emergency',
 ];
 
 const MobileMenu = ({ active }: { active: AirTableAccountRoutes }) => {
