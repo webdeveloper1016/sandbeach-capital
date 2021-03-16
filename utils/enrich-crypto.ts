@@ -2,7 +2,9 @@ import _ from 'lodash';
 import {
   AirTableCryptoModel,
   CoinCapAssetModel,
+  CoinCapAssetModelExteded,
   EnrichedCryptoModel,
+  IexStockQuoteDetailedModelEnriched,
 } from '../ts';
 import { currencyDisplay, percentDisplay, numberDisplayLong } from './calc';
 
@@ -22,6 +24,7 @@ export const enrichCrypto = (
         accounts.find((l) => l.subAssetClass === 'Stablecoin'),
       ),
       accounts,
+      assetClass: accounts.find((l) => l.assetClass).assetClass,
       totalAmount: numberDisplayLong(totalAmount),
       totalValue: currencyDisplay(totalAmount * p.priceDisplay.val),
       accountTags: accounts.map((a) => a.account),
@@ -62,4 +65,59 @@ export const enrichCrypto = (
     portfolioTotal: currencyDisplay(portfolioTotal),
     portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),
   };
+};
+
+export const mapCryptoToIEX = (
+  data: CoinCapAssetModelExteded[],
+  portfolioTotal: number,
+): IexStockQuoteDetailedModelEnriched[] => {
+  const holdings = data.map((c) => ({
+    symbol: c.symbol,
+    companyName: c.name,
+    symbolCompany: {
+      symbol: c.symbol,
+      name: c.name,
+    },
+    shares: c.totalAmount.val,
+    sharesDisplay: c.totalAmount,
+    equity: c.totalValue,
+    prices: {
+      previousClose: c.priceDisplay,
+      open: c.priceDisplay,
+      high: c.priceDisplay,
+      low: c.priceDisplay,
+      close: c.priceDisplay,
+      latest: c.priceDisplay,
+    },
+    volume: {
+      prev: c.volumeDisplay,
+      current: c.volumeDisplay,
+    },
+    change: currencyDisplay(0),
+    changePercent: c.changePercent,
+    equityPrevClose: c.totalValue,
+    stats: {
+      marketCap: c.marketCapDisplay,
+      peRatio: 0,
+      week52High: currencyDisplay(0),
+      week52Low: currencyDisplay(0),
+      week52Range: '-',
+      week52OffHighPercent: {
+        perc: { display: '-', val: 0 },
+        class: '',
+      },
+      ytdChange: {
+        perc: { display: '-', val: 0 },
+        class: '',
+      },
+    },
+    logo: null,
+    sector: c.assetClass,
+    accounts: c.accountTags,
+    accountsJoined: c.accountTags.join(', '),
+    exclude: false,
+    targetPercent: { val: 0, display: '-' },
+    weight: percentDisplay(c.totalValue.val, portfolioTotal),
+  }));
+  return holdings;
 };

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { percentDisplay } from './calc';
 import { formatDetailedQuote } from './iex';
+import { mapCryptoToIEX } from './enrich-crypto';
 import {
   AirTablePieModel,
   IexSimpleQuoteModel,
@@ -60,7 +61,16 @@ export const enrichAllHoldings = (
     })
     .filter((x) => !x.exclude);
 
-  const ordered = _.orderBy(holdings, ['equity.val'], ['desc']);
+  const cryptoHoldings = mapCryptoToIEX(
+    cryptoData.coinsWithAmount.filter((x) => !x.stablecoin),
+    portfolioTotal,
+  );
+
+  const ordered = _.orderBy(
+    [...holdings, ...cryptoHoldings],
+    ['equity.val'],
+    ['desc'],
+  );
 
   return ordered.map((o, k) => ({
     ...o,
