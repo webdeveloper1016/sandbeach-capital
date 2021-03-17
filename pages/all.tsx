@@ -38,7 +38,7 @@ const AllAccountsPage = () => (
                 accessor: 'stats.marketCap.display',
                 // style: { minWidth: '135px' },
               },
-              
+
               {
                 Header: 'YTD',
                 accessor: 'stats.ytdChange',
@@ -46,7 +46,7 @@ const AllAccountsPage = () => (
                   <PercChangeCell value={instance.value} />
                 ),
               },
-              { Header: 'Close', accessor: 'prices.close.display' },
+              { Header: 'Close', accessor: 'prices.close.display' }, // TODO: switch close to last
               {
                 Header: '52W Range',
                 accessor: 'stats.week52Range',

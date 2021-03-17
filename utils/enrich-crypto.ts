@@ -116,7 +116,7 @@ export const mapCryptoToIEX = (
     accounts: c.accountTags,
     accountsJoined: c.accountTags.join(', '),
     exclude: false,
-    targetPercent: { val: 0, display: '-' },
+    targetPercent: { val: 0, display: '-' }, // TODO: get this in there
     weight: percentDisplay(c.totalValue.val, portfolioTotal),
   }));
   return holdings;

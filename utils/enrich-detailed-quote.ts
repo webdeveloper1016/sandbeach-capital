@@ -13,6 +13,7 @@ import {
   EnrichedDetailedQuoteModel,
 } from '../ts';
 
+// TODO: calc RH pie percentage of RH total
 export const enrichDetailedQuotes = (
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
