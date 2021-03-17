@@ -26,13 +26,13 @@ export const enrichDetailedQuotes = (
       }
 
       const { quote, logo } = iexData as IexBatchRequestDetailed;
-      const detailed = formatDetailedQuote(slice.symbol, slice.shares, quote)
+      const detailed = formatDetailedQuote(slice.symbol, slice.shares, quote);
       return {
         ...detailed,
         logo: logo ? logo.url : null,
         tags: slice.tags ? slice.tags : [],
         sector: slice.sector,
-      }
+      };
     })
     .filter((x) => x);
 
@@ -66,6 +66,10 @@ export const enrichDetailedQuotes = (
       dayChange: {
         class: dayChangePerc.val > 0 ? 'text-green-500' : 'text-red-500',
         perc: dayChangePerc,
+      },
+      weight: {
+        tgt: { val: 10, display: '10%' },
+        actual: { val: 12, display: '12%' },
       },
     },
     quotes: _.orderBy(accountWithWeight, ['equity.val'], ['desc']),

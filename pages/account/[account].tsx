@@ -42,6 +42,7 @@ const IndividualAccountPage = () => {
         balance={data.summary.balance.display}
         percChange={data.summary.dayChange.perc.display}
         percClass={data.summary.dayChange.class}
+        weight={data.summary.weight}
       />
       <AccountTable
         columns={[

@@ -1,4 +1,4 @@
-import { AirTableAccountRoutes } from '../ts';
+import { AirTableAccountRoutes, NumberDisplayModel } from '../ts';
 
 export const labels: Record<AirTableAccountRoutes, string> = {
   'robinhood-aw': 'All Weather ☔️',
@@ -29,6 +29,10 @@ interface AccountBalanceHeaderProps {
   balance: string;
   percChange: string;
   percClass: string;
+  weight?: {
+    tgt: NumberDisplayModel;
+    actual: NumberDisplayModel;
+  };
 }
 
 export const AccountBalanceHeader = ({
@@ -36,6 +40,7 @@ export const AccountBalanceHeader = ({
   balance,
   percChange,
   percClass,
+  weight,
 }: AccountBalanceHeaderProps) => (
   <div className="mb-5">
     <div className="text-xl">{labels[accountName]}</div>
@@ -45,8 +50,15 @@ export const AccountBalanceHeader = ({
       </div>
     )}
     <div className="text-2xl md:text-3xl">
-      <span>{balance}</span>
-      <span className={`text-base ml-2 ${percClass} `}>{percChange}</span>
+      <span>💰 {balance}</span>
+      <span className={`text-base ml-3 ${percClass} `}>
+        {percClass.includes('green') ? `📈` : `📉`} {percChange}
+      </span>
+      {weight && (
+        <span className="text-base text-gray-400 ml-3">
+          ⚖️ ${weight.actual.display}/${weight.tgt.display}
+        </span>
+      )}
     </div>
   </div>
 );

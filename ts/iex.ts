@@ -106,6 +106,10 @@ export interface EnrichedDetailedQuoteModel {
     balance: NumberDisplayModel;
     prevBalance: NumberDisplayModel;
     dayChange: PercChangeModel;
+    weight: {
+      tgt: NumberDisplayModel;
+      actual: NumberDisplayModel;
+    };
   };
   quotes: IexStockQuoteDetailedModelEnriched[];
 }
