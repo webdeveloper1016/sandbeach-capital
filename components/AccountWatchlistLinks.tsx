@@ -7,9 +7,9 @@ import { AirTableAccountRoutes } from '../ts';
 const accountLinks: AirTableAccountRoutes[] = [
   'robinhood-core',
   'robinhood-moon',
+  'robinhood-income',
+  'robinhood-aw',
   'crypto',
-  'm1-taxable',
-  'm1-income',
   'bryan-roth',
 ];
 

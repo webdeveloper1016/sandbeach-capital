@@ -12,9 +12,8 @@ export type AirTableTablesType =
   | 'Pies';
 
 export type AirTableStockAccounts =
-  // | 'betterment-emergency'
-  | 'm1-taxable'
-  | 'm1-income'
+  | 'robinhood-aw'
+  | 'robinhood-income'
   | 'robinhood-core'
   | 'robinhood-moon'
   | 'bryan-roth';

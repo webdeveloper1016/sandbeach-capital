@@ -1,17 +1,17 @@
 import { AirTableAccountRoutes } from '../ts';
 
 export const labels: Record<AirTableAccountRoutes, string> = {
-  'm1-taxable': 'All Weather ☔️',
-  'm1-income': 'Income 💦',
-  'bryan-roth': 'M1 Roth 🏝',
-  'robinhood-core': 'RH Core 💎',
-  'robinhood-moon': 'RH Moon 🧪',
+  'robinhood-aw': 'All Weather ☔️',
+  'robinhood-income': 'Income 💦',
+  'bryan-roth': 'Roth 🏝',
+  'robinhood-core': 'Core 💎',
+  'robinhood-moon': 'Moon 🧪',
   crypto: 'Crypto 🚀',
 };
 
 export const subheader: Record<AirTableAccountRoutes, string | null> = {
-  'm1-taxable': null,
-  'm1-income': null,
+  'robinhood-aw': null,
+  'robinhood-income': null,
   'bryan-roth': null,
   'robinhood-core': null,
   'robinhood-moon': null,
