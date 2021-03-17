@@ -52,7 +52,8 @@ export const AccountBalanceHeader = ({
     <div className="text-2xl md:text-3xl">
       <span>💰 {balance}</span>
       <span className={`text-base ml-3 ${percClass} `}>
-        {percClass.includes('green') ? `📈` : `📉`} {percChange}
+        {percChange && (percClass.includes('green') ? `📈 ` : `📉 `)}
+        {percChange}
       </span>
       {weight && (
         <span className="text-base text-gray-400 ml-3">
