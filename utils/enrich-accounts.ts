@@ -7,6 +7,7 @@ import {
   AirTableAccountModel,
   AirTablePieModel,
   IexSimpleQuoteModel,
+  IexDetailedQuoteModel,
   EnrichedCryptoModel,
   APIPortfolioModel,
   IexUrlModel,
@@ -17,11 +18,10 @@ const pieSlimTop = 10;
 export const enrichAccounts = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
-  quotes: IexSimpleQuoteModel,
+  quotes: IexDetailedQuoteModel,
   cryptoData: EnrichedCryptoModel,
   iex: IexUrlModel,
 ): APIPortfolioModel => {
-
   const accountsWithQuotes = accounts.map((account) => {
     let pie = [];
     // enrich account with crypto or stock data
@@ -44,7 +44,7 @@ export const enrichAccounts = (
           ...slice,
           symbol: slice.symbol || slice.sector,
           sliceTotalValue: currencyDisplay(
-            quote ? quote.price.val * slice.shares : slice.shares,
+            quote ? quote.quote.latestPrice * slice.shares : slice.shares,
           ),
         };
       });

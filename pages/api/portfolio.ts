@@ -5,7 +5,7 @@ import {
   airtablePaged,
   auth,
   errResp,
-  fetchStockHoldings,
+  fetchStockHoldingsDetailed,
   fetchCoincap,
 } from '../../middleware';
 import { enrichAccounts } from '../../utils/enrich-accounts';
@@ -36,12 +36,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const pies = await airtablePaged<AirTablePieModel>('Pies');
 
     // fetch quotes
-    const quotes = await fetchStockHoldings(
-      _.uniqBy(pies, 'symbol')
-        .map((x) => x.symbol)
-        .filter((x) => x),
-      iex,
-    );
+    const quotes = await fetchStockHoldingsDetailed(pies, iex);
+
     const cryptoQuotes = await fetchCoincap(
       _.uniqBy(crypto, 'coin').map((x) => x.coin),
     );

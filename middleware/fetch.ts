@@ -8,6 +8,7 @@ import {
   IexSimpleQuoteModel,
   IexDetailedQuoteModel,
   IexStockQuoteModel,
+  AirTablePieModel,
 } from '../ts';
 import { formatStockQuote } from '../utils/iex';
 import { formatCoincap } from '../utils/coincap';
@@ -79,9 +80,12 @@ export const fetchStockHoldings = async (
 };
 
 export const fetchStockHoldingsDetailed = async (
-  symbols: string[],
+  pies: AirTablePieModel[],
   iex: IexUrlModel,
 ): Promise<IexDetailedQuoteModel> => {
+  const symbols = _.uniqBy(pies, 'symbol')
+    .map((x) => x.symbol)
+    .filter((x) => x);
   const allData = await fetchIEXBatch(symbols, iex);
   return allData;
 };

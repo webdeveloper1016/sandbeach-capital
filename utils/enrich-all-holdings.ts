@@ -5,6 +5,7 @@ import { mapCryptoToIEX } from './enrich-crypto';
 import {
   AirTablePieModel,
   IexSimpleQuoteModel,
+  IexDetailedQuoteModel,
   IexStockQuoteDetailedModelEnriched,
   AirTableAccountModel,
   EnrichedCryptoModel,
@@ -13,13 +14,13 @@ import {
 export const enrichAllHoldings = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
-  quotes: IexSimpleQuoteModel,
+  quotes: IexDetailedQuoteModel,
   cryptoData: EnrichedCryptoModel,
   portfolioTotal: number,
 ): IexStockQuoteDetailedModelEnriched[] => {
   const holdings = Object.keys(quotes)
     .map((symbol) => {
-      const quote = quotes[symbol].api;
+      const quote = quotes[symbol];
       const rollup = pies
         .filter((p) => p.symbol === symbol)
         .reduce(
@@ -43,7 +44,7 @@ export const enrichAllHoldings = (
             exclude: false,
           },
         );
-      const detailedQuote = formatDetailedQuote(symbol, rollup.shares, quote);
+      const detailedQuote = formatDetailedQuote(symbol, rollup.shares, quote.quote);
       return {
         ...detailedQuote,
         logo: null,
