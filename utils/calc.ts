@@ -7,7 +7,7 @@ export const sumAccounts = (data: any[]): number =>
   data.reduce((accum, current) => accum + current.balance, 0);
 
 export const sumPies = (data: any[]): number =>
-  data.reduce((accum, current) => accum + current.approxVal.val, 0);
+  data.reduce((accum, current) => accum + current.totalValue.val, 0);
 
 export const currencyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

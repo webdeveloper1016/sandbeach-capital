@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
   currencyDisplay,
   percentDisplay,
+  sumPies,
   numberDisplay,
   percDisplayWithClass,
 } from '../utils/calc';
@@ -65,7 +66,7 @@ export const enrichDetailedQuotes = (
   const menuItems = enrichedAcctData.accounts
     .filter((a) => a.showInAccountsMenu)
     .map((x) => x.nicknameId);
-  console.log(account);
+  const rhTotal = sumPies(enrichedAcctData.accounts.filter((a) => a.robinhoodBuckets))
   return {
     menuItems,
     summary: {
@@ -78,7 +79,7 @@ export const enrichDetailedQuotes = (
       weight: account.robinhoodBuckets
         ? {
             tgt: percentDisplay(account.robinhoodBuckets, 1),
-            actual: { val: 12, display: '12%' },
+            actual: percentDisplay(account.totalValue.val, rhTotal),
           }
         : null,
     },
