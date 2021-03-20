@@ -1,21 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import {
-  airtable,
-  airtablePaged,
-  auth,
-  errResp,
-  fetchStockHoldingsDetailed,
-  fetchCoincap,
-} from '../../middleware';
-import { enrichAccounts } from '../../utils/enrich-accounts';
-import { enrichCrypto } from '../../utils/enrich-crypto';
-import {
-  AirTableAccountModel,
-  AirTablePieModel,
-  IexUrlModel,
-  AirTableCryptoModel,
-} from '../../ts';
+import { airtableAll, auth, errResp, fetchPortfolio } from '../../middleware';
+import { IexUrlModel } from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -31,25 +17,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     await auth(req);
 
     // fetch from DB
-    const accounts = await airtable<AirTableAccountModel[]>('Accounts');
-    const crypto = await airtable<AirTableCryptoModel[]>('Crypto');
-    const pies = await airtablePaged<AirTablePieModel>('Pies');
+    const airtable = await airtableAll();
 
-    // fetch quotes
-    const quotes = await fetchStockHoldingsDetailed(pies, iex);
-
-    const cryptoQuotes = await fetchCoincap(
-      _.uniqBy(crypto, 'coin').map((x) => x.coin),
-    );
+    // fetch quotes and format
+    const { allAccountData } = await fetchPortfolio(airtable, iex);
 
     res.status(200).json({
-      data: enrichAccounts(
-        accounts,
-        pies,
-        quotes,
-        enrichCrypto(crypto, cryptoQuotes),
-        iex,
-      ),
+      data: allAccountData,
     });
   } catch (error) {
     res.status(error.status || 500).end(errResp(prod, error, error.status));

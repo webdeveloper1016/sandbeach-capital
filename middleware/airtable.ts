@@ -1,6 +1,12 @@
-import _ from 'lodash'
+import _ from 'lodash';
 import AirtableConnect from 'airtable';
-import { AirTableTablesType } from '../ts';
+import {
+  AirTableAccountModel,
+  AirTablePieModel,
+  AirTableTablesType,
+  AirTableCryptoModel,
+  AirTableAllTables
+} from '../ts';
 
 const base = new AirtableConnect({ apiKey: process.env.AIRTABLE_API_KEY }).base(
   process.env.AIRTABLE_BASE,
@@ -64,4 +70,18 @@ export const airtablePaged = <T>(
       reject(error);
     }
   });
+};
+
+export const airtableAll = async (): Promise<AirTableAllTables> => {
+  const data = await Promise.all([
+    airtable<AirTableAccountModel[]>('Accounts'),
+    airtable<AirTableCryptoModel[]>('Crypto'),
+    airtablePaged<AirTablePieModel>('Pies'),
+  ]);
+
+  return {
+    accounts: data[0],
+    crypto: data[1],
+    pies: data[2],
+  };
 };

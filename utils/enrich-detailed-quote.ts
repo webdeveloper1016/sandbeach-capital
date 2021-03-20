@@ -11,12 +11,14 @@ import {
   IexDetailedQuoteModel,
   IexBatchRequestDetailed,
   EnrichedDetailedQuoteModel,
+  APIPortfolioModel,
 } from '../ts';
 
-// TODO: calc RH pie percentage of RH total
 export const enrichDetailedQuotes = (
+  accountName: string,
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
+  enrichedAcctData: APIPortfolioModel,
 ): EnrichedDetailedQuoteModel => {
   const data = pies
     .map((slice) => {
@@ -59,7 +61,13 @@ export const enrichDetailedQuotes = (
     true,
   );
 
+  const account = enrichedAcctData.accounts.find((a) => a.id === accountName);
+  const menuItems = enrichedAcctData.accounts
+    .filter((a) => a.showInAccountsMenu)
+    .map((x) => x.nicknameId);
+  console.log(account);
   return {
+    menuItems,
     summary: {
       balance: currencyDisplay(sumAccount),
       prevBalance: currencyDisplay(sumPrevClose),
@@ -67,10 +75,12 @@ export const enrichDetailedQuotes = (
         class: dayChangePerc.val > 0 ? 'text-green-500' : 'text-red-500',
         perc: dayChangePerc,
       },
-      weight: {
-        tgt: { val: 10, display: '10%' },
-        actual: { val: 12, display: '12%' },
-      },
+      weight: account.robinhoodBuckets
+        ? {
+            tgt: percentDisplay(account.robinhoodBuckets, 1),
+            actual: { val: 12, display: '12%' },
+          }
+        : null,
     },
     quotes: _.orderBy(accountWithWeight, ['equity.val'], ['desc']),
   };

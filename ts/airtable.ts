@@ -49,6 +49,7 @@ export interface AirTableAccountModel {
   crypto?: boolean;
   excludeFromAnalysis?: boolean;
   robinhoodBuckets?: number;
+  showInAccountsMenu?: boolean;
 }
 
 export interface AirTablePieModel {
@@ -81,4 +82,10 @@ export interface AirTableAccountModelExtended extends AirTableAccountModel {
   pieSlimTopOnlyCount: number;
   totalValue: NumberDisplayModel;
   weight: NumberDisplayModel;
+}
+
+export interface AirTableAllTables {
+  accounts: AirTableAccountModel[];
+  crypto: AirTableCryptoModel[];
+  pies: AirTablePieModel[];
 }

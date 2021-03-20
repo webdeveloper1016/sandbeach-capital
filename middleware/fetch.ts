@@ -9,9 +9,12 @@ import {
   IexDetailedQuoteModel,
   IexStockQuoteModel,
   AirTablePieModel,
+  AirTableAllTables,
 } from '../ts';
 import { formatStockQuote } from '../utils/iex';
 import { formatCoincap } from '../utils/coincap';
+import { enrichAccounts } from '../utils/enrich-accounts';
+import { enrichCrypto } from '../utils/enrich-crypto';
 
 // https://docs.coincap.io/#89deffa0-ab03-4e0a-8d92-637a857d2c91
 export const fetchCoincap = async (
@@ -88,4 +91,31 @@ export const fetchStockHoldingsDetailed = async (
     .filter((x) => x);
   const allData = await fetchIEXBatch(symbols, iex);
   return allData;
+};
+
+export const fetchPortfolio = async (
+  airtable: AirTableAllTables,
+  iex: IexUrlModel,
+) => {
+  const { accounts, crypto, pies } = airtable;
+  const quotes = await fetchStockHoldingsDetailed(pies, iex);
+
+  const cryptoQuotes = await fetchCoincap(
+    _.uniqBy(crypto, 'coin').map((x) => x.coin),
+  );
+
+  const allAccountData = enrichAccounts(
+    accounts,
+    pies,
+    quotes,
+    enrichCrypto(crypto, cryptoQuotes),
+    iex,
+  );
+
+  return {
+    airtable,
+    quotes,
+    cryptoQuotes,
+    allAccountData,
+  };
 };

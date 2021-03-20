@@ -102,6 +102,10 @@ export interface IexStockQuoteDetailedModelEnriched
 }
 
 export interface EnrichedDetailedQuoteModel {
+  menuItems: {
+    nickname: string;
+    id: string;
+  }[];
   summary: {
     balance: NumberDisplayModel;
     prevBalance: NumberDisplayModel;
@@ -109,7 +113,7 @@ export interface EnrichedDetailedQuoteModel {
     weight: {
       tgt: NumberDisplayModel;
       actual: NumberDisplayModel;
-    };
+    } | null;
   };
   quotes: IexStockQuoteDetailedModelEnriched[];
 }

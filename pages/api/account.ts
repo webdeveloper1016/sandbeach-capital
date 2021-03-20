@@ -1,22 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import {
-  airtable,
-  airtablePaged,
-  auth,
-  errResp,
-  fetchStockHoldingsDetailed,
-  fetchCoincap,
-} from '../../middleware';
-import { enrichAccounts } from '../../utils/enrich-accounts';
+import { auth, errResp, airtableAll, fetchPortfolio } from '../../middleware';
 import { enrichDetailedQuotes } from '../../utils/enrich-detailed-quote';
-import { enrichCrypto } from '../../utils/enrich-crypto';
-import {
-  AirTablePieModel,
-  AirTableAccountModel,
-  IexUrlModel,
-  AirTableCryptoModel,
-} from '../../ts';
+import { IexUrlModel } from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -32,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // check auth before proceeding
     await auth(req);
 
-    const account = req.query.account;
+    const account = req.query.account as string;
 
     if (!account) {
       res.status(400).end(errResp(prod, 'Must include account param', 400));
@@ -40,35 +26,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // fetch from DB
-    const accounts = await airtable<AirTableAccountModel[]>('Accounts');
-    const crypto = await airtable<AirTableCryptoModel[]>('Crypto');
-    const pies = await airtablePaged<AirTablePieModel>('Pies');
-    // const pies = await airtable<AirTablePieModel[]>(
-    //   'Pies',
-    //   `{account} = '${account}'`,
-    // );
-    console.log(accounts);
-    // robinhoodBuckets
+    const airtable = await airtableAll();
 
-    // fetch quotes
-    const quotes = await fetchStockHoldingsDetailed(pies, iex);
-
-    const cryptoQuotes = await fetchCoincap(
-      _.uniqBy(crypto, 'coin').map((x) => x.coin),
-    );
-
-    const accountData = enrichAccounts(
-      accounts,
-      pies,
-      quotes,
-      enrichCrypto(crypto, cryptoQuotes),
-      iex,
-    );
+    // fetch quotes and format
+    const { allAccountData, quotes } = await fetchPortfolio(airtable, iex);
 
     res.status(200).json({
       data: enrichDetailedQuotes(
-        pies.filter((x) => x.account === account),
+        account,
+        airtable.pies.filter((x) => x.account === account),
         quotes,
+        allAccountData,
       ),
     });
   } catch (error) {
