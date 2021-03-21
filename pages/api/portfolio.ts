@@ -14,6 +14,7 @@ const iex: IexUrlModel = {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    console.warn(`/api/portfolio request ${req.query.account}`)
     // check auth before proceeding
     await auth(req);
 

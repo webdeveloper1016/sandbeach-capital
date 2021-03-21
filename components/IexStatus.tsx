@@ -1,10 +1,13 @@
 import { useQueryClient } from 'react-query';
+import { useRouter } from 'next/router';
 import { format } from 'date-fns';
 import _ from 'lodash';
 import ErrorBoundary from './ErrorBoundary';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
 
 const IexStatusComp = (): React.ReactElement => {
+  const router = useRouter();
+  const account = router.query.account;
   const queryClient = useQueryClient();
   const queries = queryClient
     .getQueryCache()
@@ -16,7 +19,7 @@ const IexStatusComp = (): React.ReactElement => {
     .get('updatedAt', null)
     .value() as number;
 
-  const { data } = useFetchPortfolio();
+  const { data } = useFetchPortfolio(account);
 
   if (!latest) {
     return <div />;
