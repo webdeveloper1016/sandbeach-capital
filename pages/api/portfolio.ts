@@ -15,7 +15,8 @@ const iex: IexUrlModel = {
 // TODO: add key stats --> https://iexcloud.io/docs/api/#key-stats
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.warn(`/api/portfolio request ${req.query.account}`)
+    console.log('**************************')
+    console.log(`/api/portfolio request ${req.query.account}`)
     // check auth before proceeding
     await auth(req);
 

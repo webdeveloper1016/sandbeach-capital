@@ -30,11 +30,15 @@ const useGetPortfolio = async (params: {
 };
 
 /** React Query hook to get the data */
-const useFetchPortfolio = (account = null): UseQueryResult<APIPortfolioModel> => {
+const useFetchPortfolio = (
+  account = null,
+): UseQueryResult<APIPortfolioModel> => {
+  console.error('HERE')
   const auth = useAuth();
-  return useQuery(['portfolio', { account }], () =>
-    useGetPortfolio({ ...auth, account }),
-  );
+  return useQuery(['portfolio'], () => useGetPortfolio({ ...auth, account }), {
+    refetchOnWindowFocus: false,
+    staleTime: 1000,
+  });
 };
 
 export default useFetchPortfolio;

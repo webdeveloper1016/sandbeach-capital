@@ -69,18 +69,18 @@ const fetchIEXBatch = async (
   }, {});
 };
 
-export const fetchStockHoldings = async (
-  symbols: string[],
-  iex: IexUrlModel,
-): Promise<IexSimpleQuoteModel> => {
-  const allData = await fetchIEXBatch(symbols, iex);
-  return Object.keys(allData).reduce((acc, key) => {
-    acc[key] = {
-      ...formatStockQuote(allData[key].quote),
-    };
-    return acc;
-  }, {});
-};
+// export const fetchStockHoldings = async (
+//   symbols: string[],
+//   iex: IexUrlModel,
+// ): Promise<IexSimpleQuoteModel> => {
+//   const allData = await fetchIEXBatch(symbols, iex);
+//   return Object.keys(allData).reduce((acc, key) => {
+//     acc[key] = {
+//       ...formatStockQuote(allData[key].quote),
+//     };
+//     return acc;
+//   }, {});
+// };
 
 export const fetchStockHoldingsDetailed = async (
   pies: AirTablePieModel[],
