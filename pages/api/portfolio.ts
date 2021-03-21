@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
 import { airtableAll, auth, errResp, fetchPortfolio } from '../../middleware';
+import { enrichDetailedQuotes } from '../../utils/enrich-detailed-quote';
 import { IexUrlModel } from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
@@ -16,14 +17,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // check auth before proceeding
     await auth(req);
 
+    // check for account in request
+    const account = req.query.account as string;
+
     // fetch from DB
     const airtable = await airtableAll();
 
     // fetch quotes and format
-    const { allAccountData } = await fetchPortfolio(airtable, iex);
+    const { allAccountData, quotes } = await fetchPortfolio(airtable, iex);
 
     res.status(200).json({
-      data: allAccountData,
+      data: {
+        ...allAccountData,
+        accountName: account || null,
+        accountRouteData: enrichDetailedQuotes(
+          airtable.pies.filter((x) => x.account === account),
+          quotes,
+          allAccountData,
+          account,
+        ),
+      },
     });
   } catch (error) {
     res.status(error.status || 500).end(errResp(prod, error, error.status));

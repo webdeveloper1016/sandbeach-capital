@@ -16,11 +16,14 @@ import {
 } from '../ts';
 
 export const enrichDetailedQuotes = (
-  accountName: string,
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
   enrichedAcctData: APIPortfolioModel,
-): EnrichedDetailedQuoteModel => {
+  accountName?: string,
+): EnrichedDetailedQuoteModel | null => {
+  console.log(`Account route: ${accountName}`);
+  if (!accountName) return null;
+
   const data = pies
     .map((slice) => {
       const iexData = _.get(quotes, [slice.symbol], null);
@@ -66,7 +69,9 @@ export const enrichDetailedQuotes = (
   const menuItems = enrichedAcctData.accounts
     .filter((a) => a.showInAccountsMenu)
     .map((x) => x.nicknameId);
-  const rhTotal = sumPies(enrichedAcctData.accounts.filter((a) => a.robinhoodBuckets))
+  const rhTotal = sumPies(
+    enrichedAcctData.accounts.filter((a) => a.robinhoodBuckets),
+  );
   return {
     menuItems,
     summary: {

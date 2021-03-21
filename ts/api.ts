@@ -9,11 +9,13 @@ import {
 import { EnrichedCryptoModel } from './coincap';
 
 export interface APIPortfolioModel {
+  accountName: string | null;
   summary: AccountSummaryModel;
   stats: AccountStatsModel;
   accounts: AirTableAccountModelExtended[];
   aggregatedHoldings: IexStockQuoteDetailedModelEnriched[];
   iex: IexUrlModel;
+  accountRouteData: EnrichedDetailedQuoteModel | null
 }
 
 export interface APIPortfolioModelResp {

@@ -33,10 +33,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json({
       data: enrichDetailedQuotes(
-        account,
         airtable.pies.filter((x) => x.account === account),
         quotes,
         allAccountData,
+        account,
       ),
     });
   } catch (error) {
