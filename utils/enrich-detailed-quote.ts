@@ -18,7 +18,7 @@ import {
 export const enrichDetailedQuotes = (
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
-  enrichedAcctData: APIPortfolioModel,
+  enrichedAcctData: Omit<APIPortfolioModel, 'supportingData'>,
   accountName?: string,
 ): EnrichedDetailedQuoteModel | null => {
   console.log(`Account route: ${accountName}`);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import Status from './Status';
 import TotalNetWorth from './TotalNetWorth';
 import useFetchPortfolio from '../hooks/useFetchPortfolio';
@@ -10,10 +9,7 @@ interface PortfolioDataProps {
 }
 
 const PortfolioData = ({ children }: PortfolioDataProps) => {
-  const router = useRouter();
-  const account = router.query.account;
-
-  const { data, status } = useFetchPortfolio(account);
+  const { data, status } = useFetchPortfolio();
 
   return (
     <Status status={status}>

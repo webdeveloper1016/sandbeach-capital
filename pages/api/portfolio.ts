@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
 import { airtableAll, auth, errResp, fetchPortfolio } from '../../middleware';
-import { enrichDetailedQuotes } from '../../utils/enrich-detailed-quote';
 import { IexUrlModel } from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
@@ -15,30 +14,26 @@ const iex: IexUrlModel = {
 // TODO: add key stats --> https://iexcloud.io/docs/api/#key-stats
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.log('**************************')
-    console.log(`/api/portfolio request ${req.query.account}`)
     // check auth before proceeding
     await auth(req);
-
-    // check for account in request
-    const account = req.query.account as string;
 
     // fetch from DB
     const airtable = await airtableAll();
 
     // fetch quotes and format
-    const { allAccountData, quotes } = await fetchPortfolio(airtable, iex);
+    const { allAccountData, quotes, cryptoQuotes } = await fetchPortfolio(
+      airtable,
+      iex,
+    );
 
     res.status(200).json({
       data: {
         ...allAccountData,
-        accountName: account || null,
-        accountRouteData: enrichDetailedQuotes(
-          airtable.pies.filter((x) => x.account === account),
+        supportingData: {
           quotes,
-          allAccountData,
-          account,
-        ),
+          airtable,
+          cryptoQuotes,
+        },
       },
     });
   } catch (error) {

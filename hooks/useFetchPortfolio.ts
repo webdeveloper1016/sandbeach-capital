@@ -5,7 +5,6 @@ import { APIPortfolioModelResp, APIPortfolioModel } from '../ts';
 
 /** Fetch and process the API data */
 const useGetPortfolio = async (params: {
-  account: string;
   token: string;
   logout: () => void;
 }): Promise<APIPortfolioModel> => {
@@ -13,7 +12,6 @@ const useGetPortfolio = async (params: {
     const { data } = await axiosGet<APIPortfolioModelResp>(
       '/api/portfolio',
       params.token,
-      { account: params.account },
     );
 
     return data;
@@ -30,15 +28,9 @@ const useGetPortfolio = async (params: {
 };
 
 /** React Query hook to get the data */
-const useFetchPortfolio = (
-  account = null,
-): UseQueryResult<APIPortfolioModel> => {
-  console.error('HERE')
+const useFetchPortfolio = (): UseQueryResult<APIPortfolioModel> => {
   const auth = useAuth();
-  return useQuery(['portfolio'], () => useGetPortfolio({ ...auth, account }), {
-    refetchOnWindowFocus: false,
-    staleTime: 1000,
-  });
+  return useQuery(['portfolio'], () => useGetPortfolio(auth));
 };
 
 export default useFetchPortfolio;
