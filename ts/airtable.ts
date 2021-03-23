@@ -11,19 +11,6 @@ export type AirTableTablesType =
   | 'Accounts'
   | 'Pies';
 
-export type AirTableStockAccounts =
-  | 'robinhood-aw'
-  | 'robinhood-income'
-  | 'robinhood-core'
-  | 'robinhood-moon'
-  | 'bryan-roth';
-
-export type AirTableCryptoAccounts = 'crypto';
-
-export type AirTableAccountRoutes =
-  | AirTableStockAccounts
-  | AirTableCryptoAccounts;
-
 export interface AirTableCryptoModel {
   id: string;
   account: string;

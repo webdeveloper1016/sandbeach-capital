@@ -9,7 +9,7 @@ import {
   PercChangeCell,
 } from '../components/TableCells';
 import { AccountTable } from '../components/AccountTable';
-import { AirTableAccountRoutes, PercChangeModel } from '../ts';
+import { PercChangeModel } from '../ts';
 import { enrichDetailedQuotes } from '../utils/enrich-detailed-quote';
 import { APIPortfolioModel } from '../ts';
 
@@ -28,7 +28,7 @@ const AccountAnalysis = ({
       rest,
       account,
     );
-  }, [portfolioData]);
+  }, [portfolioData, account]);
 
   if (!data) {
     return <div>404</div>;
@@ -36,9 +36,9 @@ const AccountAnalysis = ({
 
   return (
     <div>
-      <AccountWatchlistLinks active={account as AirTableAccountRoutes} />
+      <AccountWatchlistLinks active={account} items={data.menuItems}/>
       <AccountBalanceHeader
-        accountName={account as AirTableAccountRoutes}
+        nickname={account}
         balance={data.summary.balance.display}
         percChange={data.summary.dayChange.perc.display}
         percClass={data.summary.dayChange.class}

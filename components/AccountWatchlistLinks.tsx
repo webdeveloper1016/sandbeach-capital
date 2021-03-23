@@ -1,19 +1,15 @@
 import React from 'react';
 import { usePopper } from 'react-popper';
 import Link from 'next/link';
-import { labels } from './AccountBalanceHeader';
-import { AirTableAccountRoutes } from '../ts';
+import { MenuItemModel } from '../ts';
 
-const accountLinks: AirTableAccountRoutes[] = [
-  'robinhood-core',
-  'robinhood-moon',
-  'robinhood-income',
-  'robinhood-aw',
-  'crypto',
-  'bryan-roth',
-];
-
-const MobileMenu = ({ active }: { active: AirTableAccountRoutes }) => {
+const MobileMenu = ({
+  active,
+  items,
+}: {
+  active: string;
+  items: MenuItemModel[];
+}) => {
   const [showPopper, setShowPopper] = React.useState(false);
   const [arrowRef, setArrowRef] = React.useState(null);
   const buttonRef = React.useRef(null);
@@ -61,15 +57,15 @@ const MobileMenu = ({ active }: { active: AirTableAccountRoutes }) => {
           <div ref={setArrowRef} style={styles.arrow} id="arrow" />
           <div className="mx-7 bg-black border border-current rounded px-3 py-1">
             <div className="flex flex-col">
-              {accountLinks.map((l) => (
-                <Link href={`/account/${l}`} key={l}>
+              {items.map((l) => (
+                <Link href={`/account/${l.id}`} key={l.id}>
                   <a
                     className={`border border-current rounded py-1 px-2 my-2 ${
-                      active === l && 'text-green-500'
+                      active === l.id && 'text-green-500'
                     }`}
                     onClick={() => setShowPopper(false)}
                   >
-                    {labels[l]}
+                    {l.nickname}
                   </a>
                 </Link>
               ))}
@@ -83,25 +79,27 @@ const MobileMenu = ({ active }: { active: AirTableAccountRoutes }) => {
 
 const AccountWatchlistLinks = ({
   active,
+  items,
 }: {
-  active: AirTableAccountRoutes;
+  active: string;
+  items: MenuItemModel[];
 }) => {
   return (
     <div className="mb-4 mt-2">
       <div className="hidden md:flex justify-between items-center">
-        {accountLinks.map((l) => (
-          <Link href={`/account/${l}`} key={l}>
+        {items.map((l) => (
+          <Link href={`/account/${l.id}`} key={l.id}>
             <a
               className={`border border-current rounded py-1 px-2 hover:bg-gray-900 ${
-                active === l && 'text-green-500'
+                active === l.id && 'text-green-500'
               }`}
             >
-              {labels[l]}
+              {l.nickname}
             </a>
           </Link>
         ))}
       </div>
-      <MobileMenu active={active} />
+      <MobileMenu active={active} items={items} />
     </div>
   );
 };

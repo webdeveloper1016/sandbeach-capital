@@ -101,11 +101,12 @@ export interface IexStockQuoteDetailedModelEnriched
   targetPercent?: NumberDisplayModel;
 }
 
+export interface MenuItemModel {
+  nickname: string;
+  id: string;
+}
 export interface EnrichedDetailedQuoteModel {
-  menuItems: {
-    nickname: string;
-    id: string;
-  }[];
+  menuItems: MenuItemModel[];
   summary: {
     balance: NumberDisplayModel;
     prevBalance: NumberDisplayModel;

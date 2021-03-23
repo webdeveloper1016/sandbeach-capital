@@ -1,31 +1,8 @@
-import { AirTableAccountRoutes, NumberDisplayModel } from '../ts';
-
-export const labels: Record<AirTableAccountRoutes, string> = {
-  'robinhood-aw': 'All Weather ☔️',
-  'robinhood-income': 'Income 💦',
-  'bryan-roth': 'Roth 🏝',
-  'robinhood-core': 'Core 💎',
-  'robinhood-moon': 'Moon 🧪',
-  crypto: 'Crypto 🚀',
-};
-
-export const subheader: Record<AirTableAccountRoutes, string | null> = {
-  'robinhood-aw': null,
-  'robinhood-income': null,
-  'bryan-roth': null,
-  'robinhood-core': null,
-  'robinhood-moon': null,
-  crypto: null,
-};
-
-export const AccountLabelHeader = ({
-  accountName,
-}: {
-  accountName: AirTableAccountRoutes;
-}) => <div className="text-xl">{labels[accountName]}</div>;
+import { NumberDisplayModel } from '../ts';
 
 interface AccountBalanceHeaderProps {
-  accountName: AirTableAccountRoutes;
+  nickname: string;
+  subheader?: string;
   balance: string;
   percChange: string;
   percClass: string;
@@ -36,17 +13,18 @@ interface AccountBalanceHeaderProps {
 }
 
 export const AccountBalanceHeader = ({
-  accountName,
+  nickname,
+  subheader,
   balance,
   percChange,
   percClass,
   weight,
 }: AccountBalanceHeaderProps) => (
   <div className="mb-5">
-    <div className="text-xl">{labels[accountName]}</div>
-    {subheader[accountName] && (
+    <div className="text-xl">{nickname}</div>
+    {subheader && (
       <div className="text-gray-500 text-sm -mt-1 font-extralight">
-        {subheader[accountName]}
+        {subheader}
       </div>
     )}
     <div className="text-2xl md:text-3xl">

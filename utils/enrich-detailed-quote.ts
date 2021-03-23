@@ -21,7 +21,6 @@ export const enrichDetailedQuotes = (
   enrichedAcctData: Omit<APIPortfolioModel, 'supportingData'>,
   accountName?: string,
 ): EnrichedDetailedQuoteModel | null => {
-  console.log(`Account route: ${accountName}`);
   if (!accountName) return null;
 
   const data = pies
