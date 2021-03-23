@@ -27,7 +27,7 @@ const CryptoPage = () => {
 
   // render
   if (status === 'loading' || !data) {
-    return <AccountViewSkeleton accountName={'crypto'} />;
+    return <AccountViewSkeleton />;
   }
 
   if (status === 'error') {
@@ -36,9 +36,8 @@ const CryptoPage = () => {
 
   return (
     <div>
-      <AccountWatchlistLinks active={'crypto'} />
       <AccountBalanceHeader
-        accountName={'crypto'}
+        nickname="Crypto"
         balance={
           showStable
             ? data.portfolioTotal.display
