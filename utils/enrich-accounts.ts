@@ -9,7 +9,7 @@ import {
   IexSimpleQuoteModel,
   IexDetailedQuoteModel,
   EnrichedCryptoModel,
-  APIPortfolioModel,
+  APIPortfolioModelSimple,
   IexUrlModel,
 } from '../ts';
 
@@ -21,7 +21,7 @@ export const enrichAccounts = (
   quotes: IexDetailedQuoteModel,
   cryptoData: EnrichedCryptoModel,
   iex: IexUrlModel,
-): APIPortfolioModel => {
+): APIPortfolioModelSimple => {
   const accountsWithQuotes = accounts.map((account) => {
     let pie = [];
     // enrich account with crypto or stock data

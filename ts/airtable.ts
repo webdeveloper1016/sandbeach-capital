@@ -19,6 +19,7 @@ export interface AirTableCryptoModel {
   amount: number;
   assetClass: CryptoAssetClassType;
   subAssetClass: CryptoAssetClassType;
+  targetPercent?: number;
 }
 
 export interface AirTableCryptoModelExtended extends AirTableCryptoModel {
@@ -30,6 +31,7 @@ export interface AirTableAccountModel {
   id: string;
   nickname: string;
   institution: string;
+  description?: string;
   timeframe: string;
   contribution?: number;
   annualContribution: number;
@@ -47,6 +49,7 @@ export interface AirTablePieModel {
   sector: string;
   shares: number;
   targetPercent?: number;
+  slicePercent?: number;
   symbol?: string;
   risk: number;
   factors?: string[];

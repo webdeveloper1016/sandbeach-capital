@@ -1,5 +1,5 @@
-import { NumberDisplayModel, PercChangeModel } from '../ts/types';
-
+import { NumberDisplayModel, PercChangeModel } from './types';
+import { AirTableAccountModelExtended } from './airtable'
 export interface IexUrlModel {
   env: 'Live' | 'Sandbox';
   token: string;
@@ -99,6 +99,7 @@ export interface IexStockQuoteDetailedModelEnriched
   rank?: number;
   exclude?: boolean;
   targetPercent?: NumberDisplayModel;
+  slicePercent?: NumberDisplayModel;
 }
 
 export interface MenuItemModel {
@@ -107,6 +108,7 @@ export interface MenuItemModel {
 }
 export interface EnrichedDetailedQuoteModel {
   menuItems: MenuItemModel[];
+  account: AirTableAccountModelExtended;
   summary: {
     balance: NumberDisplayModel;
     prevBalance: NumberDisplayModel;

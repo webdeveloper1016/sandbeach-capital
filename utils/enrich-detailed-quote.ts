@@ -37,6 +37,9 @@ export const enrichDetailedQuotes = (
         logo: logo ? logo.url : null,
         tags: slice.tags ? slice.tags : [],
         sector: slice.sector,
+        slicePercent: slice.slicePercent
+          ? percentDisplay(slice.slicePercent, 1)
+          : { val: 0, display: '-' },
       };
     })
     .filter((x) => x);
@@ -73,6 +76,7 @@ export const enrichDetailedQuotes = (
   );
   return {
     menuItems,
+    account,
     summary: {
       balance: currencyDisplay(sumAccount),
       prevBalance: currencyDisplay(sumPrevClose),
