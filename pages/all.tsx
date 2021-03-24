@@ -46,7 +46,7 @@ const AllAccountsPage = () => (
                   <PercChangeCell value={instance.value} />
                 ),
               },
-              { Header: 'Close', accessor: 'prices.close.display' }, // TODO: switch close to last
+              { Header: 'Last', accessor: 'prices.latest.display' },
               {
                 Header: '52W Range',
                 accessor: 'stats.week52Range',

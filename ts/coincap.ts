@@ -43,6 +43,7 @@ export interface CoinCapAssetModelExteded extends CoinCapAssetModel {
   totalAmount: NumberDisplayModel;
   totalValue: NumberDisplayModel;
   assetClass: string;
+  targetPercent?: number;
 }
 
 export interface EnrichedCryptoModel {

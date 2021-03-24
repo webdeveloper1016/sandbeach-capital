@@ -28,6 +28,7 @@ export const enrichCrypto = (
       totalAmount: numberDisplayLong(totalAmount),
       totalValue: currencyDisplay(totalAmount * p.priceDisplay.val),
       accountTags: accounts.map((a) => a.account),
+      targetPercent: accounts.find((l) => l.assetClass).targetPercent
     };
   });
 
@@ -116,7 +117,9 @@ export const mapCryptoToIEX = (
     accounts: c.accountTags,
     accountsJoined: c.accountTags.join(', '),
     exclude: false,
-    targetPercent: { val: 0, display: '-' }, // TODO: get this in there
+    targetPercent: c.targetPercent
+      ? percentDisplay(c.targetPercent, 1)
+      : { val: 0, display: '-' },
     weight: percentDisplay(c.totalValue.val, portfolioTotal),
   }));
   return holdings;

@@ -79,13 +79,13 @@ export const formatDetailedQuote = (
         currencyDisplay(quote.week52High).display
       }`,
       week52OffHighPercent:
-        quote.close >= quote.week52High // TODO: swtich close to last
+        quote.latestPrice >= quote.week52High
           ? {
               perc: { display: '-', val: 0 },
               class: '',
             }
           : percDisplayWithClassThreshold(
-              quote.close - quote.week52High,
+              quote.latestPrice - quote.week52High,
               quote.week52High,
               { positive: -.05, negative: -.15 },
             ),
