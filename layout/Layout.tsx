@@ -19,6 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
   const handleToggle = () => {
     setMenuStatus(menuStatus === 'hidden' ? 'flex' : 'hidden');
   };
+  console.log(menuStatus)
   return (
     <div>
       <QueryClientProvider client={queryClient}>
@@ -29,8 +30,10 @@ const Layout = ({ children }: LayoutProps) => {
         />
 
         <NavHeader status={menuStatus} onClick={handleToggle}>
-        <Banner />
-          <AppBarTicker />
+          <div>
+            <Banner />
+            <AppBarTicker />
+          </div>
         </NavHeader>
         <Container status={menuStatus}>{children}</Container>
       </QueryClientProvider>

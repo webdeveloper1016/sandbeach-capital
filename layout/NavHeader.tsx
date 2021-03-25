@@ -11,9 +11,10 @@ interface NavHeaderProps {
 
 export const NavHeader = ({ onClick, status, children }: NavHeaderProps) => {
   const queryClient = useQueryClient();
+  console.log(status)
   return (
     <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
-      {children}
+      <div>{children}</div>
       <header className="flex justify-between items-center py-2 px-2 md:px-4">
         <h1 className="text-2xl hidden md:block">Sand Beach Capital</h1>
         <IexStatus />

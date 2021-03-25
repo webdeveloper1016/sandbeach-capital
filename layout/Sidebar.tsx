@@ -34,6 +34,7 @@ export const Sidebar = ({
     onSwipedLeft,
     ...swipeConfig,
   });
+  console.log(status)
   return (
     <nav
       {...handlers}
