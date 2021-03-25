@@ -20,6 +20,10 @@ const swipeConfig = {
   trackMouse: true,
 };
 
+export const MimicSidebar = () => (
+  <div className="fixed md:flex top-0 left-0 min-h-screen border-r border-current shadow w-16 md:ml-16" />
+);
+
 export const Sidebar = ({
   status,
   onSwipedLeft,
@@ -34,7 +38,7 @@ export const Sidebar = ({
     onSwipedLeft,
     ...swipeConfig,
   });
-  console.log(status)
+  console.log(status);
   return (
     <nav
       {...handlers}
