@@ -1,27 +1,34 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Nav, NavStatusType, Header, Container } from './Nav';
-
+import { Container } from './Container';
+import { Sidebar, SidebarStatusType } from './Sidebar';
+import { NavHeader } from './NavHeader';
+import { AppBarTicker } from './AppBarTicker';
+import { Banner } from './Banner';
 
 const queryClient = new QueryClient();
+
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [menuStatus, setMenuStatus] = React.useState<NavStatusType>('hidden');
+  const [menuStatus, setMenuStatus] = React.useState<SidebarStatusType>('hidden');
   const handleToggle = () => {
     setMenuStatus(menuStatus === 'hidden' ? 'flex' : 'hidden');
   };
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <Nav
+        <Banner />
+        <Sidebar
           status={menuStatus}
           onSwipedLeft={() => setMenuStatus('hidden')}
           onItemClick={() => setMenuStatus('hidden')}
         />
-        <Header status={menuStatus} onClick={handleToggle} />
+        <NavHeader status={menuStatus} onClick={handleToggle}>
+          <AppBarTicker />
+        </NavHeader>
         <Container status={menuStatus}>{children}</Container>
       </QueryClientProvider>
     </div>

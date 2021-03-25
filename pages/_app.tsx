@@ -1,10 +1,10 @@
 // import Head from 'next/head';
 import '../styles/index.css';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import Head from '../components/Head';
+import Head from '../layout/Head';
 import { AuthProvider } from '../components/Auth';
-import Layout from '../components/Layout';
-import ErrorBoundary from '../components/ErrorBoundary';
+import Layout from '../layout/Layout';
+import ErrorBoundary from '../layout/ErrorBoundary';
 
 function MyApp({ Component, pageProps }) {
   return (

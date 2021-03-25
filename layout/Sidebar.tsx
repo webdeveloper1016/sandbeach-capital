@@ -1,12 +1,8 @@
 import Link from 'next/link';
 import { useSwipeable } from 'react-swipeable';
-import { useQueryClient } from 'react-query';
 import useAuth from '../hooks/useAuth';
 import { links } from '../routes';
-import IexStatus from './IexStatus';
-import { AppBarTicker } from './AppBarTicker';
 import {
-  Burger,
   Home,
   Accounts,
   Watchlist,
@@ -14,23 +10,22 @@ import {
   Logout,
   Crypto,
   Sparkle,
-  Refresh,
   Chart,
-} from './Icons';
+} from '../components/Icons';
 
-export type NavStatusType = 'hidden' | 'flex';
+export type SidebarStatusType = 'hidden' | 'flex';
 
 const swipeConfig = {
   preventDefaultTouchmoveEvent: true,
   trackMouse: true,
 };
 
-export const Nav = ({
+export const Sidebar = ({
   status,
   onSwipedLeft,
   onItemClick,
 }: {
-  status: NavStatusType;
+  status: SidebarStatusType;
   onSwipedLeft: () => void;
   onItemClick: () => void;
 }) => {
@@ -85,52 +80,5 @@ export const Nav = ({
         </li>
       </ul>
     </nav>
-  );
-};
-
-interface HeaderProps {
-  status: NavStatusType;
-  onClick: () => void;
-}
-export const Header = ({ onClick, status }: HeaderProps) => {
-  const queryClient = useQueryClient();
-  return (
-    <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
-      <AppBarTicker />
-      <header className="flex justify-between items-center py-2 px-2 md:px-4">
-        <h1 className="text-2xl hidden md:block">Sand Beach Capital</h1>
-        <IexStatus />
-        <div className="md:hidden">
-          <button
-            className="md:hidden mx-1"
-            onClick={() => queryClient.refetchQueries()}
-          >
-            <Refresh />
-          </button>
-          <button className="md:hidden" onClick={onClick}>
-            <Burger />
-          </button>
-        </div>
-      </header>
-    </div>
-  );
-};
-
-interface ContainerProps {
-  status: NavStatusType;
-  children: React.ReactNode;
-}
-
-export const Container = ({ children, status }: ContainerProps) => {
-  return (
-    <div
-      className={`${
-        status === 'flex' ? 'ml-16' : 'ml-0'
-      } md:ml-16 min-h-screen`}
-    >
-      <main className="container container-extended p-4 md:px-8 lg:px-20">
-        {children}
-      </main>
-    </div>
   );
 };

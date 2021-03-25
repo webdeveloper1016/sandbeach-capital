@@ -1,5 +1,5 @@
 import React from 'react';
-import Error from './Error';
+import Error from '../components/Error';
 
 interface ErrorBoundaryProps {
   fallback?: React.ReactElement;

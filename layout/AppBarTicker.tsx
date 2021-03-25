@@ -1,4 +1,4 @@
-import { TradingViewWrapper } from './TradingViewWrapper';
+import { TradingViewWrapper } from '../components/TradingViewWrapper';
 
 const src = 'embed-widget-ticker-tape';
 const config = {
