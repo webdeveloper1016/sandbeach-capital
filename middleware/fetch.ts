@@ -40,6 +40,8 @@ export const iexUrl = (
   switch (variant) {
     case 'batch':
       return `${iex.baseUrl}/stock/market/batch?types=quote&symbols=${symbols}&token=${iex.token}`;
+    case 'batch-stats':
+      return `${iex.baseUrl}/stock/market/batch?types=quote,stats&symbols=${symbols}&token=${iex.token}`;
     case 'batch-logo':
       return `${iex.baseUrl}/stock/market/batch?types=quote,logo&symbols=${symbols}&token=${iex.token}`;
     default:
@@ -47,7 +49,7 @@ export const iexUrl = (
   }
 };
 
-const fetchIEXBatch = async (
+export const fetchIEXBatch = async (
   symbols: string[],
   iex: IexUrlModel,
 ): Promise<IexDetailedQuoteModel> => {
@@ -57,7 +59,7 @@ const fetchIEXBatch = async (
   );
   const batches = await Promise.all(
     chunks.map((c) =>
-      axios.get<IexStockQuoteModel>(iexUrl(iex, 'batch', c.join(','))),
+      axios.get<IexStockQuoteModel>(iexUrl(iex, 'batch-stats', c.join(','))),
     ),
   );
 
@@ -68,19 +70,6 @@ const fetchIEXBatch = async (
     };
   }, {});
 };
-
-// export const fetchStockHoldings = async (
-//   symbols: string[],
-//   iex: IexUrlModel,
-// ): Promise<IexSimpleQuoteModel> => {
-//   const allData = await fetchIEXBatch(symbols, iex);
-//   return Object.keys(allData).reduce((acc, key) => {
-//     acc[key] = {
-//       ...formatStockQuote(allData[key].quote),
-//     };
-//     return acc;
-//   }, {});
-// };
 
 export const fetchStockHoldingsDetailed = async (
   pies: AirTablePieModel[],
