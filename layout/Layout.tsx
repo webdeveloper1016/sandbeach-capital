@@ -13,20 +13,23 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [menuStatus, setMenuStatus] = React.useState<SidebarStatusType>('hidden');
+  const [menuStatus, setMenuStatus] = React.useState<SidebarStatusType>(
+    'hidden',
+  );
   const handleToggle = () => {
     setMenuStatus(menuStatus === 'hidden' ? 'flex' : 'hidden');
   };
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <Banner />
         <Sidebar
           status={menuStatus}
           onSwipedLeft={() => setMenuStatus('hidden')}
           onItemClick={() => setMenuStatus('hidden')}
         />
+
         <NavHeader status={menuStatus} onClick={handleToggle}>
+        <Banner />
           <AppBarTicker />
         </NavHeader>
         <Container status={menuStatus}>{children}</Container>

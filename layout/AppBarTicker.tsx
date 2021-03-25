@@ -35,7 +35,7 @@ const config = {
 };
 export const AppBarTicker = () => {
   return (
-    <div className="border-b border-current shadow">
+    <div className="border-b border-t border-current shadow">
       <TradingViewWrapper src={src} config={config} />
     </div>
   );
