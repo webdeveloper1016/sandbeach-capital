@@ -11,7 +11,6 @@ interface NavHeaderProps {
 
 export const NavHeader = ({ onClick, status, children }: NavHeaderProps) => {
   const queryClient = useQueryClient();
-  console.log(status)
   return (
     <div className={`${status === 'flex' ? 'ml-16' : 'ml-0'} md:ml-16`}>
       <div>{children}</div>

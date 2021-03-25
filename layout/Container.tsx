@@ -6,7 +6,6 @@ interface ContainerProps {
 }
 
 export const Container = ({ children, status }: ContainerProps) => {
-  console.log(status)
   return (
     <div
       className={`${

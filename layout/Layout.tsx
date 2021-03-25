@@ -16,10 +16,11 @@ const Layout = ({ children }: LayoutProps) => {
   const [menuStatus, setMenuStatus] = React.useState<SidebarStatusType>(
     'hidden',
   );
+
   const handleToggle = () => {
     setMenuStatus(menuStatus === 'hidden' ? 'flex' : 'hidden');
   };
-  console.log(menuStatus)
+
   return (
     <div>
       <QueryClientProvider client={queryClient}>
