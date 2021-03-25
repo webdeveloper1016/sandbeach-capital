@@ -1,12 +1,12 @@
 import { NumberDisplayModel, PercChangeModel } from './types';
-import { AirTableAccountModelExtended } from './airtable'
+import { AirTableAccountModelExtended } from './airtable';
 export interface IexUrlModel {
   env: 'Live' | 'Sandbox';
   token: string;
   baseUrl: string;
 }
 
-export type IexUrlVariants = 'batch' | 'batch-logo';
+export type IexUrlVariants = 'batch' | 'batch-logo' | 'batch-stats';
 
 export interface IexCryptoQuoteModel {
   symbol: string;
