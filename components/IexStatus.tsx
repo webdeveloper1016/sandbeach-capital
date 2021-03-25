@@ -1,7 +1,7 @@
 import { useQueryClient } from 'react-query';
 import { format } from 'date-fns';
 import _ from 'lodash';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '../layout/ErrorBoundary';
 
 const IexStatusComp = (): React.ReactElement => {
   const queryClient = useQueryClient();
@@ -29,10 +29,8 @@ const IexStatusComp = (): React.ReactElement => {
   );
 };
 
-const IexStatus = () => (
+export const IexStatus = () => (
   <ErrorBoundary fallback={<div />}>
     <IexStatusComp />
   </ErrorBoundary>
 );
-
-export default IexStatus;
