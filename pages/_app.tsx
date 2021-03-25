@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
       <AuthProvider>
         <ErrorBoundary>
           <Layout>
-            <ReactQueryDevtools />
+            <ReactQueryDevtools initialIsOpen={false} />
             <Component {...pageProps} />
           </Layout>
         </ErrorBoundary>
