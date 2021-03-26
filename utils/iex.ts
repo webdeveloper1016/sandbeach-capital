@@ -1,9 +1,11 @@
+import { format } from 'date-fns';
 import {
   IexCryptoQuoteModel,
   IexCryptoQuoteModelEnriched,
   IexStockQuoteModel,
   IexStockQuoteModelEnriched,
   IexStockQuoteDetailedModel,
+  IexBatchRequestDetailed,
 } from '../ts/iex';
 import {
   currencyDisplay,
@@ -43,8 +45,9 @@ export const formatStockQuote = (
 export const formatDetailedQuote = (
   symbol: string,
   shares: number,
-  quote: IexStockQuoteModel,
+  iexData: IexBatchRequestDetailed,
 ): IexStockQuoteDetailedModel => {
+  const { quote, stats } = iexData;
   return {
     symbol,
     companyName: quote.companyName,
@@ -87,9 +90,19 @@ export const formatDetailedQuote = (
           : percDisplayWithClassThreshold(
               quote.latestPrice - quote.week52High,
               quote.week52High,
-              { positive: -.05, negative: -.15 },
+              { positive: -0.05, negative: -0.15 },
             ),
       ytdChange: percDisplayWithClass(quote.ytdChange, 1, true),
+      dividendYield: percentDisplay(stats.dividendYield, 1),
+      nextDividendDate:
+        (!stats.nextDividendDate || stats.nextDividendDate === '0')
+          ? '-'
+          : format(new Date(stats.nextDividendDate), 'M/d'),
+      nextEarningsDate:
+      (!stats.nextDividendDate || stats.nextDividendDate === '0')
+          ? '-'
+          : format(new Date(stats.nextEarningsDate), 'M/d'),
+      beta: numberDisplay(stats.beta),
     },
   };
 };

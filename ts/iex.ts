@@ -39,8 +39,19 @@ export interface IexStockQuoteModel {
   ytdChange: number;
 }
 
+export interface IexStatsModel {
+  year1ChangePercent: number;
+  ytdChangePercent: number;
+  dividendYield: number;
+  nextDividendDate?: string;
+  nextEarningsDate?: string;
+  peRatio: number;
+  beta: number;
+}
+
 export interface IexBatchRequestDetailed {
   quote: IexStockQuoteModel;
+  stats: IexStatsModel;
   logo?: {
     url: string;
   };
@@ -85,6 +96,10 @@ export interface IexStockQuoteDetailedModel {
     ytdChange: PercChangeModel;
     week52Range: string;
     week52OffHighPercent: PercChangeModel;
+    dividendYield: NumberDisplayModel;
+    nextDividendDate?: string;
+    nextEarningsDate?: string;
+    beta: NumberDisplayModel;
   };
 }
 

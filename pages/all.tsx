@@ -59,14 +59,11 @@ const AllAccountsPage = () => (
                   <PercChangeCell value={instance.value} />
                 ),
               },
+              { Header: 'Dividend', accessor: 'stats.dividendYield.display' },
               {
                 Header: 'Sector',
                 accessor: 'sector',
                 style: { minWidth: '200px' },
-                // style: { minWidth: '200px' },
-                // Cell: (instance: { value: string }) => (
-                //   <TagCell value={instance.value} />
-                // ),
               },
               {
                 Header: 'Accounts',

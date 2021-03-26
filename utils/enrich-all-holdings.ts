@@ -44,7 +44,7 @@ export const enrichAllHoldings = (
             exclude: false,
           },
         );
-      const detailedQuote = formatDetailedQuote(symbol, rollup.shares, quote.quote);
+      const detailedQuote = formatDetailedQuote(symbol, rollup.shares, quote);
       return {
         ...detailedQuote,
         logo: null,
