@@ -61,8 +61,8 @@ export const percDisplayWithClassThreshold = (
   a: number,
   b: number,
   threshold: {
-    positive: number,
-    negative: number,
+    positive: number;
+    negative: number;
   },
   annoatePositive?: boolean,
 ): PercChangeModel => {
@@ -104,3 +104,12 @@ export const numberDisplayLong = (a: number): NumberDisplayModel => ({
 
 export const dateDisplay = (dateIn: number | Date): string =>
   format(dateIn, 'MM/dd/yyyy p');
+
+export const dateDisplayShort = (dateIn: number | Date): string => {
+  try {
+    const formatted = format(new Date(dateIn), 'M/d');
+    return formatted;
+  } catch (error) {
+    return '-';
+  }
+};

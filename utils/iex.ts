@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import {
   IexCryptoQuoteModel,
   IexCryptoQuoteModelEnriched,
@@ -14,6 +13,7 @@ import {
   percentDisplay,
   percDisplayWithClass,
   percDisplayWithClassThreshold,
+  dateDisplayShort,
 } from './calc';
 
 export const priceAnnotate = ' ⚡';
@@ -95,13 +95,13 @@ export const formatDetailedQuote = (
       ytdChange: percDisplayWithClass(quote.ytdChange, 1, true),
       dividendYield: percentDisplay(stats.dividendYield, 1),
       nextDividendDate:
-        (!stats.nextDividendDate || stats.nextDividendDate === '0')
+        !stats.nextDividendDate || stats.nextDividendDate === '0'
           ? '-'
-          : format(new Date(stats.nextDividendDate), 'M/d'),
+          : dateDisplayShort(new Date(stats.nextDividendDate)),
       nextEarningsDate:
-      (!stats.nextDividendDate || stats.nextDividendDate === '0')
+        !stats.nextDividendDate || stats.nextDividendDate === '0'
           ? '-'
-          : format(new Date(stats.nextEarningsDate), 'M/d'),
+          : dateDisplayShort(new Date(stats.nextEarningsDate)),
       beta: numberDisplay(stats.beta),
     },
   };
