@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import { airtableAll, auth, errResp, fetchPortfolio } from '../../middleware';
+import { fetchIEXBatch, auth, errResp } from '../../middleware';
 import { IexUrlModel } from '../../ts';
 
 const prod = process.env.NODE_ENV === 'production';
@@ -16,24 +16,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // check auth before proceeding
     await auth(req);
 
-    // fetch from DB
-    const airtable = await airtableAll();
+    // get symbols from body
+    const symbols = req.body.symbols || [];
 
-    // fetch quotes and format
-    const { allAccountData, quotes, cryptoQuotes } = await fetchPortfolio(
-      airtable,
-      iex,
-    );
+    // fetch from IEX
+    const data = await fetchIEXBatch(symbols, iex);
 
     res.status(200).json({
-      data: {
-        ...allAccountData,
-        supportingData: {
-          quotes,
-          airtable,
-          cryptoQuotes,
-        },
-      },
+      data,
     });
   } catch (error) {
     res.status(error.status || 500).end(errResp(prod, error, error.status));

@@ -101,11 +101,14 @@ const AccountAnalysis = ({
           {
             Header: 'Tags',
             accessor: 'tags',
-            style: { minWidth: '225px' },
+            style: { minWidth: '175px' },
             Cell: (instance: { value: string[] }) => (
               <TagListCell value={instance.value} />
             ),
           },
+          { Header: 'Dividend', accessor: 'stats.dividendYield.display' },
+          { Header: 'Next Dividend', accessor: 'stats.nextDividendDate' },
+          { Header: 'Next Earnings', accessor: 'stats.nextEarningsDate' },
         ]}
         data={data.quotes}
       />

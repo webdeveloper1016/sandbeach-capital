@@ -3,8 +3,6 @@ import {
   currencyDisplay,
   percentDisplay,
   sumPies,
-  numberDisplay,
-  percDisplayWithClass,
 } from '../utils/calc';
 import { formatDetailedQuote } from './iex';
 import {
@@ -30,7 +28,7 @@ export const enrichDetailedQuotes = (
         return null;
       }
 
-      const { quote, logo } = iexData as IexBatchRequestDetailed;
+      const { logo, ...quote } = iexData as IexBatchRequestDetailed;
       const detailed = formatDetailedQuote(slice.symbol, slice.shares, quote);
       return {
         ...detailed,

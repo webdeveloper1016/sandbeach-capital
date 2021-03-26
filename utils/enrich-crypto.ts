@@ -28,7 +28,7 @@ export const enrichCrypto = (
       totalAmount: numberDisplayLong(totalAmount),
       totalValue: currencyDisplay(totalAmount * p.priceDisplay.val),
       accountTags: accounts.map((a) => a.account),
-      targetPercent: accounts.find((l) => l.assetClass).targetPercent
+      targetPercent: accounts.find((l) => l.assetClass).targetPercent,
     };
   });
 
@@ -111,6 +111,10 @@ export const mapCryptoToIEX = (
         perc: { display: '-', val: 0 },
         class: '',
       },
+      dividendYield: { val: 0, display: '-' },
+      nextDividendDate: '-',
+      nextEarningsDate: '-',
+      beta: { val: 0, display: '-' },
     },
     logo: null,
     sector: c.assetClass,
@@ -122,5 +126,6 @@ export const mapCryptoToIEX = (
       : { val: 0, display: '-' },
     weight: percentDisplay(c.totalValue.val, portfolioTotal),
   }));
+
   return holdings;
 };
