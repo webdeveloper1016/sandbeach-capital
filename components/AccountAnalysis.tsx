@@ -61,6 +61,7 @@ const AccountAnalysis = ({
             Cell: (instance: { value: PercChangeModel }) => (
               <PercChangeCell value={instance.value} />
             ),
+            sortType: 'basic',
           },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
