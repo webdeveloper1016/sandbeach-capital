@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable } from 'react-table';
+import { useTable, useSortBy, Row } from 'react-table';
 
 interface TableHeaderProps {
   headerGroups: any;
@@ -16,6 +16,7 @@ export interface TableProps {
       column: any,
     ) => React.ReactNode;
     style?: React.CSSProperties;
+    sortType?: 'alphanumeric' | 'basic' | 'datetime' | ((rowA:Row, rowB: Row, columnId: string, desc: string) => void);
   }[];
   data: Record<any, any>[];
 }
@@ -26,14 +27,12 @@ export const TableHead = ({ headerGroups }: TableHeaderProps) => (
       <tr {...headerGroup.getHeaderGroupProps()}>
         {headerGroup.headers.map((column) => (
           <th
-            className="px-4 pt-4 pb-7 border-b-2 border-gray-500 text-left text-sm leading-4 text-green-500 tracking-wider min-table-width"
+            className="px-4 pt-4 pb-7 border-b-2 border-gray-500 text-left text-sm leading-4 text-green-500 tracking-wider min-table-width cursor-pointer"
             {...column.getHeaderProps([
               {
-                // className: column.className,
+                ...column.getSortByToggleProps(),
                 style: column.style,
               },
-              // getColumnProps(column),
-              // getHeaderProps(column),
             ])}
           >
             {column.render('Header')}
@@ -47,7 +46,10 @@ export const TableHead = ({ headerGroups }: TableHeaderProps) => (
 export const AccountTable = ({ columns, data }: TableProps) => {
   const colMemo = React.useMemo(() => columns, [columns]);
   const dataMemo = React.useMemo(() => data, [data]);
-  const tableInstance = useTable({ columns: colMemo, data: dataMemo });
+  const tableInstance = useTable(
+    { columns: colMemo, data: dataMemo },
+    useSortBy,
+  );
 
   const {
     getTableProps,
