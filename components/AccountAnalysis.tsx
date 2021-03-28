@@ -9,9 +9,9 @@ import {
   PercChangeCell,
 } from '../components/TableCells';
 import { AccountTable } from '../components/AccountTable';
-import { PercChangeModel } from '../ts';
 import { enrichDetailedQuotes } from '../utils/enrich-detailed-quote';
-import { APIPortfolioModel } from '../ts';
+import { percChangeSort } from '../utils/calc';
+import { APIPortfolioModel, PercChangeModel } from '../ts';
 
 const AccountAnalysis = ({
   portfolioData,
@@ -61,7 +61,8 @@ const AccountAnalysis = ({
             Cell: (instance: { value: PercChangeModel }) => (
               <PercChangeCell value={instance.value} />
             ),
-            sortType: 'basic',
+            sortType: (row1, row2, id, desc) =>
+              percChangeSort(row1.values[id], row2.values[id]),
           },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },

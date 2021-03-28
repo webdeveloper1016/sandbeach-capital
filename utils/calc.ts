@@ -113,3 +113,14 @@ export const dateDisplayShort = (dateIn: number | Date): string => {
     return '-';
   }
 };
+
+export const percChangeSort = (
+  row1: PercChangeModel,
+  row2: PercChangeModel,
+): 1 | -1 => {
+  try {
+    return row1.perc.val > row2.perc.val ? 1 : -1;
+  } catch (error) {
+    return 1;
+  }
+};
