@@ -124,3 +124,14 @@ export const percChangeSort = (
     return 1;
   }
 };
+
+export const numberDisplaySort = (
+  row1: NumberDisplayModel,
+  row2: NumberDisplayModel,
+): 1 | -1 => {
+  try {
+    return row1.val > row2.val ? 1 : -1;
+  } catch (error) {
+    return 1;
+  }
+};

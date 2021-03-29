@@ -10,8 +10,8 @@ import {
 } from '../components/TableCells';
 import { AccountTable } from '../components/AccountTable';
 import { enrichDetailedQuotes } from '../utils/enrich-detailed-quote';
-import { percChangeSort } from '../utils/calc';
-import { APIPortfolioModel, PercChangeModel } from '../ts';
+import { percChangeSort, numberDisplaySort } from '../utils/calc';
+import { APIPortfolioModel, PercChangeModel, NumberDisplayModel } from '../ts';
 
 const AccountAnalysis = ({
   portfolioData,
@@ -54,24 +54,37 @@ const AccountAnalysis = ({
               <SymbolNameCell value={instance.value} />
             ),
           },
-          { Header: 'Price', accessor: 'prices.latest.display' },
+          { Header: 'Last', accessor: 'prices.latest.display' },
           {
             Header: 'Day',
             accessor: 'changePercent',
             Cell: (instance: { value: PercChangeModel }) => (
               <PercChangeCell value={instance.value} />
             ),
-            sortType: (row1, row2, id, desc) =>
+            sortType: (row1, row2, id) =>
               percChangeSort(row1.values[id], row2.values[id]),
           },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
           { Header: 'Target', accessor: 'slicePercent.display' },
           { Header: 'Shares', accessor: 'shares' },
-          { Header: 'Volume', accessor: 'volume.current.display' },
           {
-            Header: 'Mkt Cap',
-            accessor: 'stats.marketCap.display',
+            Header: 'Vol',
+            accessor: 'volume.current',
+            Cell: (instance: { value: { display: string } }) => (
+              <span>{instance.value.display}</span>
+            ),
+            sortType: (row1, row2, id) =>
+              numberDisplaySort(row1.values[id], row2.values[id]),
+          },
+          {
+            Header: 'Cap',
+            accessor: 'stats.marketCap',
+            Cell: (instance: { value: { display: string } }) => (
+              <span>{instance.value.display}</span>
+            ),
+            sortType: (row1, row2, id) =>
+              numberDisplaySort(row1.values[id], row2.values[id]),
           },
           {
             Header: 'YTD',
@@ -79,6 +92,8 @@ const AccountAnalysis = ({
             Cell: (instance: { value: PercChangeModel }) => (
               <PercChangeCell value={instance.value} />
             ),
+            sortType: (row1, row2, id) =>
+              percChangeSort(row1.values[id], row2.values[id]),
           },
           {
             Header: '52W Range',
@@ -91,6 +106,8 @@ const AccountAnalysis = ({
             Cell: (instance: { value: PercChangeModel }) => (
               <PercChangeCell value={instance.value} />
             ),
+            sortType: (row1, row2, id) =>
+              percChangeSort(row1.values[id], row2.values[id]),
           },
           {
             Header: 'Sector',
@@ -108,7 +125,7 @@ const AccountAnalysis = ({
               <TagListCell value={instance.value} />
             ),
           },
-          { Header: 'Dividend', accessor: 'stats.dividendYield.display' },
+          { Header: 'Yield', accessor: 'stats.dividendYield.display' },
           { Header: 'Next Dividend', accessor: 'stats.nextDividendDate' },
           { Header: 'Next Earnings', accessor: 'stats.nextEarningsDate' },
         ]}
