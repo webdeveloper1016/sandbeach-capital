@@ -24,6 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       airtable,
       iex,
     );
+    // TODO: cache key stats data
 
     res.status(200).json({
       data: {
