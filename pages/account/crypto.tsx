@@ -13,6 +13,7 @@ import { ToggleCheckbox } from '../../components/ToggleCheckbox';
 import useFetchCrypto from '../../hooks/useFetchCrypto';
 import { PercChangeModel } from '../../ts';
 
+// TODO: add progress bar
 const CryptoPage = () => {
   // hooks
   const { data, status } = useFetchCrypto();
