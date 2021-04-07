@@ -14,6 +14,7 @@ import {
 } from '../ts';
 
 const pieSlimTop = 10;
+const accountWeightFilter = 0.005;
 
 export const enrichAccounts = (
   accounts: AirTableAccountModel[],
@@ -88,7 +89,7 @@ export const enrichAccounts = (
       ...a,
       weight: percentDisplay(a.totalValue.val, portfolioTotal),
     }))
-    .filter((x) => x.totalValue.val > 0); // TODO: increase this value
+    .filter((x) => x.weight.val > accountWeightFilter);
 
   const exCryptoPortfolioTotal = accountsWithWeight
     .filter((a) => !a.crypto)
