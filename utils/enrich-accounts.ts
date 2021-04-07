@@ -87,7 +87,7 @@ export const enrichAccounts = (
       ...a,
       weight: percentDisplay(a.totalValue.val, portfolioTotal),
     }))
-    .filter((x) => x.weight.val > accountWeightFilter);
+    // .filter((x) => x.weight.val > accountWeightFilter);
 
   const exCryptoPortfolioTotal = accountsWithWeight
     .filter((a) => !a.crypto)

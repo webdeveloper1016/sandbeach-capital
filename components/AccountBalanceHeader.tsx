@@ -35,7 +35,7 @@ export const AccountBalanceHeader = ({
       </span>
       {weight && (
         <span className="text-base max-w-sm text-gray-400 ml-3">
-          {`⚖️ ${weight.actual.display}/${weight.tgt.display}`}
+          {weight.tgt.val ? `⚖️ ${weight.actual.display}/${weight.tgt.display}` : `⚖️ ${weight.actual.display}`}
         </span>
       )}
     </div>

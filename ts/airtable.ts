@@ -37,7 +37,8 @@ export interface AirTableAccountModel {
   annualContribution: number;
   crypto?: boolean;
   excludeFromAnalysis?: boolean;
-  robinhoodBuckets?: number;
+  barbellWeights?: number;
+  parentAccount?: boolean;
   showInAccountsMenu?: boolean;
 }
 

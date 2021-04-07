@@ -53,7 +53,7 @@ const AccountAnalysis = ({
     <div>
       <AccountWatchlistLinks active={account} items={data.menuItems} />
       <AccountBalanceHeader
-        nickname={data.account.nickname}
+        nickname={data.account.nickname || ""}
         subheader={data.account.description}
         balance={data.summary.balanceDisplay}
         percChange={data.summary.dayChange.perc.display}
