@@ -79,7 +79,6 @@ export const enrichDetailedQuotes = (
   const menuItems = enrichedAcctData.accounts
     .filter((a) => a.showInAccountsMenu)
     .map((x) => x.nicknameId);
-  console.log(menuItems);
   const viewTotal = sumPies(
     enrichedAcctData.accounts.filter((a) => a.showInAccountsMenu),
   );
