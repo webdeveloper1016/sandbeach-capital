@@ -1,9 +1,5 @@
 import _ from 'lodash';
-import {
-  currencyDisplay,
-  percentDisplay,
-  sumPies,
-} from '../utils/calc';
+import { currencyDisplay, percentDisplay, sumPies } from '../utils/calc';
 import { formatDetailedQuote } from './iex';
 import {
   AirTablePieModel,
@@ -13,13 +9,14 @@ import {
   APIPortfolioModel,
 } from '../ts';
 
+
 export const enrichDetailedQuotes = (
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
   enrichedAcctData: Omit<APIPortfolioModel, 'supportingData'>,
   accountName?: string,
 ): EnrichedDetailedQuoteModel | null => {
-  if (!accountName) return null;
+  if (!accountName || _.isEmpty(pies)) return null;
 
   const data = pies
     .map((slice) => {
@@ -65,7 +62,7 @@ export const enrichDetailedQuotes = (
     true,
   );
 
-  const account = enrichedAcctData.accounts.find((a) => a.id === accountName);
+  const account = enrichedAcctData.accounts.find((a) => a.id.includes(accountName));
   const menuItems = enrichedAcctData.accounts
     .filter((a) => a.showInAccountsMenu)
     .map((x) => x.nicknameId);
@@ -82,7 +79,7 @@ export const enrichDetailedQuotes = (
         class: dayChangePerc.val > 0 ? 'text-green-500' : 'text-red-500',
         perc: dayChangePerc,
       },
-      weight: account.robinhoodBuckets
+      weight: account?.robinhoodBuckets
         ? {
             tgt: percentDisplay(account.robinhoodBuckets, 1),
             actual: percentDisplay(account.totalValue.val, rhTotal),

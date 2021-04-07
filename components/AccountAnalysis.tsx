@@ -12,6 +12,7 @@ import { AccountTable } from '../components/AccountTable';
 import { enrichDetailedQuotes } from '../utils/enrich-detailed-quote';
 import { percChangeSort, numberDisplaySort } from '../utils/calc';
 import { APIPortfolioModel, PercChangeModel, NumberDisplayModel } from '../ts';
+import { aggregateAccount } from '../config';
 
 const AccountAnalysis = ({
   portfolioData,
@@ -22,8 +23,11 @@ const AccountAnalysis = ({
   const account = router.query.account as string;
   const data = React.useMemo(() => {
     const { supportingData, ...rest } = portfolioData;
+    const piesToAnalyze = aggregateAccount.includes(account) // this will get robinhood-efts and robinhood-stocks
+      ? supportingData.airtable.pies.filter((x) => x.account.includes(account)) 
+      : supportingData.airtable.pies.filter((x) => x.account === account);
     return enrichDetailedQuotes(
-      supportingData.airtable.pies.filter((x) => x.account === account),
+      piesToAnalyze,
       supportingData.quotes,
       rest,
       account,
