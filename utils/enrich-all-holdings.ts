@@ -33,7 +33,7 @@ export const enrichAllHoldings = (
               ...accum.accounts,
               accounts.find((f) => f.id === current.account).nickname,
             ],
-            targetPercent: current.targetPercent || null,
+            targetPercent: current.targetPercent || accum.targetPercent,
             exclude: accounts.find((f) => f.id === current.account)
               .excludeFromAnalysis,
           }),
