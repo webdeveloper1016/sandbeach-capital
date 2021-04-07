@@ -24,13 +24,24 @@ const AccountAnalysis = ({
   const data = React.useMemo(() => {
     const { supportingData, ...rest } = portfolioData;
     const piesToAnalyze = aggregateAccount.includes(account) // this will get robinhood-efts and robinhood-stocks
-      ? supportingData.airtable.pies.filter((x) => x.account.includes(account)) 
-      : supportingData.airtable.pies.filter((x) => x.account === account);
+      ? {
+          aggregated: true,
+          data: supportingData.airtable.pies.filter((x) =>
+            x.account.includes(account),
+          ),
+        }
+      : {
+          aggregated: false,
+          data: supportingData.airtable.pies.filter(
+            (x) => x.account === account,
+          ),
+        };
     return enrichDetailedQuotes(
-      piesToAnalyze,
+      piesToAnalyze.data,
       supportingData.quotes,
       rest,
       account,
+      piesToAnalyze.aggregated,
     );
   }, [portfolioData, account]);
 
@@ -44,7 +55,7 @@ const AccountAnalysis = ({
       <AccountBalanceHeader
         nickname={data.account.nickname}
         subheader={data.account.description}
-        balance={data.summary.balance.display}
+        balance={data.summary.balanceDisplay}
         percChange={data.summary.dayChange.perc.display}
         percClass={data.summary.dayChange.class}
         weight={data.summary.weight}

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _, { xor } from 'lodash';
 import { currencyDisplay, percentDisplay, sumPies } from '../utils/calc';
 import { formatDetailedQuote } from './iex';
 import {
@@ -6,15 +6,30 @@ import {
   IexDetailedQuoteModel,
   IexBatchRequestDetailed,
   EnrichedDetailedQuoteModel,
+  AirTableAccountModelExtended,
   APIPortfolioModel,
 } from '../ts';
 
+const mergeAccounts = (
+  accts: AirTableAccountModelExtended[],
+): AirTableAccountModelExtended => {
+  console.log(accts)
+  return {
+    ...accts[0],
+    nickname: 'Merged',
+    robinhoodBuckets: accts.reduce(
+      (accum, current) => accum + current.robinhoodBuckets,
+      0,
+    ),
+  };
+};
 
 export const enrichDetailedQuotes = (
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
   enrichedAcctData: Omit<APIPortfolioModel, 'supportingData'>,
   accountName?: string,
+  aggregated?: boolean,
 ): EnrichedDetailedQuoteModel | null => {
   if (!accountName || _.isEmpty(pies)) return null;
 
@@ -62,27 +77,33 @@ export const enrichDetailedQuotes = (
     true,
   );
 
-  const account = enrichedAcctData.accounts.find((a) => a.id.includes(accountName));
+  const account = aggregated
+    ? mergeAccounts(
+        enrichedAcctData.accounts.filter((a) => a.id.includes(accountName)).filter(x => !x.crypto),
+      )
+    : enrichedAcctData.accounts.find((a) => a.id === accountName);
+  console.log(account);
   const menuItems = enrichedAcctData.accounts
     .filter((a) => a.showInAccountsMenu)
     .map((x) => x.nicknameId);
-  const rhTotal = sumPies(
-    enrichedAcctData.accounts.filter((a) => a.robinhoodBuckets),
+  const viewTotal = sumPies(
+    enrichedAcctData.accounts.filter((a) => a.showInAccountsMenu),
   );
   return {
     menuItems,
     account,
     summary: {
       balance: currencyDisplay(sumAccount),
+      balanceDisplay: `${currencyDisplay(sumAccount).display} / ${currencyDisplay(viewTotal).display}`,
       prevBalance: currencyDisplay(sumPrevClose),
       dayChange: {
         class: dayChangePerc.val > 0 ? 'text-green-500' : 'text-red-500',
         perc: dayChangePerc,
       },
-      weight: account?.robinhoodBuckets
+      weight: account.robinhoodBuckets
         ? {
             tgt: percentDisplay(account.robinhoodBuckets, 1),
-            actual: percentDisplay(account.totalValue.val, rhTotal),
+            actual: percentDisplay(sumAccount, viewTotal),
           }
         : null,
     },

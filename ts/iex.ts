@@ -126,6 +126,7 @@ export interface EnrichedDetailedQuoteModel {
   account: AirTableAccountModelExtended;
   summary: {
     balance: NumberDisplayModel;
+    balanceDisplay: string;
     prevBalance: NumberDisplayModel;
     dayChange: PercChangeModel;
     weight: {
