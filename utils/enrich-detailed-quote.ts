@@ -13,16 +13,7 @@ import {
 const mergeAccounts = (
   accts: AirTableAccountModelExtended[],
 ): AirTableAccountModelExtended => {
-  console.log(accts);
-  return accts.find(x => x.parentAccount) || accts[0]
-  // return {
-  //   ...accts[0],
-  //   nickname: 'Merged',
-  //   barbellWeights: accts.reduce(
-  //     (accum, current) => accum + current.barbellWeights,
-  //     0,
-  //   ),
-  // };
+  return accts.find((x) => x.parentAccount) || accts[0];
 };
 
 export const enrichDetailedQuotes = (
@@ -85,7 +76,6 @@ export const enrichDetailedQuotes = (
           .filter((x) => !x.crypto),
       )
     : enrichedAcctData.accounts.find((a) => a.id === accountName);
-  console.log(account);
   const menuItems = enrichedAcctData.accounts
     .filter((a) => a.showInAccountsMenu)
     .map((x) => x.nicknameId);
@@ -99,6 +89,7 @@ export const enrichDetailedQuotes = (
   return {
     menuItems,
     account,
+    noTargets: account.parentAccount || _.isEmpty(accountWithWeight.filter(x => x.slicePercent.val > 0)),
     summary: {
       balance: currencyDisplay(sumAccount),
       balanceDisplay: `${currencyDisplay(sumAccount).display} / ${

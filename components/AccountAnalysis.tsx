@@ -53,7 +53,7 @@ const AccountAnalysis = ({
     <div>
       <AccountWatchlistLinks active={account} items={data.menuItems} />
       <AccountBalanceHeader
-        nickname={data.account.nickname || ""}
+        nickname={data.account.nickname || ''}
         subheader={data.account.description}
         balance={data.summary.balanceDisplay}
         percChange={data.summary.dayChange.perc.display}
@@ -81,7 +81,9 @@ const AccountAnalysis = ({
           },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
-          { Header: 'Target', accessor: 'slicePercent.display' },
+          data.noTargets
+            ? null
+            : { Header: 'Target', accessor: 'slicePercent.display' },
           { Header: 'Shares', accessor: 'shares' },
           {
             Header: 'Vol',
@@ -143,7 +145,7 @@ const AccountAnalysis = ({
           { Header: 'Yield', accessor: 'stats.dividendYield.display' },
           { Header: 'Next Dividend', accessor: 'stats.nextDividendDate' },
           { Header: 'Next Earnings', accessor: 'stats.nextEarningsDate' },
-        ]}
+        ].filter((x) => x)}
         data={data.quotes}
       />
     </div>
