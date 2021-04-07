@@ -12,6 +12,7 @@ import { AccountTable } from '../components/AccountTable';
 import { enrichDetailedQuotes } from '../utils/enrich-detailed-quote';
 import { percChangeSort, numberDisplaySort } from '../utils/calc';
 import { APIPortfolioModel, PercChangeModel, NumberDisplayModel } from '../ts';
+import { aggregateAccount } from '../config';
 
 const AccountAnalysis = ({
   portfolioData,
@@ -22,11 +23,25 @@ const AccountAnalysis = ({
   const account = router.query.account as string;
   const data = React.useMemo(() => {
     const { supportingData, ...rest } = portfolioData;
+    const piesToAnalyze = aggregateAccount.includes(account) // this will get robinhood-efts and robinhood-stocks
+      ? {
+          aggregated: true,
+          data: supportingData.airtable.pies.filter((x) =>
+            x.account.includes(account),
+          ),
+        }
+      : {
+          aggregated: false,
+          data: supportingData.airtable.pies.filter(
+            (x) => x.account === account,
+          ),
+        };
     return enrichDetailedQuotes(
-      supportingData.airtable.pies.filter((x) => x.account === account),
+      piesToAnalyze.data,
       supportingData.quotes,
       rest,
       account,
+      piesToAnalyze.aggregated,
     );
   }, [portfolioData, account]);
 
@@ -38,9 +53,9 @@ const AccountAnalysis = ({
     <div>
       <AccountWatchlistLinks active={account} items={data.menuItems} />
       <AccountBalanceHeader
-        nickname={data.account.nickname}
+        nickname={data.account.nickname || ''}
         subheader={data.account.description}
-        balance={data.summary.balance.display}
+        balance={data.summary.balanceDisplay}
         percChange={data.summary.dayChange.perc.display}
         percClass={data.summary.dayChange.class}
         weight={data.summary.weight}
@@ -66,7 +81,9 @@ const AccountAnalysis = ({
           },
           { Header: 'Equity', accessor: 'equity.display' },
           { Header: 'Weight', accessor: 'weight.display' },
-          { Header: 'Target', accessor: 'slicePercent.display' },
+          data.noTargets
+            ? null
+            : { Header: 'Target', accessor: 'slicePercent.display' },
           { Header: 'Shares', accessor: 'shares' },
           {
             Header: 'Vol',
@@ -128,7 +145,7 @@ const AccountAnalysis = ({
           { Header: 'Yield', accessor: 'stats.dividendYield.display' },
           { Header: 'Next Dividend', accessor: 'stats.nextDividendDate' },
           { Header: 'Next Earnings', accessor: 'stats.nextEarningsDate' },
-        ]}
+        ].filter((x) => x)}
         data={data.quotes}
       />
     </div>

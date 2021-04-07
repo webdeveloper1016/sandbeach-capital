@@ -124,8 +124,10 @@ export interface MenuItemModel {
 export interface EnrichedDetailedQuoteModel {
   menuItems: MenuItemModel[];
   account: AirTableAccountModelExtended;
+  noTargets: boolean;
   summary: {
     balance: NumberDisplayModel;
+    balanceDisplay: string;
     prevBalance: NumberDisplayModel;
     dayChange: PercChangeModel;
     weight: {

@@ -4,6 +4,7 @@ import PortfolioData from '../components/PortfolioData';
 import Header from '../components/Header';
 import Section from '../components/Section';
 import { AccountTable } from '../components/AccountTable';
+import { accountWeightFilter } from '../config';
 
 // TODO: add scroll to top of pg functionality
 const AccountsPage = () => (
@@ -29,13 +30,13 @@ const AccountsPage = () => (
               { Header: 'Balance', accessor: 'totalValue.display' },
               { Header: 'Portfolio Weight', accessor: 'weight.display' },
             ]}
-            data={data.accounts}
+            data={data.accounts.filter((x) => x.weight.val > accountWeightFilter)}
           />
         </div>
         <div>
           <Section>
             <Header size="text-2xl" content="Details:" />
-            {data.accounts.map((a, k) => (
+            {data.accounts.filter((x) => x.weight.val > accountWeightFilter).map((a, k) => (
               <div className="px-2 pb-6 overflow-x-auto" key={k}>
                 <Header
                   id={a.id}

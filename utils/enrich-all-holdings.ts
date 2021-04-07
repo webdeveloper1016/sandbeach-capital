@@ -10,6 +10,7 @@ import {
   AirTableAccountModel,
   EnrichedCryptoModel,
 } from '../ts';
+import { holdingWeightFilter } from '../config';
 
 export const enrichAllHoldings = (
   accounts: AirTableAccountModel[],
@@ -32,7 +33,7 @@ export const enrichAllHoldings = (
               ...accum.accounts,
               accounts.find((f) => f.id === current.account).nickname,
             ],
-            targetPercent: current.targetPercent || null,
+            targetPercent: current.targetPercent || accum.targetPercent,
             exclude: accounts.find((f) => f.id === current.account)
               .excludeFromAnalysis,
           }),
@@ -69,7 +70,7 @@ export const enrichAllHoldings = (
     [...holdings, ...cryptoHoldings],
     ['equity.val'],
     ['desc'],
-  );
+  ).filter((x) => x.weight.val > holdingWeightFilter);
 
   return ordered.map((o, k) => ({
     ...o,
