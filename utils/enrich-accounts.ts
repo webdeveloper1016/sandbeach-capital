@@ -12,9 +12,7 @@ import {
   APIPortfolioModelSimple,
   IexUrlModel,
 } from '../ts';
-
-const pieSlimTop = 10;
-const accountWeightFilter = 0.005;
+import { pieSlimTop, accountWeightFilter } from '../config';
 
 export const enrichAccounts = (
   accounts: AirTableAccountModel[],
