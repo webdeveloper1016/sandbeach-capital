@@ -8,6 +8,7 @@ import {
 } from '../components/TableCells';
 import { PercChangeModel } from '../ts';
 
+// TODO: view only taxable accounts
 const AllAccountsPage = () => (
   <PortfolioData>
     {(data) => (

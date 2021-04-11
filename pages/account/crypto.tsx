@@ -10,10 +10,12 @@ import {
 } from '../../components/TableCells';
 import { AccountTable } from '../../components/AccountTable';
 import { ToggleCheckbox } from '../../components/ToggleCheckbox';
+import { ProgressBar } from '../../components/ProgressBar';
 import useFetchCrypto from '../../hooks/useFetchCrypto';
 import { PercChangeModel } from '../../ts';
 
-// TODO: add progress bar
+
+// TODO: Pie chart of BTC by institution
 const CryptoPage = () => {
   // hooks
   const { data, status } = useFetchCrypto();
@@ -35,6 +37,8 @@ const CryptoPage = () => {
     return <Error />;
   }
 
+  console.log(data)
+
   return (
     <div>
       <AccountBalanceHeader
@@ -52,6 +56,7 @@ const CryptoPage = () => {
         label="Show Stablecoins"
         onChange={handleToggleCheckbox}
       />
+      <ProgressBar title="Next BTC Milestone: 0.40 BTC" progress={.38/.4 * 100}/>
       <AccountTable
         columns={[
           {
@@ -86,14 +91,6 @@ const CryptoPage = () => {
             Header: 'Max Supply',
             accessor: 'supplyDisplay.display',
             style: { minWidth: '170px' },
-          },
-          {
-            Header: 'Accounts',
-            accessor: 'accountTags',
-            style: { minWidth: '340px' },
-            Cell: (instance: { value: string[] }) => (
-              <TagListCell value={instance.value} />
-            ),
           },
         ]}
         data={
