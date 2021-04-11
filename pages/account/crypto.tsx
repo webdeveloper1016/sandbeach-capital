@@ -117,23 +117,24 @@ const CryptoPage = () => {
             ),
           },
           { Header: 'Equity', accessor: 'totalValue.display' },
+          { Header: 'Amount', accessor: 'totalAmount.display' },
           {
             Header: 'Weight',
             accessor: showStable ? 'weight.display' : 'weightExStable.display',
           },
-          { Header: 'Amount', accessor: 'totalAmount.display' },
-          { Header: 'Volume', accessor: 'volumeDisplay.display' },
+
+          // { Header: 'Volume', accessor: 'volumeDisplay.display' },
           {
-            Header: 'Market Cap',
+            Header: 'Cap',
             accessor: 'marketCapDisplay.display',
             style: { minWidth: '135px' },
           },
-          { Header: 'Rank', accessor: 'rank' },
-          {
-            Header: 'Max Supply',
-            accessor: 'supplyDisplay.display',
-            style: { minWidth: '170px' },
-          },
+          // { Header: 'Rank', accessor: 'rank' },
+          // {
+          //   Header: 'Max Supply',
+          //   accessor: 'supplyDisplay.display',
+          //   style: { minWidth: '170px' },
+          // },
         ]}
         data={
           showStable
