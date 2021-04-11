@@ -1,19 +1,51 @@
-import React, { ChangeEventHandler } from 'react';
+import React from 'react';
 import { AccountViewSkeleton } from '../../components/Skeleton';
 import Error from '../../components/Error';
-import AccountWatchlistLinks from '../../components/AccountWatchlistLinks';
+import Section from '../../components/Section';
+import Header from '../../components/Header';
 import { AccountBalanceHeader } from '../../components/AccountBalanceHeader';
-import {
-  SymbolNameCell,
-  TagListCell,
-  PercChangeCell,
-} from '../../components/TableCells';
+import { SymbolNameCell, PercChangeCell } from '../../components/TableCells';
 import { AccountTable } from '../../components/AccountTable';
 import { ToggleCheckbox } from '../../components/ToggleCheckbox';
 import { ProgressBar } from '../../components/ProgressBar';
 import useFetchCrypto from '../../hooks/useFetchCrypto';
-import { PercChangeModel } from '../../ts';
+import { currencyFormatter, numberDisplayLong } from '../../utils/calc';
+import { PercChangeModel, CoinCapAssetModelExteded } from '../../ts';
 
+const goalShort = 0.4;
+const goalLong = 0.5;
+
+const BtcProgress = ({
+  data,
+  tgt,
+  title,
+}: {
+  data: CoinCapAssetModelExteded[];
+  tgt: number;
+  title: string;
+}) => {
+  const { goal, away, amt, milestone } = React.useMemo(() => {
+    const currentBtc = data.find((x) => x.id === 'bitcoin');
+    const away = tgt - currentBtc.totalAmount.val;
+    const amt = currentBtc.priceDisplay.val * away;
+    const milestone = (currentBtc.totalAmount.val / tgt) * 100;
+    return {
+      goal: tgt,
+      away,
+      amt,
+      milestone,
+    };
+  }, [data]);
+
+  return (
+    <ProgressBar
+      title={`${title}: ${goal} BTC | ${
+        numberDisplayLong(away).display
+      } | ${currencyFormatter.format(amt)}`}
+      progress={milestone}
+    />
+  );
+};
 
 // TODO: Pie chart of BTC by institution
 const CryptoPage = () => {
@@ -37,8 +69,6 @@ const CryptoPage = () => {
     return <Error />;
   }
 
-  console.log(data)
-
   return (
     <div>
       <AccountBalanceHeader
@@ -56,7 +86,19 @@ const CryptoPage = () => {
         label="Show Stablecoins"
         onChange={handleToggleCheckbox}
       />
-      <ProgressBar title="Next BTC Milestone: 0.40 BTC" progress={.38/.4 * 100}/>
+      <Section>
+        <Header content="Bitcoin Goals" size="text-xl" />
+        <BtcProgress
+          title="Next"
+          data={data.coinsWithAmount}
+          tgt={goalShort}
+        />
+        <BtcProgress
+          title="2021"
+          data={data.coinsWithAmount}
+          tgt={goalLong}
+        />
+      </Section>
       <AccountTable
         columns={[
           {
