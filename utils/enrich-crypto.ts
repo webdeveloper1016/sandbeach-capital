@@ -14,7 +14,6 @@ export const enrichCrypto = (
   prices: CoinCapAssetModel[],
   config: AirTableConfigModelExtended,
 ): EnrichedCryptoModel => {
-  console.log(config);
   const coins = prices.map((p) => {
     const accounts = holdings.filter((h) => h.coin === p.id);
     const totalAmount = accounts.reduce(
