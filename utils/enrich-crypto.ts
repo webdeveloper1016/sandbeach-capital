@@ -5,12 +5,14 @@ import {
   CoinCapAssetModelExteded,
   EnrichedCryptoModel,
   IexStockQuoteDetailedModelEnriched,
+  AirTableConfigModelExtended,
 } from '../ts';
 import { currencyDisplay, percentDisplay, numberDisplayLong } from './calc';
 
 export const enrichCrypto = (
   holdings: AirTableCryptoModel[],
   prices: CoinCapAssetModel[],
+  config: AirTableConfigModelExtended,
 ): EnrichedCryptoModel => {
   const coins = prices.map((p) => {
     const accounts = holdings.filter((h) => h.coin === p.id);
@@ -65,6 +67,7 @@ export const enrichCrypto = (
     holdingsByAccount,
     portfolioTotal: currencyDisplay(portfolioTotal),
     portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),
+    config,
   };
 };
 

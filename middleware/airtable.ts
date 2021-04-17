@@ -5,7 +5,8 @@ import {
   AirTablePieModel,
   AirTableTablesType,
   AirTableCryptoModel,
-  AirTableAllTables
+  AirTableAllTables,
+  AirTableConfigModel,
 } from '../ts';
 
 const base = new AirtableConnect({ apiKey: process.env.AIRTABLE_API_KEY }).base(
@@ -77,11 +78,13 @@ export const airtableAll = async (): Promise<AirTableAllTables> => {
     airtable<AirTableAccountModel[]>('Accounts'),
     airtable<AirTableCryptoModel[]>('Crypto'),
     airtablePaged<AirTablePieModel>('Pies'),
+    airtable<AirTableConfigModel[]>('Config'),
   ]);
 
   return {
     accounts: data[0],
     crypto: data[1],
     pies: data[2],
+    config: data[3],
   };
 };

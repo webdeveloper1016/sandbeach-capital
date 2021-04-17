@@ -3,6 +3,7 @@ import TableSection from '../components/TableSection';
 import Pill from '../components/Pill';
 
 // TODO: index fund percentage
+// TODO: add portfolio annual value chart
 const HomePage = () => (
   <PortfolioData>
     {(data) => (

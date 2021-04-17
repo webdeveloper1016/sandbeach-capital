@@ -1,5 +1,5 @@
 import { NumberDisplayModel, PercChangeModel } from './types';
-import { AirTableCryptoModelExtended } from './airtable';
+import { AirTableCryptoModelExtended, AirTableConfigModelExtended } from './airtable';
 export interface AssetModel {
   id: string;
   rank: string;
@@ -52,4 +52,5 @@ export interface EnrichedCryptoModel {
   portfolioTotal: NumberDisplayModel;
   portfolioTotalExStable: NumberDisplayModel;
   holdingsByAccount: AirTableCryptoModelExtended[];
+  config: AirTableConfigModelExtended;
 }

@@ -12,9 +12,6 @@ import useFetchCrypto from '../../hooks/useFetchCrypto';
 import { currencyFormatter, numberDisplayLong } from '../../utils/calc';
 import { PercChangeModel, CoinCapAssetModelExteded } from '../../ts';
 
-const goalShort = 0.4;
-const goalLong = 0.5;
-
 const BtcProgress = ({
   data,
   tgt,
@@ -88,16 +85,8 @@ const CryptoPage = () => {
       />
       <Section>
         <Header content="Bitcoin Goals" size="text-xl" />
-        <BtcProgress
-          title="Next"
-          data={data.coinsWithAmount}
-          tgt={goalShort}
-        />
-        <BtcProgress
-          title="2021"
-          data={data.coinsWithAmount}
-          tgt={goalLong}
-        />
+        <BtcProgress title="Next" data={data.coinsWithAmount} tgt={data.config.btcGoalShort} />
+        <BtcProgress title="2021" data={data.coinsWithAmount} tgt={data.config.btcGoalLong} />
       </Section>
       <AccountTable
         columns={[
