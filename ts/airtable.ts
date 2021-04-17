@@ -75,6 +75,16 @@ export interface AirTableAccountModelExtended extends AirTableAccountModel {
   weight: NumberDisplayModel;
 }
 
+export interface AirTableConfigModel {
+  btcGoalShort: string;
+  btcGoalLong: string;
+}
+
+export interface AirTableConfigModelExtended {
+  btcGoalShort: number;
+  btcGoalLong: number;
+}
+
 export interface AirTableAllTables {
   accounts: AirTableAccountModel[];
   crypto: AirTableCryptoModel[];
