@@ -6,5 +6,4 @@ export const links = [
   { href: '/all', label: 'All', icon: 'chart' },
   { href: `/account/${accountRoute}`, label: 'Watchlists', icon: 'watchlist' },
   { href: '/account/crypto', label: 'Crypto', icon: 'crypto' },
-  { href: '/kids', label: 'Kids', icon: 'kids' },
 ];
