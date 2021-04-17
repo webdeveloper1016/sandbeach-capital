@@ -5,17 +5,16 @@ import {
   CoinCapAssetModelExteded,
   EnrichedCryptoModel,
   IexStockQuoteDetailedModelEnriched,
-  AirTableConfigModel,
+  AirTableConfigModelExtended,
 } from '../ts';
 import { currencyDisplay, percentDisplay, numberDisplayLong } from './calc';
-
-const btcGoalShort = '0.41'; // TODO: fetch config from API
-const btcGoalLong = '0.5';
 
 export const enrichCrypto = (
   holdings: AirTableCryptoModel[],
   prices: CoinCapAssetModel[],
+  config: AirTableConfigModelExtended,
 ): EnrichedCryptoModel => {
+  console.log(config);
   const coins = prices.map((p) => {
     const accounts = holdings.filter((h) => h.coin === p.id);
     const totalAmount = accounts.reduce(
@@ -69,10 +68,7 @@ export const enrichCrypto = (
     holdingsByAccount,
     portfolioTotal: currencyDisplay(portfolioTotal),
     portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),
-    config: {
-      btcGoalShort: Number(btcGoalShort),
-      btcGoalLong: Number(btcGoalLong),
-    },
+    config,
   };
 };
 

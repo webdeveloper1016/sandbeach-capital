@@ -5,11 +5,11 @@ import {
 } from './types';
 
 export type AirTableTablesType =
-  | 'Crypto'
-  | 'Stocks'
-  | 'Watchlist'
   | 'Accounts'
-  | 'Pies';
+  | 'Pies'
+  | 'Crypto'
+  | 'Config'
+  | 'Historical';
 
 export interface AirTableCryptoModel {
   id: string;
@@ -76,17 +76,21 @@ export interface AirTableAccountModelExtended extends AirTableAccountModel {
 }
 
 export interface AirTableConfigModel {
-  btcGoalShort: string;
-  btcGoalLong: string;
+  key: string;
+  value: string;
+  type: 'number' | 'string';
 }
 
 export interface AirTableConfigModelExtended {
   btcGoalShort: number;
   btcGoalLong: number;
+  ethGoalLong: number;
+  ethGoalShort: number;
 }
 
 export interface AirTableAllTables {
   accounts: AirTableAccountModel[];
   crypto: AirTableCryptoModel[];
   pies: AirTablePieModel[];
+  config: AirTableConfigModel[];
 }
