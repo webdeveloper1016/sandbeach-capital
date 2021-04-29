@@ -34,13 +34,16 @@ export const enrichCrypto = (
     };
   });
 
-  const holdingsByAccount = holdings.map((h) => ({
-    ...h,
-    sliceTotalValue: currencyDisplay(
-      prices.find((p) => p.id === h.coin)?.priceDisplay.val * h.amount,
-    ),
-    sliceWeight: percentDisplay(1, 1),
-  }));
+  const holdingsByAccount = holdings.map((h) => {
+    const price = prices.find((p) => p.id === h.coin)?.priceDisplay.val;
+    const totalVal = price ? price * h.amount : 0;
+
+    return {
+      ...h,
+      sliceTotalValue: currencyDisplay(totalVal),
+      sliceWeight: percentDisplay(1, 1),
+    };
+  });
 
   const portfolioTotal = coins.reduce(
     (accum, current) => accum + current.totalValue.val,
