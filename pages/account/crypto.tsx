@@ -118,12 +118,12 @@ const CryptoPage = () => {
             accessor: 'marketCapDisplay.display',
             style: { minWidth: '135px' },
           },
-          // { Header: 'Rank', accessor: 'rank' },
-          // {
-          //   Header: 'Max Supply',
-          //   accessor: 'supplyDisplay.display',
-          //   style: { minWidth: '170px' },
-          // },
+          { Header: 'Rank', accessor: 'rank' },
+          {
+            Header: 'Max Supply',
+            accessor: 'supplyDisplay.display',
+            style: { minWidth: '170px' },
+          },
         ]}
         data={
           showStable
