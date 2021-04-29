@@ -1,33 +1,36 @@
 import axios from 'axios';
 import _ from 'lodash';
 import {
-  CoinCapAssetRespModel,
-  CoinCapAssetModel,
   IexUrlModel,
   IexUrlVariants,
   IexDetailedQuoteModel,
   IexStockQuoteModel,
   AirTablePieModel,
   AirTableAllTables,
+  CoinMarketCapAssetModel,
+  CoinMarketCapRespModel,
 } from '../ts';
 import { extractConfig } from '../utils/extract-config';
-import { formatCoincap } from '../utils/coincap';
+import { formatCoinMarketCap } from '../utils/cmc';
 import { enrichAccounts } from '../utils/enrich-accounts';
 import { enrichCrypto } from '../utils/enrich-crypto';
 
-export const fetchCoincap = async (
+export const fetchCoinMarketCap = async (
   ids: string[],
-): Promise<CoinCapAssetModel[]> => {
-  const { data } = await axios.get<CoinCapAssetRespModel>(
-    `${process.env.COINCAP_API_URL}/assets`,
+): Promise<CoinMarketCapAssetModel[]> => {
+  const { data } = await axios.get<CoinMarketCapRespModel>(
+    `${process.env.CMC_API_URL}`,
     {
       params: {
-        ids: ids.join(','),
+        slug: ids.join(','),
+      },
+      headers: {
+        'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY,
       },
     },
   );
 
-  return formatCoincap(data.data);
+  return formatCoinMarketCap(data);
 };
 
 export const iexUrl = (
@@ -86,9 +89,9 @@ export const fetchPortfolio = async (
 ) => {
   const { accounts, crypto, pies, config } = airtable;
   const quotes = await fetchStockHoldingsDetailed(pies, iex);
-  const airtableConfig = extractConfig(config)
+  const airtableConfig = extractConfig(config);
 
-  const cryptoQuotes = await fetchCoincap(
+  const cryptoQuotes = await fetchCoinMarketCap(
     _.uniqBy(crypto, 'coin').map((x) => x.coin),
   );
 

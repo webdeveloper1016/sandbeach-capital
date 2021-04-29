@@ -8,7 +8,7 @@ import {
   IexDetailedQuoteModel,
   IexStockQuoteDetailedModelEnriched,
   AirTableAccountModel,
-  EnrichedCryptoModel,
+  CMCEnrichedCryptoModel,
 } from '../ts';
 import { holdingWeightFilter } from '../config';
 
@@ -16,7 +16,7 @@ export const enrichAllHoldings = (
   accounts: AirTableAccountModel[],
   pies: AirTablePieModel[],
   quotes: IexDetailedQuoteModel,
-  cryptoData: EnrichedCryptoModel,
+  cryptoData: CMCEnrichedCryptoModel,
   portfolioTotal: number,
 ): IexStockQuoteDetailedModelEnriched[] => {
   const holdings = Object.keys(quotes)

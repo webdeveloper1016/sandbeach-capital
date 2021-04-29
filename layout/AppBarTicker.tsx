@@ -4,12 +4,12 @@ const src = 'embed-widget-ticker-tape';
 const config = {
   symbols: [
     {
-      proName: 'AMEX:VT',
-      title: 'VT',
-    },
-    {
       proName: 'NASDAQ:QQQ',
       title: 'QQQ',
+    },
+    {
+      proName: 'AMEX:SCHD',
+      title: 'SCHD',
     },
     {
       proName: 'BITSTAMP:BTCUSD',
