@@ -10,19 +10,19 @@ import { ToggleCheckbox } from '../../components/ToggleCheckbox';
 import { ProgressBar } from '../../components/ProgressBar';
 import useFetchCrypto from '../../hooks/useFetchCrypto';
 import { currencyFormatter, numberDisplayLong } from '../../utils/calc';
-import { PercChangeModel, CoinCapAssetModelExteded } from '../../ts';
+import { PercChangeModel, CoinMarketCapAssetModelExteded } from '../../ts';
 
 const BtcProgress = ({
   data,
   tgt,
   title,
 }: {
-  data: CoinCapAssetModelExteded[];
+  data: CoinMarketCapAssetModelExteded[];
   tgt: number;
   title: string;
 }) => {
   const { goal, away, amt, milestone } = React.useMemo(() => {
-    const currentBtc = data.find((x) => x.id === 'bitcoin');
+    const currentBtc = data.find((x) => x.slug === 'bitcoin');
     const away = tgt - currentBtc.totalAmount.val;
     const amt = currentBtc.priceDisplay.val * away;
     const milestone = (currentBtc.totalAmount.val / tgt) * 100;
@@ -85,8 +85,16 @@ const CryptoPage = () => {
       />
       <Section>
         <Header content="Bitcoin Goals" size="text-xl" />
-        <BtcProgress title="Next" data={data.coinsWithAmount} tgt={data.config.btcGoalShort} />
-        <BtcProgress title="2021" data={data.coinsWithAmount} tgt={data.config.btcGoalLong} />
+        <BtcProgress
+          title="Next"
+          data={data.coinsWithAmount}
+          tgt={data.config.btcGoalShort}
+        />
+        <BtcProgress
+          title="2021"
+          data={data.coinsWithAmount}
+          tgt={data.config.btcGoalLong}
+        />
       </Section>
       <AccountTable
         columns={[
@@ -98,6 +106,8 @@ const CryptoPage = () => {
             ),
           },
           { Header: 'Price', accessor: 'priceDisplay.display' },
+
+          { Header: 'Equity', accessor: 'totalValue.display' },
           {
             Header: 'Day',
             accessor: 'changePercent',
@@ -105,7 +115,27 @@ const CryptoPage = () => {
               <PercChangeCell value={instance.value} />
             ),
           },
-          { Header: 'Equity', accessor: 'totalValue.display' },
+          {
+            Header: 'Week',
+            accessor: 'changePercentWeek',
+            Cell: (instance: { value: PercChangeModel }) => (
+              <PercChangeCell value={instance.value} />
+            ),
+          },
+          {
+            Header: 'Month',
+            accessor: 'changePercentMo',
+            Cell: (instance: { value: PercChangeModel }) => (
+              <PercChangeCell value={instance.value} />
+            ),
+          },
+          {
+            Header: '3 Month',
+            accessor: 'changePercentThreeMo',
+            Cell: (instance: { value: PercChangeModel }) => (
+              <PercChangeCell value={instance.value} />
+            ),
+          },
           { Header: 'Amount', accessor: 'totalAmount.display' },
           {
             Header: 'Weight',

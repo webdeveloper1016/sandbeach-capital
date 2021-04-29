@@ -7,7 +7,7 @@ import {
   EnrichedDetailedQuoteModel,
   IexStockQuoteDetailedModelEnriched,
 } from './iex';
-import { EnrichedCryptoModel, CoinCapAssetModel } from './coincap';
+import { CMCEnrichedCryptoModel, CoinMarketCapAssetModel } from './cmc';
 
 export interface APIPortfolioModelSimple {
   summary: AccountSummaryModel;
@@ -27,7 +27,7 @@ export interface APIPortfolioModel {
   supportingData: {
     quotes: IexDetailedQuoteModel;
     airtable: AirTableAllTables;
-    cryptoQuotes: CoinCapAssetModel[];
+    cryptoQuotes: CoinMarketCapAssetModel[];
   };
 }
 
@@ -40,5 +40,5 @@ export interface APIAccountModelResp {
 }
 
 export interface APICryptoModelResp {
-  data: EnrichedCryptoModel;
+  data: CMCEnrichedCryptoModel;
 }

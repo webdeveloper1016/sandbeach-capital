@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import { airtable, auth, errResp, fetchCoincap } from '../../middleware';
+import { airtable, auth, errResp, fetchCoinMarketCap } from '../../middleware';
 import { enrichCrypto } from '../../utils/enrich-crypto';
 import { extractConfig } from '../../utils/extract-config';
 import { AirTableCryptoModel, AirTableConfigModel } from '../../ts';
@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const config = await airtable<AirTableConfigModel[]>('Config');
 
     // fetch prices
-    const prices = await fetchCoincap(
+    const prices = await fetchCoinMarketCap(
       _.uniqBy(holdings, 'coin').map((x) => x.coin),
     );
 

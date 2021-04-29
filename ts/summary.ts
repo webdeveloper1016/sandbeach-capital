@@ -1,10 +1,10 @@
 import { NumberDisplayModel } from './types';
-import { CoinCapAssetModel } from './coincap';
+import { CoinMarketCapAssetModel } from './cmc';
 
 export interface AccountSummaryModel {
   portfolioTotal: NumberDisplayModel;
   exCryptoPortfolioTotal: NumberDisplayModel;
   cryptoPortfolioTotal: NumberDisplayModel;
   cryptoPortfolioTotalExStable: NumberDisplayModel;
-  btcLast: CoinCapAssetModel;
+  btcLast: CoinMarketCapAssetModel;
 }
