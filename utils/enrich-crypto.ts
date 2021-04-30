@@ -6,12 +6,14 @@ import {
   CMCEnrichedCryptoModel,
   IexStockQuoteDetailedModelEnriched,
   AirTableConfigModelExtended,
+  AirTableTransactionsModel
 } from '../ts';
 import { currencyDisplay, percentDisplay, numberDisplayLong } from './calc';
 
 export const enrichCrypto = (
   holdings: AirTableCryptoModel[],
   prices: CoinMarketCapAssetModel[],
+  transactions: AirTableTransactionsModel[],
   config: AirTableConfigModelExtended,
 ): CMCEnrichedCryptoModel => {
   const coins = prices.map((p) => {
@@ -71,6 +73,7 @@ export const enrichCrypto = (
     portfolioTotal: currencyDisplay(portfolioTotal),
     portfolioTotalExStable: currencyDisplay(portfolioTotalExStable),
     config,
+    transactions,
   };
 };
 

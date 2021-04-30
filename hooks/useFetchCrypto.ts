@@ -31,7 +31,7 @@ const useGetCrypto = async (params: {
 const useFetchCrypto = (): UseQueryResult<CMCEnrichedCryptoModel> => {
   const auth = useAuth();
   return useQuery('crypto', () => useGetCrypto(auth), {
-    refetchInterval: 1000 * 60,
+    refetchInterval: 1000 * 60 * 5,
   });
 };
 

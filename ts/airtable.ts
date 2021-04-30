@@ -9,7 +9,8 @@ export type AirTableTablesType =
   | 'Pies'
   | 'Crypto'
   | 'Config'
-  | 'Historical';
+  | 'Historical'
+  | 'Transactions';
 
 export interface AirTableCryptoModel {
   id: string;
@@ -86,6 +87,19 @@ export interface AirTableConfigModelExtended {
   btcGoalLong: number;
   ethGoalLong: number;
   ethGoalShort: number;
+}
+
+export interface AirTableTransactionsModel {
+  timestamp: string;
+  type: string;
+  asset: string;
+  quantity: number;
+  price: number;
+  total: number;
+  totalBeforeFees: number;
+  fees: number;
+  exchange: string;
+  notes: string;
 }
 
 export interface AirTableAllTables {

@@ -1,5 +1,9 @@
 import { NumberDisplayModel, PercChangeModel } from './types';
-import { AirTableCryptoModelExtended, AirTableConfigModelExtended } from './airtable';
+import {
+  AirTableCryptoModelExtended,
+  AirTableConfigModelExtended,
+  AirTableTransactionsModel,
+} from './airtable';
 
 export interface CMCAssetQuoteModel {
   price: number;
@@ -52,9 +56,8 @@ export interface CoinMarketCapAssetModel extends CMCAssetModel {
   supplyDisplay: NumberDisplayModel;
 }
 
-
-
-export interface CoinMarketCapAssetModelExteded extends CoinMarketCapAssetModel {
+export interface CoinMarketCapAssetModelExteded
+  extends CoinMarketCapAssetModel {
   stablecoin: boolean;
   weight: NumberDisplayModel;
   weightExStable: NumberDisplayModel;
@@ -72,4 +75,5 @@ export interface CMCEnrichedCryptoModel {
   portfolioTotalExStable: NumberDisplayModel;
   holdingsByAccount: AirTableCryptoModelExtended[];
   config: AirTableConfigModelExtended;
+  transactions: AirTableTransactionsModel[];
 }
