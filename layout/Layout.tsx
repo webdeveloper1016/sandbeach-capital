@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
 
         <NavHeader status={menuStatus} onClick={handleToggle}>
           <div>
-            <Banner hide/>
+            <Banner hide />
             <AppBarTicker />
           </div>
         </NavHeader>
