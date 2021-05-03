@@ -96,7 +96,6 @@ export interface AirTableTransactionsModel {
   quantity: number;
   price: number;
   total: number;
-  totalBeforeFees: number;
   fees: number;
   exchange: string;
   notes: string;
