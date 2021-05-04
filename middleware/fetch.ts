@@ -87,7 +87,7 @@ export const fetchPortfolio = async (
   airtable: AirTableAllTables,
   iex: IexUrlModel,
 ) => {
-  const { accounts, crypto, pies, config } = airtable;
+  const { accounts, crypto, pies, config, transactions } = airtable;
   const quotes = await fetchStockHoldingsDetailed(pies, iex);
   const airtableConfig = extractConfig(config);
 
@@ -99,7 +99,7 @@ export const fetchPortfolio = async (
     accounts,
     pies,
     quotes,
-    enrichCrypto(crypto, cryptoQuotes, airtableConfig),
+    enrichCrypto(crypto, cryptoQuotes, transactions, airtableConfig),
     iex,
   );
 
@@ -108,5 +108,6 @@ export const fetchPortfolio = async (
     quotes,
     cryptoQuotes,
     allAccountData,
+    airtableConfig,
   };
 };

@@ -9,8 +9,14 @@ import {
   PercChangeCell,
 } from '../components/TableCells';
 import { AccountTable } from '../components/AccountTable';
+import { ProgressBar } from '../components/ProgressBar';
 import { enrichDetailedQuotes } from '../utils/enrich-detailed-quote';
-import { percChangeSort, numberDisplaySort } from '../utils/calc';
+import {
+  percChangeSort,
+  numberDisplaySort,
+  currencyFormatter,
+  percentDisplay,
+} from '../utils/calc';
 import { APIPortfolioModel, PercChangeModel, NumberDisplayModel } from '../ts';
 import { aggregateAccount } from '../config';
 
@@ -45,6 +51,19 @@ const AccountAnalysis = ({
     );
   }, [portfolioData, account]);
 
+  const goal = React.useMemo(() => {
+    const perc = percentDisplay(
+      data.summary.viewTotal.val,
+      portfolioData.config.taxableEquitiesGoal,
+    );
+    return {
+      perc,
+      title: `Taxable Brokerage Goal | ${currencyFormatter.format(
+        portfolioData.config.taxableEquitiesGoal,
+      )} | ${perc.display}`,
+    };
+  }, [data, portfolioData]);
+
   if (!data) {
     return <div>404</div>;
   }
@@ -60,6 +79,7 @@ const AccountAnalysis = ({
         percClass={data.summary.dayChange.class}
         weight={data.summary.weight}
       />
+      <ProgressBar title={goal.title} progress={goal.perc.val * 100} />
       <AccountTable
         columns={[
           {

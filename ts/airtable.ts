@@ -87,6 +87,7 @@ export interface AirTableConfigModelExtended {
   btcGoalLong: number;
   ethGoalLong: number;
   ethGoalShort: number;
+  taxableEquitiesGoal: number;
 }
 
 export interface AirTableTransactionsModel {
@@ -106,4 +107,5 @@ export interface AirTableAllTables {
   crypto: AirTableCryptoModel[];
   pies: AirTablePieModel[];
   config: AirTableConfigModel[];
+  transactions: AirTableTransactionsModel[]
 }

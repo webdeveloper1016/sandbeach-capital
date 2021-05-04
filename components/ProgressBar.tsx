@@ -1,4 +1,10 @@
-export const ProgressBar = ({ progress, title }: { progress: number, title: string }) => {
+export const ProgressBar = ({
+  progress,
+  title,
+}: {
+  progress: number;
+  title: string;
+}) => {
   return (
     <div className="relative pt-1">
       <div>{title}</div>

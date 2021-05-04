@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const airtable = await airtableAll();
 
     // fetch quotes and format
-    const { allAccountData, quotes, cryptoQuotes } = await fetchPortfolio(
+    const { allAccountData, quotes, cryptoQuotes, airtableConfig } = await fetchPortfolio(
       airtable,
       iex,
     );
@@ -28,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json({
       data: {
         ...allAccountData,
+        config: airtableConfig,
         supportingData: {
           quotes,
           airtable,

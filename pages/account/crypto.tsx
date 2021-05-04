@@ -45,7 +45,6 @@ const BtcProgress = ({
   );
 };
 
-// TODO: Pie chart of BTC by institution
 const CryptoPage = () => {
   // hooks
   const { data, status } = useFetchCrypto();
@@ -104,7 +103,9 @@ const CryptoPage = () => {
             accessor: 'symbolName',
             Cell: (instance: { value: { symbol: string; name: string } }) => (
               <Link href={`/account/crypto/${instance.value.symbol}`}>
-                <a><SymbolNameCell value={instance.value} /></a>
+                <a>
+                  <SymbolNameCell value={instance.value} />
+                </a>
               </Link>
             ),
           },
