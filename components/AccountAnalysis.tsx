@@ -2,12 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import AccountWatchlistLinks from '../components/AccountWatchlistLinks';
 import { AccountBalanceHeader } from '../components/AccountBalanceHeader';
-import {
-  SymbolNameCell,
-  TagCell,
-  TagListCell,
-  PercChangeCell,
-} from '../components/TableCells';
+import { SymbolNameCell, PercChangeCell } from '../components/TableCells';
 import { AccountTable } from '../components/AccountTable';
 import { ProgressBar } from '../components/ProgressBar';
 import { enrichDetailedQuotes } from '../utils/enrich-detailed-quote';
@@ -17,7 +12,7 @@ import {
   currencyFormatter,
   percentDisplay,
 } from '../utils/calc';
-import { APIPortfolioModel, PercChangeModel, NumberDisplayModel } from '../ts';
+import { APIPortfolioModel, PercChangeModel } from '../ts';
 import { aggregateAccount } from '../config';
 
 const AccountAnalysis = ({
@@ -100,20 +95,13 @@ const AccountAnalysis = ({
               percChangeSort(row1.values[id], row2.values[id]),
           },
           { Header: 'Equity', accessor: 'equity.display' },
-          { Header: 'Weight', accessor: 'weight.display' },
+          data.noTargets
+            ? null
+            : { Header: 'Weight', accessor: 'weight.display' },
           data.noTargets
             ? null
             : { Header: 'Target', accessor: 'slicePercent.display' },
           { Header: 'Shares', accessor: 'shares' },
-          {
-            Header: 'Vol',
-            accessor: 'volume.current',
-            Cell: (instance: { value: { display: string } }) => (
-              <span>{instance.value.display}</span>
-            ),
-            sortType: (row1, row2, id) =>
-              numberDisplaySort(row1.values[id], row2.values[id]),
-          },
           {
             Header: 'Cap',
             accessor: 'stats.marketCap',
@@ -146,25 +134,6 @@ const AccountAnalysis = ({
             sortType: (row1, row2, id) =>
               percChangeSort(row1.values[id], row2.values[id]),
           },
-          {
-            Header: 'Sector',
-            accessor: 'sector',
-            style: { minWidth: '170px' },
-            Cell: (instance: { value: string }) => (
-              <TagCell value={instance.value} />
-            ),
-          },
-          {
-            Header: 'Tags',
-            accessor: 'tags',
-            style: { minWidth: '175px' },
-            Cell: (instance: { value: string[] }) => (
-              <TagListCell value={instance.value} />
-            ),
-          },
-          { Header: 'Yield', accessor: 'stats.dividendYield.display' },
-          { Header: 'Next Dividend', accessor: 'stats.nextDividendDate' },
-          { Header: 'Next Earnings', accessor: 'stats.nextEarningsDate' },
         ].filter((x) => x)}
         data={data.quotes}
       />
