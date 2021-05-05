@@ -88,12 +88,15 @@ export const enrichDetailedQuotes = (
   return {
     menuItems,
     account,
-    noTargets: account.parentAccount || _.isEmpty(accountWithWeight.filter(x => x.slicePercent.val > 0)),
+    noTargets:
+      account.parentAccount ||
+      _.isEmpty(accountWithWeight.filter((x) => x.slicePercent.val > 0)),
     summary: {
       balance: currencyDisplay(sumAccount),
       balanceDisplay: `${currencyDisplay(sumAccount).display} / ${
         currencyDisplay(viewTotal).display
       }`,
+      viewTotal: currencyDisplay(viewTotal),
       prevBalance: currencyDisplay(sumPrevClose),
       dayChange: {
         class: dayChangePerc.val > 0 ? 'text-green-500' : 'text-red-500',

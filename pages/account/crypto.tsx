@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { AccountViewSkeleton } from '../../components/Skeleton';
 import Error from '../../components/Error';
 import Section from '../../components/Section';
@@ -44,7 +45,6 @@ const BtcProgress = ({
   );
 };
 
-// TODO: Pie chart of BTC by institution
 const CryptoPage = () => {
   // hooks
   const { data, status } = useFetchCrypto();
@@ -102,7 +102,11 @@ const CryptoPage = () => {
             Header: 'Symbol',
             accessor: 'symbolName',
             Cell: (instance: { value: { symbol: string; name: string } }) => (
-              <SymbolNameCell value={instance.value} />
+              <Link href={`/account/crypto/${instance.value.symbol}`}>
+                <a>
+                  <SymbolNameCell value={instance.value} />
+                </a>
+              </Link>
             ),
           },
           { Header: 'Price', accessor: 'priceDisplay.display' },

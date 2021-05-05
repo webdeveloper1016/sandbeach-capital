@@ -1,4 +1,8 @@
-import { AirTableAccountModelExtended, AirTableAllTables } from './airtable';
+import {
+  AirTableAccountModelExtended,
+  AirTableAllTables,
+  AirTableConfigModelExtended,
+} from './airtable';
 import { AccountSummaryModel } from './summary';
 import { AccountStatsModel } from './stats';
 import {
@@ -24,6 +28,7 @@ export interface APIPortfolioModel {
   accounts: AirTableAccountModelExtended[];
   aggregatedHoldings: IexStockQuoteDetailedModelEnriched[];
   iex: IexUrlModel;
+  config: AirTableConfigModelExtended;
   supportingData: {
     quotes: IexDetailedQuoteModel;
     airtable: AirTableAllTables;

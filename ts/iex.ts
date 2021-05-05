@@ -127,6 +127,7 @@ export interface EnrichedDetailedQuoteModel {
   noTargets: boolean;
   summary: {
     balance: NumberDisplayModel;
+    viewTotal: NumberDisplayModel;
     balanceDisplay: string;
     prevBalance: NumberDisplayModel;
     dayChange: PercChangeModel;

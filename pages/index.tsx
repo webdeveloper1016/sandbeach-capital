@@ -1,13 +1,42 @@
+import React from 'react';
 import PortfolioData from '../components/PortfolioData';
 import TableSection from '../components/TableSection';
-import Pill from '../components/Pill';
+import { ProgressBar } from '../components/ProgressBar';
+import Section from '../components/Section';
+import Header from '../components/Header';
+import { currencyFormatter, percentDisplay } from '../utils/calc';
+import { APIPortfolioModel } from '../ts';
 
-// TODO: index fund percentage
+const Goal = ({ data }: { data: APIPortfolioModel }) => {
+  const goal = React.useMemo(() => {
+    const perc = percentDisplay(
+      data.summary.portfolioTotal.val,
+      data.config.portfolioValueGoal,
+    );
+    return {
+      perc,
+      title: `${currencyFormatter.format(data.config.portfolioValueGoal)} | ${
+        perc.display
+      }`,
+    };
+  }, [data]);
+
+  return (
+    <div >
+      <Section noBorder>
+        <Header content="Savings Goal:" size="text-2xl" />
+        <ProgressBar title={goal.title} progress={goal.perc.val * 100} />
+      </Section>
+    </div>
+  );
+};
+
 // TODO: add portfolio annual value chart
 const HomePage = () => (
   <PortfolioData>
     {(data) => (
       <div>
+        <Goal data={data} />
         <TableSection
           header="Cash Equivalents:"
           columns={[
@@ -34,44 +63,6 @@ const HomePage = () => (
             { Header: 'Weight', accessor: 'weight.display' },
           ]}
           data={data.stats.byAssetClass}
-        />
-        <TableSection
-          header="Factor Tilts:"
-          subheader="*Holdings can be in more than one factor."
-          columns={[
-            {
-              Header: 'Factor',
-              accessor: 'label',
-              Cell: (instance: { value: string }) => (
-                <div className="flex">
-                  <Pill color="blue" content={instance.value} />
-                </div>
-              ),
-            },
-            { Header: 'Balance', accessor: 'value.display' },
-            { Header: 'Weight', accessor: 'weight.display' },
-          ]}
-          data={data.stats.byFactor}
-        />
-        <TableSection
-          header="Risk Levels:"
-          columns={[
-            {
-              Header: 'Level',
-              accessor: 'label',
-            },
-            { Header: 'Balance', accessor: 'value.display' },
-            { Header: 'Weight', accessor: 'weight.display' },
-          ]}
-          data={data.stats.byRisk}
-        />
-        <TableSection
-          header="Savings Details:"
-          columns={[
-            { Header: 'Label', accessor: 'label' },
-            { Header: 'Amount', accessor: 'value.display' },
-          ]}
-          data={data.stats.byContribution}
         />
       </div>
     )}
