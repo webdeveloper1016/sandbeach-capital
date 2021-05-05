@@ -88,6 +88,7 @@ export interface AirTableConfigModelExtended {
   ethGoalLong: number;
   ethGoalShort: number;
   taxableEquitiesGoal: number;
+  portfolioValueGoal: number;
 }
 
 export interface AirTableTransactionsModel {
