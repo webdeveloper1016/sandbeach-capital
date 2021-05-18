@@ -63,6 +63,10 @@ export const enrichDetailedQuotes = (
     weight: percentDisplay(p.equity.val, sumAccount),
   }));
 
+
+
+  const orderedQuote = _.orderBy(accountWithWeight, ['equity.val'], ['desc'])
+
   const dayChangePerc = percentDisplay(
     sumAccount - sumPrevClose,
     sumAccount,
@@ -112,6 +116,9 @@ export const enrichDetailedQuotes = (
             actual: percentDisplay(sumAccount, viewTotal),
           },
     },
-    quotes: _.orderBy(accountWithWeight, ['equity.val'], ['desc']),
+    quotes: orderedQuote.map((o, k) => ({
+      ...o,
+      rank: k + 1,
+    })),
   };
 };

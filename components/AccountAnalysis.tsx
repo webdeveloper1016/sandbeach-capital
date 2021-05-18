@@ -77,6 +77,7 @@ const AccountAnalysis = ({
       <ProgressBar title={goal.title} progress={goal.perc.val * 100} />
       <AccountTable
         columns={[
+          { Header: 'Rank', accessor: 'rank' },
           {
             Header: 'Symbol',
             accessor: 'symbolCompany',
