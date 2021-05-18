@@ -2,13 +2,11 @@ import PortfolioData from '../components/PortfolioData';
 import { AccountTable } from '../components/AccountTable';
 import {
   SymbolNameCell,
-  TagCell,
-  TagListCell,
   PercChangeCell,
 } from '../components/TableCells';
 import { PercChangeModel } from '../ts';
+import { accountWeightFilter } from '../config';
 
-// TODO: view only taxable accounts
 const AllAccountsPage = () => (
   <PortfolioData>
     {(data) => (
@@ -72,7 +70,7 @@ const AllAccountsPage = () => (
                 style: { minWidth: '250px' },
               },
             ]}
-            data={data.aggregatedHoldings}
+            data={data.aggregatedHoldings.filter((x) => x.weight.val > accountWeightFilter)}
           />
         </div>
       </div>
